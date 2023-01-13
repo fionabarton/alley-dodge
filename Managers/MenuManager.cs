@@ -16,10 +16,13 @@ public class MenuManager : MonoBehaviour {
     public Button startGameButton;
     public Button exitGameButton;
     public Button defaultSettingsButton;
-    
+
     // Objects to be activated/deactivated
     public GameObject handlesGO;
     public List<GameObject> xrRayInteractorsGO;
+
+    // Delayed text display
+    public DelayedTextDisplay delayedTextDisplay;
 
     void Start() {
         // Add listener to slider and dropdowns
@@ -57,6 +60,12 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
+    // Called OnPointerUp() by the EventTrigger attached to the slider in the Inspector
+    public void OnSliderButtonReleased() {
+        // Delayed text display
+        delayedTextDisplay.DisplayText("Player height selected!");
+    }
+
     // On value changed of levelSelectDropdown, set level 
     void SetLevel() {
         // Set level to value of dropdown
@@ -83,6 +92,9 @@ public class MenuManager : MonoBehaviour {
         // Set display text colors
         GameManager.S.score.displayText.color = GameManager.color.alleyMaterial1.color;
         GameManager.S.score.displayMessageFrame.color = GameManager.color.alleyMaterial2.color;
+
+        // Delayed text display
+        delayedTextDisplay.DisplayText("Level selected!");
     }
 
     // On value changed of alleyAmountDropdown, sets alley amount
@@ -102,6 +114,9 @@ public class MenuManager : MonoBehaviour {
 
         // Initialize alleys
         GameManager.alley.InitializeAlleys();
+
+        // Delayed text display
+        delayedTextDisplay.DisplayText("Amount of alleys selected!");
     }
 
     // On click of startGameButton, starts game
@@ -145,5 +160,8 @@ public class MenuManager : MonoBehaviour {
         // Set display text colors
         GameManager.S.score.displayText.color = GameManager.color.alleyMaterial1.color;
         GameManager.S.score.displayMessageFrame.color = GameManager.color.alleyMaterial2.color;
+        
+        // Delayed text display
+        delayedTextDisplay.DisplayText("Options set to their default values!");
     }
 }
