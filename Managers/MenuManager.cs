@@ -74,12 +74,13 @@ public class MenuManager : MonoBehaviour {
         // Set colorNdx
         if (GameManager.S.score.level != 1) {
             GameManager.color.colorNdx = GameManager.S.score.level - 2;
+            GameManager.color.GetNewColorPalette();
         } else {
             GameManager.color.colorNdx = 0;
+            GameManager.color.Start();
         }
 
-        // Set scene colors
-        GameManager.color.GetNewColorPalette();
+        // Set display text colors
         GameManager.S.score.displayText.color = GameManager.color.alleyMaterial1.color;
         GameManager.S.score.displayMessageFrame.color = GameManager.color.alleyMaterial2.color;
     }
@@ -139,7 +140,9 @@ public class MenuManager : MonoBehaviour {
 
         // Reset scene colors
         GameManager.color.colorNdx = 0;
-        GameManager.color.GetNewColorPalette();
+        GameManager.color.Start();
+
+        // Set display text colors
         GameManager.S.score.displayText.color = GameManager.color.alleyMaterial1.color;
         GameManager.S.score.displayMessageFrame.color = GameManager.color.alleyMaterial2.color;
     }
