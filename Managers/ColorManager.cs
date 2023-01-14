@@ -11,7 +11,7 @@ public class ColorManager : MonoBehaviour {
 
     [Header("Set dynamically")]
     // Current color palette index (0 = red & cyan)
-    public int      colorNdx;
+    public int      colorNdx = 0;
 
     List<Color> colors = new List<Color>() {
         new Color(0.9f, 0.0f, 0.05f), // red
@@ -28,9 +28,22 @@ public class ColorManager : MonoBehaviour {
         new Color(1.0f, 0.0f, 0.5f) // rose
     };
 
-    void Start() {
+    public void Start() {
         alleyMaterial1.color = colors[0];
         alleyMaterial2.color = colors[6];
+    }
+
+    // Resets script properties to default values
+    public void ResetPalette() {
+        colorNdx = 0;
+        alleyMaterial1.color = colors[0];
+        alleyMaterial2.color = colors[6];
+    }
+
+    // Sets display text colors to alley colors
+    public void SetDisplayTextPalette() {
+        GameManager.S.score.displayText.color = alleyMaterial1.color;
+        GameManager.S.score.displayMessageFrame.color = alleyMaterial2.color;
     }
 
     // Sets the two alley materials to a new set of two complementary colors 
