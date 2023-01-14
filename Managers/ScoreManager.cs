@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class ScoreManager : MonoBehaviour {
 	public TMPro.TextMeshProUGUI	scoreText;
 	public TMPro.TextMeshProUGUI	objectCountText;
 	public TMPro.TextMeshProUGUI	levelText;
+	public TMPro.TextMeshProUGUI	timeText;
 
 	public Image					displayMessageFrame;
 
@@ -19,22 +21,23 @@ public class ScoreManager : MonoBehaviour {
 	public int						score = 0;
 	public int						level = 1;
 	public int						objectCount = 0;
+	public float					startingTime = 0f;
+	public float					endingTime = 0f;
 
 	// Amount of collectibles needed to proceed to next level
 	public int						amountToNextLevel = 5;
 
-    private void Start() {
-		// Display text
-		//SetDisplayText("Let's go!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
-		Invoke("StartDelay", 0.1f);
-	}
+	// Dictates whether timerText is updated or not
+	public bool						timerIsOn;
 
-	void StartDelay() {
-		// Display text
-		SetDisplayText("Let's go!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
-	}
+    private void FixedUpdate() {
+		// Display time
+        if (timerIsOn) {
+			timeText.text = "Time:\n" + GetTime(Time.time);
+		}
+    }
 
-	// Display text message, then...
+    // Display text message, then...
     public void SetDisplayText(string message, Color textColor, Color frameColor) {
 		displayText.color = textColor;
 
@@ -87,7 +90,7 @@ public class ScoreManager : MonoBehaviour {
 		// Play confetti particle systems
 		GameManager.S.confetti.DropConfetti();
 
-		// Increase speed (starts at 1.5f)
+		// Increase speed (starts at 2.0f)
 		GameManager.S.spawner.timeDuration -= 0.1f;
 
 		// Increment level
@@ -99,5 +102,39 @@ public class ScoreManager : MonoBehaviour {
 
 		// Display text
 		SetDisplayText("NEXT LEVEL!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
+	}
+
+	// Get and return total time in '00:00:00:000' format
+	public string GetTime(float _endingTime) {
+		// Get time in seconds
+		float time = _endingTime - startingTime;
+
+		// Convert time to '00:00:00:000' format
+		TimeSpan t = TimeSpan.FromSeconds(time);
+		string timeString = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}",
+		t.Hours,
+		t.Minutes,
+		t.Seconds,
+		t.Milliseconds);
+
+		// Return string
+		return timeString;
+	}
+
+	// Resets script properties to their default values
+	public void ResetScore() {
+		score = 0;
+		level = 1;
+		objectCount = 0;
+		startingTime = 0f;
+		endingTime = 0f;
+		amountToNextLevel = 5;
+		timerIsOn = false;
+	}
+
+	// Updates score and level GUI
+	public void UpdateGUI() {
+		scoreText.text = "Score: " + score;
+		levelText.text = "Level: " + level;
 	}
 }
