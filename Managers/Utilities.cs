@@ -10,4 +10,25 @@ public class Utilities : MonoBehaviour {
             objects[i].SetActive(isActive);
         }
     }
+
+    // Set cursor position to currently selected button/gameObject
+    public void PositionCursor(GameObject cursorGO, GameObject selectedGO,
+        float xAxisDistanceFromCenter, float yAxisDistanceFromCenter = 0, int directionToFace = 2) {
+        // Get position
+        float tPosX = selectedGO.GetComponent<RectTransform>().anchoredPosition.x;
+        float tPosY = selectedGO.GetComponent<RectTransform>().anchoredPosition.y;
+        float tParentX = selectedGO.transform.parent.GetComponent<RectTransform>().anchoredPosition.x;
+        float tParentY = selectedGO.transform.parent.GetComponent<RectTransform>().anchoredPosition.y;
+
+        // Set position
+        RectTransform rectTrans = cursorGO.GetComponent<RectTransform>();
+        rectTrans.anchoredPosition = new Vector2(
+            (tPosX + tParentX + xAxisDistanceFromCenter),
+            (tPosY + tParentY + yAxisDistanceFromCenter)
+        );
+
+        // Set rotation
+        int angle = (directionToFace + 1) * 90;
+        cursorGO.transform.localEulerAngles = new Vector3(0, 0, angle);
+    }
 }
