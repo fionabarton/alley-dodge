@@ -12,6 +12,14 @@ public class Utilities : MonoBehaviour {
         tGO.transform.position = tPos;
     }
 
+    // Set GameObject Scale
+    public void SetScale(GameObject tGO, float x, float y) {
+        Vector3 tScale = tGO.transform.localScale;
+        tScale.x = x;
+        tScale.y = y;
+        tGO.transform.localScale = tScale;
+    }
+
     // Activate or deactivate all of the gameObject elements stored within a list 
     public void SetActiveList(List<GameObject> objects, bool isActive) {
         for (int i = 0; i < objects.Count; i++) {
