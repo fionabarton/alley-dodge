@@ -20,15 +20,22 @@ public class AdjustObjectsHeight : MonoBehaviour {
         // Get distance between rows
         float distanceBetweenRows = playerHeight / 168;
 
-        // Handles
+        // Handles (yPos)
         GameManager.utilities.SetPosition(row1Handles, 0, lowestRowYPos);
         GameManager.utilities.SetPosition(row2Handles, 0, lowestRowYPos + distanceBetweenRows);
         GameManager.utilities.SetPosition(row3Handles, 0, lowestRowYPos + (distanceBetweenRows * 2));
 
-        // Pickups
+        // Pickups (yPos)
         GameManager.S.spawner.pickupMaxYPos = playerHeight / 30.54545455f;
 
-        // Hazards
+        // Hazards (yPos)
+        GameManager.S.spawner.horizontalYPos = playerHeight / 67.2f;
+        GameManager.S.spawner.verticalLowYPos = playerHeight / 448f;
+        GameManager.S.spawner.verticalHighYPos = playerHeight / 51.69230769f;
 
+        // Hazards (yScale)
+        GameManager.utilities.SetScale(GameManager.S.spawner.horizontalBlock, 1, (playerHeight / 33.6f), 1);
+        GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowBlock, 3, (playerHeight / 224f), 1);
+        GameManager.utilities.SetScale(GameManager.S.spawner.verticalHighBlock, 3, (playerHeight / 48f), 1);
     }
 }
