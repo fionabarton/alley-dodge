@@ -5,13 +5,19 @@ using UnityEngine;
 // Adjusts the position and scale of climbing handles, pickups, and hazards based on the player’s height 
 public class AdjustObjectsHeight : MonoBehaviour {
     [Header("Set in Inspector")]
-    public GameObject row1Handles;
-    public GameObject row2Handles;
-    public GameObject row3Handles;
+    // Horizontal climbing handles
+    public GameObject       row1Handles;
+    public GameObject       row2Handles;
+    public GameObject       row3Handles;
 
-    public GameObject horizontalHazard;
-    public GameObject verticalHighHazard;
-    public GameObject verticalLowHazard;
+    // Hazards
+    public GameObject       horizontalHazard;
+    public GameObject       verticalHighHazard;
+    public GameObject       verticalLowHazard;
+
+    // Vertical climbing handles
+    public List<GameObject> longVerticalHandles;
+    public List<GameObject> shortVerticalHandles;
 
     public void SetObjects(float playerHeight = 168) {
         // Get lowest row height
@@ -37,5 +43,15 @@ public class AdjustObjectsHeight : MonoBehaviour {
         GameManager.utilities.SetScale(GameManager.S.spawner.horizontalBlock, 1, (playerHeight / 33.6f), 1);
         GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowBlock, 3, (playerHeight / 224f), 1);
         GameManager.utilities.SetScale(GameManager.S.spawner.verticalHighBlock, 3, (playerHeight / 48f), 1);
+    
+        // Vertical climbing handles
+        for(int i = 0; i < longVerticalHandles.Count; i++) {
+            GameManager.utilities.SetPosition(longVerticalHandles[i], longVerticalHandles[i].transform.position.x, (playerHeight / 84f));
+            GameManager.utilities.SetScale(longVerticalHandles[i], 0.2f, (playerHeight / 84f), 0.2f);
+        }
+        for (int i = 0; i < shortVerticalHandles.Count; i++) {
+            GameManager.utilities.SetPosition(shortVerticalHandles[i], shortVerticalHandles[i].transform.position.x, (playerHeight / 112f));
+            GameManager.utilities.SetScale(shortVerticalHandles[i], 0.2f, (playerHeight / 112f), 0.2f);
+        }
     }
 }
