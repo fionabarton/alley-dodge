@@ -5,7 +5,9 @@ using UnityEngine;
 // Based on the user specified alleyCount, sets the size of the alley and amount of handles.
 public class AlleyManager : MonoBehaviour {
     [Header("Set in Inspector")]
-    public GameObject playerFloor;
+    public GameObject       playerFloor;
+    public GameObject       transparentAlley;
+
     public List<GameObject> handles3;
     public List<GameObject> alleys3;
     public List<GameObject> handles5;
@@ -24,9 +26,12 @@ public class AlleyManager : MonoBehaviour {
         // Set floor length
         playerFloor.transform.localScale = new Vector3(alleyCount, 1, 2.5f);
 
+        // Set transparent alley length
+        transparentAlley.transform.localScale = new Vector3(alleyCount, 0.025f, 50f);
+
         // Set length of vertical block hazards
-        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, 0.75f, playerHeight / 224f);
-        GameManager.S.spawner.verticalHighBlock.transform.localScale = new Vector3(alleyCount, 3.5f, playerHeight / 48f);
+        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 224f, 1);
+        GameManager.S.spawner.verticalHighBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 48f, 1);
 
         // Set xPos range of horizontal block hazards & pickups
         GameManager.S.spawner.minXPos = -(alleyCount / 2);
