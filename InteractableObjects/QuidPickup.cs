@@ -10,7 +10,8 @@ public class QuidPickup : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
             // Increase score
-            GameManager.S.score.AddToScore(GameManager.S.score.level);
+            //GameManager.S.score.AddToScore(GameManager.S.score.level);
+            GameManager.S.score.AddToScore(1);
 
             // Instantiate particle system
             Instantiate(explosionGO, transform.position, transform.rotation);
