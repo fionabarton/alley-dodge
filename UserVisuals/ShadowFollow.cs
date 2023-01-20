@@ -6,11 +6,11 @@ using UnityEngine;
 public class ShadowFollow : MonoBehaviour {
     [Header("Set in Inspector")]
     public Transform objectToFollow;
-
+    
     private void Start() {
         StartCoroutine("Follow");
     }
-
+    
     IEnumerator Follow() {
         Vector3 tPos = transform.position;
         tPos = new Vector3(objectToFollow.position.x, 0.01f, objectToFollow.position.z);
