@@ -12,21 +12,27 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		quidPickup;
 
 	// Amount of time until next object is spawned
-	public float timeDuration = 0.5f;
+	public float			timeDuration = 2.0f;
 
 	// Controls whether ALL objects (hazards, pickups, etc.) can move
-	public bool objectsCanMove = true;
+	public bool				objectsCanMove = true;
 
 	// Controls whether script can spawn objects
-	public bool canSpawn = true;
+	public bool				canSpawn = true;
 
 	[Header("Set Dynamically")]
-	private float timeDone;
+	public float			timeDone;
 
 	// Dictates the range objects are spawned on the x-axis,
 	// their values are affected by the value of alleyCount
-	public int minXPos;
-	public int maxXPos;
+	public int				minXPos;
+	public int				maxXPos;
+
+	// Adjusted based on player height
+	public float			pickupMaxYPos = 5.5f;
+	public float			horizontalYPos = 2.5f;
+	public float			verticalLowYPos = 0.375f;
+	public float			verticalHighYPos = 3.25f;
 
 	private void Start() {
 		timeDone = timeDuration + Time.time;
@@ -47,52 +53,58 @@ public class ObjectSpawner : MonoBehaviour {
 
 	// Instantiate a random hazard or pickup
 	void InstantiateRandomObject() {
-		// Add to object count
-		GameManager.S.score.AddToObjectCount();
+        // Add to object count
+        GameManager.S.score.AddToObjectCount();
 
-		float randomVal = Random.value;
+        float randomVal = Random.value;
 
-		if (randomVal <= 0.33f) {
-			// Instantiate horizontal block
-			InstantiateHorizontalBlock();
-		} else if (randomVal > 0.33f && randomVal <= 0.66f) {
-			// Instantiate vertical block
-			if (Random.value > 0.5) {
-				// Low block
-				InstantiateVerticalLowBlock();
-			} else {
-				// High block
-				InstantiateVerticalHighBlock();
-			}
-		} else {
-			// Spawn pickups
-			if (Random.value > 0.25) {
-				InstantiateQuidPickup();
-			} else {
-				InstantiateShieldPickup();
-			}
-		}
-	}
+        //if (randomVal <= 0.5f) {
+        //	InstantiateHorizontalBlock();
+        //} else {
+        //	InstantiateQuidPickup();
+        //}
+
+        if (randomVal <= 0.33f) {
+            // Instantiate horizontal block
+            InstantiateHorizontalBlock();
+        } else if (randomVal > 0.33f && randomVal <= 0.66f) {
+            // Instantiate vertical block
+            if (Random.value > 0.5) {
+                // Low block
+                InstantiateVerticalLowBlock();
+            } else {
+                // High block
+                InstantiateVerticalHighBlock();
+            }
+        } else {
+            // Spawn pickups
+            if (Random.value > 0.25) {
+                InstantiateQuidPickup();
+            } else {
+                InstantiateShieldPickup();
+            }
+        }
+    }
 
 	void InstantiateHorizontalBlock() {
 		// Get random position on x-axis
 		int xPos = Random.Range(minXPos, maxXPos);
 		
-		Instantiate(horizontalBlock, new Vector3(xPos, 2.5f, 40), transform.rotation);
+		Instantiate(horizontalBlock, new Vector3(xPos, horizontalYPos, 40), transform.rotation);
 	}
 
 	void InstantiateVerticalLowBlock() {
-		Instantiate(verticalLowBlock, new Vector3(0, 0.375f, 40), transform.rotation);
+		Instantiate(verticalLowBlock, new Vector3(0, verticalLowYPos, 40), transform.rotation);
 	}
 
 	void InstantiateVerticalHighBlock() {
-		Instantiate(verticalHighBlock, new Vector3(0, 3.25f, 40), transform.rotation);
+		Instantiate(verticalHighBlock, new Vector3(0, verticalHighYPos, 40), transform.rotation);
 	}
 
 	void InstantiateQuidPickup() {
 		// Get random position 
 		int xPos = Random.Range(minXPos, maxXPos);
-		float yPos = Random.Range(0.5f, 5.5f);
+		float yPos = Random.Range(0.5f, pickupMaxYPos);
 
 		Instantiate(quidPickup, new Vector3(xPos, yPos, 40), transform.rotation);
 	}
@@ -100,7 +112,7 @@ public class ObjectSpawner : MonoBehaviour {
 	void InstantiateShieldPickup() {
 		// Get random position 
 		int xPos = Random.Range(minXPos, maxXPos);
-		float yPos = Random.Range(0.5f, 5.5f);
+		float yPos = Random.Range(0.5f, pickupMaxYPos);
 
 		Instantiate(shieldPickup, new Vector3(xPos, yPos, 40), transform.rotation);
 	}

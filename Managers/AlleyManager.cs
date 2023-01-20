@@ -14,19 +14,19 @@ public class AlleyManager : MonoBehaviour {
     // Amount of alleys
     public int alleyCount = 3; // 3, 5, 7
 
-    private void Start() {
-        //InitializeAlleys();
-        Invoke("InitializeAlleys", 0.1f);
-    }
+    //private void Start() {
+    //    //InitializeAlleys();
+    //    Invoke("InitializeAlleys", 0.1f);
+    //}
 
     // Depending on value of alleyCount, set:
-    void InitializeAlleys() {
+    public void InitializeAlleys(float playerHeight = 168) {
         // Set floor length
         playerFloor.transform.localScale = new Vector3(alleyCount, 1, 2.5f);
 
         // Set length of vertical block hazards
-        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, 0.75f, 0.75f);
-        GameManager.S.spawner.verticalHighBlock.transform.localScale = new Vector3(alleyCount, 3.5f, 1);
+        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, 0.75f, playerHeight / 224f);
+        GameManager.S.spawner.verticalHighBlock.transform.localScale = new Vector3(alleyCount, 3.5f, playerHeight / 48f);
 
         // Set xPos range of horizontal block hazards & pickups
         GameManager.S.spawner.minXPos = -(alleyCount / 2);

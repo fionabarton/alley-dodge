@@ -7,7 +7,6 @@ public class ResetUserPosition : MonoBehaviour {
     [Header("Set in Inspector")]
     public Transform            resetPosition;
     [SerializeField] GameObject xrOriginGO;
-    //[SerializeField] Camera     playerHead;
 
     public Animator             faderAnim;
 

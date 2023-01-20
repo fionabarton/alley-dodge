@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     // Display text message, then...
-    public void SetDisplayText(string message, Color textColor, Color frameColor) {
+    public void SetDisplayText(string message, Color textColor, Color frameColor, bool invokeFunction = true) {
 		displayText.color = textColor;
 
 		displayText.text = message;
@@ -47,7 +47,10 @@ public class ScoreManager : MonoBehaviour {
 		displayMessageFrame.color = frameColor;
 
 		CancelInvoke();
-		Invoke("DisplayAmountToNextLevel", 2);
+
+		if (invokeFunction) {
+			Invoke("DisplayAmountToNextLevel", 2);
+		}
     }
 
 	// Display amount of collectibles needed to proceed to next level
@@ -62,7 +65,7 @@ public class ScoreManager : MonoBehaviour {
     public void AddToScore(int amount = 1) {
 		score += amount;
 
-		scoreText.text = "£" + score;
+		scoreText.text = "Score: " + score;
 
 		amountToNextLevel -= 1;
 
@@ -124,12 +127,11 @@ public class ScoreManager : MonoBehaviour {
 	// Resets script properties to their default values
 	public void ResetScore() {
 		score = 0;
-		level = 1;
+		//level = GameManager.S.me
 		objectCount = 0;
 		startingTime = 0f;
 		endingTime = 0f;
 		amountToNextLevel = 5;
-		timerIsOn = false;
 	}
 
 	// Updates score and level GUI

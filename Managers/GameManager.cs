@@ -6,10 +6,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     [Header("Set in Inspector")]
     public ConfettiManager      confetti;
+    public HighScoreManager     highScore;
     public ScoreManager         score;
     public ObjectSpawner        spawner;
+    public DamageColliderFollow damageColl;
+
+    // Objects to be activated/deactivated
+    public List<GameObject>     xrRayInteractorsGO;
+
+    // Menus
+    public GameObject           keyboardMenuGO;
+    public GameObject           highScoreMenuGO;
+    public GameObject           startGameMenuGO;
 
     [Header("Set dynamically")]
+    public GameObject           previouslyHighlightedGO;
+
     public static AlleyManager  alley;
     public static ColorManager  color;
     public static ShieldManager shield;

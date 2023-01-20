@@ -19,13 +19,13 @@ public class HighScoreManager : MonoBehaviour {
     public HighScore[]                  highScores;
 
     // Index at which to store a new HighScore in the 'highScores' array
-    public int                          newHighScoreNdx = 0;
+    public int                          newHighScoreNdx = -1;
 
     // Index at which the new HighScore is displayed in the list of 10 displayed scores
-    public int                          newHighScoreListNdx = 0;
+    public int                          newHighScoreListNdx = -1;
 
     //
-    public int                          newHighScorePageNdx = 0;
+    public int                          newHighScorePageNdx = -1;
 
     //
     public int                          currentPageNdx = 0;

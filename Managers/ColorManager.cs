@@ -33,14 +33,14 @@ public class ColorManager : MonoBehaviour {
         alleyMaterial2.color = colors[6];
     }
 
-    // Resets script properties to default values
+    // Resets script properties to their default values
     public void ResetPalette() {
         colorNdx = 0;
         alleyMaterial1.color = colors[0];
         alleyMaterial2.color = colors[6];
     }
 
-    // Sets display text colors to alley colors
+    // Sets UI display text colors to alley colors
     public void SetDisplayTextPalette() {
         GameManager.S.score.displayText.color = alleyMaterial1.color;
         GameManager.S.score.displayMessageFrame.color = alleyMaterial2.color;

@@ -13,10 +13,11 @@ public class Utilities : MonoBehaviour {
     }
 
     // Set GameObject Scale
-    public void SetScale(GameObject tGO, float x, float y) {
+    public void SetScale(GameObject tGO, float x, float y, float z = -1) {
         Vector3 tScale = tGO.transform.localScale;
         tScale.x = x;
         tScale.y = y;
+        if (z != -1) tScale.z = z;
         tGO.transform.localScale = tScale;
     }
 
