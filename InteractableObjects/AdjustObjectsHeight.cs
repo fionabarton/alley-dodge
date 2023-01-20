@@ -53,5 +53,10 @@ public class AdjustObjectsHeight : MonoBehaviour {
             GameManager.utilities.SetPosition(shortVerticalHandles[i], shortVerticalHandles[i].transform.position.x, (playerHeight / 112f));
             GameManager.utilities.SetScale(shortVerticalHandles[i], 0.2f, (playerHeight / 112f), 0.2f);
         }
+
+        // Player damage collider
+        GameManager.S.damageColl.yScale = playerHeight / 186.6666667f;
+        GameManager.S.damageColl.yOffset = playerHeight / 252.0000252f;
+        GameManager.S.damageColl.SetScale();
     }
 }
