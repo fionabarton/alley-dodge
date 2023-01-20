@@ -48,6 +48,9 @@ public class MenuManager : MonoBehaviour {
     private void OnEnable() {
         // Display text
         delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
+
+        // Set selected game object to null
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
@@ -64,13 +67,13 @@ public class MenuManager : MonoBehaviour {
         // If height is less than 1 meter...
         if (playerHeightSlider.value < 100) {
             // Display height text
-            heightText.text = "Player Height:\n" + playerHeightSlider.value + " cm / " + feet + " ft " + inches + " in";
+            heightText.text = playerHeightSlider.value + " cm / " + feet + " ft " + inches + " in";
         } else {
             // Get meters
             double d1 = System.Math.Round((playerHeightSlider.value / 100), 2);
 
             // Display height text
-            heightText.text = "Player Height:\n" + d1 + " m / " + feet + " ft " + inches + " in";
+            heightText.text = d1 + " m / " + feet + " ft " + inches + " in";
         }
 
         // 
