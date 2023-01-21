@@ -93,7 +93,7 @@ public class MenuManager : MonoBehaviour {
     void SetLevel(bool displayText = true) {
         // Set level to value of dropdown
         GameManager.S.score.level = (levelSelectDropdown.value + 1);
-        GameManager.S.score.levelText.text = "Level: " + GameManager.S.score.level;
+        GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
 
         // Set spawn speed
         float defaultSpawnSpeed = 2.0f;
@@ -200,6 +200,9 @@ public class MenuManager : MonoBehaviour {
     public void GoToHighScoreMenuButton() {
         // Activate high score menu
         GameManager.S.highScoreMenuGO.SetActive(true);
+
+        // Update high score display
+        GameManager.S.highScore.UpdateHighScoreDisplay(GameManager.S.highScore.currentPageNdx);
 
         // Deactivate keyboard input menu
         GameManager.S.startGameMenuGO.SetActive(false);

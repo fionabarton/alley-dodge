@@ -5,6 +5,7 @@ using UnityEngine;
 // Stores and displays the top 100 high scores (name, score, level, objects, time)
 public class HighScoreManager : MonoBehaviour {
     [Header("Set in Inspector")]
+    public TMPro.TextMeshProUGUI        titleText;
     public List<TMPro.TextMeshProUGUI>  rankText;
     public List<TMPro.TextMeshProUGUI>  nameText;
     public List<TMPro.TextMeshProUGUI>  scoreText;
@@ -12,6 +13,14 @@ public class HighScoreManager : MonoBehaviour {
     public List<TMPro.TextMeshProUGUI>  objectsText;
     public List<TMPro.TextMeshProUGUI>  timeText;
     public TMPro.TextMeshProUGUI        pageText;
+
+    // Needed to highlight new high score text with cycling rainbow color animation clip
+    public List<Animator>               rankAnim;
+    public List<Animator>               nameAnim;
+    public List<Animator>               scoreAnim;
+    public List<Animator>               levelAnim;
+    public List<Animator>               objectsAnim;
+    public List<Animator>               timeAnim;
 
     public List<GameObject>             cursorGO;
 
@@ -144,6 +153,13 @@ public class HighScoreManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            // Set new HighScore text color
+            SetHighScoreColors(0, "RainbowTextCycle");
+        }
+    }
+
     // Checks if the score is a new high score,
     // then returns at what index it belongs in the highScores array
     public bool CheckForNewHighScore(int score) {
@@ -207,6 +223,9 @@ public class HighScoreManager : MonoBehaviour {
         // Get index of first score to be displayed on this page
         int startingNdx = pageNdx * 10;
 
+        // Set title text
+        titleText.text = "Top 100 High Scores " + "(" + (startingNdx + 1).ToString() + "-" + (startingNdx + 10).ToString() + ")";
+
         // Loop over the 10 UI text objects
         for (int i = 0; i < 10; i++) {
             // Get rank suffix (1st, 2nd, & 3rd)
@@ -230,7 +249,7 @@ public class HighScoreManager : MonoBehaviour {
             timeText[i].text = highScores[startingNdx + i].time;
 
             // Reset text color
-            SetHighScoreColors(i, Color.white);
+            SetHighScoreColors(i, "RainbowTextWhite");
         }
 
         // 
@@ -245,7 +264,7 @@ public class HighScoreManager : MonoBehaviour {
                 GameManager.utilities.PositionCursor(cursorGO[1], timeText[newHighScoreListNdx].gameObject, 3.5f, 0, 2);
 
                 // Set new HighScore text color
-                SetHighScoreColors(newHighScoreListNdx, Color.yellow);
+                SetHighScoreColors(newHighScoreListNdx, "RainbowTextCycle");
             } else {
                 // Deactivate cursors 
                 GameManager.utilities.SetActiveList(cursorGO, false);
@@ -253,17 +272,17 @@ public class HighScoreManager : MonoBehaviour {
         }
 
         // Set page text
-        pageText.text = "Page " + (pageNdx + 1).ToString() + "/10";
+        pageText.text = "Page: " + "<color=white>" + (pageNdx + 1).ToString() + "/10" + "</color>";
     }
 
     // Sets the colors of a single HighScore entry's text
-    void SetHighScoreColors(int scoreNdx, Color color) {
-        rankText[scoreNdx].color = color;
-        nameText[scoreNdx].color = color;
-        scoreText[scoreNdx].color = color;
-        levelText[scoreNdx].color = color;
-        objectsText[scoreNdx].color = color;
-        timeText[scoreNdx].color = color;
+    public void SetHighScoreColors(int scoreNdx, string clipName) {
+        rankAnim[scoreNdx].CrossFade(clipName, 0);
+        nameAnim[scoreNdx].CrossFade(clipName, 0);
+        scoreAnim[scoreNdx].CrossFade(clipName, 0);
+        levelAnim[scoreNdx].CrossFade(clipName, 0);
+        objectsAnim[scoreNdx].CrossFade(clipName, 0);
+        timeAnim[scoreNdx].CrossFade(clipName, 0);
     }
 
     //

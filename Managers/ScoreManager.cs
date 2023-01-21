@@ -33,7 +33,7 @@ public class ScoreManager : MonoBehaviour {
     private void FixedUpdate() {
 		// Display time
         if (timerIsOn) {
-			timeText.text = "Time:\n" + GetTime(Time.time);
+			timeText.text = "Time:\n<color=white>" + GetTime(Time.time);
 		}
     }
 
@@ -65,7 +65,7 @@ public class ScoreManager : MonoBehaviour {
     public void AddToScore(int amount = 1) {
 		score += amount;
 
-		scoreText.text = "Score: " + score;
+		scoreText.text = "Score: <color=white>" + score;
 
 		amountToNextLevel -= 1;
 
@@ -82,7 +82,7 @@ public class ScoreManager : MonoBehaviour {
 	public void AddToObjectCount(int amount = 1) {
 		objectCount += amount;
 
-		objectCountText.text = "Objects: " + objectCount;
+		objectCountText.text = "Objects: <color=white>" + objectCount;
 	}
 
 	// Set up for next level
@@ -98,7 +98,7 @@ public class ScoreManager : MonoBehaviour {
 
 		// Increment level
 		level += 1;
-		levelText.text = "Level: " + level;
+		levelText.text = "Level: <color=white>" + level;
 
 		// Reset amountToNextLevel 
 		amountToNextLevel = 5;
@@ -136,7 +136,7 @@ public class ScoreManager : MonoBehaviour {
 
 	// Updates score and level GUI
 	public void UpdateGUI() {
-		scoreText.text = "Score: " + score;
-		levelText.text = "Level: " + level;
+		scoreText.text = "Score: <color=white>" + score;
+		levelText.text = "Level: <color=white>" + level;
 	}
 }

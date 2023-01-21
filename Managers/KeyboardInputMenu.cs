@@ -36,7 +36,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
     // Variables related to predetermined default names
     private int                 dontCareNdx;
-    private List<string>        dontCareNames = new List<string>() { "Butthead", "Mildew", "Pee Wee", "Disappointment?", "Moon Unit" };
+    private List<string>        dontCareNames = new List<string>() { "Butthead", "Mildew", "Pee Wee", "Disappointment", "Moon Unit" };
 
     void Start() {
         gameObject.SetActive(false);
@@ -160,6 +160,9 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.score.objectCount,
             GameManager.S.score.GetTime(GameManager.S.score.endingTime));
 
+        // Activate high score menu
+        GameManager.S.highScoreMenuGO.SetActive(true);
+
         // Update high score display
         GameManager.S.highScore.AddNewHighScore(newHighScore);
 
@@ -169,16 +172,14 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Deactivate keyboard input menu
         GameManager.S.keyboardMenuGO.SetActive(false);
 
+        // Play confetti particle systems
+        GameManager.S.confetti.DropConfetti();
+
         //// Audio: Win
         //StartCoroutine(AudioManager.S.PlaySongThenResumePreviousSong(6));
-
-        // Display text
-        //messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nThe name has been set!\nPress the action button to proceed!");
-
-        //
-        ActivateHighScoreMenu();
     }
 
+    //
     void ActivateHighScoreMenu() {
         // Activate high score menu
         GameManager.S.highScoreMenuGO.SetActive(true);
