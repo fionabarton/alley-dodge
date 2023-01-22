@@ -7,6 +7,7 @@ public class AlleyManager : MonoBehaviour {
     [Header("Set in Inspector")]
     public GameObject       playerFloor;
     public GameObject       transparentAlley;
+    public GameObject       baseHandle;
 
     public List<GameObject> handles3;
     public List<GameObject> alleys3;
@@ -16,11 +17,6 @@ public class AlleyManager : MonoBehaviour {
     // Amount of alleys
     public int alleyCount = 3; // 3, 5, 7
 
-    //private void Start() {
-    //    //InitializeAlleys();
-    //    Invoke("InitializeAlleys", 0.1f);
-    //}
-
     // Depending on value of alleyCount, set:
     public void InitializeAlleys(float playerHeight = 168) {
         // Set floor length
@@ -28,6 +24,9 @@ public class AlleyManager : MonoBehaviour {
 
         // Set transparent alley length
         transparentAlley.transform.localScale = new Vector3(alleyCount, 0.025f, 50f);
+
+        // Set base handle length  3-1, 5-2, 7-3
+        baseHandle.transform.localScale = new Vector3(0.2f, ((alleyCount/2)), 0.2f);
 
         // Set length of vertical block hazards
         GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 224f, 1);
