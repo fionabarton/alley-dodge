@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
 
-//
+// Handles what happens after the user collides with a hazardous object
 public class PlayerDamage : MonoBehaviour {
     [Header("Set in Inspector")]
     public XRController leftXR;
@@ -62,14 +62,8 @@ public class PlayerDamage : MonoBehaviour {
                     //
                     Invoke("AnnounceHighScore", 2.5f);
                 } else {
-                    // Reset score for next game
-                    GameManager.S.score.ResetScore();
-
-                    // Activate XR ray interactors
-                    GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
-
-                    // Activate Start Game/Options menu
-                    GameManager.S.startGameMenuGO.SetActive(true);
+                    //
+                    Invoke("ActivateStartMenu", 2.5f);
                 }
             } else {
                 // Deactivate shield
@@ -103,5 +97,16 @@ public class PlayerDamage : MonoBehaviour {
 
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
+    }
+
+    void ActivateStartMenu() {
+        // Reset score for next game
+        GameManager.S.score.ResetScore();
+
+        // Activate XR ray interactors
+        GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
+
+        // Activate Start Game/Options menu
+        GameManager.S.startGameMenuGO.SetActive(true);
     }
 }
