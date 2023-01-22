@@ -153,13 +153,6 @@ public class HighScoreManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            // Set new HighScore text color
-            SetHighScoreColors(0, "RainbowTextCycle");
-        }
-    }
-
     // Checks if the score is a new high score,
     // then returns at what index it belongs in the highScores array
     public bool CheckForNewHighScore(int score) {
@@ -324,11 +317,11 @@ public class HighScore {
     // Metadata not visible on scoreboard
     public string   dateTime;
     public int      alleyCount;
-    public int      playerHeight;
-    public int      fallThroughFloorCount;
+    public float    playerHeight;
+    public int      fallBelowFloorCount;
 
     public HighScore(string _name, int _score, int _level, int _objects, string _time,
-        string _dateTime = "", int _alleyCount = 3, int _playerHeight = 168, int _fallThroughFloorCount = 0) {
+        string _dateTime = "", int _alleyCount = 3, float _playerHeight = 168, int _fallBelowFloorCount = 0) {
         name = _name;
         score = _score;
         level = _level;
@@ -339,6 +332,6 @@ public class HighScore {
         dateTime = _dateTime;
         alleyCount = _alleyCount;
         playerHeight = _playerHeight;
-        fallThroughFloorCount = _fallThroughFloorCount;
+        fallBelowFloorCount = _fallBelowFloorCount;
     }
 }

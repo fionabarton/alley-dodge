@@ -142,6 +142,11 @@ public class ScoreManager : MonoBehaviour {
 
 	// Display UI countdown from 3 to 1
 	public IEnumerator Countdown(int count = 4) {
+		//
+		if (count == 3) {
+			GameManager.S.fallBelowFloorCount += 1;
+		}
+		
 		// Set text color
 		if (count == 4) {
 			displayText.text = "GET\nREADY";
