@@ -139,4 +139,39 @@ public class ScoreManager : MonoBehaviour {
 		scoreText.text = "Score: <color=white>" + score;
 		levelText.text = "Level: <color=white>" + level;
 	}
+
+	// Display UI countdown from 3 to 1
+	public IEnumerator Countdown(int count = 4) {
+		// Set text color
+		if (count == 4) {
+			displayText.text = "GET\nREADY";
+			displayText.color = GameManager.color.alleyMaterial1.color;
+		} else if(count == 3) {
+			displayText.text = "3";
+			displayText.color = Color.red;
+		} else if (count == 2) {
+			displayText.text = "2";
+			displayText.color = new Color(1.0f, 0.35f, 0.0f);
+		} else if (count == 1) {
+			displayText.text = "1";
+			displayText.color = Color.yellow;
+		} else if (count == 0) {
+			displayText.text = "GO!";
+			displayText.color = Color.green;
+		}
+
+		// If the countdown is done...
+		if (count == -1) {
+			// Display text: amount to next level
+			DisplayAmountToNextLevel();
+
+			// Unfreeze objects and restart spawner
+			GameManager.S.spawner.canSpawn = true;
+			GameManager.S.spawner.objectsCanMove = true;
+		} else {
+			// Wait for 1 second and restart this coroutine
+			yield return new WaitForSeconds(1);
+			StartCoroutine(Countdown(count - 1));
+		}
+	}
 }
