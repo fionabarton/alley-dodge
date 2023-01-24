@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour {
     public ScoreManager         score;
     public ObjectSpawner        spawner;
     public DamageColliderFollow damageColl;
-
+    public ClimbProvider        climb;
+    public List<XRDirectClimbInteractor> climbInteractors;
     // Objects to be activated/deactivated
     public List<GameObject>     xrRayInteractorsGO;
 
@@ -47,6 +48,11 @@ public class GameManager : MonoBehaviour {
         shield = GetComponent<ShieldManager>();
         utilities = GetComponent<Utilities>();
         words = GetComponent<WordManager>();
+    }
+
+    public void EnableClimbInteractors(bool isActive){
+        climbInteractors[0].enabled = isActive;
+        climbInteractors[1].enabled = isActive;
     }
 
     // For testing!

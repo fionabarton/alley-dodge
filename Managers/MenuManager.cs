@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 // Menu that handles adjusting options (player height, level, alley amount) and starting/exiting the game.
 public class MenuManager : MonoBehaviour {
@@ -55,6 +56,9 @@ public class MenuManager : MonoBehaviour {
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
     public void DisplayHeightInMetersAndFeet() {
+        // Deactivate climbing interactors
+        GameManager.S.EnableClimbInteractors(false);
+
         // Get total inches from total centimeters
         float totalInches = playerHeightSlider.value / 2.54f;
 
@@ -76,7 +80,7 @@ public class MenuManager : MonoBehaviour {
             heightText.text = d1 + " m / " + feet + " ft " + inches + " in";
         }
 
-        // 
+        // Set objects position and scale
         adjustObjectsHeight.SetObjects(playerHeightSlider.value);
 
         // Reset resetPosition height (where the user respawns if they’ve fallen through the floor) 
@@ -85,6 +89,9 @@ public class MenuManager : MonoBehaviour {
 
     // Called OnPointerUp() by the EventTrigger attached to the slider in the Inspector
     public void OnSliderButtonReleased() {
+        // Activate climbing interactors
+        GameManager.S.EnableClimbInteractors(true);
+
         // Delayed text display
         delayedTextDisplay.DisplayText("Player height selected!");
     }
@@ -156,6 +163,9 @@ public class MenuManager : MonoBehaviour {
 
         // Deactivate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, false);
+
+        // Activate climbing interactors (in case the user hasn't released the 'player height' slider)
+        GameManager.S.EnableClimbInteractors(true);
 
         // Deactivate menu
         gameObject.SetActive(false);
