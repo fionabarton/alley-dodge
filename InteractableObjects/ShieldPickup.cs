@@ -5,7 +5,7 @@ using UnityEngine;
 //
 public class ShieldPickup : MonoBehaviour {
     [Header("Set in Inspector")]
-    public GameObject explosionGO;
+    public GameObject   explosionGO;
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
@@ -13,6 +13,7 @@ public class ShieldPickup : MonoBehaviour {
             Instantiate(explosionGO, transform.position, transform.rotation);
 
             // SFX
+            GameManager.audioMan.PlayPlayerClip(eSound.sfxBuff2);
 
             // Activate shield
             GameManager.shield.SetActiveShield(true);
