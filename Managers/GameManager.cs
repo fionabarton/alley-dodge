@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour {
 
     public MenuManager          startGameMenuCS;
 
+    public AudioSource          playerAudioSource;
+    public AudioSource          UIAudioSource;
+
     [Header("Set dynamically")]
     public GameObject           previouslyHighlightedGO;
 
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour {
     public static ShieldManager shield;
     public static Utilities     utilities;
     public static WordManager   words;
+    public static AudioManager  audioMan;
 
     private static GameManager _S;
     public static GameManager S { get { return _S; } set { _S = value; } }
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour {
         shield = GetComponent<ShieldManager>();
         utilities = GetComponent<Utilities>();
         words = GetComponent<WordManager>();
+        audioMan = GetComponent<AudioManager>();
     }
 
     public void EnableClimbInteractors(bool isActive){
@@ -58,15 +63,7 @@ public class GameManager : MonoBehaviour {
     // For testing!
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.Space)) {
-    //        Debug.Log("name: " + highScore.highScores[highScore.newHighScoreNdx].name);
-    //        Debug.Log("score: " + highScore.highScores[highScore.newHighScoreNdx].score);
-    //        Debug.Log("level: " + highScore.highScores[highScore.newHighScoreNdx].level);
-    //        Debug.Log("objects: " + highScore.highScores[highScore.newHighScoreNdx].objects);
-    //        Debug.Log("time: " + highScore.highScores[highScore.newHighScoreNdx].time);
-    //        Debug.Log("dateTime: " + highScore.highScores[highScore.newHighScoreNdx].dateTime);
-    //        Debug.Log("alleyCount: " + highScore.highScores[highScore.newHighScoreNdx].alleyCount);
-    //        Debug.Log("playerHeight: " + highScore.highScores[highScore.newHighScoreNdx].playerHeight);
-    //        Debug.Log("fallBelowFloorCount: " + highScore.highScores[highScore.newHighScoreNdx].fallBelowFloorCount);
+    //
     //    }
     //}
 }
