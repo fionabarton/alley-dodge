@@ -42,6 +42,15 @@ public class HighScoreManager : MonoBehaviour {
     void Start() {
         // Initialize array of high scores
         highScores = new HighScore[100];
+
+        //
+        SetHighScoresToDefaultValues();
+
+        gameObject.SetActive(false);
+    }
+
+    //
+    public void SetHighScoresToDefaultValues() {
         highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
         highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
         highScores[2] = new HighScore("Chani", 42, 9, 0, "00:01:52.629");
@@ -146,11 +155,6 @@ public class HighScoreManager : MonoBehaviour {
         highScores[97] = new HighScore("97", 1, 1, 0, "00:00:00:000");
         highScores[98] = new HighScore("98", 1, 1, 0, "00:00:00:000");
         highScores[99] = new HighScore("99", 1, 1, 0, "00:00:00:000");
-
-        //
-        UpdateHighScoreDisplay(currentPageNdx, false);
-
-        gameObject.SetActive(false);
     }
 
     // Checks if the score is a new high score,
@@ -203,6 +207,9 @@ public class HighScoreManager : MonoBehaviour {
 
         // 
         highScores = tScores;
+
+        // Save data
+        GameManager.save.SaveData();
 
         //
         UpdateHighScoreDisplay(currentPageNdx);
@@ -283,8 +290,8 @@ public class HighScoreManager : MonoBehaviour {
         // Deactivate high score menu
         GameManager.S.highScoreMenuGO.SetActive(false);
 
-        // Activate keyboard input menu
-        GameManager.S.startGameMenuGO.SetActive(true);
+        //
+        GameManager.S.mainMenuGO.SetActive(true);
 
         //
         GameManager.S.previouslyHighlightedGO = null;

@@ -12,15 +12,18 @@ public class GameManager : MonoBehaviour {
     public DamageColliderFollow damageColl;
     public ClimbProvider        climb;
     public List<XRDirectClimbInteractor> climbInteractors;
+
     // Objects to be activated/deactivated
     public List<GameObject>     xrRayInteractorsGO;
 
     // Menus
     public GameObject           keyboardMenuGO;
     public GameObject           highScoreMenuGO;
-    public GameObject           startGameMenuGO;
+    public GameObject           mainMenuGO;
+    public GameObject           optionsMenuGO;
 
-    public MenuManager          startGameMenuCS;
+    public MainMenu             mainMenuCS;
+    public OptionsMenu          optionsMenuCS;
 
     public AudioSource          playerAudioSource;
     public AudioSource          UIAudioSource;
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour {
     public static Utilities     utilities;
     public static WordManager   words;
     public static AudioManager  audioMan;
+    public static SaveManager   save;
 
     private static GameManager _S;
     public static GameManager S { get { return _S; } set { _S = value; } }
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour {
         utilities = GetComponent<Utilities>();
         words = GetComponent<WordManager>();
         audioMan = GetComponent<AudioManager>();
+        save = GetComponent<SaveManager>();
     }
 
     public void EnableClimbInteractors(bool isActive){
