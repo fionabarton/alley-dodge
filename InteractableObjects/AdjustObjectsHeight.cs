@@ -10,11 +10,6 @@ public class AdjustObjectsHeight : MonoBehaviour {
     public GameObject       row2Handles;
     public GameObject       row3Handles;
 
-    // Hazards
-    public GameObject       horizontalHazard;
-    public GameObject       verticalHighHazard;
-    public GameObject       verticalLowHazard;
-
     // Vertical climbing handles
     public List<GameObject> longVerticalHandles;
     public List<GameObject> shortVerticalHandles;
