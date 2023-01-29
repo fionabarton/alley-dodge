@@ -161,7 +161,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.score.GetTime(GameManager.S.score.endingTime),
             System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"),
             GameManager.alley.alleyCount,
-            GameManager.S.startGameMenuCS.playerHeightSlider.value,
+            GameManager.S.mainMenuCS.playerHeightSlider.value,
             GameManager.S.fallBelowFloorCount);
 
         // Activate high score menu

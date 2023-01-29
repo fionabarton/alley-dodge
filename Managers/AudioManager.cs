@@ -7,9 +7,9 @@ sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sf
 sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell };
 
 public class AudioManager : MonoBehaviour {
-    public AudioSource playerAudioSource;
-    public AudioSource UIAudioSource;
-    public List<AudioClip> audioClips;
+    public AudioSource      playerAudioSource;
+    public AudioSource      UIAudioSource;
+    public List<AudioClip>  audioClips;
 
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.Space)) {
@@ -18,7 +18,8 @@ public class AudioManager : MonoBehaviour {
     //}
 
     private void Start() {
-        
+        playerAudioSource.volume = 0;
+        UIAudioSource.volume = 0;
     }
 
     public void PlayPlayerClip(eSound soundName) {
