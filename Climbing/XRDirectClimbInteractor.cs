@@ -31,5 +31,4 @@ public class XRDirectClimbInteractor : XRDirectInteractor {
 
         ClimbHandDeactivated?.Invoke(_controllerName);
     }
-
 }
