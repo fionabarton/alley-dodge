@@ -106,7 +106,7 @@ public class PlayerDamage : MonoBehaviour {
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
 
-        // Activate Start Game/Options menu
-        GameManager.S.startGameMenuGO.SetActive(true);
+        // Activate main menu
+        GameManager.S.mainMenuGO.SetActive(true);
     }
 }
