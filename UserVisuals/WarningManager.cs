@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// On trigger press, deactivate the disclaimer warning the user to not jump and also
+// On trigger press, deactivates the disclaimer warning the user to not jump and also
 // be wary of their surroundings as the playspace can shift during gameplay
 public class WarningManager : MonoBehaviour {
     [Header("Set in Inspector")]
