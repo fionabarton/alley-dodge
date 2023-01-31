@@ -6,15 +6,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System;
+using System.Security.Cryptography;
+using System.Web;
 
 // Reads and writes save data to and from a currently unencrypted JSON file
 public class SaveManager : MonoBehaviour {
-    public SaveData data;
+    [Header("Set Dynamically")]
+    public CryptographyManager  crypt;
+    
+    public SaveData             data;
 
-    private string file = "gdfyrt5y5yddddg.txt";
+    private string              file = "gdfyrt5y5yfsdfsddsfsdddddg.txt";
 
     private void Awake() {
         data = new SaveData();
+        crypt = GetComponent<CryptographyManager>();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -34,21 +41,31 @@ public class SaveManager : MonoBehaviour {
             data.fallBelowFloorCounts[i] = GameManager.S.highScore.highScores[i].fallBelowFloorCount;
         }
 
-        // Save cached data to file
+        // Get data in JSON format
         string json = JsonUtility.ToJson(data);
+
+        // Encrypt data 
+        json = crypt.Encrypt(json);
+
+        // Write data to file
         WriteToFile(file, json);
     }
 
     //
     public void LoadData() {
-        // Load data from file
+        // Read data from file
         data = new SaveData();
         string json = ReadFromFile(file);
-        JsonUtility.FromJsonOverwrite(json, data);
 
-        // If data file exists,
-        // Display data loaded from file
+        // If data file exists
         if(json != "") {
+            // Decrypt data string
+            json = crypt.Decrypt(json);
+
+            // Overwrite data by reading from its JSON represenation
+            JsonUtility.FromJsonOverwrite(json, data);
+
+            // Display high score data in game UI
             for (int i = 0; i < GameManager.S.highScore.highScores.Length; i++) {
                 GameManager.S.highScore.highScores[i].name = data.names[i];
                 GameManager.S.highScore.highScores[i].score = data.scores[i];
@@ -62,7 +79,7 @@ public class SaveManager : MonoBehaviour {
                 GameManager.S.highScore.highScores[i].fallBelowFloorCount = data.fallBelowFloorCounts[i];
             }
         } else {
-            //
+            // Display default high score data in game UI
             GameManager.S.highScore.SetHighScoresToDefaultValues();
         }
     }
