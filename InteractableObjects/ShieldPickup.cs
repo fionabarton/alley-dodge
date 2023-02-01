@@ -13,7 +13,7 @@ public class ShieldPickup : MonoBehaviour {
             Instantiate(explosionGO, transform.position, transform.rotation);
 
             // SFX
-            GameManager.audioMan.PlayPlayerClip(eSound.sfxBuff2);
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxBuff2);
 
             // Activate shield
             GameManager.shield.SetActiveShield(true);

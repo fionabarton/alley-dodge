@@ -16,7 +16,7 @@ public class QuidPickup : MonoBehaviour {
             Instantiate(explosionGO, transform.position, transform.rotation);
 
             // SFX
-            GameManager.audioMan.PlayPlayerClip(eSound.sfxConfirm);
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
 
             // Destroy this GO
             Destroy(gameObject);
