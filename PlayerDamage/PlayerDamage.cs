@@ -95,6 +95,9 @@ public class PlayerDamage : MonoBehaviour {
         // Activate keyboard input menu
         GameManager.S.keyboardMenuGO.SetActive(true);
 
+        //
+        GameManager.S.keyboardMenuCS.GetInputString();
+
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
     }
