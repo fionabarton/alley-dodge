@@ -16,6 +16,9 @@ public class MainMenu : MonoBehaviour {
     public TMPro.TMP_Dropdown       alleyAmountDropdown;
     public Button                   startGameButton;
     public Button                   exitGameButton;
+    public Button                   resetButton;
+    public Button                   optionsButton;
+    public Button                   highScoresButton;
 
     // Delayed text display
     public DelayedTextDisplay       delayedTextDisplay;
@@ -35,6 +38,23 @@ public class MainMenu : MonoBehaviour {
     }
 
     void Start() {
+        // GetPlayerPrefs
+        if (PlayerPrefs.HasKey("Player Height")) {
+            playerHeightSlider.value = PlayerPrefs.GetFloat("Player Height");
+        } else {
+            playerHeightSlider.value = 168;
+        }
+        if (PlayerPrefs.HasKey("Level Select")) {
+            levelSelectDropdown.value = PlayerPrefs.GetInt("Level Select");
+        } else {
+            levelSelectDropdown.value = 0;
+        }
+        if (PlayerPrefs.HasKey("Alley Amount")) {
+            alleyAmountDropdown.value = PlayerPrefs.GetInt("Alley Amount");
+        } else {
+            alleyAmountDropdown.value = 0;
+        }
+
         // Add listener to slider and dropdowns
         playerHeightSlider.onValueChanged.AddListener(delegate { DisplayHeightInMetersAndFeet(); });
         levelSelectDropdown.onValueChanged.AddListener(delegate { SetLevel(); });
@@ -43,17 +63,27 @@ public class MainMenu : MonoBehaviour {
         // Add listeners to buttons
         startGameButton.onClick.AddListener(delegate { StartGame(); });
         exitGameButton.onClick.AddListener(delegate { ExitApp(); });
-
+        resetButton.onClick.AddListener(delegate { DefaultSettings(); });
+        optionsButton.onClick.AddListener(delegate { GoToOptionsMenuButton(); });
+        highScoresButton.onClick.AddListener(delegate { GoToHighScoreMenuButton(); });
+        
         // Set objects' position and scale to their default values
         Invoke("SetObjects", 0.1f);
     }
 
     void SetObjects() {
         adjustObjectsHeight.SetObjects(playerHeightSlider.value);
+
+        // In case the level or alley dropdowns are set to something other than 1
+        SetLevel(false);
+        SetAlleyAmount(alleyAmountDropdown.value);
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
     public void DisplayHeightInMetersAndFeet() {
+        // Save settings
+        PlayerPrefs.SetFloat("Player Height", playerHeightSlider.value);
+
         // Deactivate climbing interactors
         GameManager.S.EnableClimbInteractors(false);
 
@@ -95,7 +125,10 @@ public class MainMenu : MonoBehaviour {
     }
 
     // On value changed of levelSelectDropdown, set level 
-    void SetLevel() {
+    void SetLevel(bool displayText = true) {
+        // Save settings
+        PlayerPrefs.SetInt("Level Select", levelSelectDropdown.value);
+
         // Set level to value of dropdown
         GameManager.S.score.level = (levelSelectDropdown.value + 1);
         GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
@@ -119,14 +152,19 @@ public class MainMenu : MonoBehaviour {
         // Set display text colors
         GameManager.color.SetDisplayTextPalette();
 
-        if (gameObject.activeInHierarchy) {
-            // Delayed text display
-            delayedTextDisplay.DisplayText("Level selected!");
-        }
+        if (displayText) {
+            if (gameObject.activeInHierarchy) {
+                // Delayed text display
+                delayedTextDisplay.DisplayText("Level selected!");
+            }
+        }        
     }
 
     // On value changed of alleyAmountDropdown, sets alley amount
-    public void SetAlleyAmount(int amount) {
+    public void SetAlleyAmount(int amount, bool displayText = true) {
+        // Save settings
+        PlayerPrefs.SetInt("Alley Amount", amount);
+
         // Set alleyAmount to value of dropdown
         switch (amount) {
             case 0:
@@ -144,8 +182,10 @@ public class MainMenu : MonoBehaviour {
         GameManager.alley.InitializeAlleys(playerHeightSlider.value);
 
         // Delayed text display
-        if (gameObject.activeInHierarchy) {
-            delayedTextDisplay.DisplayText("Amount of alleys selected!");
+        if (displayText) {
+            if (gameObject.activeInHierarchy) {
+                delayedTextDisplay.DisplayText("Amount of alleys selected!");
+            }
         }
     }
 
@@ -208,5 +248,28 @@ public class MainMenu : MonoBehaviour {
 
         // Deactivate keyboard input menu
         gameObject.SetActive(false);
+    }
+
+    // On click of defaultSettingsButton, returns all menu settings to their default value
+    public void DefaultSettings() {
+        // Reset slider and dropdown values
+        playerHeightSlider.value = 168;
+        levelSelectDropdown.value = 0;
+        alleyAmountDropdown.value = 0;
+
+        // Reset alley amount
+        SetAlleyAmount(3);
+
+        // Reset spawn speed
+        GameManager.S.spawner.timeDuration = 2.0f;
+
+        // Reset scene colors
+        GameManager.color.ResetPalette();
+
+        // Set display text colors
+        GameManager.color.SetDisplayTextPalette();
+
+        // Delayed text display
+        delayedTextDisplay.DisplayText("Menu settings set to their default values!");
     }
 }

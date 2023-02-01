@@ -2,38 +2,105 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum eSound { bgm1940, bgmLose, bgmNever, bgmNinja, bgmSoap, bgmStart_Battle, bgmThings, bgmWin,
-sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
-sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell };
+public enum eBGM {
+    bgm1940, bgmLose, bgmNever, bgmNinja, bgmSoap, bgmStart_Battle, bgmThings, bgmWin
+};
+
+public enum eSFX {
+    sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
+    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell
+};
 
 public class AudioManager : MonoBehaviour {
-    public AudioSource      playerAudioSource;
-    public AudioSource      UIAudioSource;
-    public List<AudioClip>  audioClips;
+    [Header("Set in Inspector")]
+    public AudioSource      playerSFXAudioSource;
+    public AudioSource      UI_SFXAudioSource;
+    public AudioSource      BGMAudioSource;
 
-    //private void Update() {
-    //    if (Input.GetKeyDown(KeyCode.Space)) {
-    //        PlayClip(eSound.sfxRun);
-    //    }
-    //}
+    public List<AudioClip>  bgmClips = new List<AudioClip>();
+    public List<AudioClip>  sfxClips = new List<AudioClip>();
+
+    [Header("Set Dynamically")]
+    public float            previousVolumeLvl;
 
     private void Start() {
-        playerAudioSource.volume = 0;
-        UIAudioSource.volume = 0;
+        // Set previous volume level
+        previousVolumeLvl = AudioListener.volume;
+
+        // Play BGM
+        PlayBGMClip(eBGM.bgmSoap);
     }
 
-    public void PlayPlayerClip(eSound soundName) {
-        playerAudioSource.clip = GetClip(soundName);
-        playerAudioSource.Play();
+    //
+    public void PlayPlayerSFXClip(eSFX SFXName) {
+        playerSFXAudioSource.clip = GetSFXClip(SFXName);
+        playerSFXAudioSource.Play();
     }
 
-    public void PlayUIClip(eSound soundName) {
-        UIAudioSource.clip = GetClip(soundName);
-        UIAudioSource.Play();
+    //
+    public void PlayUISFXClip(eSFX SFXName) {
+        UI_SFXAudioSource.clip = GetSFXClip(SFXName);
+        UI_SFXAudioSource.Play();
     }
 
-    public AudioClip GetClip(eSound soundName) {
-        AudioClip clip = audioClips[(int)soundName];
+    //
+    public AudioClip GetSFXClip(eSFX SFXName) {
+        AudioClip clip = sfxClips[(int)SFXName];
         return clip;
+    }
+
+    //
+    public void PlayBGMClip(eBGM BGMName) {
+        BGMAudioSource.clip = GetBGMClip(BGMName);
+        BGMAudioSource.Play();
+    }
+
+    //
+    public AudioClip GetBGMClip(eBGM BGMName) {
+        AudioClip clip = bgmClips[(int)BGMName];
+        return clip;
+    }
+
+    public void PauseAndMuteAudio() {
+        // Pause and mute
+        if (!AudioListener.pause) {
+            previousVolumeLvl = AudioListener.volume;
+            AudioListener.pause = true;
+
+            // Save settings
+            PlayerPrefs.SetInt("Mute Audio", 0);
+        // Unpause and unmute
+        } else {
+            AudioListener.volume = previousVolumeLvl;
+            AudioListener.pause = false;
+
+            // Save settings
+            PlayerPrefs.SetInt("Mute Audio", 1);
+        }
+    }
+
+    public void SetMasterVolume(float volume) {
+        AudioListener.volume = volume;
+
+        // Save settings
+        PlayerPrefs.SetFloat("Master Volume", volume);
+
+        // Set previous volume level
+        previousVolumeLvl = volume;
+    }
+
+    public void SetBGMVolume(float volume) {
+        BGMAudioSource.volume = volume;
+
+        // Save settings
+        PlayerPrefs.SetFloat("BGM Volume", volume);
+    }
+
+    public void SetSFXVolume(float volume) {
+        playerSFXAudioSource.volume = volume;
+        UI_SFXAudioSource.volume = volume;
+
+        // Save settings
+        PlayerPrefs.SetFloat("SFX Volume", volume);
     }
 }

@@ -37,7 +37,7 @@ public class KeyboardInputMenu : MonoBehaviour {
     // Variables related to predetermined default names
     private int                 dontCareNdx;
     private List<string>        dontCareNames = new List<string>() { "Butthead", "Mildew", "Pee Wee", "Disappointment", "Moon Unit" };
-
+    
     void Start() {
         gameObject.SetActive(false);
     }
@@ -56,6 +56,9 @@ public class KeyboardInputMenu : MonoBehaviour {
                     inputString += characters[ndx];
                     DisplayText(inputString + GetRemainingWhitespace());
 
+                    // Save settings
+                    PlayerPrefs.SetString("Keyboard Input String", inputString);
+
                     if (inputString.Length < 15) {
                         // Set active char cursor position
                         GameManager.utilities.PositionCursor(cursorGO, charSlotsText[inputString.Length].gameObject, 0, -160, 3);
@@ -69,6 +72,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
                     // Audio: Confirm
                     //AudioManager.S.PlaySFX(eSoundName.confirm);
+                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
                 }
             }
         } else {
@@ -77,6 +81,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
             // Audio: Damage
             //AudioManager.S.PlayRandomDamageSFX();
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDamage1);
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't add anymore characters;\nthere's no more room!");
@@ -90,12 +95,16 @@ public class KeyboardInputMenu : MonoBehaviour {
             inputString = inputString.Remove(inputString.Length - 1);
             DisplayText(inputString + GetRemainingWhitespace());
 
+            // Save settings
+            PlayerPrefs.SetString("Keyboard Input String", inputString);
+
             // Set active char cursor position
             cursorGO.SetActive(true);
             GameManager.utilities.PositionCursor(cursorGO, charSlotsText[inputString.Length].gameObject, 0, -160, 3);
 
             // Audio: Deny
             //AudioManager.S.PlaySFX(eSoundName.deny);
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nYeah, you delete that character!");
@@ -105,6 +114,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
             // Audio: Damage
             //AudioManager.S.PlayRandomDamageSFX();
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDamage2);
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't delete anymore characters;\nthere's nothing left to delete!");
@@ -116,6 +126,9 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Get a default name
         inputString = dontCareNames[dontCareNdx];
         DisplayText(inputString + GetRemainingWhitespace());
+
+        // Save settings
+        PlayerPrefs.SetString("Keyboard Input String", inputString);
 
         // Set active char cursor position
         cursorGO.SetActive(true);
@@ -133,11 +146,13 @@ public class KeyboardInputMenu : MonoBehaviour {
 
         // Audio: Confirm
         //AudioManager.S.PlaySFX(eSoundName.confirm);
+        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
     }
 
     public void OK() {
         //// Audio: Confirm
         //AudioManager.S.PlaySFX(eSoundName.confirm);
+        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
 
         // Activate sub menu
         subMenuGO.SetActive(true);
@@ -181,6 +196,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
         //// Audio: Win
         //StartCoroutine(AudioManager.S.PlaySongThenResumePreviousSong(6));
+        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxBuff2);
     }
 
     //
@@ -198,6 +214,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
         //// Audio: Deny
         //AudioManager.S.PlaySFX(eSoundName.deny);
+        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
 
         // Display text
         messageDisplay.DisplayText("Oh, okay. That's cool.\nSo what's the name?");
@@ -223,6 +240,31 @@ public class KeyboardInputMenu : MonoBehaviour {
     public void DisplayText(string text) {
         for (int i = 0; i < charSlotsText.Count; i++) {
             charSlotsText[i].text = text[i].ToString();
+        }
+    }
+
+    //
+    public void GetInputString() {
+        // GetPlayerPrefs
+        if (PlayerPrefs.HasKey("Keyboard Input String")) {
+            inputString = PlayerPrefs.GetString("Keyboard Input String");
+            Debug.Log(inputString.Length);
+
+            if (inputString != "") {
+                DisplayText(inputString + GetRemainingWhitespace());
+
+                // Set active char cursor position
+                cursorGO.SetActive(true);
+                if (inputString.Length < 15) {
+                    // Set active char cursor position
+                    GameManager.utilities.PositionCursor(cursorGO, charSlotsText[inputString.Length].gameObject, 0, -160, 3);
+                } else {
+                    // Set active char cursor position
+                    GameManager.utilities.PositionCursor(cursorGO, okButtonGO, 100, 0, 2);
+                }
+            }
+        } else {
+            inputString = "";
         }
     }
 }

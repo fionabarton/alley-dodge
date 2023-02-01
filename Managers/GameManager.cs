@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     public GameObject           mainMenuGO;
     public GameObject           optionsMenuGO;
 
+    public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
     public OptionsMenu          optionsMenuCS;
 
