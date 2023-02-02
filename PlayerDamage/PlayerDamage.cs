@@ -18,8 +18,6 @@ public class PlayerDamage : MonoBehaviour {
             leftXR.SendHapticImpulse(0.25f, 0.5f);
             rightXR.SendHapticImpulse(0.25f, 0.5f);
 
-            // SFX
-
             // Instantiate explosion
             Instantiate(explosionGO, transform.position, transform.rotation);
 
@@ -57,6 +55,9 @@ public class PlayerDamage : MonoBehaviour {
                 //
                 GameManager.S.score.timerIsOn = false;
 
+                // SFX
+                GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireblast);
+
                 // Check for high score
                 if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
                     //
@@ -66,6 +67,9 @@ public class PlayerDamage : MonoBehaviour {
                     Invoke("ActivateStartMenu", 2.5f);
                 }
             } else {
+                // SFX
+                GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireball);
+
                 // Deactivate shield
                 GameManager.shield.SetActiveShield(false);
 
@@ -95,7 +99,7 @@ public class PlayerDamage : MonoBehaviour {
         // Activate keyboard input menu
         GameManager.S.keyboardMenuGO.SetActive(true);
 
-        //
+        // Display saved name input string
         GameManager.S.keyboardMenuCS.GetInputString();
 
         // Activate XR ray interactors
