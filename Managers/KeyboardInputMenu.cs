@@ -71,7 +71,6 @@ public class KeyboardInputMenu : MonoBehaviour {
                     messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nYeah, you add that character!");
 
                     // Audio: Confirm
-                    //AudioManager.S.PlaySFX(eSoundName.confirm);
                     GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
                 }
             }
@@ -80,8 +79,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             messageDisplayAnim.CrossFade("DisplayTextShake", 0);
 
             // Audio: Damage
-            //AudioManager.S.PlayRandomDamageSFX();
-            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDamage1);
+            GameManager.audioMan.PlayRandomDamageSFX();
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't add anymore characters;\nthere's no more room!");
@@ -103,7 +101,6 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.utilities.PositionCursor(cursorGO, charSlotsText[inputString.Length].gameObject, 0, -160, 3);
 
             // Audio: Deny
-            //AudioManager.S.PlaySFX(eSoundName.deny);
             GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
 
             // Display text
@@ -113,8 +110,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             messageDisplayAnim.CrossFade("DisplayTextShake", 0);
 
             // Audio: Damage
-            //AudioManager.S.PlayRandomDamageSFX();
-            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDamage2);
+            GameManager.audioMan.PlayRandomDamageSFX();
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't delete anymore characters;\nthere's nothing left to delete!");
@@ -145,13 +141,11 @@ public class KeyboardInputMenu : MonoBehaviour {
         messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nNice choice, lazy bones!");
 
         // Audio: Confirm
-        //AudioManager.S.PlaySFX(eSoundName.confirm);
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
     }
 
     public void OK() {
-        //// Audio: Confirm
-        //AudioManager.S.PlaySFX(eSoundName.confirm);
+        // Audio: Confirm
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
 
         // Activate sub menu
@@ -194,26 +188,14 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Play confetti particle systems
         GameManager.S.confetti.DropConfetti();
 
-        //// Audio: Win
-        //StartCoroutine(AudioManager.S.PlaySongThenResumePreviousSong(6));
+        // Audio: Win
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxBuff2);
     }
-
-    //
-    void ActivateHighScoreMenu() {
-        // Activate high score menu
-        GameManager.S.highScoreMenuGO.SetActive(true);
-
-        // Deactivate keyboard input menu
-        GameManager.S.keyboardMenuGO.SetActive(false);
-    }
-
     public void No() {
         // Deactivate sub menu
         subMenuGO.SetActive(false);
 
-        //// Audio: Deny
-        //AudioManager.S.PlaySFX(eSoundName.deny);
+        // Audio: Deny
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
 
         // Display text
@@ -243,12 +225,11 @@ public class KeyboardInputMenu : MonoBehaviour {
         }
     }
 
-    //
+    // Display saved name input string
     public void GetInputString() {
         // GetPlayerPrefs
         if (PlayerPrefs.HasKey("Keyboard Input String")) {
             inputString = PlayerPrefs.GetString("Keyboard Input String");
-            Debug.Log(inputString.Length);
 
             if (inputString != "") {
                 DisplayText(inputString + GetRemainingWhitespace());

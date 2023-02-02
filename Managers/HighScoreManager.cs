@@ -48,8 +48,6 @@ public class HighScoreManager : MonoBehaviour {
 
         gameObject.SetActive(false);
     }
-
-    //
     public void SetHighScoresToDefaultValues() {
         highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
         highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
@@ -160,7 +158,10 @@ public class HighScoreManager : MonoBehaviour {
     // Checks if the score is a new high score,
     // then returns at what index it belongs in the highScores array
     public bool CheckForNewHighScore(int score) {
-        for(int i = 0; i < highScores.Length; i++) {
+        // Load data
+        GameManager.save.Load();
+
+        for (int i = 0; i < highScores.Length; i++) {
             if(score > highScores[i].score) {
                 // Set newHighScoreNdx
                 newHighScoreNdx = i;
@@ -209,7 +210,7 @@ public class HighScoreManager : MonoBehaviour {
         highScores = tScores;
 
         // Save data
-        GameManager.save.SaveData();
+        GameManager.save.Save();
 
         //
         UpdateHighScoreDisplay(currentPageNdx);

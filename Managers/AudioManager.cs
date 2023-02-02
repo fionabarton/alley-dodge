@@ -103,4 +103,16 @@ public class AudioManager : MonoBehaviour {
         // Save settings
         PlayerPrefs.SetFloat("SFX Volume", volume);
     }
+
+    //
+    public void PlayRandomDamageSFX() {
+        int randomInt = Random.Range(0, 3);
+        if (randomInt == 0) {
+            PlayPlayerSFXClip(eSFX.sfxDamage1);
+        } else if (randomInt == 1) {
+            PlayPlayerSFXClip(eSFX.sfxDamage2);
+        } else {
+            PlayPlayerSFXClip(eSFX.sfxDamage3);
+        }
+    }
 }

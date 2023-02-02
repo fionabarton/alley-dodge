@@ -1,6 +1,7 @@
 // Please note that I, Fiona Barton, did not write all of this code.
 // The more useful/trickier bits were sourced from:
 // https://www.youtube.com/watch?v=ii31ObaAaJo
+// https://www.youtube.com/watch?v=aSNj2nvSyD4
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,16 +18,18 @@ public class SaveManager : MonoBehaviour {
     
     public SaveData             data;
 
-    private string              file = "gdfyrt5y5yfsdfsddsfsdddddg.txt";
+    private string              persistentPath = "";
 
     private void Awake() {
+        // Create save data
         data = new SaveData();
+
+        // Set path
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+
         crypt = GetComponent<CryptographyManager>();
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    //
-    public void SaveData() {
+    public void Save() {
         // Cache data displayed in game
         for (int i = 0; i < GameManager.S.highScore.highScores.Length; i++) {
             data.names[i] = GameManager.S.highScore.highScores[i].name;
@@ -41,29 +44,34 @@ public class SaveManager : MonoBehaviour {
             data.fallBelowFloorCounts[i] = GameManager.S.highScore.highScores[i].fallBelowFloorCount;
         }
 
+        // Get file path
+        string savePath = persistentPath;
+
         // Get data in JSON format
         string json = JsonUtility.ToJson(data);
 
-        // Encrypt data 
+        // Encrypt data
         json = crypt.Encrypt(json);
 
         // Write data to file
-        WriteToFile(file, json);
+        using StreamWriter writer = new StreamWriter(savePath);
+        writer.Write(json);
+        writer.Flush();
+        writer.Close();
     }
 
-    //
-    public void LoadData() {
-        // Read data from file
-        data = new SaveData();
-        string json = ReadFromFile(file);
+    public void Load() {
+        // If save data file exists
+        if (File.Exists(persistentPath)) {
+            // Read data from file
+            using StreamReader reader = new StreamReader(persistentPath);
+            string json = reader.ReadToEnd();
 
-        // If data file exists
-        if(json != "") {
             // Decrypt data string
             json = crypt.Decrypt(json);
 
-            // Overwrite data by reading from its JSON represenation
-            JsonUtility.FromJsonOverwrite(json, data);
+            // Create SaveData object from its JSON representation
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             // Display high score data in game UI
             for (int i = 0; i < GameManager.S.highScore.highScores.Length; i++) {
@@ -82,38 +90,6 @@ public class SaveManager : MonoBehaviour {
             // Display default high score data in game UI
             GameManager.S.highScore.SetHighScoresToDefaultValues();
         }
-    }
-
-    //
-    public void WriteToFile(string fileName, string json) {
-        string path = GetFilePath(fileName);
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-
-        using(StreamWriter writer = new StreamWriter(fileStream)) {
-            writer.Write(json);
-            writer.Flush();
-            writer.Close();
-        }
-    }
-
-    //
-    public string ReadFromFile(string fileName) {
-        string path = GetFilePath(fileName);
-        if (File.Exists(path)) {
-            using(StreamReader reader = new StreamReader(path)) {
-                string json = reader.ReadToEnd();
-                return json;
-            }
-        } else {
-            Debug.LogWarning("File not found!");
-        }
-        return "";
-    }
-
-    // Returns the saved data file's path
-    private string GetFilePath(string fileName) {
-        //Debug.Log(Application.persistentDataPath + "/" + fileName);
-        return Application.persistentDataPath + "/" + fileName;
     }
 }
 

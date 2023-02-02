@@ -241,7 +241,7 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.highScoreMenuGO.SetActive(true);
 
         // Load data
-        GameManager.save.LoadData();
+        GameManager.save.Load();
 
         // Update high score display
         GameManager.S.highScore.UpdateHighScoreDisplay(GameManager.S.highScore.currentPageNdx);
@@ -258,7 +258,7 @@ public class MainMenu : MonoBehaviour {
         alleyAmountDropdown.value = 0;
 
         // Reset alley amount
-        SetAlleyAmount(3);
+        SetAlleyAmount(0);
 
         // Reset spawn speed
         GameManager.S.spawner.timeDuration = 2.0f;
