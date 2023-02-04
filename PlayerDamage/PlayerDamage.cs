@@ -58,6 +58,9 @@ public class PlayerDamage : MonoBehaviour {
                 // SFX
                 GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireblast);
 
+                // Play BGM: Lose
+                GameManager.audioMan.PlayBGMClip(eBGM.bgmLose, false);
+
                 // Check for high score
                 if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
                     //
@@ -90,6 +93,14 @@ public class PlayerDamage : MonoBehaviour {
         // Display text
         GameManager.S.score.displayText.text = "NEW\nHIGH SCORE!";
 
+        // Play BGM: Win
+        GameManager.audioMan.PlayBGMClip(eBGM.bgmWin, false);
+
+        // Set player color to rainbow cycle
+        GameManager.S.playerDamageColldierAnim.CrossFade("RainbowColor", 0);
+        GameManager.S.playerLeftHandAnim.CrossFade("RainbowColor", 0);
+        GameManager.S.playerRightHandAnim.CrossFade("RainbowColor", 0);
+
         //
         Invoke("ActivateKeyboardMenu", 2.5f);
     }
@@ -104,6 +115,9 @@ public class PlayerDamage : MonoBehaviour {
 
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
+
+        // Play BGM: 1940
+        GameManager.audioMan.PlayBGMClip(eBGM.bgm1940);
     }
 
     void ActivateStartMenu() {
