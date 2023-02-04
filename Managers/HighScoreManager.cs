@@ -264,7 +264,7 @@ public class HighScoreManager : MonoBehaviour {
                 GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -8.25f, 0, 0);
                 GameManager.utilities.PositionCursor(cursorGO[1], timeText[newHighScoreListNdx].gameObject, 3.5f, 0, 2);
 
-                // Set new HighScore text color
+                // Set new HighScore text color to rainbow cycle
                 SetHighScoreColors(newHighScoreListNdx, "RainbowTextCycle");
             } else {
                 // Deactivate cursors 
@@ -296,6 +296,11 @@ public class HighScoreManager : MonoBehaviour {
 
         //
         GameManager.S.previouslyHighlightedGO = null;
+
+        // Reset player color
+        GameManager.S.playerDamageColldierAnim.CrossFade("DefaultColor", 0);
+        GameManager.S.playerLeftHandAnim.CrossFade("DefaultColor", 0);
+        GameManager.S.playerRightHandAnim.CrossFade("DefaultColor", 0);
     }
 
     // Displays either the previous or next 10 entries of high scores

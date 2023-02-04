@@ -16,18 +16,25 @@ public class GameManager : MonoBehaviour {
     // Objects to be activated/deactivated
     public List<GameObject>     xrRayInteractorsGO;
 
-    // Menus
+    // Menu game objects
     public GameObject           keyboardMenuGO;
     public GameObject           highScoreMenuGO;
     public GameObject           mainMenuGO;
     public GameObject           optionsMenuGO;
 
+    // Menu scripts
     public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
     public OptionsMenu          optionsMenuCS;
 
+    // Audio
     public AudioSource          playerAudioSource;
     public AudioSource          UIAudioSource;
+
+    // Animators
+    public Animator             playerDamageColldierAnim;
+    public Animator             playerLeftHandAnim;
+    public Animator             playerRightHandAnim;
 
     [Header("Set dynamically")]
     public GameObject           previouslyHighlightedGO;
