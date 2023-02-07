@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Stores and displays the top 100 high scores (name, score, level, objects, time)
 public class HighScoreManager : MonoBehaviour {
@@ -13,6 +14,8 @@ public class HighScoreManager : MonoBehaviour {
     public List<TMPro.TextMeshProUGUI>  objectsText;
     public List<TMPro.TextMeshProUGUI>  timeText;
     public TMPro.TextMeshProUGUI        pageText;
+
+    public Button                       resetButton;
 
     // Needed to highlight new high score text with cycling rainbow color animation clip
     public List<Animator>               rankAnim;
@@ -47,8 +50,12 @@ public class HighScoreManager : MonoBehaviour {
         SetHighScoresToDefaultValues();
 
         gameObject.SetActive(false);
+
+        //
+        resetButton.onClick.AddListener(delegate { SetHighScoresToDefaultValues(true); });
     }
-    public void SetHighScoresToDefaultValues() {
+
+    public void SetHighScoresToDefaultValues(bool saveData = false) {
         highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
         highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
         highScores[2] = new HighScore("Chani", 42, 9, 0, "00:01:52.629");
@@ -153,6 +160,13 @@ public class HighScoreManager : MonoBehaviour {
         highScores[97] = new HighScore("97", 1, 1, 0, "00:00:00:000");
         highScores[98] = new HighScore("98", 1, 1, 0, "00:00:00:000");
         highScores[99] = new HighScore("99", 1, 1, 0, "00:00:00:000");
+
+        // Save data
+        if (saveData) {
+            GameManager.save.Save();
+
+            UpdateHighScoreDisplay(currentPageNdx);
+        }
     }
 
     // Checks if the score is a new high score,
