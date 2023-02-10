@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
     public GameObject           highScoreMenuGO;
     public GameObject           mainMenuGO;
     public GameObject           optionsMenuGO;
+    public GameObject           moreMenuGO;
 
     // Menu scripts
     public KeyboardInputMenu    keyboardMenuCS;
