@@ -35,8 +35,15 @@ public class MainMenu : MonoBehaviour {
 
         // Set selected game object to null
         EventSystem.current.SetSelectedGameObject(null);
+
+        // Play BGM: Soap
+        Invoke("PlayBGMClip", 0.1f);
     }
 
+    // Play BGM: Soap
+    void PlayBGMClip() {
+        GameManager.audioMan.PlayBGMClip(eBGM.bgmSoap);
+    }
     void Start() {
         // GetPlayerPrefs
         if (PlayerPrefs.HasKey("Player Height")) {
@@ -62,8 +69,8 @@ public class MainMenu : MonoBehaviour {
 
         // Add listeners to buttons
         startGameButton.onClick.AddListener(delegate { StartGame(); });
-        exitGameButton.onClick.AddListener(delegate { ExitApp(); });
-        resetButton.onClick.AddListener(delegate { DefaultSettings(); });
+        exitGameButton.onClick.AddListener(delegate { AddExitAppConfirmationListeners(); });
+        resetButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
         optionsButton.onClick.AddListener(delegate { GoToOptionsMenuButton(); });
         highScoresButton.onClick.AddListener(delegate { GoToHighScoreMenuButton(); });
         
@@ -219,17 +226,19 @@ public class MainMenu : MonoBehaviour {
 
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
-    }
 
-    // On click of exitGameButton, quits application
-    void ExitApp() {
-        Application.Quit();
+        // Play BGM: Ninja
+        GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
     }
 
     //
     public void GoToOptionsMenuButton() {
-        // Activate options menu
-        GameManager.S.optionsMenuGO.SetActive(true);
+        //// Activate options menu
+        //GameManager.S.optionsMenuGO.SetActive(true);
+        GameManager.S.moreMenuGO.SetActive(true);
+
+        // Play BGM: Never
+        GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
 
         // Deactivate this menu
         gameObject.SetActive(false);
@@ -246,30 +255,64 @@ public class MainMenu : MonoBehaviour {
         // Update high score display
         GameManager.S.highScore.UpdateHighScoreDisplay(GameManager.S.highScore.currentPageNdx);
 
+        // Play BGM: 1940
+        GameManager.audioMan.PlayBGMClip(eBGM.bgm1940);
+
         // Deactivate keyboard input menu
         gameObject.SetActive(false);
     }
 
-    // On click of defaultSettingsButton, returns all menu settings to their default value
-    public void DefaultSettings() {
-        // Reset slider and dropdown values
-        playerHeightSlider.value = 168;
-        levelSelectDropdown.value = 0;
-        alleyAmountDropdown.value = 0;
+    // Adds functions to the sub menu's yes/no buttons
+    void AddDefaultSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    }
+    // On 'Yes' button click, returns all menu settings to their default value
+    public void DefaultSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
 
-        // Reset alley amount
-        SetAlleyAmount(0);
+        // 
+        if (yesOrNo == 0) {
+            // Reset slider and dropdown values
+            playerHeightSlider.value = 168;
+            levelSelectDropdown.value = 0;
+            alleyAmountDropdown.value = 0;
 
-        // Reset spawn speed
-        GameManager.S.spawner.timeDuration = 2.0f;
+            // Reset alley amount
+            SetAlleyAmount(0);
 
-        // Reset scene colors
-        GameManager.color.ResetPalette();
+            // Reset spawn speed
+            GameManager.S.spawner.timeDuration = 2.0f;
 
-        // Set display text colors
-        GameManager.color.SetDisplayTextPalette();
+            // Reset scene colors
+            GameManager.color.ResetPalette();
 
-        // Delayed text display
-        delayedTextDisplay.DisplayText("Menu settings set to their default values!");
+            // Set display text colors
+            GameManager.color.SetDisplayTextPalette();
+
+            // Delayed text display
+            delayedTextDisplay.DisplayText("Menu settings set to their default values!");
+        } else {
+            // Reset display text
+            delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddExitAppConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(ExitApp, "Are you sure that you would\nlike to close this application?");
+    }
+    // On 'Yes' button click, quits application
+    void ExitApp(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // Reset display text
+        delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
+
+        // Quit application
+        if (yesOrNo == 0) {
+            Application.Quit();
+        } 
     }
 }

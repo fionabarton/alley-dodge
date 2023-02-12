@@ -144,62 +144,46 @@ public class KeyboardInputMenu : MonoBehaviour {
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
     }
 
-    public void OK() {
+    // On 'OK' button click, adds functions to the sub menu's yes/no buttons
+    public void AddSetNameConfirmationListeners() {
         // Audio: Confirm
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
 
-        // Activate sub menu
-        subMenuGO.SetActive(true);
-
-        // Display text
-        messageDisplay.DisplayText("Are you sure about this name?\nWell, are ya?");
-
-        // Set OnClick Methods
-        subMenuYesButton.onClick.RemoveAllListeners();
-        subMenuNoButton.onClick.RemoveAllListeners();
-        subMenuYesButton.onClick.AddListener(Yes);
-        subMenuNoButton.onClick.AddListener(No);
+        GameManager.S.subMenuCS.AddListeners(SetName, "Are you sure about this name?\nWell, are ya?");
     }
-
-    public void Yes() {
-        // Create new HighScore
-        HighScore newHighScore = new HighScore(
-            inputString,
-            GameManager.S.score.score, GameManager.S.score.level,
-            GameManager.S.score.objectCount,
-            GameManager.S.score.GetTime(GameManager.S.score.endingTime),
-            System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"),
-            GameManager.alley.alleyCount,
-            GameManager.S.mainMenuCS.playerHeightSlider.value,
-            GameManager.S.fallBelowFloorCount);
-
-        // Activate high score menu
-        GameManager.S.highScoreMenuGO.SetActive(true);
-
-        // Update high score display
-        GameManager.S.highScore.AddNewHighScore(newHighScore);
-
+    // On 'Yes' button click, creates and stores a new HighScore based on the user's performance
+    void SetName(int yesOrNo = -1) {
         // Deactivate sub menu
-        subMenuGO.SetActive(false);
+        GameManager.S.subMenuGO.SetActive(false);
 
-        // Deactivate keyboard input menu
-        GameManager.S.keyboardMenuGO.SetActive(false);
+        // 
+        if (yesOrNo == 0) {
+            // Create new HighScore
+            HighScore newHighScore = new HighScore(
+                inputString,
+                GameManager.S.score.score, GameManager.S.score.level,
+                GameManager.S.score.objectCount,
+                GameManager.S.score.GetTime(GameManager.S.score.endingTime),
+                System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"),
+                GameManager.alley.alleyCount,
+                GameManager.S.mainMenuCS.playerHeightSlider.value,
+                GameManager.S.fallBelowFloorCount);
 
-        // Play confetti particle systems
-        GameManager.S.confetti.DropConfetti();
+            // Activate high score menu
+            GameManager.S.highScoreMenuGO.SetActive(true);
 
-        // Audio: Win
-        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxBuff2);
-    }
-    public void No() {
-        // Deactivate sub menu
-        subMenuGO.SetActive(false);
+            // Update high score display
+            GameManager.S.highScore.AddNewHighScore(newHighScore);
 
-        // Audio: Deny
-        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
+            // Deactivate keyboard input menu
+            GameManager.S.keyboardMenuGO.SetActive(false);
 
-        // Display text
-        messageDisplay.DisplayText("Oh, okay. That's cool.\nSo what's the name?");
+            // Play confetti particle systems
+            GameManager.S.confetti.DropConfetti();
+        } else {
+            // Display text
+            messageDisplay.DisplayText("Oh, okay. That's cool.\nSo what's the name?");
+        }
     }
 
     // Returns a string of whitespace as long as the amount of remaining empty chars 

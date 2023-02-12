@@ -52,9 +52,25 @@ public class HighScoreManager : MonoBehaviour {
         gameObject.SetActive(false);
 
         //
-        resetButton.onClick.AddListener(delegate { SetHighScoresToDefaultValues(true); });
+        resetButton.onClick.AddListener(delegate { AddResetHighScoresConfirmationListeners(); });
     }
 
+    // Adds functions to the sub menu's yes/no buttons
+    void AddResetHighScoresConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(ResetHighScores, "Are you sure that you would like to\ndelete all saved high scores?");
+    }
+    // On 'Yes' button click, deletes all saved high scores and resets them to default values
+    void ResetHighScores(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            SetHighScoresToDefaultValues(true);
+        } 
+    }
+
+    // Deletes all saved high scores and resets them to default values 
     public void SetHighScoresToDefaultValues(bool saveData = false) {
         highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
         highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
@@ -305,7 +321,7 @@ public class HighScoreManager : MonoBehaviour {
         // Deactivate high score menu
         GameManager.S.highScoreMenuGO.SetActive(false);
 
-        //
+        // Activate Main Menu
         GameManager.S.mainMenuGO.SetActive(true);
 
         //

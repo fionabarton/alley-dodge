@@ -22,11 +22,14 @@ public class GameManager : MonoBehaviour {
     public GameObject           mainMenuGO;
     public GameObject           optionsMenuGO;
     public GameObject           moreMenuGO;
+    public GameObject           subMenuGO;
 
     // Menu scripts
     public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
     public OptionsMenu          optionsMenuCS;
+    public SubMenu              subMenuCS;
+
 
     // Audio
     public AudioSource          playerAudioSource;
@@ -74,10 +77,10 @@ public class GameManager : MonoBehaviour {
         climbInteractors[1].enabled = isActive;
     }
 
-    // For testing!
+    //// For testing!
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.Space)) {
-    //
+
     //    }
     //}
 }
