@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//
 public class AudioMenu : MonoBehaviour {
     [Header("Set in Inspector")]
-    public Slider masterVolSlider;
-    public Slider BGMVolSlider;
-    public Slider SFXVolSlider;
-    public Button defaultSettingsButton;
-    public Button muteAudioButton;
-    public TMPro.TextMeshProUGUI muteAudioButtonText;
+    public Slider                   masterVolSlider;
+    public Slider                   BGMVolSlider;
+    public Slider                   SFXVolSlider;
+    public Button                   defaultSettingsButton;
+    public Button                   muteAudioButton;
+    public TMPro.TextMeshProUGUI    muteAudioButtonText;
 
     // Delayed text display
-    public DelayedTextDisplay delayedTextDisplay;
+    public DelayedTextDisplay       delayedTextDisplay;
 
     private void OnEnable() {
         // Display text
@@ -31,7 +32,7 @@ public class AudioMenu : MonoBehaviour {
         SFXVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetSFXVolume((SFXVolSlider.value)); });
 
         // Add listeners to buttons
-        defaultSettingsButton.onClick.AddListener(delegate { DefaultSettings(); });
+        defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
         muteAudioButton.onClick.AddListener(delegate { MuteAudioButton(); });
 
         Invoke("GetPlayerPrefs", 0.1f);
@@ -75,23 +76,7 @@ public class AudioMenu : MonoBehaviour {
         delayedTextDisplay.DisplayText(name + " volume set!");
     }
 
-    // On click of defaultSettingsButton, returns all menu settings to their default value
-    public void DefaultSettings() {
-        // Reset slider values
-        masterVolSlider.value = 0.5f;
-        BGMVolSlider.value = 0.5f;
-        SFXVolSlider.value = 0.5f;
-
-        // Reset mute
-        AudioListener.pause = true;
-        GameManager.audioMan.PauseAndMuteAudio();
-        muteAudioButtonText.text = "Mute Audio";
-
-        // Delayed text display
-        delayedTextDisplay.DisplayText("Options set to their default values!");
-    }
-
-    //
+    // On click (un)mutes all audio
     public void MuteAudioButton() {
         // Delayed text display
         if (!AudioListener.pause) {
@@ -107,7 +92,35 @@ public class AudioMenu : MonoBehaviour {
             // Save settings
             PlayerPrefs.SetInt("Mute Audio", 1);
         }
-
         GameManager.audioMan.PauseAndMuteAudio();
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddDefaultSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    }
+    // On 'Yes' button click, returns all menu settings to their default value
+    public void DefaultSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Reset slider values
+            masterVolSlider.value = 0.5f;
+            BGMVolSlider.value = 0.5f;
+            SFXVolSlider.value = 0.5f;
+
+            // Reset mute
+            AudioListener.pause = true;
+            GameManager.audioMan.PauseAndMuteAudio();
+            muteAudioButtonText.text = "Mute Audio";
+
+            // Delayed text display
+            delayedTextDisplay.DisplayText("Options set to their default values!");
+        } else {
+            // Display text
+            delayedTextDisplay.DisplayText("Welcome to the audio menu!");
+        }
     }
 }
