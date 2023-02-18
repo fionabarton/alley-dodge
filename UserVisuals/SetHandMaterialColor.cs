@@ -6,20 +6,54 @@ using UnityEngine;
 // with a climbable XRGrabInteractable object.
 public class SetHandMaterialColor : MonoBehaviour {
     [Header("Set in Inspector")]
-    public Material handMaterial;
+    public Material         handMaterial;
+    public GameObject       particles;
+    public GameObject       sparkParticles;
 
+    public bool             isLeftHand;
+    
     // Red w/ slight opacity
-    public void OnHoverEntered() {
-        handMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 0.25f));
-    }
+    //public void OnHoverEntered() {
+    //    handMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 0.25f));
+    //}
 
     // White w/ slight opacity
     public void OnSelectEntered() {
-        handMaterial.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.25f));
+        //handMaterial.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.25f));
+
+        particles.SetActive(true);
+
+        // Set animation clip
+        if (isLeftHand) {
+            GameManager.S.playerLeftHandAnim.CrossFade("RainbowColor", 0);
+        } else {
+            GameManager.S.playerRightHandAnim.CrossFade("RainbowColor", 0);
+        }
+
+        // Instantiate sparks
+        Instantiate(sparkParticles, transform.position, transform.rotation);
+    }
+
+    public void OnSelectExited() {
+        particles.SetActive(false);
+
+        // Set animation clip
+        if (isLeftHand) {
+            GameManager.S.playerLeftHandAnim.CrossFade("DefaultColor", 0);
+        } else {
+            GameManager.S.playerRightHandAnim.CrossFade("DefaultColor", 0);
+        }
     }
 
     // Red w/ no opacity
     public void OnExited() {
-        handMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 1.0f));
+        //handMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+        // Set animation clip
+        if (isLeftHand) {
+            GameManager.S.playerLeftHandAnim.CrossFade("DefaultColor", 0);
+        } else {
+            GameManager.S.playerRightHandAnim.CrossFade("DefaultColor", 0);
+        }
     }
 }
