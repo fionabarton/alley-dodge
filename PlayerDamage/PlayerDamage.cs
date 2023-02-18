@@ -11,15 +11,14 @@ public class PlayerDamage : MonoBehaviour {
     public XRController rightXR;
 
     public GameObject   explosionGO;
+    public GameObject   damageParticleSystemGO;
+    public GameObject   deathParticleSystemGO;
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Hazard") {
             // Haptic feedback (amplitude, duration)
             leftXR.SendHapticImpulse(0.25f, 0.5f);
             rightXR.SendHapticImpulse(0.25f, 0.5f);
-
-            // Instantiate explosion
-            Instantiate(explosionGO, transform.position, transform.rotation);
 
             // Destroy hazard
             Destroy(other.gameObject);
@@ -55,6 +54,9 @@ public class PlayerDamage : MonoBehaviour {
                 //
                 GameManager.S.score.timerIsOn = false;
 
+                // Instantiate explosion
+                Instantiate(deathParticleSystemGO, transform.position, transform.rotation);
+
                 // SFX
                 GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireblast);
 
@@ -63,13 +65,16 @@ public class PlayerDamage : MonoBehaviour {
 
                 // Check for high score
                 if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
-                    //
+                    // 
                     Invoke("AnnounceHighScore", 2.5f);
                 } else {
                     //
                     Invoke("ActivateStartMenu", 2.5f);
                 }
             } else {
+                // Instantiate explosion
+                Instantiate(damageParticleSystemGO, transform.position, transform.rotation);
+
                 // SFX
                 GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireball);
 
@@ -120,6 +125,7 @@ public class PlayerDamage : MonoBehaviour {
         GameManager.audioMan.PlayBGMClip(eBGM.bgm1940);
     }
 
+    //
     void ActivateStartMenu() {
         // Reset score for next game
         GameManager.S.score.ResetScore();
