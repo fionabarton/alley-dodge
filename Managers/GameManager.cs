@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
     public OptionsMenu          optionsMenuCS;
+    public MoreMenu             moreMenuCS;
     public SubMenu              subMenuCS;
 
 
