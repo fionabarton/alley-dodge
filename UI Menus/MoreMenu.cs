@@ -21,6 +21,9 @@ public class MoreMenu : MonoBehaviour {
     //
     public List<GameObject> cursorGO;
 
+    // Delayed text display
+    public DelayedTextDisplay delayedTextDisplay;
+
     void Start() {
         // Add listeners to buttons
         audioButton.onClick.AddListener(delegate { ActivateMenuGO(0); });
@@ -65,6 +68,11 @@ public class MoreMenu : MonoBehaviour {
         // Set cursor positions
         GameManager.utilities.PositionCursor(cursorGO[0], menuButtons[ndx].gameObject, -125f, 0, 0);
         GameManager.utilities.PositionCursor(cursorGO[1], menuButtons[ndx].gameObject, 125f, 0, 2);
+
+        // Display text
+        if(ndx == 3) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu!");
+        }
     }
 
     //

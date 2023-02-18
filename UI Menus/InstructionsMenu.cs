@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//
 public class InstructionsMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     public Button                   previousPageButton;
@@ -16,13 +17,20 @@ public class InstructionsMenu : MonoBehaviour {
     //
     public int                      currentPageNdx = 0;
 
+    private void OnEnable() {
+        // Display text
+        if (Time.time > 0.01f) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the instructions menu!");
+        }
+    }
+
     void Start() {
         // Add listeners to buttons
         previousPageButton.onClick.AddListener(delegate { GoToPreviousOrNextPage(-1); });
         nextPageButton.onClick.AddListener(delegate { GoToPreviousOrNextPage(1); });
     }
 
-    // Displays either the previous or next 10 entries of high scores
+    // Displays either the previous or next page of instructions
     public void GoToPreviousOrNextPage(int amountToChange) {
         //
         currentPageNdx += amountToChange;

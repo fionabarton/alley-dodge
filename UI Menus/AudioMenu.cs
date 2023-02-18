@@ -14,12 +14,11 @@ public class AudioMenu : MonoBehaviour {
     public Button                   muteAudioButton;
     public TMPro.TextMeshProUGUI    muteAudioButtonText;
 
-    // Delayed text display
-    public DelayedTextDisplay       delayedTextDisplay;
-
     private void OnEnable() {
         // Display text
-        delayedTextDisplay.DisplayText("Welcome to the audio menu!");
+        if (Time.time > 0.01f) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu!");
+        }
 
         // Set selected game object to null
         EventSystem.current.SetSelectedGameObject(null);
@@ -73,20 +72,20 @@ public class AudioMenu : MonoBehaviour {
     // Called OnPointerUp() by the EventTrigger attached to each slider in the Inspector
     public void OnSliderButtonReleased(string name) {
         // Delayed text display
-        delayedTextDisplay.DisplayText(name + " volume set!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!");
     }
 
     // On click (un)mutes all audio
     public void MuteAudioButton() {
         // Delayed text display
         if (!AudioListener.pause) {
-            delayedTextDisplay.DisplayText("Audio has been muted!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been muted!");
             muteAudioButtonText.text = "Unmute Audio";
 
             // Save settings
             PlayerPrefs.SetInt("Mute Audio", 0);
         } else {
-            delayedTextDisplay.DisplayText("Audio has been unmuted!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been unmuted!");
             muteAudioButtonText.text = "Mute Audio";
 
             // Save settings
@@ -117,10 +116,10 @@ public class AudioMenu : MonoBehaviour {
             muteAudioButtonText.text = "Mute Audio";
 
             // Delayed text display
-            delayedTextDisplay.DisplayText("Options set to their default values!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
         } else {
             // Display text
-            delayedTextDisplay.DisplayText("Welcome to the audio menu!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu!");
         }
     }
 }
