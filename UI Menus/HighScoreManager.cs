@@ -291,7 +291,7 @@ public class HighScoreManager : MonoBehaviour {
                 GameManager.utilities.SetActiveList(cursorGO, true);
 
                 // Set cursor positions
-                GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -8.25f, 0, 0);
+                GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -9f, 0, 0);
                 GameManager.utilities.PositionCursor(cursorGO[1], timeText[newHighScoreListNdx].gameObject, 3.5f, 0, 2);
 
                 // Set new HighScore text color to rainbow cycle

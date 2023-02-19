@@ -296,6 +296,9 @@ public class MainMenu : MonoBehaviour {
             // Reset display text
             delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
         }
+
+        // Activate climbing interactors
+        GameManager.S.EnableClimbInteractors(true);
     }
 
     // Adds functions to the sub menu's yes/no buttons

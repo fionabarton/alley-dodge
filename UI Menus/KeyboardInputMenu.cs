@@ -9,9 +9,6 @@ public class KeyboardInputMenu : MonoBehaviour {
     public List<Text>           charSlotsText;
 
     //
-    public Text                 displayText;
-
-    //
     public GameObject           cursorGO;
 
     // Used to set cursor position
@@ -22,11 +19,6 @@ public class KeyboardInputMenu : MonoBehaviour {
 
     //
     public DelayedTextDisplay   messageDisplay;
-
-    //
-    public GameObject           subMenuGO;
-    public Button               subMenuYesButton;
-    public Button               subMenuNoButton;
 
     [Header("Set Dynamically")]
     private string              inputString = "";
