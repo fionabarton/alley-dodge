@@ -2,11 +2,11 @@
 // It was sourced from:
 // https://www.c-sharpcorner.com/blogs/encrypt-and-decrypt-a-string-in-asp-net1
 
-using UnityEngine;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine;
 
 // Encrypts and decrypts a string of data
 public class CryptographyManager : MonoBehaviour {

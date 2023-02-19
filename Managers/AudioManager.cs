@@ -26,9 +26,6 @@ public class AudioManager : MonoBehaviour {
     private void Start() {
         // Set previous volume level
         previousVolumeLvl = AudioListener.volume;
-
-        // Play BGM
-        PlayBGMClip(eBGM.bgmSoap);
     }
 
     //
@@ -50,7 +47,9 @@ public class AudioManager : MonoBehaviour {
     }
 
     //
-    public void PlayBGMClip(eBGM BGMName) {
+    public void PlayBGMClip(eBGM BGMName, bool doesLoop = true) {
+        BGMAudioSource.loop = doesLoop;
+
         BGMAudioSource.clip = GetBGMClip(BGMName);
         BGMAudioSource.Play();
     }

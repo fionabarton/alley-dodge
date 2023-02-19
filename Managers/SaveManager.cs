@@ -3,13 +3,8 @@
 // https://www.youtube.com/watch?v=ii31ObaAaJo
 // https://www.youtube.com/watch?v=aSNj2nvSyD4
 
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using System;
-using System.Security.Cryptography;
-using System.Web;
 
 // Reads and writes save data to and from a currently unencrypted JSON file
 public class SaveManager : MonoBehaviour {
