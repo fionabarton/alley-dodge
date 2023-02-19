@@ -7,7 +7,7 @@ using UnityEngine;
 public class SetHandMaterialColor : MonoBehaviour {
     [Header("Set in Inspector")]
     public Material         handMaterial;
-    public GameObject       particles;
+    public GameObject       handParticles;
     public GameObject       sparkParticles;
 
     public bool             isLeftHand;
@@ -21,7 +21,7 @@ public class SetHandMaterialColor : MonoBehaviour {
     public void OnSelectEntered() {
         //handMaterial.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.25f));
 
-        particles.SetActive(true);
+        handParticles.SetActive(true);
 
         // Set animation clip
         if (isLeftHand) {
@@ -35,7 +35,7 @@ public class SetHandMaterialColor : MonoBehaviour {
     }
 
     public void OnSelectExited() {
-        particles.SetActive(false);
+        handParticles.SetActive(false);
 
         // Set animation clip
         if (isLeftHand) {
@@ -48,6 +48,8 @@ public class SetHandMaterialColor : MonoBehaviour {
     // Red w/ no opacity
     public void OnExited() {
         //handMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+        handParticles.SetActive(false);
 
         // Set animation clip
         if (isLeftHand) {
