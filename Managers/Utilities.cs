@@ -48,4 +48,10 @@ public class Utilities : MonoBehaviour {
         int angle = (directionToFace + 1) * 90;
         cursorGO.transform.localEulerAngles = new Vector3(0, 0, angle);
     }
+
+    // Get midpoint between two gameObjects
+    public Vector3 GetMidpoint(GameObject object1, GameObject object2) {
+        Vector3 midpoint = object2.transform.position + (object1.transform.position - object2.transform.position) / 2;
+        return midpoint;
+    }
 }
