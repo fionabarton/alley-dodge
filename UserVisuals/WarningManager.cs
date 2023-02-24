@@ -9,6 +9,8 @@ public class WarningManager : MonoBehaviour {
     [Header("Set in Inspector")]
     public Transform            objectToFollow; // Main Camera > WarningCanvasObjectToFollow
 
+    public GameObject           explosionGO;
+
     public InputActionReference toggleReference = null;
 
     public float                speed = 1.0f;
@@ -23,6 +25,13 @@ public class WarningManager : MonoBehaviour {
 
     // Destroy this game object
     void DeactivateWarning(InputAction.CallbackContext context) {
+        // Instantiate particle system
+        Instantiate(explosionGO, transform.position, transform.rotation);
+
+        // Play SFX
+        GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
+
+        // Destroy this game object
         Destroy(gameObject);
     }
 
