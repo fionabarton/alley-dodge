@@ -305,17 +305,24 @@ public class MainMenu : MonoBehaviour {
     void AddExitAppConfirmationListeners() {
         GameManager.S.subMenuCS.AddListeners(ExitApp, "Are you sure that you would\nlike to close this application?");
     }
-    // On 'Yes' button click, quits application
+    // On 'Yes' button click, quits application after a short delay
     void ExitApp(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
-        // Reset display text
-        delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
-
-        // Quit application
+        // 
         if (yesOrNo == 0) {
-            Application.Quit();
-        } 
+            // Delayed text display
+            delayedTextDisplay.DisplayText("Thanks for playing, ya big 'ol lug.\nLet's play together again soon!");
+
+            // Quit application in 2 seconds
+            Invoke("DelayedExitApp", 2f);
+        } else {
+            // Reset display text
+            delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!");
+        }
+    }
+    void DelayedExitApp() {
+        Application.Quit();
     }
 }
