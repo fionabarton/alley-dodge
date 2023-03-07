@@ -10,7 +10,6 @@ public class PlayerDamage : MonoBehaviour {
     public XRController leftXR;
     public XRController rightXR;
 
-    public GameObject   explosionGO;
     public GameObject   damageParticleSystemGO;
     public GameObject   deathParticleSystemGO;
 
@@ -46,10 +45,13 @@ public class PlayerDamage : MonoBehaviour {
 
                 // Display text
                 GameManager.S.score.SetDisplayText("GAME OVER!", Color.red, Color.red, false);
- 
+
                 // Reset object spawner timer properties
-                GameManager.S.spawner.timeDuration = 2.0f;
-                GameManager.S.spawner.timeDone = GameManager.S.spawner.timeDuration + Time.time;
+                GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+                GameManager.S.spawner.timeDone = GameManager.S.spawner.startingSpawnSpeed + Time.time;
+
+                // Reset object speed 
+                GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
 
                 //
                 GameManager.S.score.timerIsOn = false;
