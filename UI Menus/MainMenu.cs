@@ -143,9 +143,9 @@ public class MainMenu : MonoBehaviour {
         // Set spawn speed
         float defaultSpawnSpeed = 2.0f;
         if(GameManager.S.score.level != 1) {
-            GameManager.S.spawner.timeDuration = defaultSpawnSpeed - ((float)(GameManager.S.score.level - 1) / 10);
+            GameManager.S.spawner.spawnSpeed = defaultSpawnSpeed - ((float)(GameManager.S.score.level - 1) / 10);
         } else {
-            GameManager.S.spawner.timeDuration = defaultSpawnSpeed;
+            GameManager.S.spawner.spawnSpeed = defaultSpawnSpeed;
         }
 
         // Set colorNdx
@@ -282,7 +282,7 @@ public class MainMenu : MonoBehaviour {
             SetAlleyAmount(0);
 
             // Reset spawn speed
-            GameManager.S.spawner.timeDuration = 2.0f;
+            GameManager.S.spawner.spawnSpeed = 2.0f;
 
             // Reset scene colors
             GameManager.color.ResetPalette();

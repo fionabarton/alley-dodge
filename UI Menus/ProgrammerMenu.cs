@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Allows users to adjust the random object instantiation algorithm
 public class ProgrammerMenu : MonoBehaviour {
@@ -8,23 +9,100 @@ public class ProgrammerMenu : MonoBehaviour {
     public List<TMPro.TMP_Dropdown> chanceDropdowns;
     public List<TMPro.TMP_Dropdown> spawnDropdowns;
 
+    public List<TMPro.TMP_Dropdown> speedDropdowns;
+    public Button                   defaultSettingsButton;
+
+    //public List<float>              speedDropdownValues;
+
     void Start() {
-        // Set dropdowns to default values
-        chanceDropdowns[0].value = 6; // 30%
-        chanceDropdowns[1].value = 7; // 35%
-        chanceDropdowns[4].value = 7; // 35%
+        // Get top level chanceDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Chance Dropdown 0")) {
+            chanceDropdowns[0].value = PlayerPrefs.GetInt("Chance Dropdown 0");
+        } else {
+            chanceDropdowns[0].value = 6; // 30%
+        }
+        if (PlayerPrefs.HasKey("Chance Dropdown 1")) {
+            chanceDropdowns[1].value = PlayerPrefs.GetInt("Chance Dropdown 1");
+        } else {
+            chanceDropdowns[1].value = 7; // 35%
+        }
+        if (PlayerPrefs.HasKey("Chance Dropdown 4")) {
+            chanceDropdowns[4].value = PlayerPrefs.GetInt("Chance Dropdown 4");
+        } else {
+            chanceDropdowns[4].value = 7; // 35%
+        }
 
-        chanceDropdowns[2].value = 10; // 50%
-        chanceDropdowns[3].value = 10; // 50%
+        // Get mid level chanceDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Chance Dropdown 2")) {
+            chanceDropdowns[2].value = PlayerPrefs.GetInt("Chance Dropdown 2");
+        } else {
+            chanceDropdowns[2].value = 10; // 50%
+        }
+        if (PlayerPrefs.HasKey("Chance Dropdown 3")) {
+            chanceDropdowns[3].value = PlayerPrefs.GetInt("Chance Dropdown 3");
+        } else {
+            chanceDropdowns[3].value = 10; // 50%
+        }
 
-        chanceDropdowns[5].value = 15; // 75%
-        chanceDropdowns[6].value = 5; // 25%
+        if (PlayerPrefs.HasKey("Chance Dropdown 5")) {
+            chanceDropdowns[5].value = PlayerPrefs.GetInt("Chance Dropdown 5");
+        } else {
+            chanceDropdowns[5].value = 15; // 75%
+        }
+        if (PlayerPrefs.HasKey("Chance Dropdown 6")) {
+            chanceDropdowns[6].value = PlayerPrefs.GetInt("Chance Dropdown 6");
+        } else {
+            chanceDropdowns[6].value = 5; // 25%
+        }
 
-        spawnDropdowns[0].value = 0; // Horizontal block
-        spawnDropdowns[1].value = 1; // Vertical low block
-        spawnDropdowns[2].value = 2; // Vertical high block
-        spawnDropdowns[3].value = 3; // Quid pickup
-        spawnDropdowns[4].value = 4; // Shield pickup
+        // Get spawnDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Spawn Dropdown 0")) {
+            spawnDropdowns[0].value = PlayerPrefs.GetInt("Spawn Dropdown 0");
+        } else {
+            spawnDropdowns[0].value = 0; // Horizontal block
+        }
+        if (PlayerPrefs.HasKey("Spawn Dropdown 1")) {
+            spawnDropdowns[1].value = PlayerPrefs.GetInt("Spawn Dropdown 1");
+        } else {
+            spawnDropdowns[1].value = 1; // Vertical low block
+        }
+        if (PlayerPrefs.HasKey("Spawn Dropdown 2")) {
+            spawnDropdowns[2].value = PlayerPrefs.GetInt("Spawn Dropdown 2");
+        } else {
+            spawnDropdowns[2].value = 2; // Vertical high block
+        }
+        if (PlayerPrefs.HasKey("Spawn Dropdown 3")) {
+            spawnDropdowns[3].value = PlayerPrefs.GetInt("Spawn Dropdown 3");
+        } else {
+            spawnDropdowns[3].value = 3; // Quid pickup
+        }
+        if (PlayerPrefs.HasKey("Spawn Dropdown 4")) {
+            spawnDropdowns[4].value = PlayerPrefs.GetInt("Spawn Dropdown 4");
+        } else {
+            spawnDropdowns[4].value = 4; // Shield pickup
+        }
+
+        // Get speedDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
+            speedDropdowns[0].value = PlayerPrefs.GetInt("Speed Dropdown 0");
+        } else {
+            speedDropdowns[0].value = 4; // 5
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
+            speedDropdowns[1].value = PlayerPrefs.GetInt("Speed Dropdown 1");
+        } else {
+            speedDropdowns[1].value = 0; // 0
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
+            speedDropdowns[2].value = PlayerPrefs.GetInt("Speed Dropdown 2");
+        } else {
+            speedDropdowns[2].value = 19; // 2.0f
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
+            speedDropdowns[3].value = PlayerPrefs.GetInt("Speed Dropdown 3");
+        } else {
+            speedDropdowns[3].value = 1; // 0.1f
+        }
 
         // Add listener to dropdowns
         spawnDropdowns[0].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(0, spawnDropdowns[0].value); });
@@ -41,12 +119,13 @@ public class ProgrammerMenu : MonoBehaviour {
         chanceDropdowns[5].onValueChanged.AddListener(delegate { SetChanceDropdownValue(5, chanceDropdowns[5].value); });
         chanceDropdowns[6].onValueChanged.AddListener(delegate { SetChanceDropdownValue(6, chanceDropdowns[6].value); });
 
-        //// GetPlayerPrefs
-        //if (PlayerPrefs.HasKey("Level Select")) {
-        //    levelSelectDropdown.value = PlayerPrefs.GetInt("Level Select");
-        //} else {
-        //    levelSelectDropdown.value = 0;
-        //}
+        speedDropdowns[0].onValueChanged.AddListener(delegate { SetObjectSpeedDropdownValue(speedDropdowns[0].value); });
+        //speedDropdowns[1].onValueChanged.AddListener(delegate { SetObjectSpeedDropdownValue(speedDropdowns[0].value); });
+        //speedDropdowns[2].onValueChanged.AddListener(delegate { SetObjectSpeedDropdownValue(speedDropdowns[0].value); });
+        //speedDropdowns[3].onValueChanged.AddListener(delegate { SetObjectSpeedDropdownValue(speedDropdowns[0].value); });
+
+        // Add listeners to button
+        defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
     }
 
     void SetChanceDropdownValue(int ndx, int value) {
@@ -54,11 +133,102 @@ public class ProgrammerMenu : MonoBehaviour {
         GameManager.S.spawner.chancesToSpawn[ndx] = valueAsFloat / 20;
 
         chanceDropdowns[ndx].value = value;
+
+        // Save settings
+        string tString = "Chance Dropdown " + ndx.ToString();
+        PlayerPrefs.SetInt(tString, chanceDropdowns[ndx].value);
     }
 
     void SetSpawnDropdownValue(int ndx, int value) {
         GameManager.S.spawner.objectsToSpawn[ndx] = value;
 
         spawnDropdowns[ndx].value = value;
+
+        // Save settings
+        string tString = "Spawn Dropdown " + ndx.ToString();
+        PlayerPrefs.SetInt(tString, spawnDropdowns[ndx].value);
+    }
+
+    //
+    void SetObjectSpeedDropdownValue(int value) {
+        GameManager.S.spawner.objectSpeed = value + 1;
+
+        speedDropdowns[0].value = value;
+
+        // Save settings
+        string tString = "Speed Dropdown 0";
+        PlayerPrefs.SetInt(tString, speedDropdowns[0].value);
+    }
+
+    void SetSpawnSpeedDropdownValue() {
+
+    }
+
+    void SetAmountToIncreaseObjectSpeedDropdownValue() {
+
+    }
+
+    void SetAmountToDecreaseSpawnSpeedDropdownValue() {
+
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddDefaultSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    }
+    // On 'Yes' button click, returns all menu settings to their default value
+    public void DefaultSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Set dropdowns to default values
+            SetChanceDropdownValue(0, 6); // 30%
+            SetChanceDropdownValue(1, 7); // 35%
+            SetChanceDropdownValue(4, 7); // 35%
+
+            SetChanceDropdownValue(2, 10); // 50%
+            SetChanceDropdownValue(3, 10); // 50%
+
+            SetChanceDropdownValue(5, 15); // 75%
+            SetChanceDropdownValue(6, 5); // 25%
+
+            SetSpawnDropdownValue(0, 0); // Horizontal block
+            SetSpawnDropdownValue(1, 1); // Vertical low block
+            SetSpawnDropdownValue(2, 2); // Vertical high block
+            SetSpawnDropdownValue(3, 3); // Quid pickup
+            SetSpawnDropdownValue(4, 4); // Shield pickup
+
+            SetObjectSpeedDropdownValue(4); // 5
+            // 0
+            // 2.0f
+            // 0.1f
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu!");
+        }
+    }
+
+    //
+    void Moo() {
+        // Add up chanceDropdown values
+        int total = 20;
+
+        // If 
+        if (total == 20) {
+            // Total == 100%
+
+        } else {
+            // Prompt user that combined dropdown values must equal 100%
+
+            // Display text
+
+            // Highlight dropdowns
+
+        }
     }
 }
