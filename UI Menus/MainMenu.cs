@@ -140,12 +140,13 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.score.level = (levelSelectDropdown.value + 1);
         GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
 
-        // Set spawn speed
-        float defaultSpawnSpeed = 2.0f;
+        // Set spawn and object speed
         if(GameManager.S.score.level != 1) {
-            GameManager.S.spawner.spawnSpeed = defaultSpawnSpeed - ((float)(GameManager.S.score.level - 1) / 10);
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed - ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToDecreaseSpawnSpeed);
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed + ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToIncreaseObjectSpeed);
         } else {
-            GameManager.S.spawner.spawnSpeed = defaultSpawnSpeed;
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
         }
 
         // Set colorNdx
@@ -282,7 +283,10 @@ public class MainMenu : MonoBehaviour {
             SetAlleyAmount(0);
 
             // Reset spawn speed
-            GameManager.S.spawner.spawnSpeed = 2.0f;
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+
+            // Reset object speed
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
 
             // Reset scene colors
             GameManager.color.ResetPalette();
