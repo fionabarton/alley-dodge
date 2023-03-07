@@ -12,7 +12,14 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		quidPickup;
 
 	// Amount of time until next object is spawned
-	public float			timeDuration = 2.0f;
+	public float			spawnSpeed = 2.0f;
+
+	// Speed at which objects travel down the alley
+	public float			objectSpeed = 5;
+
+	// Amount to increase per level
+	public float			amountToDecreaseSpawnSpeed = 0.1f;
+	public float			amountToIncreaseObjectSpeed = 0;
 
 	// Controls whether ALL objects (hazards, pickups, etc.) can move
 	public bool				objectsCanMove = true;
@@ -39,14 +46,14 @@ public class ObjectSpawner : MonoBehaviour {
 	public List<float>		chancesToSpawn;
 
 	private void Start() {
-		timeDone = timeDuration + Time.time;
+		timeDone = spawnSpeed + Time.time;
 	}
 
     private void FixedUpdate() {
 		if (canSpawn) {
 			if (timeDone <= Time.time) {
 				InstantiateRandomObject();
-				timeDone = timeDuration + Time.time;
+				timeDone = spawnSpeed + Time.time;
 			}
 		}
 	}
