@@ -93,8 +93,11 @@ public class ScoreManager : MonoBehaviour {
 		// Play confetti particle systems
 		GameManager.S.confetti.DropConfetti();
 
-		// Increase speed (starts at 2.0f)
-		GameManager.S.spawner.timeDuration -= 0.1f;
+		// Decrease spawn speed (starts at 2.0f)
+		GameManager.S.spawner.currentSpawnSpeed -= GameManager.S.spawner.amountToDecreaseSpawnSpeed;
+
+		// Increase object speed (starts at 0)
+		GameManager.S.spawner.currentObjectSpeed += GameManager.S.spawner.amountToIncreaseObjectSpeed;
 
 		// Increment level
 		level += 1;

@@ -12,10 +12,12 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		quidPickup;
 
 	// Amount of time until next object is spawned
-	public float			spawnSpeed = 2.0f;
+	public float			startingSpawnSpeed = 2.0f;
+	public float			currentSpawnSpeed = 2.0f;
 
 	// Speed at which objects travel down the alley
-	public float			objectSpeed = 5;
+	public float			startingObjectSpeed = 5;
+	public float			currentObjectSpeed = 5;
 
 	// Amount to increase per level
 	public float			amountToDecreaseSpawnSpeed = 0.1f;
@@ -46,14 +48,14 @@ public class ObjectSpawner : MonoBehaviour {
 	public List<float>		chancesToSpawn;
 
 	private void Start() {
-		timeDone = spawnSpeed + Time.time;
+		timeDone = currentSpawnSpeed + Time.time;
 	}
 
     private void FixedUpdate() {
 		if (canSpawn) {
 			if (timeDone <= Time.time) {
 				InstantiateRandomObject();
-				timeDone = spawnSpeed + Time.time;
+				timeDone = currentSpawnSpeed + Time.time;
 			}
 		}
 	}
