@@ -8,7 +8,7 @@ public class MoveObject : MonoBehaviour {
 
     void FixedUpdate() {
         if (GameManager.S.spawner.objectsCanMove) {
-            transform.Translate(direction * Time.fixedDeltaTime * GameManager.S.spawner.objectSpeed);
+            transform.Translate(direction * Time.fixedDeltaTime * GameManager.S.spawner.currentObjectSpeed);
         }
     }
 }
