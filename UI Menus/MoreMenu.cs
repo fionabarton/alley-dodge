@@ -45,45 +45,57 @@ public class MoreMenu : MonoBehaviour {
 
     //
     void ActivateMenuGO(int ndx) {
-        // Deactivate all menus
-        GameManager.utilities.SetActiveList(menuGOs, false);
+        //
+        if (GameManager.S.programmerMenuCS.CheckAllDropdownsForValidValues()) {
+            // Deactivate all menus
+            GameManager.utilities.SetActiveList(menuGOs, false);
 
-        // Activate selected menu
-        menuGOs[ndx].SetActive(true);
+            // Activate selected menu
+            menuGOs[ndx].SetActive(true);
 
-        // Reset all menu buttons' colorss
-        for (int i = 0; i < menuButtons.Count; i++) {
-            ColorBlock colors = menuButtons[i].colors;
-            colors.normalColor = Color.white;
-            colors.highlightedColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 1);
-            menuButtons[i].colors = colors;
-        }
+            // Reset all menu buttons' colorss
+            for (int i = 0; i < menuButtons.Count; i++) {
+                ColorBlock colors = menuButtons[i].colors;
+                colors.normalColor = Color.white;
+                colors.highlightedColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 1);
+                menuButtons[i].colors = colors;
+            }
 
-        // Set selected menu button's colors
-        ColorBlock c = menuButtons[ndx].colors;
-        c.normalColor = new Color(1, 0.7843137f, 0, 1);
-        c.highlightedColor = new Color(0.7264151f, 0.5697374f, 0, 1);
-        menuButtons[ndx].colors = c;
+            // Set selected menu button's colors
+            ColorBlock c = menuButtons[ndx].colors;
+            c.normalColor = new Color(1, 0.7843137f, 0, 1);
+            c.highlightedColor = new Color(0.7264151f, 0.5697374f, 0, 1);
+            menuButtons[ndx].colors = c;
 
-        // Set cursor positions
-        GameManager.utilities.PositionCursor(cursorGO[0], menuButtons[ndx].gameObject, -125f, 0, 0);
-        GameManager.utilities.PositionCursor(cursorGO[1], menuButtons[ndx].gameObject, 125f, 0, 2);
+            // Set cursor positions
+            GameManager.utilities.PositionCursor(cursorGO[0], menuButtons[ndx].gameObject, -125f, 0, 0);
+            GameManager.utilities.PositionCursor(cursorGO[1], menuButtons[ndx].gameObject, 125f, 0, 2);
 
-        // Display text
-        if(ndx == 3) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu!");
+            // Display text
+            if (ndx == 3) {
+                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu!");
+            }
+        } else {
+            // Audio: Damage
+            GameManager.audioMan.PlayRandomDamageSFX();
         }
     }
 
     //
     public void BackToMainMenuButton() {
-        // Deactivate this menu
-        gameObject.SetActive(false);
-
-        // Activate Main Menu
-        GameManager.S.mainMenuGO.SetActive(true);
-
         //
-        GameManager.S.previouslyHighlightedGO = null;
+        if (GameManager.S.programmerMenuCS.CheckAllDropdownsForValidValues()) {
+            // Deactivate this menu
+            gameObject.SetActive(false);
+
+            // Activate Main Menu
+            GameManager.S.mainMenuGO.SetActive(true);
+
+            //
+            GameManager.S.previouslyHighlightedGO = null;
+        } else {
+            // Audio: Damage
+            GameManager.audioMan.PlayRandomDamageSFX();
+        }
     }
 }
