@@ -20,17 +20,15 @@ public class GameManager : MonoBehaviour {
     public GameObject           keyboardMenuGO;
     public GameObject           highScoreMenuGO;
     public GameObject           mainMenuGO;
-    public GameObject           optionsMenuGO;
     public GameObject           moreMenuGO;
     public GameObject           subMenuGO;
 
     // Menu scripts
     public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
-    public OptionsMenu          optionsMenuCS;
     public MoreMenu             moreMenuCS;
+    public ProgrammerMenu       programmerMenuCS;
     public SubMenu              subMenuCS;
-
 
     // Audio
     public AudioSource          playerAudioSource;
