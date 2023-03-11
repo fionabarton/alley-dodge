@@ -63,7 +63,7 @@ public class MainMenu : MonoBehaviour {
         }
 
         // Add listener to slider and dropdowns
-        playerHeightSlider.onValueChanged.AddListener(delegate { DisplayHeightInMetersAndFeet(); });
+        playerHeightSlider.onValueChanged.AddListener(delegate { DisplayHeightInMetersAndFeet(playerHeightSlider.value); });
         levelSelectDropdown.onValueChanged.AddListener(delegate { SetLevel(); });
         alleyAmountDropdown.onValueChanged.AddListener(delegate { SetAlleyAmount(alleyAmountDropdown.value); });
 
@@ -79,7 +79,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     void SetObjects() {
-        adjustObjectsHeight.SetObjects(playerHeightSlider.value);
+        DisplayHeightInMetersAndFeet(playerHeightSlider.value);
 
         // In case the level or alley dropdowns are set to something other than 1
         SetLevel(false);
@@ -87,15 +87,15 @@ public class MainMenu : MonoBehaviour {
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
-    public void DisplayHeightInMetersAndFeet() {
+    public void DisplayHeightInMetersAndFeet(float playerHeight = 168) {
         // Save settings
-        PlayerPrefs.SetFloat("Player Height", playerHeightSlider.value);
+        PlayerPrefs.SetFloat("Player Height", playerHeight);
 
         // Deactivate climbing interactors
         GameManager.S.EnableClimbInteractors(false);
 
         // Get total inches from total centimeters
-        float totalInches = playerHeightSlider.value / 2.54f;
+        float totalInches = playerHeight / 2.54f;
 
         // Get feet
         int feet = (int)totalInches / 12;
@@ -104,22 +104,22 @@ public class MainMenu : MonoBehaviour {
         double inches = System.Math.Round((totalInches - (feet * 12)), 2);
 
         // If height is less than 1 meter...
-        if (playerHeightSlider.value < 100) {
+        if (playerHeight < 100) {
             // Display height text
-            heightText.text = playerHeightSlider.value + " cm / " + feet + " ft " + inches + " in";
+            heightText.text = playerHeight + " cm / " + feet + " ft " + inches + " in";
         } else {
             // Get meters
-            double d1 = System.Math.Round((playerHeightSlider.value / 100), 2);
+            double d1 = System.Math.Round((playerHeight / 100), 2);
 
             // Display height text
             heightText.text = d1 + " m / " + feet + " ft " + inches + " in";
         }
 
         // Set objects position and scale
-        adjustObjectsHeight.SetObjects(playerHeightSlider.value);
+        adjustObjectsHeight.SetObjects(playerHeight);
 
         // Reset resetPosition height (where the user respawns if they’ve fallen through the floor) 
-        GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeightSlider.value / 98.82352941f));
+        GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 99f));
     }
 
     // Called OnPointerUp() by the EventTrigger attached to the slider in the Inspector
@@ -129,6 +129,18 @@ public class MainMenu : MonoBehaviour {
 
         // Delayed text display
         delayedTextDisplay.DisplayText("Player height selected!");
+    }
+
+    // Set player height based on camera's y-position
+    public void SetPlayerHeight() {
+        // Convert camera's y-position to the user's height in centimeters
+        float heightInCm = 99 * Camera.main.transform.localPosition.y;
+
+        // Make adjustments based on the user's height
+        DisplayHeightInMetersAndFeet(heightInCm);
+
+        // Activate climbing interactors
+        GameManager.S.EnableClimbInteractors(true);
     }
 
     // On value changed of levelSelectDropdown, set level 
