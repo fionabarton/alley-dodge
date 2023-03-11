@@ -31,6 +31,9 @@ public class WarningManager : MonoBehaviour {
         // Play SFX
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
+        // Set player height based on camera's y-position
+        GameManager.S.mainMenuCS.SetPlayerHeight();
+
         // Destroy this game object
         Destroy(gameObject);
     }
