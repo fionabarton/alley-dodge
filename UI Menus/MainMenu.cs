@@ -81,6 +81,9 @@ public class MainMenu : MonoBehaviour {
     void SetObjects() {
         DisplayHeightInMetersAndFeet(playerHeightSlider.value);
 
+        // Activate climbing interactors
+        GameManager.S.EnableClimbInteractors(true);
+
         // In case the level or alley dropdowns are set to something other than 1
         SetLevel(false);
         SetAlleyAmount(alleyAmountDropdown.value);
@@ -88,6 +91,8 @@ public class MainMenu : MonoBehaviour {
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
     public void DisplayHeightInMetersAndFeet(float playerHeight = 168) {
+        playerHeightSlider.value = playerHeight;
+
         // Save settings
         PlayerPrefs.SetFloat("Player Height", playerHeight);
 
