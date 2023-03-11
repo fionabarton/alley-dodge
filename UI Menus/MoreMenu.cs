@@ -73,7 +73,7 @@ public class MoreMenu : MonoBehaviour {
 
             // Display text
             if (ndx == 3) {
-                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu!");
+                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu:\nLearn what actions are performed by pressing\ncertain buttons/inputs on your hand controllers.");
             }
         } else {
             // Audio: Damage

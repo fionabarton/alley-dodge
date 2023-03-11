@@ -20,7 +20,7 @@ public class InstructionsMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the instructions menu!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the instructions menu:\nRead along and learn how to play the game.");
         }
     }
 

@@ -29,7 +29,7 @@ public class ProgrammerMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nAdjust gameplay settings such as the chance of\neach random object being spawned, object speed, etc.");
         }
     }
 
