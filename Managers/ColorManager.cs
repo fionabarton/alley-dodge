@@ -42,8 +42,12 @@ public class ColorManager : MonoBehaviour {
 
     // Sets UI display text colors to alley colors
     public void SetDisplayTextPalette() {
-        GameManager.S.score.displayText.color = alleyMaterial1.color;
-        GameManager.S.score.displayMessageFrame.color = alleyMaterial2.color;
+        // Get alley material colors w/ 0.5f opacity
+        Color c1 = new Color(alleyMaterial1.color.r, alleyMaterial1.color.g, alleyMaterial1.color.b, 0.5f);
+        Color c2 = new Color(alleyMaterial2.color.r, alleyMaterial2.color.g, alleyMaterial2.color.b, 0.5f);
+
+        GameManager.S.score.displayText.color = c1;
+        GameManager.S.score.displayMessageFrame.color = c2;
     }
 
     // Sets the two alley materials to a new set of two complementary colors 
