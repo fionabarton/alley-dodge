@@ -148,6 +148,9 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
+
+        //chanceDropdowns[0].options[chanceDropdowns[0].value].text
+
         // 
         if (yesOrNo == 0) {
             // Create new HighScore
@@ -159,7 +162,12 @@ public class KeyboardInputMenu : MonoBehaviour {
                 System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"),
                 GameManager.alley.alleyCount,
                 GameManager.S.mainMenuCS.playerHeightSlider.value,
-                GameManager.S.fallBelowFloorCount);
+                GameManager.S.fallBelowFloorCount,
+                GameManager.S.programmerMenuCS.speedDropdowns[0].options[GameManager.S.programmerMenuCS.speedDropdowns[0].value].text,
+                GameManager.S.programmerMenuCS.speedDropdowns[1].options[GameManager.S.programmerMenuCS.speedDropdowns[1].value].text,
+                GameManager.S.programmerMenuCS.speedDropdowns[2].options[GameManager.S.programmerMenuCS.speedDropdowns[2].value].text,
+                GameManager.S.programmerMenuCS.speedDropdowns[3].options[GameManager.S.programmerMenuCS.speedDropdowns[3].value].text
+                );
 
             // Activate high score menu
             GameManager.S.highScoreMenuGO.SetActive(true);
