@@ -19,8 +19,9 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI    scoreValue;
     public TMPro.TextMeshProUGUI    levelValue;
     public TMPro.TextMeshProUGUI    objectsValue;
+    public TMPro.TextMeshProUGUI    runTimeValue;
+    public TMPro.TextMeshProUGUI    dateValue;
     public TMPro.TextMeshProUGUI    timeValue;
-    public TMPro.TextMeshProUGUI    dateTimeValue;
     public TMPro.TextMeshProUGUI    alleyAmountValue;
     public TMPro.TextMeshProUGUI    playerHeightValue;
     public TMPro.TextMeshProUGUI    fallBelowFloorCountValue;
@@ -64,8 +65,9 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         scoreValue.text = GameManager.S.highScore.highScores[ndx].score.ToString();
         levelValue.text = GameManager.S.highScore.highScores[ndx].level.ToString();
         objectsValue.text = GameManager.S.highScore.highScores[ndx].objects.ToString();
+        runTimeValue.text = GameManager.S.highScore.highScores[ndx].runTime;
+        dateValue.text = GameManager.S.highScore.highScores[ndx].date;
         timeValue.text = GameManager.S.highScore.highScores[ndx].time;
-        dateTimeValue.text = GameManager.S.highScore.highScores[ndx].dateTime;
         alleyAmountValue.text = GameManager.S.highScore.highScores[ndx].alleyCount.ToString();
         playerHeightValue.text = GameManager.S.highScore.highScores[ndx].playerHeight.ToString();
         fallBelowFloorCountValue.text = GameManager.S.highScore.highScores[ndx].fallBelowFloorCount.ToString(); 

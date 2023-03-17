@@ -12,7 +12,7 @@ public class HighScoreManager : MonoBehaviour {
     public List<TMPro.TextMeshProUGUI>  scoreText;
     public List<TMPro.TextMeshProUGUI>  levelText;
     public List<TMPro.TextMeshProUGUI>  objectsText;
-    public List<TMPro.TextMeshProUGUI>  timeText;
+    public List<TMPro.TextMeshProUGUI>  runTimeText;
     public TMPro.TextMeshProUGUI        pageText;
 
     public Button                       resetButton;
@@ -23,7 +23,7 @@ public class HighScoreManager : MonoBehaviour {
     public List<Animator>               scoreAnim;
     public List<Animator>               levelAnim;
     public List<Animator>               objectsAnim;
-    public List<Animator>               timeAnim;
+    public List<Animator>               runTimeAnim;
 
     public List<GameObject>             cursorGO;
 
@@ -197,7 +197,7 @@ public class HighScoreManager : MonoBehaviour {
             scoreText[i].text = highScores[startingNdx + i].score.ToString();
             levelText[i].text = highScores[startingNdx + i].level.ToString();
             objectsText[i].text = highScores[startingNdx + i].objects.ToString();
-            timeText[i].text = highScores[startingNdx + i].time;
+            runTimeText[i].text = highScores[startingNdx + i].runTime;
 
             // Reset text color
             SetHighScoreColors(i, "RainbowTextWhite");
@@ -212,7 +212,7 @@ public class HighScoreManager : MonoBehaviour {
 
                 // Set cursor positions
                 GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -300f, 0, 0);
-                GameManager.utilities.PositionCursor(cursorGO[1], timeText[newHighScoreListNdx].gameObject, 116f, 0, 2);
+                GameManager.utilities.PositionCursor(cursorGO[1], runTimeText[newHighScoreListNdx].gameObject, 116f, 0, 2);
 
                 // Set new HighScore text color to rainbow cycle
                 SetHighScoreColors(newHighScoreListNdx, "RainbowTextCycle");
@@ -233,7 +233,7 @@ public class HighScoreManager : MonoBehaviour {
         scoreAnim[scoreNdx].CrossFade(clipName, 0);
         levelAnim[scoreNdx].CrossFade(clipName, 0);
         objectsAnim[scoreNdx].CrossFade(clipName, 0);
-        timeAnim[scoreNdx].CrossFade(clipName, 0);
+        runTimeAnim[scoreNdx].CrossFade(clipName, 0);
     }
 
     //
@@ -275,10 +275,11 @@ public class HighScore {
     public int      score;
     public int      level;
     public int      objects;
-    public string   time;
+    public string   runTime;
 
     // Metadata not visible on scoreboard
-    public string   dateTime;
+    public string   date;
+    public string   time;
     public int      alleyCount;
     public float    playerHeight;
     public int      fallBelowFloorCount;
@@ -290,17 +291,18 @@ public class HighScore {
 
     // TBI: Programmer settings
 
-    public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects= 0, string _time = "00:00:00:000",
-        string _dateTime = "12:00 29 August, 1997", int _alleyCount = 3, float _playerHeight = 168, int _fallBelowFloorCount = 0,
+    public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects= 0, string _runTime = "00:00:00:000",
+        string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, float _playerHeight = 168, int _fallBelowFloorCount = 0,
         string _startingObjectSpeed = "5", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1") {
         name = _name;
         score = _score;
         level = _level;
         objects = _objects;
-        time = _time;
+        runTime = _runTime;
 
         // Metadata not visible on scoreboard
-        dateTime = _dateTime;
+        date = _date;
+        time = _time + " UTC";
         alleyCount = _alleyCount;
         playerHeight = _playerHeight;
         fallBelowFloorCount = _fallBelowFloorCount;
