@@ -31,12 +31,18 @@ public class SaveManager : MonoBehaviour {
             data.scores[i] = GameManager.S.highScore.highScores[i].score;
             data.levels[i] = GameManager.S.highScore.highScores[i].level;
             data.objects[i] = GameManager.S.highScore.highScores[i].objects;
-            data.times[i] = GameManager.S.highScore.highScores[i].time;
+            data.runTimes[i] = GameManager.S.highScore.highScores[i].runTime;
 
-            data.dateTimes[i] = GameManager.S.highScore.highScores[i].dateTime;
+            data.dates[i] = GameManager.S.highScore.highScores[i].date;
+            data.times[i] = GameManager.S.highScore.highScores[i].time;
             data.alleyCounts[i] = GameManager.S.highScore.highScores[i].alleyCount;
             data.playerHeights[i] = GameManager.S.highScore.highScores[i].playerHeight;
             data.fallBelowFloorCounts[i] = GameManager.S.highScore.highScores[i].fallBelowFloorCount;
+            
+            data.startingObjectSpeed[i] = GameManager.S.highScore.highScores[i].startingObjectSpeed;
+            data.amountToIncreaseObjectSpeed[i] = GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed;
+            data.startingSpawnSpeed[i] = GameManager.S.highScore.highScores[i].startingSpawnSpeed;
+            data.amountToDecreaseSpawnSpeed[i] = GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed;
         }
 
         // Get file path
@@ -74,12 +80,18 @@ public class SaveManager : MonoBehaviour {
                 GameManager.S.highScore.highScores[i].score = data.scores[i];
                 GameManager.S.highScore.highScores[i].level = data.levels[i];
                 GameManager.S.highScore.highScores[i].objects = data.objects[i];
-                GameManager.S.highScore.highScores[i].time = data.times[i];
+                GameManager.S.highScore.highScores[i].runTime = data.runTimes[i];
 
-                GameManager.S.highScore.highScores[i].dateTime = data.dateTimes[i];
+                GameManager.S.highScore.highScores[i].date = data.dates[i];
+                GameManager.S.highScore.highScores[i].time = data.times[i];
                 GameManager.S.highScore.highScores[i].alleyCount = data.alleyCounts[i];
                 GameManager.S.highScore.highScores[i].playerHeight = data.playerHeights[i];
                 GameManager.S.highScore.highScores[i].fallBelowFloorCount = data.fallBelowFloorCounts[i];
+
+                GameManager.S.highScore.highScores[i].startingObjectSpeed = data.startingObjectSpeed[i];
+                GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed = data.amountToIncreaseObjectSpeed[i];
+                GameManager.S.highScore.highScores[i].startingSpawnSpeed = data.startingSpawnSpeed[i];
+                GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed = data.amountToDecreaseSpawnSpeed[i];
             }
         } else {
             // Display default high score data in game UI
@@ -94,10 +106,16 @@ public class SaveData {
     public int[] scores = new int[100];
     public int[] levels = new int[100];
     public int[] objects = new int[100];
-    public string[] times = new string[100];
+    public string[] runTimes = new string[100];
 
-    public string[] dateTimes = new string[100];
+    public string[] dates = new string[100];
+    public string[] times = new string[100];
     public int[] alleyCounts = new int[100];
     public float[] playerHeights = new float[100];
     public int[] fallBelowFloorCounts = new int[100];
+
+    public string[] startingObjectSpeed = new string[100];
+    public string[] amountToIncreaseObjectSpeed = new string[100];
+    public string[] startingSpawnSpeed = new string[100];
+    public string[] amountToDecreaseSpawnSpeed = new string[100];
 }
