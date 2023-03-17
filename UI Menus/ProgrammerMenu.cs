@@ -109,7 +109,7 @@ public class ProgrammerMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
         } else {
-            speedDropdowns[1].value = 0; // 0
+            speedDropdowns[1].value = 1; // 0.1f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
@@ -246,7 +246,7 @@ public class ProgrammerMenu : MonoBehaviour {
             SetSpawnDropdownValue(4, 4); // Shield pickup
 
             SetStartingObjectSpeedDropdownValue(4); // 5
-            SetAmountToIncreaseObjectSpeedDropdownValue(0); // 0
+            SetAmountToIncreaseObjectSpeedDropdownValue(1); // 0.1f
             SetStartingSpawnSpeedDropdownValue(19); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
 
