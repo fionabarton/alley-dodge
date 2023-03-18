@@ -38,9 +38,13 @@ public class AdjustObjectsHeight : MonoBehaviour {
         GameManager.utilities.SetScale(GameManager.S.spawner.horizontalBlock, 1, (playerHeight / 33.6f), 1);
         GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowBlock, 3, (playerHeight / 224f), 1);
         GameManager.utilities.SetScale(GameManager.S.spawner.verticalHighBlock, 3, (playerHeight / 48f), 1);
-    
+
+        GameManager.utilities.SetScale(GameManager.S.spawner.horizontalDestruction, 1, (playerHeight / 168f), 1);
+        GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowDestruction, 1, (playerHeight / 168f), 1);
+        GameManager.utilities.SetScale(GameManager.S.spawner.verticalHighDestruction, 1, (playerHeight / 168f), 1);
+
         // Vertical climbing handles
-        for(int i = 0; i < longVerticalHandles.Count; i++) {
+        for (int i = 0; i < longVerticalHandles.Count; i++) {
             GameManager.utilities.SetPosition(longVerticalHandles[i], longVerticalHandles[i].transform.position.x, (playerHeight / 84f));
             GameManager.utilities.SetScale(longVerticalHandles[i], 0.2f, (playerHeight / 84f), 0.2f);
         }
