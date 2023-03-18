@@ -43,6 +43,20 @@ public class SaveManager : MonoBehaviour {
             data.amountToIncreaseObjectSpeed[i] = GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed;
             data.startingSpawnSpeed[i] = GameManager.S.highScore.highScores[i].startingSpawnSpeed;
             data.amountToDecreaseSpawnSpeed[i] = GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed;
+
+            data.chanceToSpawn0[i] = GameManager.S.highScore.highScores[i].chanceToSpawn0;
+            data.chanceToSpawn1[i] = GameManager.S.highScore.highScores[i].chanceToSpawn1;
+            data.chanceToSpawn2[i] = GameManager.S.highScore.highScores[i].chanceToSpawn2;
+            data.chanceToSpawn3[i] = GameManager.S.highScore.highScores[i].chanceToSpawn3;
+            data.chanceToSpawn4[i] = GameManager.S.highScore.highScores[i].chanceToSpawn4;
+            data.chanceToSpawn5[i] = GameManager.S.highScore.highScores[i].chanceToSpawn5;
+            data.chanceToSpawn6[i] = GameManager.S.highScore.highScores[i].chanceToSpawn6;
+
+            data.objectToSpawn0[i] = GameManager.S.highScore.highScores[i].objectToSpawn0;
+            data.objectToSpawn1[i] = GameManager.S.highScore.highScores[i].objectToSpawn1;
+            data.objectToSpawn2[i] = GameManager.S.highScore.highScores[i].objectToSpawn2;
+            data.objectToSpawn3[i] = GameManager.S.highScore.highScores[i].objectToSpawn3;
+            data.objectToSpawn4[i] = GameManager.S.highScore.highScores[i].objectToSpawn4;
         }
 
         // Get file path
@@ -92,6 +106,20 @@ public class SaveManager : MonoBehaviour {
                 GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed = data.amountToIncreaseObjectSpeed[i];
                 GameManager.S.highScore.highScores[i].startingSpawnSpeed = data.startingSpawnSpeed[i];
                 GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed = data.amountToDecreaseSpawnSpeed[i];
+
+                GameManager.S.highScore.highScores[i].chanceToSpawn0 = data.chanceToSpawn0[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn1 = data.chanceToSpawn1[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn2 = data.chanceToSpawn2[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn3 = data.chanceToSpawn3[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn4 = data.chanceToSpawn4[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn5 = data.chanceToSpawn5[i];
+                GameManager.S.highScore.highScores[i].chanceToSpawn6 = data.chanceToSpawn6[i];
+
+                GameManager.S.highScore.highScores[i].objectToSpawn0 = data.objectToSpawn0[i];
+                GameManager.S.highScore.highScores[i].objectToSpawn1 = data.objectToSpawn1[i];
+                GameManager.S.highScore.highScores[i].objectToSpawn2 = data.objectToSpawn2[i];
+                GameManager.S.highScore.highScores[i].objectToSpawn3 = data.objectToSpawn3[i];
+                GameManager.S.highScore.highScores[i].objectToSpawn4 = data.objectToSpawn4[i];
             }
         } else {
             // Display default high score data in game UI
@@ -111,11 +139,25 @@ public class SaveData {
     public string[] dates = new string[100];
     public string[] times = new string[100];
     public int[] alleyCounts = new int[100];
-    public float[] playerHeights = new float[100];
+    public string[] playerHeights = new string[100];
     public int[] fallBelowFloorCounts = new int[100];
 
     public string[] startingObjectSpeed = new string[100];
     public string[] amountToIncreaseObjectSpeed = new string[100];
     public string[] startingSpawnSpeed = new string[100];
     public string[] amountToDecreaseSpawnSpeed = new string[100];
+
+    public string[] chanceToSpawn0 = new string[100];
+    public string[] chanceToSpawn1 = new string[100];
+    public string[] chanceToSpawn2 = new string[100];
+    public string[] chanceToSpawn3 = new string[100];
+    public string[] chanceToSpawn4 = new string[100];
+    public string[] chanceToSpawn5 = new string[100];
+    public string[] chanceToSpawn6 = new string[100];
+
+    public string[] objectToSpawn0 = new string[100];
+    public string[] objectToSpawn1 = new string[100];
+    public string[] objectToSpawn2 = new string[100];
+    public string[] objectToSpawn3 = new string[100];
+    public string[] objectToSpawn4 = new string[100];
 }
