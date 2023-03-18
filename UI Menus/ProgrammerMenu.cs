@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ProgrammerMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     public List<TMPro.TMP_Dropdown> chanceDropdowns;
-    public List<TMPro.TMP_Dropdown> spawnDropdowns;
+    public List<TMPro.TMP_Dropdown> objectDropdowns;
 
     public List<TMPro.TMP_Dropdown> speedDropdowns;
     public Button                   defaultSettingsButton;
@@ -73,31 +73,31 @@ public class ProgrammerMenu : MonoBehaviour {
             chanceDropdowns[6].value = 5; // 25%
         }
 
-        // Get spawnDropdowns PlayerPrefs
-        if (PlayerPrefs.HasKey("Spawn Dropdown 0")) {
-            SetSpawnDropdownValue(0, PlayerPrefs.GetInt("Spawn Dropdown 0"));
+        // Get objectDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Object Dropdown 0")) {
+            SetObjectDropdownValue(0, PlayerPrefs.GetInt("Object Dropdown 0"));
         } else {
-            spawnDropdowns[0].value = 0; // Horizontal block
+            objectDropdowns[0].value = 0; // Horizontal block
         }
-        if (PlayerPrefs.HasKey("Spawn Dropdown 1")) {
-            SetSpawnDropdownValue(1, PlayerPrefs.GetInt("Spawn Dropdown 1"));
+        if (PlayerPrefs.HasKey("Object Dropdown 1")) {
+            SetObjectDropdownValue(1, PlayerPrefs.GetInt("Object Dropdown 1"));
         } else {
-            spawnDropdowns[1].value = 1; // Vertical low block
+            objectDropdowns[1].value = 1; // Vertical low block
         }
-        if (PlayerPrefs.HasKey("Spawn Dropdown 2")) {
-            SetSpawnDropdownValue(2, PlayerPrefs.GetInt("Spawn Dropdown 2"));
+        if (PlayerPrefs.HasKey("Object Dropdown 2")) {
+            SetObjectDropdownValue(2, PlayerPrefs.GetInt("Object Dropdown 2"));
         } else {
-            spawnDropdowns[2].value = 2; // Vertical high block
+            objectDropdowns[2].value = 2; // Vertical high block
         }
-        if (PlayerPrefs.HasKey("Spawn Dropdown 3")) {
-            SetSpawnDropdownValue(3, PlayerPrefs.GetInt("Spawn Dropdown 3"));
+        if (PlayerPrefs.HasKey("Object Dropdown 3")) {
+            SetObjectDropdownValue(3, PlayerPrefs.GetInt("Object Dropdown 3"));
         } else {
-            spawnDropdowns[3].value = 3; // Quid pickup
+            objectDropdowns[3].value = 3; // Quid pickup
         }
-        if (PlayerPrefs.HasKey("Spawn Dropdown 4")) {
-            SetSpawnDropdownValue(4, PlayerPrefs.GetInt("Spawn Dropdown 4"));
+        if (PlayerPrefs.HasKey("Object Dropdown 4")) {
+            SetObjectDropdownValue(4, PlayerPrefs.GetInt("Object Dropdown 4"));
         } else {
-            spawnDropdowns[4].value = 4; // Shield pickup
+            objectDropdowns[4].value = 4; // Shield pickup
         }
 
         // Get speedDropdowns PlayerPrefs
@@ -123,11 +123,11 @@ public class ProgrammerMenu : MonoBehaviour {
         }
 
         // Add listener to dropdowns
-        spawnDropdowns[0].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(0, spawnDropdowns[0].value); });
-        spawnDropdowns[1].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(1, spawnDropdowns[1].value); });
-        spawnDropdowns[2].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(2, spawnDropdowns[2].value); });
-        spawnDropdowns[3].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(3, spawnDropdowns[3].value); });
-        spawnDropdowns[4].onValueChanged.AddListener(delegate { SetSpawnDropdownValue(4, spawnDropdowns[4].value); });
+        objectDropdowns[0].onValueChanged.AddListener(delegate { SetObjectDropdownValue(0, objectDropdowns[0].value); });
+        objectDropdowns[1].onValueChanged.AddListener(delegate { SetObjectDropdownValue(1, objectDropdowns[1].value); });
+        objectDropdowns[2].onValueChanged.AddListener(delegate { SetObjectDropdownValue(2, objectDropdowns[2].value); });
+        objectDropdowns[3].onValueChanged.AddListener(delegate { SetObjectDropdownValue(3, objectDropdowns[3].value); });
+        objectDropdowns[4].onValueChanged.AddListener(delegate { SetObjectDropdownValue(4, objectDropdowns[4].value); });
 
         chanceDropdowns[0].onValueChanged.AddListener(delegate { SetChanceDropdownValue(0, chanceDropdowns[0].value); });
         chanceDropdowns[1].onValueChanged.AddListener(delegate { SetChanceDropdownValue(1, chanceDropdowns[1].value); });
@@ -179,10 +179,10 @@ public class ProgrammerMenu : MonoBehaviour {
         }
     }
 
-    void SetSpawnDropdownValue(int ndx, int value) {
+    void SetObjectDropdownValue(int ndx, int value) {
         GameManager.S.spawner.objectsToSpawn[ndx] = value;
 
-        spawnDropdowns[ndx].value = value;
+        objectDropdowns[ndx].value = value;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,11 +239,11 @@ public class ProgrammerMenu : MonoBehaviour {
             SetChanceDropdownValue(5, 15); // 75%
             SetChanceDropdownValue(6, 5); // 25%
 
-            SetSpawnDropdownValue(0, 0); // Horizontal block
-            SetSpawnDropdownValue(1, 1); // Vertical low block
-            SetSpawnDropdownValue(2, 2); // Vertical high block
-            SetSpawnDropdownValue(3, 3); // Quid pickup
-            SetSpawnDropdownValue(4, 4); // Shield pickup
+            SetObjectDropdownValue(0, 0); // Horizontal block
+            SetObjectDropdownValue(1, 1); // Vertical low block
+            SetObjectDropdownValue(2, 2); // Vertical high block
+            SetObjectDropdownValue(3, 3); // Quid pickup
+            SetObjectDropdownValue(4, 4); // Shield pickup
 
             SetStartingObjectSpeedDropdownValue(4); // 5
             SetAmountToIncreaseObjectSpeedDropdownValue(1); // 0.1f
@@ -373,10 +373,10 @@ public class ProgrammerMenu : MonoBehaviour {
             PlayerPrefs.SetInt(tString, chanceDropdowns[i].value);
         }
 
-        // Spawn dropdowns
-        for (int i = 0; i < spawnDropdowns.Count; i++) {
-            string tString = "Spawn Dropdown " + i.ToString();
-            PlayerPrefs.SetInt(tString, spawnDropdowns[i].value);
+        // Object dropdowns
+        for (int i = 0; i < objectDropdowns.Count; i++) {
+            string tString = "Object Dropdown " + i.ToString();
+            PlayerPrefs.SetInt(tString, objectDropdowns[i].value);
         }
 
         // Speed dropdowns

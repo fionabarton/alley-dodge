@@ -271,29 +271,43 @@ public class HighScoreManager : MonoBehaviour {
 
 //
 public class HighScore {
-    public string   name;
-    public int      score;
-    public int      level;
-    public int      objects;
-    public string   runTime;
+    public string name;
+    public int score;
+    public int level;
+    public int objects;
+    public string runTime;
 
     // Metadata not visible on scoreboard
-    public string   date;
-    public string   time;
-    public int      alleyCount;
-    public float    playerHeight;
-    public int      fallBelowFloorCount;
+    public string date;
+    public string time;
+    public int alleyCount;
+    public string playerHeight;
+    public int fallBelowFloorCount;
 
-    public string   startingObjectSpeed;
-    public string   amountToIncreaseObjectSpeed;
-    public string   startingSpawnSpeed;
-    public string   amountToDecreaseSpawnSpeed;
+    public string startingObjectSpeed;
+    public string amountToIncreaseObjectSpeed;
+    public string startingSpawnSpeed;
+    public string amountToDecreaseSpawnSpeed;
 
-    // TBI: Programmer settings
+    public string chanceToSpawn0;
+    public string chanceToSpawn1;
+    public string chanceToSpawn2;
+    public string chanceToSpawn3;
+    public string chanceToSpawn4;
+    public string chanceToSpawn5;
+    public string chanceToSpawn6;
 
-    public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects= 0, string _runTime = "00:00:00:000",
-        string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, float _playerHeight = 168, int _fallBelowFloorCount = 0,
-        string _startingObjectSpeed = "5", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1") {
+    public string objectToSpawn0;
+    public string objectToSpawn1;
+    public string objectToSpawn2;
+    public string objectToSpawn3;
+    public string objectToSpawn4;
+
+    public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects = 0, string _runTime = "00:00:00:000",
+        string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, string _playerHeight = "1.68 m / 5 ft 6.14 in", int _fallBelowFloorCount = 0,
+        string _startingObjectSpeed = "5", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1",
+        string _chanceToSpawn0 = "30%", string _chanceToSpawn1 = "35%", string _chanceToSpawn2 = "35%", string _chanceToSpawn3 = "50%", string _chanceToSpawn4 = "50%", string _chanceToSpawn5 = "75%", string _chanceToSpawn6 = "25%",
+        string _objectToSpawn0 = "Hori. Block", string _objectToSpawn1 = "Verti. Low Block", string _objectToSpawn2 = "Verti. High Block", string _objectToSpawn3 = "Quid Pickup", string _objectToSpawn4 = "Shield Pickup") {
         name = _name;
         score = _score;
         level = _level;
@@ -311,5 +325,19 @@ public class HighScore {
         amountToIncreaseObjectSpeed = _amountToIncreaseObjectSpeed;
         startingSpawnSpeed = _startingSpawnSpeed;
         amountToDecreaseSpawnSpeed = _amountToDecreaseSpawnSpeed;
+
+        chanceToSpawn0 = _chanceToSpawn0;
+        chanceToSpawn1 = _chanceToSpawn1;
+        chanceToSpawn2 = _chanceToSpawn2;
+        chanceToSpawn3 = _chanceToSpawn3;
+        chanceToSpawn4 = _chanceToSpawn4;
+        chanceToSpawn5 = _chanceToSpawn5;
+        chanceToSpawn6 = _chanceToSpawn6;
+
+        objectToSpawn0 = _objectToSpawn0;
+        objectToSpawn1 = _objectToSpawn1;
+        objectToSpawn2 = _objectToSpawn2;
+        objectToSpawn3 = _objectToSpawn3;
+        objectToSpawn4 = _objectToSpawn4;
     }
 }

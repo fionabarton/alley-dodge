@@ -162,12 +162,24 @@ public class KeyboardInputMenu : MonoBehaviour {
                 System.DateTime.UtcNow.ToString("dd MMMM, yyyy"),
                 System.DateTime.UtcNow.ToString("HH:mm"),
                 GameManager.alley.alleyCount,
-                GameManager.S.mainMenuCS.playerHeightSlider.value,
+                GameManager.S.mainMenuCS.GetPlayerHeightInMetersAndFeet(GameManager.S.mainMenuCS.playerHeightSlider.value),
                 GameManager.S.fallBelowFloorCount,
                 GameManager.S.programmerMenuCS.speedDropdowns[0].options[GameManager.S.programmerMenuCS.speedDropdowns[0].value].text,
                 GameManager.S.programmerMenuCS.speedDropdowns[1].options[GameManager.S.programmerMenuCS.speedDropdowns[1].value].text,
                 GameManager.S.programmerMenuCS.speedDropdowns[2].options[GameManager.S.programmerMenuCS.speedDropdowns[2].value].text,
-                GameManager.S.programmerMenuCS.speedDropdowns[3].options[GameManager.S.programmerMenuCS.speedDropdowns[3].value].text
+                GameManager.S.programmerMenuCS.speedDropdowns[3].options[GameManager.S.programmerMenuCS.speedDropdowns[3].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[0].options[GameManager.S.programmerMenuCS.chanceDropdowns[0].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[1].options[GameManager.S.programmerMenuCS.chanceDropdowns[1].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[4].options[GameManager.S.programmerMenuCS.chanceDropdowns[4].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[2].options[GameManager.S.programmerMenuCS.chanceDropdowns[2].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[3].options[GameManager.S.programmerMenuCS.chanceDropdowns[3].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[5].options[GameManager.S.programmerMenuCS.chanceDropdowns[5].value].text,
+                GameManager.S.programmerMenuCS.chanceDropdowns[6].options[GameManager.S.programmerMenuCS.chanceDropdowns[6].value].text,
+                GameManager.S.programmerMenuCS.objectDropdowns[0].options[GameManager.S.programmerMenuCS.objectDropdowns[0].value].text,
+                GameManager.S.programmerMenuCS.objectDropdowns[1].options[GameManager.S.programmerMenuCS.objectDropdowns[1].value].text,
+                GameManager.S.programmerMenuCS.objectDropdowns[2].options[GameManager.S.programmerMenuCS.objectDropdowns[2].value].text,
+                GameManager.S.programmerMenuCS.objectDropdowns[3].options[GameManager.S.programmerMenuCS.objectDropdowns[3].value].text,
+                GameManager.S.programmerMenuCS.objectDropdowns[4].options[GameManager.S.programmerMenuCS.objectDropdowns[4].value].text
                 );
 
             // Activate high score menu

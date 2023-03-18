@@ -6,29 +6,31 @@ using UnityEngine.UI;
 //
 public class SelectedHighScoreMenu : MonoBehaviour {
     [Header("Set in Inspector")]
-    public GameObject               scoreboardMenuGO;
-    public GameObject               selectedHighScoreMenuGO;
+    public GameObject                   scoreboardMenuGO;
+    public GameObject                   selectedHighScoreMenuGO;
 
     // Buttons
-    public List<Button>             entryButtons;
-    public Button                   backToScoreboardButton;
+    public List<Button>                 entryButtons;
+    public Button                       backToScoreboardButton;
 
     // Property values text
-    public TMPro.TextMeshProUGUI    rankValue;
-    public TMPro.TextMeshProUGUI    nameValue;
-    public TMPro.TextMeshProUGUI    scoreValue;
-    public TMPro.TextMeshProUGUI    levelValue;
-    public TMPro.TextMeshProUGUI    objectsValue;
-    public TMPro.TextMeshProUGUI    runTimeValue;
-    public TMPro.TextMeshProUGUI    dateValue;
-    public TMPro.TextMeshProUGUI    timeValue;
-    public TMPro.TextMeshProUGUI    alleyAmountValue;
-    public TMPro.TextMeshProUGUI    playerHeightValue;
-    public TMPro.TextMeshProUGUI    fallBelowFloorCountValue;
-    public TMPro.TextMeshProUGUI    startingObjectSpeedValue;
-    public TMPro.TextMeshProUGUI    amountToIncreaseObjectSpeedValue;
-    public TMPro.TextMeshProUGUI    startingSpawnSpeedValue;
-    public TMPro.TextMeshProUGUI    amountToDecreaseSpawnSpeedValue;
+    public TMPro.TextMeshProUGUI        rankValue;
+    public TMPro.TextMeshProUGUI        nameValue;
+    public TMPro.TextMeshProUGUI        scoreValue;
+    public TMPro.TextMeshProUGUI        levelValue;
+    public TMPro.TextMeshProUGUI        objectsValue;
+    public TMPro.TextMeshProUGUI        runTimeValue;
+    public TMPro.TextMeshProUGUI        dateValue;
+    public TMPro.TextMeshProUGUI        timeValue;
+    public TMPro.TextMeshProUGUI        alleyAmountValue;
+    public TMPro.TextMeshProUGUI        playerHeightValue;
+    public TMPro.TextMeshProUGUI        fallBelowFloorCountValue;
+    public TMPro.TextMeshProUGUI        startingObjectSpeedValue;
+    public TMPro.TextMeshProUGUI        amountToIncreaseObjectSpeedValue;
+    public TMPro.TextMeshProUGUI        startingSpawnSpeedValue;
+    public TMPro.TextMeshProUGUI        amountToDecreaseSpawnSpeedValue;
+    public List<TMPro.TextMeshProUGUI>  chanceToSpawnValues;
+    public List<TMPro.TextMeshProUGUI>  objectToSpawnValues;
 
     //[Header("Set Dynamically")]
 
@@ -69,12 +71,24 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         dateValue.text = GameManager.S.highScore.highScores[ndx].date;
         timeValue.text = GameManager.S.highScore.highScores[ndx].time;
         alleyAmountValue.text = GameManager.S.highScore.highScores[ndx].alleyCount.ToString();
-        playerHeightValue.text = GameManager.S.highScore.highScores[ndx].playerHeight.ToString();
+        playerHeightValue.text = GameManager.S.highScore.highScores[ndx].playerHeight;
         fallBelowFloorCountValue.text = GameManager.S.highScore.highScores[ndx].fallBelowFloorCount.ToString(); 
         startingObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].startingObjectSpeed;
         amountToIncreaseObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].amountToIncreaseObjectSpeed;
         startingSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].startingSpawnSpeed;
         amountToDecreaseSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].amountToDecreaseSpawnSpeed;
+        chanceToSpawnValues[0].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn0;
+        chanceToSpawnValues[1].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn1;
+        chanceToSpawnValues[2].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn2;
+        chanceToSpawnValues[3].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn3;
+        chanceToSpawnValues[4].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn4;
+        chanceToSpawnValues[5].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn5;
+        chanceToSpawnValues[6].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn6;
+        objectToSpawnValues[0].text = GameManager.S.highScore.highScores[ndx].objectToSpawn0;
+        objectToSpawnValues[1].text = GameManager.S.highScore.highScores[ndx].objectToSpawn1;
+        objectToSpawnValues[2].text = GameManager.S.highScore.highScores[ndx].objectToSpawn2;
+        objectToSpawnValues[3].text = GameManager.S.highScore.highScores[ndx].objectToSpawn3;
+        objectToSpawnValues[4].text = GameManager.S.highScore.highScores[ndx].objectToSpawn4;
     }
 
     //
