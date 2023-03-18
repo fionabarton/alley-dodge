@@ -11,6 +11,10 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
 
+	public GameObject		horizontalDestruction;
+	public GameObject		verticalHighDestruction;
+	public GameObject		verticalLowDestruction;
+
 	// Amount of time until next object is spawned
 	public float			startingSpawnSpeed = 2.0f;
 	public float			currentSpawnSpeed = 2.0f;
