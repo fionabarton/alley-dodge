@@ -8,7 +8,8 @@ public enum eBGM {
 
 public enum eSFX {
     sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
-    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell
+    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell,
+    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow
 };
 
 public class AudioManager : MonoBehaviour {
