@@ -30,7 +30,25 @@ public class QuidPickup : MonoBehaviour {
                 }
 
                 // SFX
-                GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
+                string scoreStr = GameManager.S.score.score.ToString();
+                //if (scoreStr.EndsWith("1") || scoreStr.EndsWith("6")) {
+                //    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxQuid1);
+                //} else if (scoreStr.EndsWith("2") || scoreStr.EndsWith("7")) {
+                //    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxQuid2);
+                //} else if (scoreStr.EndsWith("3") || scoreStr.EndsWith("8")) {
+                //    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxQuid3);
+                //} else if (scoreStr.EndsWith("4") || scoreStr.EndsWith("9")) {
+                //    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxQuid4);
+                //} else if (scoreStr.EndsWith("5") || scoreStr.EndsWith("0")) {
+                //    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxQuid5);
+                //}
+
+                // SFX
+                if(scoreStr.EndsWith("0") || scoreStr.EndsWith("5")) {
+                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxBuff1);
+                } else {
+                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
+                }
 
                 // Destroy this GO
                 Destroy(gameObject);
