@@ -98,5 +98,8 @@ public class SelectedHighScoreMenu : MonoBehaviour {
 
         // Deactivate SelectedHighScoreMenu gameObject
         selectedHighScoreMenuGO.SetActive(false);
+
+        // Update high score display
+        GameManager.S.highScore.UpdateHighScoreDisplay(GameManager.S.highScore.currentPageNdx);
     }
 }
