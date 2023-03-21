@@ -63,7 +63,7 @@ public class KeyboardInputMenu : MonoBehaviour {
                     messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nYeah, you add that character!");
 
                     // Audio: Confirm
-                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
+                    GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
                 }
             }
         } else {
@@ -93,7 +93,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.utilities.PositionCursor(cursorGO, charSlotsText[inputString.Length].gameObject, 0, -160, 3);
 
             // Audio: Deny
-            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
+            GameManager.audioMan.PlayUISFXClip(eSFX.sfxDeny);
 
             // Display text
             messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nYeah, you delete that character!");
@@ -133,13 +133,13 @@ public class KeyboardInputMenu : MonoBehaviour {
         messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nNice choice, lazy bones!");
 
         // Audio: Confirm
-        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
+        GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
     }
 
     // On 'OK' button click, adds functions to the sub menu's yes/no buttons
     public void AddSetNameConfirmationListeners() {
         // Audio: Confirm
-        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
+        GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
         GameManager.S.subMenuCS.AddListeners(SetName, "Are you sure about this name?\nWell, are ya?");
     }
