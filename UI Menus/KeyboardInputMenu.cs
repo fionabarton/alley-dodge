@@ -164,6 +164,7 @@ public class KeyboardInputMenu : MonoBehaviour {
                 GameManager.alley.alleyCount,
                 GameManager.S.mainMenuCS.GetPlayerHeightInMetersAndFeet(GameManager.S.mainMenuCS.playerHeightSlider.value),
                 GameManager.S.fallBelowFloorCount,
+                GameManager.S.damageCount,
                 GameManager.S.programmerMenuCS.speedDropdowns[0].options[GameManager.S.programmerMenuCS.speedDropdowns[0].value].text,
                 GameManager.S.programmerMenuCS.speedDropdowns[1].options[GameManager.S.programmerMenuCS.speedDropdowns[1].value].text,
                 GameManager.S.programmerMenuCS.speedDropdowns[2].options[GameManager.S.programmerMenuCS.speedDropdowns[2].value].text,

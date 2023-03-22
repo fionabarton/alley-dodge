@@ -249,8 +249,9 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.score.startingTime = Time.time;
         GameManager.S.score.timerIsOn = true;
 
-        // Reset fall through floor count
+        // Reset fall through floor & damage count
         GameManager.S.fallBelowFloorCount = 0;
+        GameManager.S.damageCount = 0;
 
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
