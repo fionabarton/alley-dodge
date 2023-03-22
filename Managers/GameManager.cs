@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
 
     //
     public int                  fallBelowFloorCount;
+    public int                  damageCount;
 
     public static AlleyManager  alley;
     public static ColorManager  color;

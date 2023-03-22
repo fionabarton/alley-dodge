@@ -38,7 +38,8 @@ public class SaveManager : MonoBehaviour {
             data.alleyCounts[i] = GameManager.S.highScore.highScores[i].alleyCount;
             data.playerHeights[i] = GameManager.S.highScore.highScores[i].playerHeight;
             data.fallBelowFloorCounts[i] = GameManager.S.highScore.highScores[i].fallBelowFloorCount;
-            
+            data.damageCounts[i] = GameManager.S.highScore.highScores[i].damageCount;
+
             data.startingObjectSpeed[i] = GameManager.S.highScore.highScores[i].startingObjectSpeed;
             data.amountToIncreaseObjectSpeed[i] = GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed;
             data.startingSpawnSpeed[i] = GameManager.S.highScore.highScores[i].startingSpawnSpeed;
@@ -101,6 +102,7 @@ public class SaveManager : MonoBehaviour {
                 GameManager.S.highScore.highScores[i].alleyCount = data.alleyCounts[i];
                 GameManager.S.highScore.highScores[i].playerHeight = data.playerHeights[i];
                 GameManager.S.highScore.highScores[i].fallBelowFloorCount = data.fallBelowFloorCounts[i];
+                GameManager.S.highScore.highScores[i].damageCount = data.damageCounts[i];
 
                 GameManager.S.highScore.highScores[i].startingObjectSpeed = data.startingObjectSpeed[i];
                 GameManager.S.highScore.highScores[i].amountToIncreaseObjectSpeed = data.amountToIncreaseObjectSpeed[i];
@@ -141,6 +143,7 @@ public class SaveData {
     public int[] alleyCounts = new int[100];
     public string[] playerHeights = new string[100];
     public int[] fallBelowFloorCounts = new int[100];
+    public int[] damageCounts = new int[100];
 
     public string[] startingObjectSpeed = new string[100];
     public string[] amountToIncreaseObjectSpeed = new string[100];
