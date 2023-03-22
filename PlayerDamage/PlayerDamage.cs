@@ -22,6 +22,9 @@ public class PlayerDamage : MonoBehaviour {
             // Destroy hazard
             Destroy(other.gameObject);
 
+            // Increment damage count
+            GameManager.S.damageCount += 1;
+
             // If shield isn't active...
             if (!GameManager.shield.shieldIsActive) {
                 // Cache ending time
