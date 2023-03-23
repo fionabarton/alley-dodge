@@ -13,6 +13,8 @@ public class PlayerDamage : MonoBehaviour {
     public GameObject   damageParticleSystemGO;
     public GameObject   deathParticleSystemGO;
 
+    public Animator     damageOverlayAnim;
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Hazard") {
             // Haptic feedback (amplitude, duration)
@@ -24,6 +26,9 @@ public class PlayerDamage : MonoBehaviour {
 
             // Increment damage count
             GameManager.S.damageCount += 1;
+
+            // Play damage overlay animation clip
+            damageOverlayAnim.CrossFade("Damage", 0);
 
             // If shield isn't active...
             if (!GameManager.shield.shieldIsActive) {
