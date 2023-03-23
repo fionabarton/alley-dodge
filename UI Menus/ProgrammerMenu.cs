@@ -29,7 +29,7 @@ public class ProgrammerMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nAdjust gameplay settings such as the chance of\neach random object being spawned, object speed, etc.");
+            SetGeneralDisplayTextMessage(currentPageNdx);
         }
     }
 
@@ -280,6 +280,9 @@ public class ProgrammerMenu : MonoBehaviour {
 
             // Set page text
             pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/2" + "</color>";
+
+            // Display text
+            SetGeneralDisplayTextMessage(currentPageNdx);
         } else {
             // Audio: Damage
             GameManager.audioMan.PlayRandomDamageSFX();
@@ -383,6 +386,15 @@ public class ProgrammerMenu : MonoBehaviour {
         for (int i = 0; i < speedDropdowns.Count; i++) {
             string tString = "Speed Dropdown " + i.ToString();
             PlayerPrefs.SetInt(tString, speedDropdowns[i].value);
+        }
+    }
+
+    // Sets the DisplayText's message depending on which page of the menu is visible
+    void SetGeneralDisplayTextMessage(int currentPageNdx = 0) {
+        if (currentPageNdx == 0) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nView and adjust the flow chart of the game's random\nobject spawner algorithm; Basically the likelihood of\nwhat objects will be generated.");
+        } else {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nAdjust gameplay settings such object speed\nand how often objects are spawned.");
         }
     }
 }
