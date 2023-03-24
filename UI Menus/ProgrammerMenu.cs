@@ -392,7 +392,7 @@ public class ProgrammerMenu : MonoBehaviour {
     // Sets the DisplayText's message depending on which page of the menu is visible
     void SetGeneralDisplayTextMessage(int currentPageNdx = 0) {
         if (currentPageNdx == 0) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nView and adjust the flow chart of the game's random\nobject spawner algorithm; Basically the likelihood of\nwhat objects will be generated.");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nView and adjust the flow chart of the game's random\nobject spawner algorithm; basically the likelihood of\nwhat objects will be generated.");
         } else {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the programmer menu:\nAdjust gameplay settings such object speed\nand how often objects are spawned.");
         }
