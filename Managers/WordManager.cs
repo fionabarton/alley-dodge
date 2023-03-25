@@ -8,6 +8,9 @@ public class WordManager : MonoBehaviour {
     public List<string> exclamations = new List<string>();
     public List<string> interjections = new List<string>();
 
+    private int         previousExclamationNdx = -1;
+    private int         previousInterjectionNdx = -1;
+
     void Start() {
         exclamations = new List<string>() { "Oh yeah", "Heck yeah", "Hoorah", "Whoopee", "Yahoo", "Wahoo", "Hot diggity dog",
             "Huzzah", "Yippee", "Woo hoo", "Whoop dee doo", "Hooray",  "Gee whiz", "Right on", "Far out",
@@ -27,6 +30,14 @@ public class WordManager : MonoBehaviour {
         // Get random index
         int randomNdx = Random.Range(0, exclamations.Count);
 
+        // If it's the same as the previous index, try getting a random index again
+        if (randomNdx == previousExclamationNdx) {
+            randomNdx = Random.Range(0, exclamations.Count);
+        }
+
+        // Cache previous index
+        previousExclamationNdx = randomNdx;
+
         // Return random exclamation
         return exclamations[randomNdx].ToUpper();
     }
@@ -35,6 +46,14 @@ public class WordManager : MonoBehaviour {
     public string GetRandomInterjection() {
         // Get random index
         int randomNdx = Random.Range(0, interjections.Count);
+
+        // If it's the same as the previous index, try getting a random index again
+        if (randomNdx == previousInterjectionNdx) {
+            randomNdx = Random.Range(0, interjections.Count);
+        }
+
+        // Cache previous index
+        previousInterjectionNdx = randomNdx;
 
         // Return random interjection
         return interjections[randomNdx].ToUpper();
