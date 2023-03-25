@@ -10,6 +10,9 @@ public class ResetUserPosition : MonoBehaviour {
 
     public Animator             faderAnim;
 
+    [Header("Set Dynamically")]
+    Vector3                     resetDestination;
+
     public void ResetPosition() {
         // Play teleport fadeout animation clip
         faderAnim.CrossFade("Fadeout", 0);
@@ -41,8 +44,18 @@ public class ResetUserPosition : MonoBehaviour {
         }
 
         // Set user position to reset position
-        var distanceDiff = resetPosition.position - Camera.main.transform.position;
-        xrOriginGO.transform.position += distanceDiff;
+        //var distanceDiff = resetPosition.position - Camera.main.transform.position;
+        //xrOriginGO.transform.position += distanceDiff;
+
+        // Cache distance between user and reset position
+        resetDestination = resetPosition.position - Camera.main.transform.position;
+
+        Invoke("SetUserPosition", 0.25f);
+    }
+
+    // Set user position to reset position
+    public void SetUserPosition() {
+        xrOriginGO.transform.position += resetDestination;
     }
 
     private void OnTriggerEnter(Collider other) {
