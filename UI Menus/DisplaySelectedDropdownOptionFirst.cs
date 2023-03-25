@@ -13,6 +13,8 @@ public class DisplaySelectedDropdownOptionFirst : MonoBehaviour {
     void Start() {
         // Add listener to dropdown
         dropdown.onValueChanged.AddListener(delegate { SetDropdownContentPosition(); });
+
+        SetDropdownContentPosition();
     }
 
     // Adjust the dropdown content's anchored position to display its currently selected option first
