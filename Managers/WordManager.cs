@@ -8,8 +8,9 @@ public class WordManager : MonoBehaviour {
     public List<string> exclamations = new List<string>();
     public List<string> interjections = new List<string>();
 
-    private int         previousExclamationNdx = -1;
-    private int         previousInterjectionNdx = -1;
+    // Stores the indexes of remaining exclamations/interjections that have yet to be displayed
+    public List<int>    remainingExclamationNdxs = new List<int>();
+    public List<int>    remainingInterjectionNdxs = new List<int>();
 
     void Start() {
         exclamations = new List<string>() { "Oh yeah", "Heck yeah", "Hoorah", "Whoopee", "Yahoo", "Wahoo", "Hot diggity dog",
@@ -23,39 +24,61 @@ public class WordManager : MonoBehaviour {
             "Blooming heck", "Flipping heck", "Blinking heck", "Dash it", "Strike me pink", "My goodness", "For Pete's sake",
             "For Heaven's sake", "Frick", "Good gosh", "Bloody heck", "Dagnabbit", "Oh poo","Blimey", "Great Scott",
             "Goodness me", "For crying out loud", "Good gracious", "Good golly", "Dang it", "Darn it" };
+
+        // Populate lists of remaining indexes
+        PopulateRemainingExclamationNdxs();
+        PopulateRemainingInterjectionNdxs();
+    }
+
+    // Populate lists of indexes of remaining exclamations/interjections that have yet to be displayed
+    void PopulateRemainingExclamationNdxs() {
+        for (int i = 0; i < exclamations.Count; i++) {
+            remainingExclamationNdxs.Add(i);
+        }
+    }
+    void PopulateRemainingInterjectionNdxs() {
+        for (int i = 0; i < interjections.Count; i++) {
+            remainingInterjectionNdxs.Add(i);
+        }
     }
 
     // Returns a random, POSITIVE word or phrase
     public string GetRandomExclamation() {
-        // Get random index
-        int randomNdx = Random.Range(0, exclamations.Count);
-
-        // If it's the same as the previous index, try getting a random index again
-        if (randomNdx == previousExclamationNdx) {
-            randomNdx = Random.Range(0, exclamations.Count);
+        // If empty, repopulate list of remaining indexes
+        if (remainingExclamationNdxs.Count <= 0) {
+            PopulateRemainingExclamationNdxs();
         }
 
-        // Cache previous index
-        previousExclamationNdx = randomNdx;
+        // Get random remaining exclamation index
+        int remainingExclamationNdx = Random.Range(0, remainingExclamationNdxs.Count);
 
-        // Return random exclamation
-        return exclamations[randomNdx].ToUpper();
+        // Get exclamation index
+        int exclamationNdx = remainingExclamationNdxs[remainingExclamationNdx];
+
+        // Remove remaining exclamation from list
+        remainingExclamationNdxs.RemoveAt(remainingExclamationNdx);
+
+        // Return exclamation
+        return exclamations[exclamationNdx].ToUpper();
     }
 
     // Returns a random, NEGATIVE word or phrase
     public string GetRandomInterjection() {
-        // Get random index
-        int randomNdx = Random.Range(0, interjections.Count);
-
-        // If it's the same as the previous index, try getting a random index again
-        if (randomNdx == previousInterjectionNdx) {
-            randomNdx = Random.Range(0, interjections.Count);
+        // If empty, repopulate list of remaining indexes
+        if (remainingInterjectionNdxs.Count <= 0) {
+            PopulateRemainingInterjectionNdxs();
         }
 
-        // Cache previous index
-        previousInterjectionNdx = randomNdx;
+        // Get random remaining interjection index
+        int remainingInterjectionNdx = Random.Range(0, remainingInterjectionNdxs.Count);
 
-        // Return random interjection
-        return interjections[randomNdx].ToUpper();
+        // Get interjection index
+        int interjectionNdx = remainingInterjectionNdxs[remainingInterjectionNdx];
+
+        // Remove remaining interjection from list
+        remainingInterjectionNdxs.RemoveAt(remainingInterjectionNdx);
+
+        // Return interjection
+        return interjections[interjectionNdx].ToUpper();
     }
 }
