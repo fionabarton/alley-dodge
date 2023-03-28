@@ -11,6 +11,13 @@ public class Utilities : MonoBehaviour {
         tPos.y = y;
         tGO.transform.position = tPos;
     }
+    public void SetPosition(GameObject tGO, float x, float y, float z) {
+        Vector3 tPos = tGO.transform.position;
+        tPos.x = x;
+        tPos.y = y;
+        tPos.z = z;
+        tGO.transform.position = tPos;
+    }
 
     // Set GameObject Scale
     public void SetScale(GameObject tGO, float x, float y, float z = -1) {
