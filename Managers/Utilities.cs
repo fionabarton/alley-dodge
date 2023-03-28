@@ -54,4 +54,13 @@ public class Utilities : MonoBehaviour {
         Vector3 midpoint = object2.transform.position + (object1.transform.position - object2.transform.position) / 2;
         return midpoint;
     }
+
+    // Map a value within a set of numbers to a different set of numbers
+    public float Map(float OldMin, float OldMax, float NewMin, float NewMax, float valueToMap) {
+        float OldRange = (OldMax - OldMin);
+        float NewRange = (NewMax - NewMin);
+        float NewValue = (((valueToMap - OldMin) * NewRange) / OldRange) + NewMin;
+
+        return (NewValue);
+    }
 }
