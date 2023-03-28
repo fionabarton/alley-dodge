@@ -193,7 +193,8 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.keyboardMenuGO.SetActive(false);
 
             // Play confetti particle systems
-            GameManager.S.confetti.DropConfetti();
+            GameManager.S.confetti.IsLooping(true);
+            GameManager.S.confetti.DropConfetti(true, true);
         } else {
             // Display text
             messageDisplay.DisplayText("Oh, okay. That's cool.\nSo what's the name?");

@@ -244,6 +244,9 @@ public class HighScoreManager : MonoBehaviour {
         // Activate Main Menu
         GameManager.S.mainMenuGO.SetActive(true);
 
+        // Stop particle systems from looping
+        GameManager.S.confetti.IsLooping(false);
+
         //
         GameManager.S.previouslyHighlightedGO = null;
 
