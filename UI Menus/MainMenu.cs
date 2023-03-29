@@ -106,7 +106,8 @@ public class MainMenu : MonoBehaviour {
         adjustObjectsHeight.SetObjects(playerHeight);
 
         // Reset resetPosition height (where the user respawns if they’ve fallen through the floor) 
-        GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 99f));
+        //GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 99f));
+        GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 50f));
     }
 
     // Returns the player's height converted from centimeters to meters/feet
@@ -151,6 +152,10 @@ public class MainMenu : MonoBehaviour {
         // Convert camera's y-position to the user's height in centimeters
         float heightInCm = 99 * Camera.main.transform.localPosition.y;
 
+        // Ensure value is between the height slider's range (85 to 250)
+        heightInCm = Mathf.Max(heightInCm, 85);
+        heightInCm = Mathf.Min(heightInCm, 250);
+
         // Make adjustments based on the user's height
         SetPlayerHeight(heightInCm);
 
@@ -158,7 +163,7 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.EnableClimbInteractors(true);
     }
 
-    // On value changed of levelSelectDropdown, set level 
+    // On value changed of levelSelectDropdown, adjust level settings accordingly
     void SetLevel(bool displayText = true) {
         // Save settings
         PlayerPrefs.SetInt("Level Select", levelSelectDropdown.value);
