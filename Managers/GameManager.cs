@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
     public MoreMenu             moreMenuCS;
     public ProgrammerMenu       programmerMenuCS;
     public SubMenu              subMenuCS;
+    public ExitRunButton        exitRunButtonCS;
 
     // Audio
     public AudioSource          playerAudioSource;
@@ -45,6 +46,9 @@ public class GameManager : MonoBehaviour {
     //
     public int                  fallBelowFloorCount;
     public int                  damageCount;
+    public int                  exitRunMenuActivatedCount;
+
+    public bool                 playerIsInvincible;
 
     public static AlleyManager  alley;
     public static ColorManager  color;
@@ -75,6 +79,27 @@ public class GameManager : MonoBehaviour {
     public void EnableClimbInteractors(bool isActive){
         climbInteractors[0].enabled = isActive;
         climbInteractors[1].enabled = isActive;
+    }
+
+    // Find and destroy all hazard and pickup game objects
+    public void DestroyAllObject() {
+        // Find all hazards and pickups
+        GameObject[] hazards = GameObject.FindGameObjectsWithTag("Hazard");
+        GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
+
+        // Destroy all hazards and pickups
+        for (int i = 0; i < hazards.Length; i++) {
+            Destroy(hazards[i]);
+
+            // Instantiate exploding cubes
+            OnDestroyInstantiateExplodingCubes cubes = hazards[i].gameObject.GetComponent<OnDestroyInstantiateExplodingCubes>();
+            if (cubes) {
+                cubes.InstantiateCubes();
+            }
+        }
+        for (int i = 0; i < pickups.Length; i++) {
+            Destroy(pickups[i]);
+        }
     }
 
     //// For testing!

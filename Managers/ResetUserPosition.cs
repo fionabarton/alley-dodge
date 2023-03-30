@@ -39,6 +39,9 @@ public class ResetUserPosition : MonoBehaviour {
                 }
             }
 
+            // Pause ScoreManager timer
+            GameManager.S.score.PauseTimer();
+
             // Wait and countdown from 3
             StartCoroutine(GameManager.S.score.Countdown());
         }

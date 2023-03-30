@@ -29,16 +29,17 @@ public class ScoreManager : MonoBehaviour {
 
 	// Dictates whether timerText is updated or not
 	public bool						timerIsOn;
+	private float					timePaused;
 
-    private void FixedUpdate() {
+	private void FixedUpdate() {
 		// Display time
         if (timerIsOn) {
 			timeText.text = "Time:\n<color=white>" + GetTime(Time.time);
 		}
     }
 
-    // Display text message, then...
-    public void SetDisplayText(string message, Color textColor, Color frameColor, bool invokeFunction = true) {
+	// Display text message, then...
+	public void SetDisplayText(string message, Color textColor, Color frameColor, bool invokeFunction = true) {
 		displayText.color = textColor;
 
 		displayText.text = message;
@@ -127,6 +128,20 @@ public class ScoreManager : MonoBehaviour {
 		return timeString;
 	}
 
+	public void PauseTimer() {
+		// Cache timePaused
+		timePaused = Time.time;
+
+		timerIsOn = false;
+	}
+
+	public void UnpauseTimer() {
+		// Add amount of time that's passed since timer was paused 
+		startingTime += Time.time - timePaused;
+
+		timerIsOn = true;
+	}
+
 	// Resets script properties to their default values
 	public void ResetScore() {
 		score = 0;
@@ -149,7 +164,7 @@ public class ScoreManager : MonoBehaviour {
 		if (count == 3) {
 			GameManager.S.fallBelowFloorCount += 1;
 		}
-		
+
 		// Set text color
 		if (count == 4) {
 			displayText.text = "GET\nREADY";
@@ -176,6 +191,14 @@ public class ScoreManager : MonoBehaviour {
 			// Unfreeze objects and restart spawner
 			GameManager.S.spawner.canSpawn = true;
 			GameManager.S.spawner.objectsCanMove = true;
+
+			GameManager.S.playerIsInvincible = false;
+
+			// Reset exit run button position and allow it to be pressed again
+			GameManager.S.exitRunButtonCS.ResetButton();
+
+			// Unpause ScoreManager timer
+			UnpauseTimer();
 		} else {
 			// Wait for 1 second and restart this coroutine
 			yield return new WaitForSeconds(1);
