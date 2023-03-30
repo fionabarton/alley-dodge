@@ -257,6 +257,7 @@ public class MainMenu : MonoBehaviour {
         // Reset fall through floor & damage count
         GameManager.S.fallBelowFloorCount = 0;
         GameManager.S.damageCount = 0;
+        GameManager.S.playerIsInvincible = false;
 
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
@@ -267,8 +268,7 @@ public class MainMenu : MonoBehaviour {
 
     //
     public void GoToOptionsMenuButton() {
-        //// Activate options menu
-        //GameManager.S.optionsMenuGO.SetActive(true);
+        // Activate more menuenable
         GameManager.S.moreMenuGO.SetActive(true);
 
         // Play BGM: Never
