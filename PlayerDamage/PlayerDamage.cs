@@ -16,83 +16,82 @@ public class PlayerDamage : MonoBehaviour {
     public Animator     damageOverlayAnim;
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Hazard") {
-            // Haptic feedback (amplitude, duration)
-            leftXR.SendHapticImpulse(0.25f, 0.5f);
-            rightXR.SendHapticImpulse(0.25f, 0.5f);
+        if (!GameManager.S.playerIsInvincible) {
+            if (other.gameObject.tag == "Hazard") {
+                // Haptic feedback (amplitude, duration)
+                leftXR.SendHapticImpulse(0.25f, 0.5f);
+                rightXR.SendHapticImpulse(0.25f, 0.5f);
 
-            // Destroy hazard
-            Destroy(other.gameObject);
+                // Destroy hazard
+                Destroy(other.gameObject);
 
-            // Increment damage count
-            GameManager.S.damageCount += 1;
+                // Increment damage count
+                GameManager.S.damageCount += 1;
 
-            // Play damage overlay animation clip
-            damageOverlayAnim.CrossFade("Damage", 0);
+                // Play damage overlay animation clip
+                damageOverlayAnim.CrossFade("Damage", 0);
 
-            // If shield isn't active...
-            if (!GameManager.shield.shieldIsActive) {
-                // Cache ending time
-                GameManager.S.score.endingTime = Time.time;
-
-                // Freeze all objects
-                GameManager.S.spawner.objectsCanMove = false;
-                GameManager.S.spawner.canSpawn = false;
-
-                // Find all hazards and pickups
-                GameObject[] hazards = GameObject.FindGameObjectsWithTag("Hazard");
-                GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
-
-                // Destroy all hazards and pickups
-                for (int i = 0; i < hazards.Length; i++) {
-                    Destroy(hazards[i]);
-                }
-                for (int i = 0; i < pickups.Length; i++) {
-                    Destroy(pickups[i]);
+                // Instantiate exploding cubes
+                OnDestroyInstantiateExplodingCubes cubes = other.gameObject.GetComponent<OnDestroyInstantiateExplodingCubes>();
+                if (cubes) {
+                    cubes.InstantiateCubes();
                 }
 
-                // Display text
-                GameManager.S.score.SetDisplayText("GAME OVER!", Color.red, Color.red, false);
+                // If shield isn't active...
+                if (!GameManager.shield.shieldIsActive) {
+                    // Cache ending time
+                    GameManager.S.score.endingTime = Time.time;
 
-                // Reset object spawner timer properties
-                GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
-                GameManager.S.spawner.timeDone = GameManager.S.spawner.startingSpawnSpeed + Time.time;
+                    // Freeze all objects
+                    GameManager.S.spawner.objectsCanMove = false;
+                    GameManager.S.spawner.canSpawn = false;
 
-                // Reset object speed 
-                GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
+                    // Find and destroy all hazard and pickup game objects
+                    GameManager.S.DestroyAllObject();
 
-                //
-                GameManager.S.score.timerIsOn = false;
+                    // Display text
+                    GameManager.S.score.SetDisplayText("GAME OVER!", Color.red, Color.red, false);
 
-                // Instantiate explosion
-                Instantiate(deathParticleSystemGO, transform.position, transform.rotation);
+                    // Reset object spawner timer properties
+                    GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+                    GameManager.S.spawner.timeDone = GameManager.S.spawner.startingSpawnSpeed + Time.time;
 
-                // SFX
-                GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireblast);
+                    // Reset object speed 
+                    GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
 
-                // Play BGM: Lose
-                GameManager.audioMan.PlayBGMClip(eBGM.bgmLose, false);
-
-                // Check for high score
-                if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
-                    // 
-                    Invoke("AnnounceHighScore", 2.5f);
-                } else {
                     //
-                    Invoke("ActivateStartMenu", 2.5f);
+                    GameManager.S.score.timerIsOn = false;
+
+                    // Instantiate explosion
+                    Instantiate(deathParticleSystemGO, transform.position, transform.rotation);
+
+                    // SFX
+                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireblast);
+
+                    // Play BGM: Lose
+                    GameManager.audioMan.PlayBGMClip(eBGM.bgmLose, false);
+
+                    // Check for high score
+                    if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
+                        // 
+                        Invoke("AnnounceHighScore", 2.5f);
+                    } else {
+                        //
+                        Invoke("ActivateStartMenu", 2.5f);
+                    }
+                } else {
+                    // Instantiate explosion
+                    Instantiate(damageParticleSystemGO, transform.position, transform.rotation);
+
+                    // SFX
+                    GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireball);
+
+                    // Deactivate shield
+                    GameManager.shield.SetActiveShield(false);
+
+                    // Display text
+                    GameManager.S.score.SetDisplayText(GameManager.words.GetRandomInterjection() + "!", Color.red, Color.red);
                 }
-            } else {
-                // Instantiate explosion
-                Instantiate(damageParticleSystemGO, transform.position, transform.rotation);
-
-                // SFX
-                GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxFireball);
-
-                // Deactivate shield
-                GameManager.shield.SetActiveShield(false);
-
-                // Display text
-                GameManager.S.score.SetDisplayText(GameManager.words.GetRandomInterjection() + "!", Color.red, Color.red);
             }
         }
     }
