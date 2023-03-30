@@ -7,7 +7,7 @@ public class OnDestroyInstantiateExplodingCubes : MonoBehaviour {
     [Header("Set dynamically")]
     public int          cubeNdx = 0;
 
-    private void OnDestroy() {
+    public void InstantiateCubes() {
         switch (cubeNdx) {
             case 0:
                 Instantiate(GameManager.S.spawner.horizontalDestruction, transform.position, transform.rotation);
