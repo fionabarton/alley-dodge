@@ -42,8 +42,7 @@ public class ExitRunButton : MonoBehaviour {
         GameManager.audioMan.BGMAudioSource.volume = 0;
 
         // Freeze objects and stop spawner
-        GameManager.S.spawner.canSpawn = false;
-        GameManager.S.spawner.objectsCanMove = false;
+        GameManager.S.spawner.PauseSpawner();
 
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
@@ -60,7 +59,7 @@ public class ExitRunButton : MonoBehaviour {
         GameManager.S.score.PauseTimer();
 
         // Increment exit run count
-        GameManager.S.exitRunMenuActivatedCount += 1;
+        GameManager.S.pauseCount += 1;
 
         // Activate sub menu
         GameManager.S.subMenuCS.AddListeners(ExitRun, "Are you sure that you would like to end this run\nand return to the main menu?");
