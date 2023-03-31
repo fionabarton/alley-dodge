@@ -172,15 +172,19 @@ public class ScoreManager : MonoBehaviour {
 		} else if(count == 3) {
 			displayText.text = "3";
 			displayText.color = Color.red;
+			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
 		} else if (count == 2) {
 			displayText.text = "2";
 			displayText.color = new Color(1.0f, 0.35f, 0.0f);
+			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
 		} else if (count == 1) {
 			displayText.text = "1";
 			displayText.color = Color.yellow;
+			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
 		} else if (count == 0) {
 			displayText.text = "GO!";
 			displayText.color = Color.green;
+			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid5);
 		}
 
 		// If the countdown is done...
