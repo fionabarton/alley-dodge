@@ -20,8 +20,7 @@ public class ResetUserPosition : MonoBehaviour {
         // If game is playing...
         if (GameManager.S.spawner.canSpawn) {
             // Freeze objects and stop spawner
-            GameManager.S.spawner.canSpawn = false;
-            GameManager.S.spawner.objectsCanMove = false;
+            GameManager.S.spawner.PauseSpawner();
 
             // Find all hazards and pickups
             GameObject[] hazards = GameObject.FindGameObjectsWithTag("Hazard");

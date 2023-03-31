@@ -29,6 +29,8 @@ public class ScoreManager : MonoBehaviour {
 
 	// Dictates whether timerText is updated or not
 	public bool						timerIsOn;
+
+	// Stores amount of time game was paused, then adds it to timer when game is unpaused
 	private float					timePaused;
 
 	private void FixedUpdate() {
@@ -131,14 +133,12 @@ public class ScoreManager : MonoBehaviour {
 	public void PauseTimer() {
 		// Cache timePaused
 		timePaused = Time.time;
-
 		timerIsOn = false;
 	}
 
 	public void UnpauseTimer() {
 		// Add amount of time that's passed since timer was paused 
 		startingTime += Time.time - timePaused;
-
 		timerIsOn = true;
 	}
 
@@ -189,8 +189,7 @@ public class ScoreManager : MonoBehaviour {
 			DisplayAmountToNextLevel();
 
 			// Unfreeze objects and restart spawner
-			GameManager.S.spawner.canSpawn = true;
-			GameManager.S.spawner.objectsCanMove = true;
+			GameManager.S.spawner.UnpauseSpawner();
 
 			GameManager.S.playerIsInvincible = false;
 

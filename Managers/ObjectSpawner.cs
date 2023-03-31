@@ -51,6 +51,9 @@ public class ObjectSpawner : MonoBehaviour {
 	public List<int>		objectsToSpawn;
 	public List<float>		chancesToSpawn;
 
+	// Stores amount of time game was paused, then adds it to timer when game is unpaused
+	private float			timePaused;
+
 	private void Start() {
 		timeDone = currentSpawnSpeed + Time.time;
 	}
@@ -62,6 +65,26 @@ public class ObjectSpawner : MonoBehaviour {
 				timeDone = currentSpawnSpeed + Time.time;
 			}
 		}
+	}
+
+	//
+	public void PauseSpawner() {
+		// Cache timePaused
+		timePaused = Time.time;
+
+		// Freeze objects and stop spawner
+		GameManager.S.spawner.canSpawn = false;
+		GameManager.S.spawner.objectsCanMove = false;
+	}
+
+	/// Unfreeze objects and restart spawner
+	public void UnpauseSpawner() {
+		// Add amount of time that's passed since timer was paused 
+		timeDone += Time.time - timePaused;
+
+		// Unfreeze objects and restart spawner
+		GameManager.S.spawner.canSpawn = true;
+		GameManager.S.spawner.objectsCanMove = true;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
