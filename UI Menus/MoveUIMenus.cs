@@ -17,17 +17,21 @@ public class MoveUIMenus : MonoBehaviour {
     public Button               resetButton;
 
     // Delayed text display
-    public DelayedTextDisplay   delayedTextDisplay;
+    //public DelayedTextDisplay   delayedTextDisplay;
 
     void Start() {
+        Invoke("OnStart", 0.1f);
+    }
+
+    void OnStart() {
         // GetPlayerPrefs
         if (PlayerPrefs.HasKey("Move Down/Up Slider")) {
-            moveDownUpSlider.value = PlayerPrefs.GetFloat("Move Down/Up Slider");
+            MoveDownUp(PlayerPrefs.GetFloat("Move Down/Up Slider"));
         } else {
             moveDownUpSlider.value = 0;
         }
         if (PlayerPrefs.HasKey("Move In/Out Slider")) {
-            moveInOutSlider.value = PlayerPrefs.GetInt("Move In/Out Slider");
+            MoveInOut(PlayerPrefs.GetFloat("Move In/Out Slider"));
         } else {
             moveInOutSlider.value = 0;
         }
@@ -67,9 +71,6 @@ public class MoveUIMenus : MonoBehaviour {
 
     // On click, returns all menu settings to their default value
     public void DefaultSettings() {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
         // Reset slider values
         moveDownUpSlider.value = 0;
         moveInOutSlider.value = 0;
@@ -78,6 +79,6 @@ public class MoveUIMenus : MonoBehaviour {
         GameManager.utilities.SetPosition(UImenusParentGO, 0, 0, 0);
  
         // Delayed text display
-        delayedTextDisplay.DisplayText("Menu settings set to\ntheir default values!"); 
+        //delayedTextDisplay.DisplayText("Menu settings set to\ntheir default values!"); 
     }
 }
