@@ -26,6 +26,7 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI        playerHeightValue;
     public TMPro.TextMeshProUGUI        fallBelowFloorCountValue;
     public TMPro.TextMeshProUGUI        damageCountValue;
+    public TMPro.TextMeshProUGUI        pauseCountValue;
     public TMPro.TextMeshProUGUI        startingObjectSpeedValue;
     public TMPro.TextMeshProUGUI        amountToIncreaseObjectSpeedValue;
     public TMPro.TextMeshProUGUI        startingSpawnSpeedValue;
@@ -75,6 +76,7 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         playerHeightValue.text = GameManager.S.highScore.highScores[ndx].playerHeight;
         fallBelowFloorCountValue.text = GameManager.S.highScore.highScores[ndx].fallBelowFloorCount.ToString();
         damageCountValue.text = GameManager.S.highScore.highScores[ndx].damageCount.ToString();
+        pauseCountValue.text = GameManager.S.highScore.highScores[ndx].pauseCount.ToString();
         startingObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].startingObjectSpeed;
         amountToIncreaseObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].amountToIncreaseObjectSpeed;
         startingSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].startingSpawnSpeed;

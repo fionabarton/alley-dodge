@@ -257,6 +257,7 @@ public class MainMenu : MonoBehaviour {
         // Reset fall through floor & damage count
         GameManager.S.fallBelowFloorCount = 0;
         GameManager.S.damageCount = 0;
+        GameManager.S.pauseCount = 0;
         GameManager.S.playerIsInvincible = false;
 
         // Display text
