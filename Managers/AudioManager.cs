@@ -9,7 +9,7 @@ public enum eBGM {
 public enum eSFX {
     sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
     sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell,
-    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream
+    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream, sfxApplauseLoop
 };
 
 public class AudioManager : MonoBehaviour {
@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource      playerSFXAudioSource;
     public AudioSource      UI_SFXAudioSource;
     public AudioSource      BGMAudioSource;
+    public AudioSource      applauseSFXAudioSource;
 
     public List<AudioClip>  bgmClips = new List<AudioClip>();
     public List<AudioClip>  sfxClips = new List<AudioClip>();
@@ -39,6 +40,19 @@ public class AudioManager : MonoBehaviour {
     public void PlayUISFXClip(eSFX SFXName) {
         UI_SFXAudioSource.clip = GetSFXClip(SFXName);
         UI_SFXAudioSource.Play();
+    }
+
+    //
+    public void PlayApplauseSFXlip(bool doesLoop = true) {
+        applauseSFXAudioSource.loop = doesLoop;
+
+        if (doesLoop) {
+            applauseSFXAudioSource.clip = sfxClips[27];
+        } else {
+            applauseSFXAudioSource.clip = sfxClips[25];
+        }
+
+        applauseSFXAudioSource.Play();
     }
 
     //
@@ -99,6 +113,7 @@ public class AudioManager : MonoBehaviour {
     public void SetSFXVolume(float volume) {
         playerSFXAudioSource.volume = volume;
         UI_SFXAudioSource.volume = volume;
+        applauseSFXAudioSource.volume = volume;
 
         // Save settings
         PlayerPrefs.SetFloat("SFX Volume", volume);

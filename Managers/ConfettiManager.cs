@@ -9,17 +9,13 @@ public class ConfettiManager : MonoBehaviour {
     public ParticleSystem       fireworksPS;
 
     // Plays particle systems that drop confetti for approximately 3 seconds
-    public void DropConfetti(bool usePlayerAudioSource = true, bool playFireworks = false) {
+    public void DropConfetti(bool loopAudio = false, bool playFireworks = false) {
         for (int i = 0; i < confettiPS.Count; i++) {
             confettiPS[i].Play();
         }
 
         // Play SFX
-        if (usePlayerAudioSource) { 
-            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxApplause);
-        } else {
-            GameManager.audioMan.PlayUISFXClip(eSFX.sfxApplause);
-        }
+        GameManager.audioMan.PlayApplauseSFXlip(loopAudio);
 
         // Play fireworks
         if (playFireworks) {
@@ -36,5 +32,10 @@ public class ConfettiManager : MonoBehaviour {
 
         var fireworksMain = fireworksPS.main;
         fireworksMain.loop = isLooping;
+
+        // Stop looping applause SFX
+        if (!isLooping) {
+            GameManager.audioMan.applauseSFXAudioSource.Stop();
+        }
     }
 }

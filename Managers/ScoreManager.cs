@@ -94,7 +94,7 @@ public class ScoreManager : MonoBehaviour {
 		GameManager.color.GetNewColorPalette();
 
 		// Play confetti particle systems
-		GameManager.S.confetti.DropConfetti(false);
+		GameManager.S.confetti.DropConfetti();
 
 		// Decrease spawn speed (starts at 2.0f)
 		GameManager.S.spawner.currentSpawnSpeed -= GameManager.S.spawner.amountToDecreaseSpawnSpeed;
