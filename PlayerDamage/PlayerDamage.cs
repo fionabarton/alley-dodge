@@ -50,7 +50,7 @@ public class PlayerDamage : MonoBehaviour {
                     GameManager.S.DestroyAllObject();
 
                     // Display text
-                    GameManager.S.score.SetDisplayText("GAME OVER!", Color.red, Color.red, false);
+                    GameManager.S.score.SetDisplayText("GAME OVER!", Color.red, Color.red, eVOX.voxGameOver, false);
 
                     // Reset object spawner timer properties
                     GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
@@ -90,7 +90,7 @@ public class PlayerDamage : MonoBehaviour {
                     GameManager.shield.SetActiveShield(false);
 
                     // Display text
-                    GameManager.S.score.SetDisplayText(GameManager.words.GetRandomInterjection() + "!", Color.red, Color.red);
+                    GameManager.S.score.SetDisplayText(GameManager.words.GetRandomInterjection(true) + "!", Color.red, Color.red);
                 }
             }
         }
@@ -106,6 +106,9 @@ public class PlayerDamage : MonoBehaviour {
 
         // Display text
         GameManager.S.score.displayText.text = "NEW\nHIGH SCORE!";
+
+        // Play VOX audio clip
+        GameManager.audioMan.PlayVOXClip(eVOX.voxNewHighScore);
 
         // Play BGM: Win
         GameManager.audioMan.PlayBGMClip(eBGM.bgmWin, false);
