@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +11,24 @@ public enum eSFX {
     sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream, sfxApplauseLoop
 };
 
+public enum eVOX {
+    vox1, vox1ToGo, vox2, vox2ToGo, vox3, vox3ToGo, vox4ToGo, vox5ToGo, voxGameOver, voxGetReady, voxGo, voxLetsGo, voxNewHighScore, voxNextLevel, voxShield,
+    voxNull
+};
+
 public class AudioManager : MonoBehaviour {
     [Header("Set in Inspector")]
     public AudioSource      playerSFXAudioSource;
     public AudioSource      UI_SFXAudioSource;
     public AudioSource      BGMAudioSource;
     public AudioSource      applauseSFXAudioSource;
+    public AudioSource      VOXAudioSource;
 
     public List<AudioClip>  bgmClips = new List<AudioClip>();
     public List<AudioClip>  sfxClips = new List<AudioClip>();
+    public List<AudioClip>  voxClips = new List<AudioClip>();
+    public List<AudioClip>  voxExclamationClips = new List<AudioClip>();
+    public List<AudioClip>  voxInterjectionClips = new List<AudioClip>();
 
     [Header("Set Dynamically")]
     public float            previousVolumeLvl;
@@ -30,18 +38,22 @@ public class AudioManager : MonoBehaviour {
         previousVolumeLvl = AudioListener.volume;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // Play/get audio functions
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     //
     public void PlayPlayerSFXClip(eSFX SFXName) {
-        playerSFXAudioSource.clip = GetSFXClip(SFXName);
+        AudioClip clip = sfxClips[(int)SFXName];
+        playerSFXAudioSource.clip = clip;
         playerSFXAudioSource.Play();
     }
-
     //
     public void PlayUISFXClip(eSFX SFXName) {
-        UI_SFXAudioSource.clip = GetSFXClip(SFXName);
+        AudioClip clip = sfxClips[(int)SFXName];
+        UI_SFXAudioSource.clip = clip;
         UI_SFXAudioSource.Play();
     }
-
     //
     public void PlayApplauseSFXlip(bool doesLoop = true) {
         applauseSFXAudioSource.loop = doesLoop;
@@ -56,24 +68,50 @@ public class AudioManager : MonoBehaviour {
     }
 
     //
-    public AudioClip GetSFXClip(eSFX SFXName) {
-        AudioClip clip = sfxClips[(int)SFXName];
-        return clip;
-    }
-
-    //
     public void PlayBGMClip(eBGM BGMName, bool doesLoop = true) {
         BGMAudioSource.loop = doesLoop;
 
-        BGMAudioSource.clip = GetBGMClip(BGMName);
+        AudioClip clip = bgmClips[(int)BGMName];
+        BGMAudioSource.clip = clip;
         BGMAudioSource.Play();
     }
 
     //
-    public AudioClip GetBGMClip(eBGM BGMName) {
-        AudioClip clip = bgmClips[(int)BGMName];
-        return clip;
+    public void PlayVOXClip(eVOX VOXName) {
+        AudioClip clip = voxClips[(int)VOXName];
+        VOXAudioSource.clip = clip;
+        VOXAudioSource.Play();
     }
+
+    //
+    public void PlayVOXExclamationClip(int ndx) {
+        AudioClip clip = voxExclamationClips[ndx];
+        VOXAudioSource.clip = clip;
+        VOXAudioSource.Play();
+    }
+
+    //
+    public void PlayVOXInterjectionClip(int ndx) {
+        AudioClip clip = voxInterjectionClips[ndx];
+        VOXAudioSource.clip = clip;
+        VOXAudioSource.Play();
+    }
+
+    //
+    public void PlayRandomDamageSFX() {
+        int randomInt = Random.Range(0, 3);
+        if (randomInt == 0) {
+            PlayPlayerSFXClip(eSFX.sfxDamage1);
+        } else if (randomInt == 1) {
+            PlayPlayerSFXClip(eSFX.sfxDamage2);
+        } else {
+            PlayPlayerSFXClip(eSFX.sfxDamage3);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // Adjust audio settings functions
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     public void PauseAndMuteAudio() {
         // Pause and mute
@@ -117,17 +155,5 @@ public class AudioManager : MonoBehaviour {
 
         // Save settings
         PlayerPrefs.SetFloat("SFX Volume", volume);
-    }
-
-    //
-    public void PlayRandomDamageSFX() {
-        int randomInt = Random.Range(0, 3);
-        if (randomInt == 0) {
-            PlayPlayerSFXClip(eSFX.sfxDamage1);
-        } else if (randomInt == 1) {
-            PlayPlayerSFXClip(eSFX.sfxDamage2);
-        } else {
-            PlayPlayerSFXClip(eSFX.sfxDamage3);
-        }
     }
 }

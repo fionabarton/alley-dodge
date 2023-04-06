@@ -41,13 +41,18 @@ public class ScoreManager : MonoBehaviour {
     }
 
 	// Display text message, then...
-	public void SetDisplayText(string message, Color textColor, Color frameColor, bool invokeFunction = true) {
+	public void SetDisplayText(string message, Color textColor, Color frameColor, eVOX vox = eVOX.voxNull, bool invokeFunction = true) {
 		displayText.color = textColor;
 
 		displayText.text = message;
 
 		// Set frame color
 		displayMessageFrame.color = frameColor;
+
+		// Play VOX audio clip
+		if(vox != eVOX.voxNull) {
+			GameManager.audioMan.PlayVOXClip(vox);
+		}
 
 		CancelInvoke();
 
@@ -62,10 +67,15 @@ public class ScoreManager : MonoBehaviour {
 		displayMessageFrame.color = GameManager.color.alleyMaterial2.color;
 
 		displayText.text = amountToNextLevel + "\nTO GO!";
+
+		// Play VOX audio clip
+		string voxEnumName = "vox" + amountToNextLevel.ToString() + "ToGo";
+		eVOX vox = (eVOX)Enum.Parse(typeof(eVOX), voxEnumName);
+		GameManager.audioMan.PlayVOXClip(vox);
 	}
 
-    // Amount of monetary pickups collected
-    public void AddToScore(int amount = 1) {
+	// Amount of monetary pickups collected
+	public void AddToScore(int amount = 1) {
 		score += amount;
 
 		scoreText.text = "Score: <color=white>" + score;
@@ -77,7 +87,7 @@ public class ScoreManager : MonoBehaviour {
 			// Go to next level
 			InitializeNextLevel();
 		} else {
-			SetDisplayText(GameManager.words.GetRandomExclamation() + "!", Color.yellow, Color.yellow);
+			SetDisplayText(GameManager.words.GetRandomExclamation(true) + "!", Color.yellow, Color.yellow);
 		}
 	}
 
@@ -110,7 +120,7 @@ public class ScoreManager : MonoBehaviour {
 		amountToNextLevel = 5;
 
 		// Display text
-		SetDisplayText("NEXT LEVEL!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
+		SetDisplayText("NEXT LEVEL!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxNextLevel);
 	}
 
 	// Get and return total time in '00:00:00:000' format
@@ -169,22 +179,27 @@ public class ScoreManager : MonoBehaviour {
 		if (count == 4) {
 			displayText.text = "GET\nREADY";
 			displayText.color = GameManager.color.alleyMaterial1.color;
+			GameManager.audioMan.PlayVOXClip(eVOX.voxGetReady);
 		} else if(count == 3) {
 			displayText.text = "3";
 			displayText.color = Color.red;
 			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
+			GameManager.audioMan.PlayVOXClip(eVOX.vox3);
 		} else if (count == 2) {
 			displayText.text = "2";
 			displayText.color = new Color(1.0f, 0.35f, 0.0f);
 			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
+			GameManager.audioMan.PlayVOXClip(eVOX.vox2);
 		} else if (count == 1) {
 			displayText.text = "1";
 			displayText.color = Color.yellow;
 			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid1);
+			GameManager.audioMan.PlayVOXClip(eVOX.vox1);
 		} else if (count == 0) {
 			displayText.text = "GO!";
 			displayText.color = Color.green;
 			GameManager.audioMan.PlayUISFXClip(eSFX.sfxQuid5);
+			GameManager.audioMan.PlayVOXClip(eVOX.voxGo);
 		}
 
 		// If the countdown is done...

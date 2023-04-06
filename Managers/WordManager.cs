@@ -13,17 +13,17 @@ public class WordManager : MonoBehaviour {
     public List<int>    remainingInterjectionNdxs = new List<int>();
 
     void Start() {
-        exclamations = new List<string>() { "Oh yeah", "Heck yeah", "Hoorah", "Whoopee", "Yahoo", "Wahoo", "Hot diggity dog",
-            "Huzzah", "Yippee", "Woo hoo", "Whoop dee doo", "Hooray",  "Gee whiz", "Right on", "Far out",
-            "Groovy", "Awesome", "Excellent", "Cool", "Incredible", "Unreal", "Fabulous", "Terrific", "Yay",
-            "Fantastic", "Great", "Gnarly", "Sweet", "Nice", "Splendid", "Wicked", "Wow", "Dude", "Cool beans",
-            "Booyah", "Cowabunga", "Tubular" };
+        exclamations = new List<string>() { "Awesome", "Booyah", "Cool", "Cool beans", "Cowabunga", "Dude", "Excellent",
+            "Fabulous", "Fantastic", "Far out", "Gee whiz", "Gnarly", "Great", "Groovy", "Heck yeah", "Hoorah", "Hooray",
+            "Hot diggity dog", "Huzzah", "Incredible", "Nice", "Oh yeah", "Right on", "Splendid", "Sweet", "Terrific",
+            "Tubular", "Unreal", "Wahoo", "Whoop dee doo", "Whoopee", "Wicked", "Woo hoo", "Wow", "Yahoo", "Yay", "Yippee" };
 
-        interjections = new List<string>() { "Rats", "Yuck", "Dang", "Darn", "Blast", "Oh bother", "Doggone it", "Darnation",
-            "Gosh darn it", "Gosh darn it to heck", "Oh fiddlesticks", "Cripes", "Confound it", "Shucks", "Shoot",
-            "Blooming heck", "Flipping heck", "Blinking heck", "Dash it", "Strike me pink", "My goodness", "For Pete's sake",
-            "For Heaven's sake", "Frick", "Good gosh", "Bloody heck", "Dagnabbit", "Oh poo","Blimey", "Great Scott",
-            "Goodness me", "For crying out loud", "Good gracious", "Good golly", "Dang it", "Darn it" };
+        interjections = new List<string>() { 
+            "Blast", "Blimey", "Blinking heck", "Bloody heck", "Blooming heck", "Confound it", "Cripes", "Dagnabbit", 
+            "Dang", "Dang it", "Darn", "Darn it", "Darnation", "Dash it", "Doggone it", "Flipping heck", 
+            "For crying out loud", "For Heaven's sake", "For Pete's sake", "Frick", "Good golly", "Good gosh", 
+            "Good gracious", "Goodness me", "Gosh darn it", "Gosh darn it to heck", "Great Scott", "My goodness", 
+            "Oh bother", "Oh fiddlesticks", "Oh poo", "Rats", "Shoot", "Shucks", "Strike me pink", "Yuck" };
 
         // Populate lists of remaining indexes
         PopulateRemainingExclamationNdxs();
@@ -43,7 +43,7 @@ public class WordManager : MonoBehaviour {
     }
 
     // Returns a random, POSITIVE word or phrase
-    public string GetRandomExclamation() {
+    public string GetRandomExclamation(bool playVOX = false) {
         // If empty, repopulate list of remaining indexes
         if (remainingExclamationNdxs.Count <= 0) {
             PopulateRemainingExclamationNdxs();
@@ -55,6 +55,11 @@ public class WordManager : MonoBehaviour {
         // Get exclamation index
         int exclamationNdx = remainingExclamationNdxs[remainingExclamationNdx];
 
+        // Play VOX audio clip
+        if (playVOX) {
+            GameManager.audioMan.PlayVOXExclamationClip(exclamationNdx);
+        }
+
         // Remove remaining exclamation from list
         remainingExclamationNdxs.RemoveAt(remainingExclamationNdx);
 
@@ -63,7 +68,7 @@ public class WordManager : MonoBehaviour {
     }
 
     // Returns a random, NEGATIVE word or phrase
-    public string GetRandomInterjection() {
+    public string GetRandomInterjection(bool playVOX = false) {
         // If empty, repopulate list of remaining indexes
         if (remainingInterjectionNdxs.Count <= 0) {
             PopulateRemainingInterjectionNdxs();
@@ -74,6 +79,11 @@ public class WordManager : MonoBehaviour {
 
         // Get interjection index
         int interjectionNdx = remainingInterjectionNdxs[remainingInterjectionNdx];
+
+        // Play VOX audio clip
+        if (playVOX) {
+            GameManager.audioMan.PlayVOXInterjectionClip(interjectionNdx);
+        }
 
         // Remove remaining interjection from list
         remainingInterjectionNdxs.RemoveAt(remainingInterjectionNdx);
