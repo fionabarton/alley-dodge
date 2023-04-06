@@ -34,7 +34,7 @@ public class ShieldPickup : MonoBehaviour {
                     GameManager.shield.SetActiveShield(true);
 
                     // Display text
-                    GameManager.S.score.SetDisplayText("SHIELD!", Color.blue, Color.blue);
+                    GameManager.S.score.SetDisplayText("SHIELD!", Color.blue, Color.blue, eVOX.voxShield);
 
                     // Destroy this GO
                     Destroy(gameObject);
