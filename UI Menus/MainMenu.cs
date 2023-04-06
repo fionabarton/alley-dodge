@@ -261,7 +261,7 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.playerIsInvincible = false;
 
         // Display text
-        GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color);
+        GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxLetsGo);
 
         // Play BGM: Ninja
         GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
