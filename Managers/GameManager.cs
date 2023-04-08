@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public ObjectSpawner        spawner;
     public DamageColliderFollow damageColl;
     public ClimbProvider        climb;
+    public DisplayPodiumManager podiums;
     public List<XRDirectClimbInteractor> climbInteractors;
 
     // Objects to be activated/deactivated
@@ -29,7 +30,8 @@ public class GameManager : MonoBehaviour {
     public MoreMenu             moreMenuCS;
     public ProgrammerMenu       programmerMenuCS;
     public SubMenu              subMenuCS;
-    public ExitRunButton        exitRunButtonCS;
+    public ExitRunButton        exitRunButtonLeftCS;
+    public ExitRunButton        exitRunButtonRightCS;
 
     // Audio
     public AudioSource          playerAudioSource;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour {
     //
     public int                  fallBelowFloorCount;
     public int                  damageCount;
-    public int                  exitRunMenuActivatedCount;
+    public int                  pauseCount;
 
     public bool                 playerIsInvincible;
 

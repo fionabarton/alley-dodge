@@ -180,6 +180,9 @@ public class ScoreManager : MonoBehaviour {
 			displayText.text = "GET\nREADY";
 			displayText.color = GameManager.color.alleyMaterial1.color;
 			GameManager.audioMan.PlayVOXClip(eVOX.voxGetReady);
+
+			// Activate exit run menu podium
+			GameManager.S.podiums.ActivateMenus(true, false);
 		} else if(count == 3) {
 			displayText.text = "3";
 			displayText.color = Color.red;
@@ -212,8 +215,9 @@ public class ScoreManager : MonoBehaviour {
 
 			GameManager.S.playerIsInvincible = false;
 
-			// Reset exit run button position and allow it to be pressed again
-			GameManager.S.exitRunButtonCS.ResetButton();
+			// Reset exit run button positions and allow them to be pressed again
+			GameManager.S.exitRunButtonLeftCS.ResetButton();
+			GameManager.S.exitRunButtonRightCS.ResetButton();
 
 			// Unpause ScoreManager timer
 			UnpauseTimer();
