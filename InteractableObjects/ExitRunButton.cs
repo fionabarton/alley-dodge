@@ -30,7 +30,8 @@ public class ExitRunButton : MonoBehaviour {
         GameManager.S.playerIsInvincible = true;
 
         // Set exit run button position
-        GameManager.utilities.SetLocalPosition(gameObject, -1.624f, 1.142f);
+        GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonLeftCS.gameObject, -1.624f, 1.142f);
+        GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonRightCS.gameObject, -1.624f, 1.142f);
 
         // Audio: Damage
         GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDamage2);
@@ -61,6 +62,9 @@ public class ExitRunButton : MonoBehaviour {
         // Increment exit run count
         GameManager.S.pauseCount += 1;
 
+        // Activate move UI menu podium
+        GameManager.S.podiums.ActivateMenus(true, true);
+
         // Activate sub menu
         GameManager.S.subMenuCS.AddListeners(ExitRun, "Are you sure that you would like to end this run\nand return to the main menu?");
     }
@@ -74,14 +78,18 @@ public class ExitRunButton : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
-            // Resets button's position and allows it to be pressed again
-            ResetButton();
+            // Reset exit run button positions and allow them to be pressed again
+            GameManager.S.exitRunButtonLeftCS.ResetButton();
+            GameManager.S.exitRunButtonRightCS.ResetButton();
 
             // Reset score for next game
             GameManager.S.score.ResetScore();
 
             // Find and destroy all hazard and pickup game objects
             GameManager.S.DestroyAllObject();
+
+            // Activate move UI menu podium
+            GameManager.S.podiums.ActivateMenus(false, true);
 
             // Activate main menu
             GameManager.S.mainMenuGO.SetActive(true);
