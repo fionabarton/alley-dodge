@@ -265,6 +265,9 @@ public class MainMenu : MonoBehaviour {
 
         // Play BGM: Ninja
         GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
+
+        // Activate exit run menu podium
+        GameManager.S.podiums.ActivateMenus(true, false);
     }
 
     //
