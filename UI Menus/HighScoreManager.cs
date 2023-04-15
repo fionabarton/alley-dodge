@@ -27,6 +27,9 @@ public class HighScoreManager : MonoBehaviour {
 
     public List<GameObject>             cursorGO;
 
+    // Delayed text display
+    public DelayedTextDisplay           delayedTextDisplay;
+
     [Header("Set Dynamically")]
     public HighScore[]                  highScores;
 
@@ -55,6 +58,13 @@ public class HighScoreManager : MonoBehaviour {
         resetButton.onClick.AddListener(delegate { AddResetHighScoresConfirmationListeners(); });
     }
 
+    private void OnEnable() {
+        // Display text
+        if (Time.time > 0.01f) {
+            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.");
+        }
+    }
+
     // Adds functions to the sub menu's yes/no buttons
     void AddResetHighScoresConfirmationListeners() {
         GameManager.S.subMenuCS.AddListeners(ResetHighScores, "Are you sure that you would like to\ndelete all saved high scores?");
@@ -67,7 +77,13 @@ public class HighScoreManager : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             SetHighScoresToDefaultValues(true);
-        } 
+
+            // Display text
+            delayedTextDisplay.DisplayText("All saved high scores deleted! ");
+        } else {
+            // Display text
+            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.");
+        }
     }
 
     // Deletes all saved high scores and resets them to default values 
