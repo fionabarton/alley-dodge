@@ -156,4 +156,11 @@ public class AudioManager : MonoBehaviour {
         // Save settings
         PlayerPrefs.SetFloat("SFX Volume", volume);
     }
+
+    public void SetVOXVolume(float volume) {
+        VOXAudioSource.volume = volume;
+
+        // Save settings
+        PlayerPrefs.SetFloat("VOX Volume", volume);
+    }
 }
