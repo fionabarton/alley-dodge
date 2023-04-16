@@ -10,6 +10,7 @@ public class AudioMenu : MonoBehaviour {
     public Slider                   masterVolSlider;
     public Slider                   BGMVolSlider;
     public Slider                   SFXVolSlider;
+    public Slider                   VOXVolSlider;
     public Button                   defaultSettingsButton;
     public Button                   muteAudioButton;
     public TMPro.TextMeshProUGUI    muteAudioButtonText;
@@ -29,6 +30,7 @@ public class AudioMenu : MonoBehaviour {
         masterVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetMasterVolume((masterVolSlider.value)); });
         BGMVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetBGMVolume((BGMVolSlider.value)); });
         SFXVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetSFXVolume((SFXVolSlider.value)); });
+        VOXVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetVOXVolume((VOXVolSlider.value)); });
 
         // Add listeners to buttons
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
@@ -59,6 +61,13 @@ public class AudioMenu : MonoBehaviour {
             GameManager.audioMan.SetSFXVolume(SFXVolSlider.value);
         } else {
             GameManager.audioMan.SetSFXVolume(0.5f);
+        }
+
+        if (PlayerPrefs.HasKey("VOX Volume")) {
+            VOXVolSlider.value = PlayerPrefs.GetFloat("VOX Volume");
+            GameManager.audioMan.SetVOXVolume(VOXVolSlider.value);
+        } else {
+            GameManager.audioMan.SetVOXVolume(0.5f);
         }
 
         if (PlayerPrefs.HasKey("Mute Audio")) {
@@ -109,6 +118,7 @@ public class AudioMenu : MonoBehaviour {
             masterVolSlider.value = 0.5f;
             BGMVolSlider.value = 0.5f;
             SFXVolSlider.value = 0.5f;
+            VOXVolSlider.value = 0.5f;
 
             // Reset mute
             AudioListener.pause = true;
