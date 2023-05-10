@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class MoreMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     public Button           audioButton;
-    public Button           programmerButton;
+    public Button           speedButton;
+    public Button           algorithmButton;
     public Button           instructionsButton;
     public Button           controlsButton;
     public Button           tutorialButton;
-    public Button           helpButton;
     public Button           mainMenuButton;
 
     // Audio, Programmer, Instructions, Controls, Tutorial, Help
@@ -27,11 +27,11 @@ public class MoreMenu : MonoBehaviour {
     void Start() {
         // Add listeners to buttons
         audioButton.onClick.AddListener(delegate { ActivateMenuGO(0); });
-        programmerButton.onClick.AddListener(delegate { ActivateMenuGO(1); });
-        instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
-        controlsButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
-        tutorialButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
-        helpButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
+        speedButton.onClick.AddListener(delegate { ActivateMenuGO(1); });
+        algorithmButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
+        instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
+        controlsButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
+        tutorialButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
         Invoke("ActivateAudioMenu", 0.1f);
@@ -46,7 +46,7 @@ public class MoreMenu : MonoBehaviour {
     //
     void ActivateMenuGO(int ndx) {
         //
-        if (GameManager.S.programmerMenuCS.CheckAllDropdownsForValidValues()) {
+        if (GameManager.S.algorithmMenuCS.CheckAllDropdownsForValidValues()) {
             // Deactivate all menus
             GameManager.utilities.SetActiveList(menuGOs, false);
 
@@ -84,7 +84,7 @@ public class MoreMenu : MonoBehaviour {
     //
     public void BackToMainMenuButton() {
         //
-        if (GameManager.S.programmerMenuCS.CheckAllDropdownsForValidValues()) {
+        if (GameManager.S.algorithmMenuCS.CheckAllDropdownsForValidValues()) {
             // Deactivate this menu
             gameObject.SetActive(false);
 
