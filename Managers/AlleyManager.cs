@@ -44,6 +44,10 @@ public class AlleyManager : MonoBehaviour {
 
                 GameManager.utilities.SetActiveList(handles5, false);
                 GameManager.utilities.SetActiveList(alleys5, false);
+
+                // Set exit run button position
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonLeftCS.gameObject.transform.parent.gameObject, 0f, -5.25f);
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonRightCS.gameObject.transform.parent.gameObject, 0f, -5.25f);
                 break;
             case 5:
                 GameManager.utilities.SetActiveList(handles3, true);
@@ -51,6 +55,10 @@ public class AlleyManager : MonoBehaviour {
 
                 GameManager.utilities.SetActiveList(handles5, false);
                 GameManager.utilities.SetActiveList(alleys5, false);
+
+                // Set exit run button position
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonLeftCS.gameObject.transform.parent.gameObject, -1f, -5.25f);
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonRightCS.gameObject.transform.parent.gameObject, 1f, -5.25f);
                 break;
             case 7:
                 GameManager.utilities.SetActiveList(handles3, true);
@@ -58,6 +66,10 @@ public class AlleyManager : MonoBehaviour {
 
                 GameManager.utilities.SetActiveList(handles5, true);
                 GameManager.utilities.SetActiveList(alleys5, true);
+
+                // Set exit run button position
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonLeftCS.gameObject.transform.parent.gameObject, -2f, -5.25f);
+                GameManager.utilities.SetLocalPosition(GameManager.S.exitRunButtonRightCS.gameObject.transform.parent.gameObject, 2f, -5.25f);
                 break;
         }
     }
