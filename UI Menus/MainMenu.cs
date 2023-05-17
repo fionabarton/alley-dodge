@@ -106,7 +106,6 @@ public class MainMenu : MonoBehaviour {
         adjustObjectsHeight.SetObjects(playerHeight);
 
         // Reset resetPosition height (where the user respawns if they’ve fallen through the floor) 
-        //GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 99f));
         GameManager.utilities.SetPosition(resetPosition.gameObject, 0, (playerHeight / 50f));
     }
 
@@ -268,6 +267,8 @@ public class MainMenu : MonoBehaviour {
 
         // Activate exit run menu podium
         GameManager.S.podiums.ActivateMenus(true, false);
+
+        SetAlleyAmount(alleyAmountDropdown.value);
     }
 
     //
