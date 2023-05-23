@@ -11,6 +11,8 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
 
+	public List<GameObject> testBlocks;
+
 	public GameObject		horizontalDestruction;
 	public GameObject		verticalHighDestruction;
 	public GameObject		verticalLowDestruction;
@@ -44,7 +46,7 @@ public class ObjectSpawner : MonoBehaviour {
 	// Adjusted based on player height
 	public float			pickupMaxYPos = 5.5f;
 	public float			horizontalYPos = 2.5f;
-	public float			verticalLowYPos = 0.375f;
+	public float			verticalLowYPos = 0.5f;
 	public float			verticalHighYPos = 3.25f;
 
 	//
@@ -91,6 +93,33 @@ public class ObjectSpawner : MonoBehaviour {
 	// Object instantiation functions
 	////////////////////////////////////////////////////////////////////////////////////////
 
+	void InstantiateTestBlock() {
+
+		int randomVal = Random.Range(0, 7);
+		if (randomVal == 0) {
+			// Enemy_Horizontal_Gap
+			Instantiate(testBlocks[0], new Vector3(0, 2.5f, 40), transform.rotation);
+		} else if (randomVal == 1) {
+			// Enemy_Horizontal_Thick LEFT
+			Instantiate(testBlocks[1], new Vector3(-0.5f, 2.5f, 40), transform.rotation);
+		} else if (randomVal == 2) {
+			// Enemy_Horizontal_Thick RIGHT
+			Instantiate(testBlocks[1], new Vector3(0.5f, 2.5f, 40), transform.rotation);
+		} else if (randomVal == 3) {
+			// Enemy_Vertical_Gap
+			Instantiate(testBlocks[2], new Vector3(0, 0.5f, 40), transform.rotation);
+		} else if (randomVal == 4) {
+			// Enemy_Vertical_Low_Thick
+			Instantiate(testBlocks[3], new Vector3(0, 1.5f, 40), transform.rotation);
+		} else if (randomVal == 5) {
+			// Enemy_Vertical_Mid
+			Instantiate(testBlocks[4], new Vector3(0, 2.5f, 40), transform.rotation);
+		} else if (randomVal == 6) {
+			// Enemy_Cross
+			Instantiate(testBlocks[5], new Vector3(0, 2.5f, 40), transform.rotation);
+		}
+	}
+	
 	// Instantiate a random hazard or pickup
 	void InstantiateRandomObject() {
         // Add to object count
@@ -99,6 +128,12 @@ public class ObjectSpawner : MonoBehaviour {
 		// Get random value
 		float randomVal = Random.value;
 
+        //     if (randomVal <= 0.5f) {
+        //InstantiateTestBlock();
+        //     } else {
+        //         InstantiateQuidPickup();
+        //     }
+
         //if (randomVal <= 0.5f) {
         //	InstantiateHorizontalBlock();
         //} else {
@@ -106,30 +141,30 @@ public class ObjectSpawner : MonoBehaviour {
         //}
 
         if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
-			// Instantiate horizontal block
-			InstantiateObject(objectsToSpawn[0]);
-		} else if (randomVal <= (chancesToSpawn[0] + chancesToSpawn[1])) { // 0.65f (65%)
-			// Get random value
-			randomVal = Random.value;
+                                              // Instantiate horizontal block
+            InstantiateObject(objectsToSpawn[0]);
+        } else if (randomVal <= (chancesToSpawn[0] + chancesToSpawn[1])) { // 0.65f (65%)
+                                                                           // Get random value
+            randomVal = Random.value;
 
-			// Instantiate vertical block
-			if (randomVal < chancesToSpawn[2]) { // 0.5f (50%)
-				// Low block
-				InstantiateObject(objectsToSpawn[1]);
-			} else if (randomVal >= (1 - chancesToSpawn[3])) { // 0.5f (50%)
-				// High block
-				InstantiateObject(objectsToSpawn[2]);
-			}
+            // Instantiate vertical block
+            if (randomVal < chancesToSpawn[2]) { // 0.5f (50%)
+                                                 // Low block
+                InstantiateObject(objectsToSpawn[1]);
+            } else if (randomVal >= (1 - chancesToSpawn[3])) { // 0.5f (50%)
+                                                               // High block
+                InstantiateObject(objectsToSpawn[2]);
+            }
         } else {
-			// Get random value
-			randomVal = Random.value;
+            // Get random value
+            randomVal = Random.value;
 
-			// Spawn pickups
-			if (randomVal < chancesToSpawn[5]) { // 0.75f (75%)
-				InstantiateObject(objectsToSpawn[3]);
-			} else if (randomVal >= (1 - chancesToSpawn[6])) { // 0.25f (25%)
-				InstantiateObject(objectsToSpawn[4]);
-			}
+            // Spawn pickups
+            if (randomVal < chancesToSpawn[5]) { // 0.75f (75%)
+                InstantiateObject(objectsToSpawn[3]);
+            } else if (randomVal >= (1 - chancesToSpawn[6])) { // 0.25f (25%)
+                InstantiateObject(objectsToSpawn[4]);
+            }
         }
     }
 

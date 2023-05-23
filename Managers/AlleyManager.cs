@@ -29,7 +29,8 @@ public class AlleyManager : MonoBehaviour {
         baseHandle.transform.localScale = new Vector3(0.2f, ((alleyCount/2)), 0.2f);
 
         // Set length of vertical block hazards
-        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 224f, 1);
+        //GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 224f, 1);
+        GameManager.S.spawner.verticalLowBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 168f, 1);
         GameManager.S.spawner.verticalHighBlock.transform.localScale = new Vector3(alleyCount, playerHeight / 48f, 1);
 
         // Set xPos range of horizontal block hazards & pickups
