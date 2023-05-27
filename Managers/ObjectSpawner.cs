@@ -5,13 +5,11 @@ using UnityEngine;
 // Instantiates a stream of randomly selected hazards/pickups at a constant rate.
 public class ObjectSpawner : MonoBehaviour {
 	[Header("Set in Inspector")]
-	public GameObject		horizontalBlock;
-	public GameObject		verticalLowBlock;
-	public GameObject		verticalHighBlock;
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
 
-	public List<GameObject> testBlocks;
+	public List<GameObject> obstacles;
+	public GameObject		testBlenderCube;
 
 	public GameObject		horizontalDestruction;
 	public GameObject		verticalHighDestruction;
@@ -45,9 +43,6 @@ public class ObjectSpawner : MonoBehaviour {
 
 	// Adjusted based on player height
 	public float			pickupMaxYPos = 5.5f;
-	public float			horizontalYPos = 2.5f;
-	public float			verticalLowYPos = 0.5f;
-	public float			verticalHighYPos = 3.25f;
 
 	//
 	public List<int>		objectsToSpawn;
@@ -57,7 +52,7 @@ public class ObjectSpawner : MonoBehaviour {
 	private float			timePaused;
 
 	private void Start() {
-		timeDone = currentSpawnSpeed + Time.time;
+		timeDone = currentSpawnSpeed + Time.time; 
 	}
 
     private void FixedUpdate() {
@@ -69,7 +64,7 @@ public class ObjectSpawner : MonoBehaviour {
 		}
 	}
 
-	//
+	// Freeze objects and stop spawner
 	public void PauseSpawner() {
 		// Cache timePaused
 		timePaused = Time.time;
@@ -89,70 +84,60 @@ public class ObjectSpawner : MonoBehaviour {
 		GameManager.S.spawner.objectsCanMove = true;
 	}
 
+	// Set the scale of all cube-shaped obstacles
+	public void SetObstacleScale(float xScale, float yScale) {
+		for(int i = 0; i < obstacles.Count; i++) {
+			if (xScale == -1) {
+				// Set xScale to its current value
+				xScale = obstacles[i].transform.localScale.x;
+			}
+
+			// Set the object's scale
+			GameManager.utilities.SetScale(obstacles[i], xScale, yScale, 1);
+		}
+    }
+
 	////////////////////////////////////////////////////////////////////////////////////////
 	// Object instantiation functions
 	////////////////////////////////////////////////////////////////////////////////////////
 
 	void InstantiateTestBlock() {
-
-		int randomVal = Random.Range(0, 7);
-		if (randomVal == 0) {
-			// Enemy_Horizontal_Gap
-			Instantiate(testBlocks[0], new Vector3(0, 2.5f, 40), transform.rotation);
-		} else if (randomVal == 1) {
-			// Enemy_Horizontal_Thick LEFT
-			Instantiate(testBlocks[1], new Vector3(-0.5f, 2.5f, 40), transform.rotation);
-		} else if (randomVal == 2) {
-			// Enemy_Horizontal_Thick RIGHT
-			Instantiate(testBlocks[1], new Vector3(0.5f, 2.5f, 40), transform.rotation);
-		} else if (randomVal == 3) {
-			// Enemy_Vertical_Gap
-			Instantiate(testBlocks[2], new Vector3(0, 0.5f, 40), transform.rotation);
-		} else if (randomVal == 4) {
-			// Enemy_Vertical_Low_Thick
-			Instantiate(testBlocks[3], new Vector3(0, 1.5f, 40), transform.rotation);
-		} else if (randomVal == 5) {
-			// Enemy_Vertical_Mid
-			Instantiate(testBlocks[4], new Vector3(0, 2.5f, 40), transform.rotation);
-		} else if (randomVal == 6) {
-			// Enemy_Cross
-			Instantiate(testBlocks[5], new Vector3(0, 2.5f, 40), transform.rotation);
-		}
+		int randomNdx = Random.Range(0, obstacles.Count);
+		Instantiate(obstacles[randomNdx], new Vector3(0, 0, 40), transform.rotation);
 	}
 	
 	// Instantiate a random hazard or pickup
 	void InstantiateRandomObject() {
         // Add to object count
         GameManager.S.score.AddToObjectCount();
-		
+
+  //      if (Random.value <= 0.75f) {
+  //          InstantiateTestBlock();
+  //          //Instantiate(testBlenderCube, new Vector3(0, 0, 40), transform.rotation);
+		//} else {
+  //          if (Random.value <= 0.75f) {
+  //              InstantiateQuidPickup();
+  //          } else {
+  //              InstantiateShieldPickup();
+  //          }
+  //      }
+
 		// Get random value
 		float randomVal = Random.value;
 
-        //     if (randomVal <= 0.5f) {
-        //InstantiateTestBlock();
-        //     } else {
-        //         InstantiateQuidPickup();
-        //     }
-
-        //if (randomVal <= 0.5f) {
-        //	InstantiateHorizontalBlock();
-        //} else {
-        //	InstantiateQuidPickup();
-        //}
-
-        if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
-                                              // Instantiate horizontal block
+		if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
+            // Instantiate horizontal block
             InstantiateObject(objectsToSpawn[0]);
         } else if (randomVal <= (chancesToSpawn[0] + chancesToSpawn[1])) { // 0.65f (65%)
-                                                                           // Get random value
+            // Get random value
             randomVal = Random.value;
 
             // Instantiate vertical block
             if (randomVal < chancesToSpawn[2]) { // 0.5f (50%)
-                                                 // Low block
+                // Low block
                 InstantiateObject(objectsToSpawn[1]);
             } else if (randomVal >= (1 - chancesToSpawn[3])) { // 0.5f (50%)
-                                                               // High block
+                // High block
                 InstantiateObject(objectsToSpawn[2]);
             }
         } else {
@@ -183,18 +168,18 @@ public class ObjectSpawner : MonoBehaviour {
 	}
 
 	void InstantiateHorizontalBlock() {
-		// Get random position on x-axis
-		int xPos = Random.Range(minXPos, maxXPos);
-		
-		Instantiate(horizontalBlock, new Vector3(xPos, horizontalYPos, 40), transform.rotation);
+		// Get random index
+		int ndx = Random.Range(2, 5);
+
+		Instantiate(obstacles[ndx], new Vector3(0, 0, 40), transform.rotation);
 	}
 
 	void InstantiateVerticalLowBlock() {
-		Instantiate(verticalLowBlock, new Vector3(0, verticalLowYPos, 40), transform.rotation);
+		Instantiate(obstacles[0], new Vector3(0, 0, 40), transform.rotation);
 	}
 
 	void InstantiateVerticalHighBlock() {
-		Instantiate(verticalHighBlock, new Vector3(0, verticalHighYPos, 40), transform.rotation);
+		Instantiate(obstacles[15], new Vector3(0, 0, 40), transform.rotation);
 	}
 
 	void InstantiateQuidPickup() {
