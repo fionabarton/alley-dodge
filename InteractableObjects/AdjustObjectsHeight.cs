@@ -14,6 +14,9 @@ public class AdjustObjectsHeight : MonoBehaviour {
     public List<GameObject> longVerticalHandles;
     public List<GameObject> shortVerticalHandles;
 
+    // 
+    public GameObject       sideMenus;
+
     public void SetObjects(float playerHeight = 168) {
         // Get lowest row height
         float lowestRowYPos = playerHeight / 84;
@@ -29,15 +32,8 @@ public class AdjustObjectsHeight : MonoBehaviour {
         // Pickups (yPos)
         GameManager.S.spawner.pickupMaxYPos = playerHeight / 30.54545455f;
 
-        // Hazards (yPos)
-        GameManager.S.spawner.horizontalYPos = playerHeight / 67.2f;
-        GameManager.S.spawner.verticalLowYPos = playerHeight / 448f;
-        GameManager.S.spawner.verticalHighYPos = playerHeight / 51.69230769f;
-
         // Hazards (yScale)
-        GameManager.utilities.SetScale(GameManager.S.spawner.horizontalBlock, 1, (playerHeight / 33.6f), 1);
-        GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowBlock, 3, (playerHeight / 224f), 1);
-        GameManager.utilities.SetScale(GameManager.S.spawner.verticalHighBlock, 3, (playerHeight / 48f), 1);
+        GameManager.S.spawner.SetObstacleScale(-1, playerHeight / 168f);
 
         GameManager.utilities.SetScale(GameManager.S.spawner.horizontalDestruction, 1, (playerHeight / 168f), 1);
         GameManager.utilities.SetScale(GameManager.S.spawner.verticalLowDestruction, 1, (playerHeight / 168f), 1);
