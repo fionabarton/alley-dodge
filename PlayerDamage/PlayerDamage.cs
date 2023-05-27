@@ -15,15 +15,24 @@ public class PlayerDamage : MonoBehaviour {
 
     public Animator     damageOverlayAnim;
 
+    // Deactivates the player's invicibility. Is called 0.1 seconds after the player collides with an obstacle.
+    void DeactivateInvicibility() {
+        GameManager.S.playerIsInvincible = false;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (!GameManager.S.playerIsInvincible) {
             if (other.gameObject.tag == "Hazard") {
+                // Make player invincible to prevent multiple collisions, then undo it after 0.1 seconds
+                GameManager.S.playerIsInvincible = true;
+                Invoke("DeactivateInvicibility", 0.1f);
+
                 // Haptic feedback (amplitude, duration)
                 leftXR.SendHapticImpulse(0.25f, 0.5f);
                 rightXR.SendHapticImpulse(0.25f, 0.5f);
 
                 // Destroy hazard
-                Destroy(other.gameObject);
+                Destroy(other.gameObject.transform.parent.gameObject);
 
                 // Increment damage count
                 GameManager.S.damageCount += 1;
