@@ -26,12 +26,12 @@ public class SpeedMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            speedDropdowns[0].value = 4; // 5
+            speedDropdowns[0].value = 9; // 10
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
         } else {
-            speedDropdowns[1].value = 1; // 0.1f
+            speedDropdowns[1].value = 2; // 0.2f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
@@ -96,8 +96,8 @@ public class SpeedMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Set dropdowns to default values
-            SetStartingObjectSpeedDropdownValue(4); // 5
-            SetAmountToIncreaseObjectSpeedDropdownValue(1); // 0.1f
+            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
             SetStartingSpawnSpeedDropdownValue(19); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
 
