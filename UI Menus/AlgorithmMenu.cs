@@ -9,10 +9,19 @@ public class AlgorithmMenu : MonoBehaviour {
     public List<TMPro.TMP_Dropdown> chanceDropdowns;
     public List<TMPro.TMP_Dropdown> objectDropdowns;
 
-    public Button defaultSettingsButton;
+    public List<Button>             objectButtons;
+    public List<Button>             objectSubMenuButtons;
+    public List<Sprite>             objectSprites;
+    public List<int>                objectButtonSpriteNdx;
+
+    public GameObject               objectSelectionSubMenu;
+
+    public Button                   goBackButton;
+
+    public Button                   defaultSettingsButton;
 
     // Shake display text animator
-    public Animator messageDisplayAnim;
+    public Animator                 messageDisplayAnim;
 
     private void OnEnable() {
         // Display text
@@ -63,38 +72,77 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Get objectDropdowns PlayerPrefs
         if (PlayerPrefs.HasKey("Object Dropdown 0")) {
-            SetObjectDropdownValue(0, PlayerPrefs.GetInt("Object Dropdown 0"));
+            SetObjectButtonValue(0, PlayerPrefs.GetInt("Object Dropdown 0"));
+
+            //objectButtonSpriteNdx[0] = PlayerPrefs.GetInt("Object Button Sprite Ndx 0");
+            //objectButtons[0].GetComponent<Image>().sprite = objectSprites[PlayerPrefs.GetInt("Object Button Sprite Ndx 0")];
+            SetObjectButtonSprite(0, PlayerPrefs.GetInt("Object Button Sprite Ndx 0"));
         } else {
-            objectDropdowns[0].value = 0; // Horizontal block
+            //objectDropdowns[0].value = 2; // Horizontal block
+            GameManager.S.spawner.objectsToSpawn[0] = 3;
+
+            //objectButtonSpriteNdx[0] = 3;
+            //objectButtons[0].GetComponent<Image>().sprite = objectSprites[3];
+            SetObjectButtonSprite(0, 3);
         }
         if (PlayerPrefs.HasKey("Object Dropdown 1")) {
-            SetObjectDropdownValue(1, PlayerPrefs.GetInt("Object Dropdown 1"));
+            SetObjectButtonValue(1, PlayerPrefs.GetInt("Object Dropdown 1"));
+
+            //objectButtonSpriteNdx[1] = PlayerPrefs.GetInt("Object Button Sprite Ndx 1");
+            //objectButtons[1].GetComponent<Image>().sprite = objectSprites[PlayerPrefs.GetInt("Object Button Sprite Ndx 1")];
+            SetObjectButtonSprite(1, PlayerPrefs.GetInt("Object Button Sprite Ndx 1"));
         } else {
-            objectDropdowns[1].value = 1; // Vertical low block
+            //objectDropdowns[1].value = 0; // Vertical low block
+            GameManager.S.spawner.objectsToSpawn[1] = 0;
+
+            //objectButtonSpriteNdx[1] = 0;
+            //objectButtons[1].GetComponent<Image>().sprite = objectSprites[0];
+            SetObjectButtonSprite(1, 0);
         }
         if (PlayerPrefs.HasKey("Object Dropdown 2")) {
-            SetObjectDropdownValue(2, PlayerPrefs.GetInt("Object Dropdown 2"));
+            SetObjectButtonValue(2, PlayerPrefs.GetInt("Object Dropdown 2"));
+
+            //objectButtonSpriteNdx[2] = PlayerPrefs.GetInt("Object Button Sprite Ndx 2");
+            //objectButtons[2].GetComponent<Image>().sprite = objectSprites[PlayerPrefs.GetInt("Object Button Sprite Ndx 2")];
+            SetObjectButtonSprite(2, PlayerPrefs.GetInt("Object Button Sprite Ndx 2"));
         } else {
-            objectDropdowns[2].value = 2; // Vertical high block
+            //objectDropdowns[2].value = 17; // Vertical high block
+            GameManager.S.spawner.objectsToSpawn[2] = 17;
+
+            //objectButtonSpriteNdx[2] = 17;
+            //objectButtons[2].GetComponent<Image>().sprite = objectSprites[17];
+            SetObjectButtonSprite(2, 17);
         }
         if (PlayerPrefs.HasKey("Object Dropdown 3")) {
-            SetObjectDropdownValue(3, PlayerPrefs.GetInt("Object Dropdown 3"));
+            SetObjectButtonValue(3, PlayerPrefs.GetInt("Object Dropdown 3"));
+
+            //objectButtonSpriteNdx[3] = PlayerPrefs.GetInt("Object Button Sprite Ndx 3");
+            //objectButtons[3].GetComponent<Image>().sprite = objectSprites[PlayerPrefs.GetInt("Object Button Sprite Ndx 3")];
+            SetObjectButtonSprite(3, PlayerPrefs.GetInt("Object Button Sprite Ndx 3"));
         } else {
-            objectDropdowns[3].value = 3; // Quid pickup
+            //objectDropdowns[3].value = 43; // Quid pickup
+            GameManager.S.spawner.objectsToSpawn[3] = 43;
+
+            //objectButtonSpriteNdx[3] = 43;
+            //objectButtons[3].GetComponent<Image>().sprite = objectSprites[43];
+            SetObjectButtonSprite(3, 43);
         }
         if (PlayerPrefs.HasKey("Object Dropdown 4")) {
-            SetObjectDropdownValue(4, PlayerPrefs.GetInt("Object Dropdown 4"));
+            SetObjectButtonValue(4, PlayerPrefs.GetInt("Object Dropdown 4"));
+
+            //objectButtonSpriteNdx[4] = PlayerPrefs.GetInt("Object Button Sprite Ndx 4");
+            //objectButtons[4].GetComponent<Image>().sprite = objectSprites[PlayerPrefs.GetInt("Object Button Sprite Ndx 4")];
+            SetObjectButtonSprite(4, PlayerPrefs.GetInt("Object Button Sprite Ndx 4"));
         } else {
-            objectDropdowns[4].value = 4; // Shield pickup
+            //objectDropdowns[4].value = 44; // Shield pickup
+            GameManager.S.spawner.objectsToSpawn[4] = 44;
+
+            //objectButtonSpriteNdx[4] = 44;
+            //objectButtons[4].GetComponent<Image>().sprite = objectSprites[44];
+            SetObjectButtonSprite(4, 44);
         }
 
         // Add listener to dropdowns
-        objectDropdowns[0].onValueChanged.AddListener(delegate { SetObjectDropdownValue(0, objectDropdowns[0].value); });
-        objectDropdowns[1].onValueChanged.AddListener(delegate { SetObjectDropdownValue(1, objectDropdowns[1].value); });
-        objectDropdowns[2].onValueChanged.AddListener(delegate { SetObjectDropdownValue(2, objectDropdowns[2].value); });
-        objectDropdowns[3].onValueChanged.AddListener(delegate { SetObjectDropdownValue(3, objectDropdowns[3].value); });
-        objectDropdowns[4].onValueChanged.AddListener(delegate { SetObjectDropdownValue(4, objectDropdowns[4].value); });
-
         chanceDropdowns[0].onValueChanged.AddListener(delegate { SetChanceDropdownValue(0, chanceDropdowns[0].value); });
         chanceDropdowns[1].onValueChanged.AddListener(delegate { SetChanceDropdownValue(1, chanceDropdowns[1].value); });
         chanceDropdowns[2].onValueChanged.AddListener(delegate { SetChanceDropdownValue(2, chanceDropdowns[2].value); });
@@ -103,8 +151,61 @@ public class AlgorithmMenu : MonoBehaviour {
         chanceDropdowns[5].onValueChanged.AddListener(delegate { SetChanceDropdownValue(5, chanceDropdowns[5].value); });
         chanceDropdowns[6].onValueChanged.AddListener(delegate { SetChanceDropdownValue(6, chanceDropdowns[6].value); });
 
-        // Add listeners to button
+        // Add listeners to buttons
+        objectButtons[0].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(0); });
+        objectButtons[1].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(1); });
+        objectButtons[2].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(2); });
+        objectButtons[3].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(3); });
+        objectButtons[4].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(4); });
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
+        goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
+
+        // Add listeners to object selection sub menu buttons
+        objectSubMenuButtons[0].onClick.AddListener(delegate { SetObjectToSpawn(0); });
+        objectSubMenuButtons[1].onClick.AddListener(delegate { SetObjectToSpawn(1); });
+        objectSubMenuButtons[2].onClick.AddListener(delegate { SetObjectToSpawn(2); });
+        objectSubMenuButtons[3].onClick.AddListener(delegate { SetObjectToSpawn(3); });
+        objectSubMenuButtons[4].onClick.AddListener(delegate { SetObjectToSpawn(4); });
+        objectSubMenuButtons[5].onClick.AddListener(delegate { SetObjectToSpawn(5); });
+        objectSubMenuButtons[6].onClick.AddListener(delegate { SetObjectToSpawn(6); });
+        objectSubMenuButtons[7].onClick.AddListener(delegate { SetObjectToSpawn(7); });
+        objectSubMenuButtons[8].onClick.AddListener(delegate { SetObjectToSpawn(8); });
+        objectSubMenuButtons[9].onClick.AddListener(delegate { SetObjectToSpawn(9); });
+        objectSubMenuButtons[10].onClick.AddListener(delegate { SetObjectToSpawn(10); });
+        objectSubMenuButtons[11].onClick.AddListener(delegate { SetObjectToSpawn(11); });
+        objectSubMenuButtons[12].onClick.AddListener(delegate { SetObjectToSpawn(12); });
+        objectSubMenuButtons[13].onClick.AddListener(delegate { SetObjectToSpawn(13); });
+        objectSubMenuButtons[14].onClick.AddListener(delegate { SetObjectToSpawn(14); });
+        objectSubMenuButtons[15].onClick.AddListener(delegate { SetObjectToSpawn(15); });
+        objectSubMenuButtons[16].onClick.AddListener(delegate { SetObjectToSpawn(16); });
+        objectSubMenuButtons[17].onClick.AddListener(delegate { SetObjectToSpawn(17); });
+        objectSubMenuButtons[18].onClick.AddListener(delegate { SetObjectToSpawn(18); });
+        objectSubMenuButtons[19].onClick.AddListener(delegate { SetObjectToSpawn(19); });
+        objectSubMenuButtons[20].onClick.AddListener(delegate { SetObjectToSpawn(20); });
+        objectSubMenuButtons[21].onClick.AddListener(delegate { SetObjectToSpawn(21); });
+        objectSubMenuButtons[22].onClick.AddListener(delegate { SetObjectToSpawn(22); });
+        objectSubMenuButtons[23].onClick.AddListener(delegate { SetObjectToSpawn(23); });
+        objectSubMenuButtons[24].onClick.AddListener(delegate { SetObjectToSpawn(24); });
+        objectSubMenuButtons[25].onClick.AddListener(delegate { SetObjectToSpawn(25); });
+        objectSubMenuButtons[26].onClick.AddListener(delegate { SetObjectToSpawn(26); });
+        objectSubMenuButtons[27].onClick.AddListener(delegate { SetObjectToSpawn(27); });
+        objectSubMenuButtons[28].onClick.AddListener(delegate { SetObjectToSpawn(28); });
+        objectSubMenuButtons[29].onClick.AddListener(delegate { SetObjectToSpawn(29); });
+        objectSubMenuButtons[30].onClick.AddListener(delegate { SetObjectToSpawn(30); });
+        objectSubMenuButtons[31].onClick.AddListener(delegate { SetObjectToSpawn(31); });
+        objectSubMenuButtons[32].onClick.AddListener(delegate { SetObjectToSpawn(32); });
+        objectSubMenuButtons[33].onClick.AddListener(delegate { SetObjectToSpawn(33); });
+        objectSubMenuButtons[34].onClick.AddListener(delegate { SetObjectToSpawn(34); });
+        objectSubMenuButtons[35].onClick.AddListener(delegate { SetObjectToSpawn(35); });
+        objectSubMenuButtons[36].onClick.AddListener(delegate { SetObjectToSpawn(36); });
+        objectSubMenuButtons[37].onClick.AddListener(delegate { SetObjectToSpawn(37); });
+        objectSubMenuButtons[38].onClick.AddListener(delegate { SetObjectToSpawn(38); });
+        objectSubMenuButtons[39].onClick.AddListener(delegate { SetObjectToSpawn(39); });
+        objectSubMenuButtons[40].onClick.AddListener(delegate { SetObjectToSpawn(40); });
+        objectSubMenuButtons[41].onClick.AddListener(delegate { SetObjectToSpawn(41); });
+        objectSubMenuButtons[42].onClick.AddListener(delegate { SetObjectToSpawn(42); });
+        objectSubMenuButtons[43].onClick.AddListener(delegate { SetObjectToSpawn(43); });
+        objectSubMenuButtons[44].onClick.AddListener(delegate { SetObjectToSpawn(44); });
     }
 
     void SetChanceDropdownValue(int ndx, int value) {
@@ -136,11 +237,67 @@ public class AlgorithmMenu : MonoBehaviour {
         }
     }
 
-    void SetObjectDropdownValue(int ndx, int value) {
+    void SetObjectButtonValue(int ndx, int value) {
         GameManager.S.spawner.objectsToSpawn[ndx] = value;
 
-        objectDropdowns[ndx].value = value;
+        //objectDropdowns[ndx].value = value;
     }
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    1) On obstacle button press, cache button index (0 to 4)
+    2) Open ObstacleMenu where the user can select an obstacle
+    3) On button press,
+    */
+
+    public int selectedObjectButtonNdx = 0;
+
+    void OpenObjectSelectionSubMenu(int ndx) {
+        // Cache button index
+        selectedObjectButtonNdx = ndx;
+
+        // Open object (obstacles & items) sub menu
+        objectSelectionSubMenu.SetActive(true);
+    }
+
+    void SetObjectToSpawn(int value) {
+        // Set object to spawn
+        GameManager.S.spawner.objectsToSpawn[selectedObjectButtonNdx] = value;
+
+        // Set button image
+        objectButtonSpriteNdx[selectedObjectButtonNdx] = value;
+        objectButtons[selectedObjectButtonNdx].GetComponent<Image>().sprite = objectSprites[value];
+
+        // Save   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!fhehae
+        string tString = "Object Button Sprite Ndx " + selectedObjectButtonNdx.ToString();
+        PlayerPrefs.SetInt(tString, objectButtonSpriteNdx[selectedObjectButtonNdx]);
+
+        //string uString = "Object Button Sprite Ndx " + selectedObjectButtonNdx.ToString();
+        //PlayerPrefs.SetInt(uString, objectButtonSpriteNdx[selectedObjectButtonNdx]);
+
+        string uString = "Object Dropdown " + selectedObjectButtonNdx.ToString();
+        PlayerPrefs.SetInt(uString, GameManager.S.spawner.objectsToSpawn[selectedObjectButtonNdx]);
+
+        // Close object (obstacles & items) sub menu
+        CloseObjectSelectionSubMenu();
+    }
+
+    void CloseObjectSelectionSubMenu() {
+        objectSelectionSubMenu.SetActive(false);
+    }
+
+    void SetObjectButtonSprite(int buttonNdx, int spriteNdx) {
+        objectButtonSpriteNdx[buttonNdx] = spriteNdx;
+
+        objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[spriteNdx];
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -166,11 +323,27 @@ public class AlgorithmMenu : MonoBehaviour {
             SetChanceDropdownValue(5, 15); // 75%
             SetChanceDropdownValue(6, 5); // 25%
 
-            SetObjectDropdownValue(0, 0); // Horizontal block
-            SetObjectDropdownValue(1, 1); // Vertical low block
-            SetObjectDropdownValue(2, 2); // Vertical high block
-            SetObjectDropdownValue(3, 3); // Quid pickup
-            SetObjectDropdownValue(4, 4); // Shield pickup
+            SetObjectButtonValue(0, 2); // Horizontal block
+            SetObjectButtonValue(1, 0); // Vertical low block
+            SetObjectButtonValue(2, 17); // Vertical high block
+            SetObjectButtonValue(3, 43); // Quid pickup
+            SetObjectButtonValue(4, 44); // Shield pickup
+
+            //objectButtonSpriteNdx[0] = 3;
+            //objectButtonSpriteNdx[1] = 0;
+            //objectButtonSpriteNdx[2] = 17;
+            //objectButtonSpriteNdx[3] = 43;
+            //objectButtonSpriteNdx[4] = 44;
+            //objectButtons[0].GetComponent<Image>().sprite = objectSprites[3];
+            //objectButtons[1].GetComponent<Image>().sprite = objectSprites[0];
+            //objectButtons[2].GetComponent<Image>().sprite = objectSprites[17];
+            //objectButtons[3].GetComponent<Image>().sprite = objectSprites[43];
+            //objectButtons[4].GetComponent<Image>().sprite = objectSprites[44];
+            SetObjectButtonSprite(0, 3);
+            SetObjectButtonSprite(1, 0);
+            SetObjectButtonSprite(2, 17);
+            SetObjectButtonSprite(3, 43);
+            SetObjectButtonSprite(4, 33);
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
@@ -222,10 +395,16 @@ public class AlgorithmMenu : MonoBehaviour {
         }
 
         // Object dropdowns
-        for (int i = 0; i < objectDropdowns.Count; i++) {
-            string tString = "Object Dropdown " + i.ToString();
-            PlayerPrefs.SetInt(tString, objectDropdowns[i].value);
-        }
+        //for (int i = 0; i < objectDropdowns.Count; i++) {
+        //    string tString = "Object Dropdown " + i.ToString();
+        //    PlayerPrefs.SetInt(tString, objectDropdowns[i].value);
+        //}
+
+        //
+        //for (int i = 0; i < GameManager.S.spawner.objectsToSpawn.Count; i++) {
+        //    string tString = "Object Dropdown " + i.ToString();
+        //    PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[i]); 
+        //}
     }
 
     void DropdownValuesInvalid(List<TMPro.TMP_Dropdown> chanceDropdowns, Color color) {
