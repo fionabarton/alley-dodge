@@ -8,7 +8,7 @@ public class ObjectSpawner : MonoBehaviour {
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
 
-	public List<GameObject> obstacles;
+	public List<GameObject> objects;
 	public GameObject		testBlenderCube;
 
 	public GameObject		horizontalDestruction;
@@ -86,14 +86,14 @@ public class ObjectSpawner : MonoBehaviour {
 
 	// Set the scale of all cube-shaped obstacles
 	public void SetObstacleScale(float xScale, float yScale) {
-		for(int i = 0; i < obstacles.Count; i++) {
+		for(int i = 0; i < objects.Count; i++) {
 			if (xScale == -1) {
 				// Set xScale to its current value
-				xScale = obstacles[i].transform.localScale.x;
+				xScale = objects[i].transform.localScale.x;
 			}
 
 			// Set the object's scale
-			GameManager.utilities.SetScale(obstacles[i], xScale, yScale, 1);
+			GameManager.utilities.SetScale(objects[i], xScale, yScale, 1);
 		}
     }
 
@@ -101,31 +101,31 @@ public class ObjectSpawner : MonoBehaviour {
 	// Object instantiation functions
 	////////////////////////////////////////////////////////////////////////////////////////
 
-	void InstantiateTestBlock() {
-		int randomNdx = Random.Range(0, obstacles.Count);
-		Instantiate(obstacles[randomNdx], new Vector3(0, 0, 40), transform.rotation);
-	}
+	//void InstantiateTestBlock() {
+	//	int randomNdx = Random.Range(0, obstacles.Count);
+	//	Instantiate(obstacles[randomNdx], new Vector3(0, 0, 40), transform.rotation);
+	//}
 	
 	// Instantiate a random hazard or pickup
 	void InstantiateRandomObject() {
         // Add to object count
         GameManager.S.score.AddToObjectCount();
 
-  //      if (Random.value <= 0.75f) {
-  //          InstantiateTestBlock();
-  //          //Instantiate(testBlenderCube, new Vector3(0, 0, 40), transform.rotation);
-		//} else {
-  //          if (Random.value <= 0.75f) {
-  //              InstantiateQuidPickup();
-  //          } else {
-  //              InstantiateShieldPickup();
-  //          }
-  //      }
+        //if (Random.value <= 0.75f) {
+        //    //InstantiateTestBlock();
+        //    Instantiate(testBlenderCube, new Vector3(0, 0, 40), transform.rotation);
+        //} else {
+        //    if (Random.value <= 0.75f) {
+        //        InstantiateQuidPickup();
+        //    } else {
+        //        InstantiateShieldPickup();
+        //    }
+        //}
 
-		// Get random value
-		float randomVal = Random.value;
+        // Get random value
+        float randomVal = Random.value;
 
-		if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
+        if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
             // Instantiate horizontal block
             InstantiateObject(objectsToSpawn[0]);
         } else if (randomVal <= (chancesToSpawn[0] + chancesToSpawn[1])) { // 0.65f (65%)
@@ -154,16 +154,28 @@ public class ObjectSpawner : MonoBehaviour {
     }
 
 	void InstantiateObject(int ndx) {
-		if(ndx == 0) {
+		//if(ndx == 0) {
+		//	InstantiateHorizontalBlock();
+		//} else if (ndx == 1) {
+		//	InstantiateVerticalLowBlock();
+		//} else if (ndx == 2) {
+		//	InstantiateVerticalHighBlock();
+		//} else if (ndx == 3) {
+		//	InstantiateQuidPickup();
+		//} else if (ndx == 4) {
+		//	InstantiateShieldPickup();
+		//}
+
+		if(ndx == 2 || ndx == 3 || ndx == 4) {
 			InstantiateHorizontalBlock();
-		} else if (ndx == 1) {
-			InstantiateVerticalLowBlock();
-		} else if (ndx == 2) {
-			InstantiateVerticalHighBlock();
-		} else if (ndx == 3) {
+		} 
+		
+		if (ndx == 43) {
 			InstantiateQuidPickup();
-		} else if (ndx == 4) {
+		} else if (ndx == 44) {
 			InstantiateShieldPickup();
+        } else {
+			Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 		}
 	}
 
@@ -171,16 +183,16 @@ public class ObjectSpawner : MonoBehaviour {
 		// Get random index
 		int ndx = Random.Range(2, 5);
 
-		Instantiate(obstacles[ndx], new Vector3(0, 0, 40), transform.rotation);
+		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 	}
 
-	void InstantiateVerticalLowBlock() {
-		Instantiate(obstacles[0], new Vector3(0, 0, 40), transform.rotation);
-	}
+	//void InstantiateVerticalLowBlock() {
+	//	Instantiate(objects[0], new Vector3(0, 0, 40), transform.rotation);
+	//}
 
-	void InstantiateVerticalHighBlock() {
-		Instantiate(obstacles[15], new Vector3(0, 0, 40), transform.rotation);
-	}
+	//void InstantiateVerticalHighBlock() {
+	//	Instantiate(objects[17], new Vector3(0, 0, 40), transform.rotation);
+	//}
 
 	void InstantiateQuidPickup() {
 		// Get random position 
