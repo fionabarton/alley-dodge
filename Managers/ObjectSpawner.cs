@@ -100,11 +100,6 @@ public class ObjectSpawner : MonoBehaviour {
 	////////////////////////////////////////////////////////////////////////////////////////
 	// Object instantiation functions
 	////////////////////////////////////////////////////////////////////////////////////////
-
-	//void InstantiateTestBlock() {
-	//	int randomNdx = Random.Range(0, obstacles.Count);
-	//	Instantiate(obstacles[randomNdx], new Vector3(0, 0, 40), transform.rotation);
-	//}
 	
 	// Instantiate a random hazard or pickup
 	void InstantiateRandomObject() {
@@ -112,7 +107,6 @@ public class ObjectSpawner : MonoBehaviour {
         GameManager.S.score.AddToObjectCount();
 
         //if (Random.value <= 0.75f) {
-        //    //InstantiateTestBlock();
         //    Instantiate(testBlenderCube, new Vector3(0, 0, 40), transform.rotation);
         //} else {
         //    if (Random.value <= 0.75f) {
@@ -154,23 +148,13 @@ public class ObjectSpawner : MonoBehaviour {
     }
 
 	void InstantiateObject(int ndx) {
-		//if(ndx == 0) {
-		//	InstantiateHorizontalBlock();
-		//} else if (ndx == 1) {
-		//	InstantiateVerticalLowBlock();
-		//} else if (ndx == 2) {
-		//	InstantiateVerticalHighBlock();
-		//} else if (ndx == 3) {
-		//	InstantiateQuidPickup();
-		//} else if (ndx == 4) {
-		//	InstantiateShieldPickup();
-		//}
-
-		if(ndx == 2 || ndx == 3 || ndx == 4) {
+		if (ndx == 2) {
 			InstantiateHorizontalBlock();
-		} 
-		
-		if (ndx == 43) {
+		} else if (ndx == 3) {
+			InstantiateHorizontalBlock();
+		} else if (ndx == 4) {
+			InstantiateHorizontalBlock();
+		}else if (ndx == 43) {
 			InstantiateQuidPickup();
 		} else if (ndx == 44) {
 			InstantiateShieldPickup();
@@ -185,14 +169,6 @@ public class ObjectSpawner : MonoBehaviour {
 
 		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 	}
-
-	//void InstantiateVerticalLowBlock() {
-	//	Instantiate(objects[0], new Vector3(0, 0, 40), transform.rotation);
-	//}
-
-	//void InstantiateVerticalHighBlock() {
-	//	Instantiate(objects[17], new Vector3(0, 0, 40), transform.rotation);
-	//}
 
 	void InstantiateQuidPickup() {
 		// Get random position 
