@@ -161,9 +161,9 @@ public class SaveData {
     public string[] chanceToSpawn5 = new string[100];
     public string[] chanceToSpawn6 = new string[100];
 
-    public string[] objectToSpawn0 = new string[100];
-    public string[] objectToSpawn1 = new string[100];
-    public string[] objectToSpawn2 = new string[100];
-    public string[] objectToSpawn3 = new string[100];
-    public string[] objectToSpawn4 = new string[100];
+    public int[] objectToSpawn0 = new int[100];
+    public int[] objectToSpawn1 = new int[100];
+    public int[] objectToSpawn2 = new int[100];
+    public int[] objectToSpawn3 = new int[100];
+    public int[] objectToSpawn4 = new int[100];
 }
