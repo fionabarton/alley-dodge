@@ -32,7 +32,7 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI        startingSpawnSpeedValue;
     public TMPro.TextMeshProUGUI        amountToDecreaseSpawnSpeedValue;
     public List<TMPro.TextMeshProUGUI>  chanceToSpawnValues;
-    public List<TMPro.TextMeshProUGUI>  objectToSpawnValues;
+    public List<Image>                  objectToSpawnImages;
 
     //[Header("Set Dynamically")]
 
@@ -88,11 +88,11 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         chanceToSpawnValues[4].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn4;
         chanceToSpawnValues[5].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn5;
         chanceToSpawnValues[6].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn6;
-        objectToSpawnValues[0].text = GameManager.S.highScore.highScores[ndx].objectToSpawn0;
-        objectToSpawnValues[1].text = GameManager.S.highScore.highScores[ndx].objectToSpawn1;
-        objectToSpawnValues[2].text = GameManager.S.highScore.highScores[ndx].objectToSpawn2;
-        objectToSpawnValues[3].text = GameManager.S.highScore.highScores[ndx].objectToSpawn3;
-        objectToSpawnValues[4].text = GameManager.S.highScore.highScores[ndx].objectToSpawn4;
+        objectToSpawnImages[0].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn0];
+        objectToSpawnImages[1].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn1];
+        objectToSpawnImages[2].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn2];
+        objectToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn3];
+        objectToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn4];
     }
 
     //

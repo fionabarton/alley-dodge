@@ -177,11 +177,11 @@ public class KeyboardInputMenu : MonoBehaviour {
                 GameManager.S.algorithmMenuCS.chanceDropdowns[3].options[GameManager.S.algorithmMenuCS.chanceDropdowns[3].value].text,
                 GameManager.S.algorithmMenuCS.chanceDropdowns[5].options[GameManager.S.algorithmMenuCS.chanceDropdowns[5].value].text,
                 GameManager.S.algorithmMenuCS.chanceDropdowns[6].options[GameManager.S.algorithmMenuCS.chanceDropdowns[6].value].text,
-                GameManager.S.algorithmMenuCS.objectDropdowns[0].options[GameManager.S.algorithmMenuCS.objectDropdowns[0].value].text,
-                GameManager.S.algorithmMenuCS.objectDropdowns[1].options[GameManager.S.algorithmMenuCS.objectDropdowns[1].value].text,
-                GameManager.S.algorithmMenuCS.objectDropdowns[2].options[GameManager.S.algorithmMenuCS.objectDropdowns[2].value].text,
-                GameManager.S.algorithmMenuCS.objectDropdowns[3].options[GameManager.S.algorithmMenuCS.objectDropdowns[3].value].text,
-                GameManager.S.algorithmMenuCS.objectDropdowns[4].options[GameManager.S.algorithmMenuCS.objectDropdowns[4].value].text
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[0],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[1],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[2],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[3],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4]
                 );
 
             // Activate high score menu

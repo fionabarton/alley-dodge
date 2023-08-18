@@ -227,8 +227,8 @@ public class HighScoreManager : MonoBehaviour {
                 GameManager.utilities.SetActiveList(cursorGO, true);
 
                 // Set cursor positions
-                GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -300f, 0, 0);
-                GameManager.utilities.PositionCursor(cursorGO[1], runTimeText[newHighScoreListNdx].gameObject, 116f, 0, 2);
+                GameManager.utilities.PositionCursor(cursorGO[0], nameText[newHighScoreListNdx].gameObject, -430f, 65, 0);
+                GameManager.utilities.PositionCursor(cursorGO[1], runTimeText[newHighScoreListNdx].gameObject, 246f, 65, 2);
 
                 // Set new HighScore text color to rainbow cycle
                 SetHighScoreColors(newHighScoreListNdx, "RainbowTextCycle");
@@ -318,17 +318,17 @@ public class HighScore {
     public string chanceToSpawn5;
     public string chanceToSpawn6;
 
-    public string objectToSpawn0;
-    public string objectToSpawn1;
-    public string objectToSpawn2;
-    public string objectToSpawn3;
-    public string objectToSpawn4;
+    public int objectToSpawn0;
+    public int objectToSpawn1;
+    public int objectToSpawn2;
+    public int objectToSpawn3;
+    public int objectToSpawn4;
 
     public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects = 0, string _runTime = "00:00:00:000",
         string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, string _playerHeight = "1.68 m / 5 ft 6.14 in", int _fallBelowFloorCount = 0, int _damageCount = 0, int _pauseCount = 0,
         string _startingObjectSpeed = "5", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1",
         string _chanceToSpawn0 = "30%", string _chanceToSpawn1 = "35%", string _chanceToSpawn2 = "35%", string _chanceToSpawn3 = "50%", string _chanceToSpawn4 = "50%", string _chanceToSpawn5 = "75%", string _chanceToSpawn6 = "25%",
-        string _objectToSpawn0 = "Hori. Block", string _objectToSpawn1 = "Verti. Low Block", string _objectToSpawn2 = "Verti. High Block", string _objectToSpawn3 = "Quid Pickup", string _objectToSpawn4 = "Shield Pickup") {
+        int _objectToSpawn0 = 3, int _objectToSpawn1 = 0, int _objectToSpawn2 = 17, int _objectToSpawn3 = 43, int _objectToSpawn4 = 44) {
         name = _name;
         score = _score;
         level = _level;
