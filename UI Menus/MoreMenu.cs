@@ -34,13 +34,13 @@ public class MoreMenu : MonoBehaviour {
         tutorialButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
-        Invoke("ActivateAudioMenu", 0.1f);
+        Invoke("ActivateAlgorithmMenu", 0.1f);
 
         gameObject.SetActive(false);
     }
 
-    void ActivateAudioMenu() {
-        ActivateMenuGO(0);
+    void ActivateAlgorithmMenu() {
+        ActivateMenuGO(2);
     }
 
     //
