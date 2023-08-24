@@ -15,11 +15,11 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
     public List<int>    levelValues;
     public List<int>    alleyAmountValues;
-    public List<int>    chanceValues;
     public List<int>    objectSpeedValues;
     public List<float>  amountToIncreaseValues;
     public List<float>  spawnSpeedValues;
     public List<float>  amountToDecreaseValues;
+    public List<int>    chanceValues;
 
     // level, alleyAmount, moveSpeed, amountToIncrease, spawnSpeed, amountToDecrease, chance (0-6)
     public List<Button> propertyButtons;
@@ -37,9 +37,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
     void OnStart() {
         // Set property button text
         if (PlayerPrefs.HasKey("Level Select")) {
-            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = PlayerPrefs.GetInt("Level Select").ToString();
+            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Level "+ PlayerPrefs.GetInt("Level Select").ToString();
         } else {
-            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "1";
+            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Level 1";
         }
 
         if (PlayerPrefs.HasKey("Alley Amount")) {
@@ -78,6 +78,45 @@ public class NumericalSelectionMenu : MonoBehaviour {
             propertyButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Speed Dropdown 3") / 10f).ToString();
         } else {
             propertyButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = "0.1";
+        }
+
+        // Get top level chanceDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Chance Value 0")) {
+            propertyButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 0") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = "30%";
+        }
+        if (PlayerPrefs.HasKey("Chance Value 1")) {
+            propertyButtons[7].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 1") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[7].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
+        }
+        if (PlayerPrefs.HasKey("Chance Value 2")) {
+            propertyButtons[8].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 2") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[8].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
+        }
+
+        // Get mid level chanceDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Chance Value 3")) {
+            propertyButtons[9].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 3") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[9].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
+        }
+        if (PlayerPrefs.HasKey("Chance Value 4")) {
+            propertyButtons[10].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 4") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[10].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
+        }
+        if (PlayerPrefs.HasKey("Chance Value 5")) {
+            propertyButtons[11].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 5") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[11].GetComponentInChildren<TextMeshProUGUI>().text = "75%";
+        }
+        if (PlayerPrefs.HasKey("Chance Value 6")) {
+            propertyButtons[12].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 6") * 5f).ToString() + "%";
+        } else {
+            propertyButtons[12].GetComponentInChildren<TextMeshProUGUI>().text = "25%";
         }
 
         gameObject.SetActive(false);
@@ -170,6 +209,76 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(copy); });
                     amountButtons[copy].onClick.AddListener(delegate { SetButtonText(5, amountToDecreaseValues[copy].ToString()); });
+                }
+                break;
+            case 6:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(0, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(6, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 7:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(1, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(7, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 8:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(2, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(8, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 9:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(3, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(9, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 10:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(4, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(10, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 11:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(5, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(11, chanceValues[copy].ToString() + "%"); });
+                }
+                break;
+            case 12:
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(6, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(12, chanceValues[copy].ToString() + "%"); });
                 }
                 break;
         }

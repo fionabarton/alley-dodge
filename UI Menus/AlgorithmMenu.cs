@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AlgorithmMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     // Dropdowns, & buttons
-    public List<TMPro.TMP_Dropdown> chanceDropdowns;
-    public List<TMPro.TMP_Dropdown> objectDropdowns;
+    public List<TMP_Dropdown>       chanceDropdowns;
+    public List<Button>             chanceButtons;
 
     public List<Button>             objectButtons;
     public List<Button>             objectSubMenuButtons;
@@ -38,42 +39,42 @@ public class AlgorithmMenu : MonoBehaviour {
 
     void Start() {
         // Get top level chanceDropdowns PlayerPrefs
-        if (PlayerPrefs.HasKey("Chance Dropdown 0")) {
-            SetChanceDropdownValue(0, PlayerPrefs.GetInt("Chance Dropdown 0"));
+        if (PlayerPrefs.HasKey("Chance Value 0")) {
+            SetChanceButtonValue(0, PlayerPrefs.GetInt("Chance Value 0"));
         } else {
-            chanceDropdowns[0].value = 6; // 30%
+            SetChanceButtonValue(0, 6); // 30%
         }
-        if (PlayerPrefs.HasKey("Chance Dropdown 1")) {
-            SetChanceDropdownValue(1, PlayerPrefs.GetInt("Chance Dropdown 1"));
+        if (PlayerPrefs.HasKey("Chance Value 1")) {
+            SetChanceButtonValue(1, PlayerPrefs.GetInt("Chance Value 1"));
         } else {
-            chanceDropdowns[1].value = 7; // 35%
+            SetChanceButtonValue(1, 7); // 35%
         }
-        if (PlayerPrefs.HasKey("Chance Dropdown 4")) {
-            SetChanceDropdownValue(4, PlayerPrefs.GetInt("Chance Dropdown 4"));
+        if (PlayerPrefs.HasKey("Chance Value 2")) {
+            SetChanceButtonValue(2, PlayerPrefs.GetInt("Chance Value 2"));
         } else {
-            chanceDropdowns[4].value = 7; // 35%
+            SetChanceButtonValue(2, 7); // 35%
         }
 
         // Get mid level chanceDropdowns PlayerPrefs
-        if (PlayerPrefs.HasKey("Chance Dropdown 2")) {
-            SetChanceDropdownValue(2, PlayerPrefs.GetInt("Chance Dropdown 2"));
+        if (PlayerPrefs.HasKey("Chance Value 3")) {
+            SetChanceButtonValue(3, PlayerPrefs.GetInt("Chance Value 3"));
         } else {
-            chanceDropdowns[2].value = 10; // 50%
+            SetChanceButtonValue(3, 10); // 50%
         }
-        if (PlayerPrefs.HasKey("Chance Dropdown 3")) {
-            SetChanceDropdownValue(3, PlayerPrefs.GetInt("Chance Dropdown 3"));
+        if (PlayerPrefs.HasKey("Chance Value 4")) {
+            SetChanceButtonValue(4, PlayerPrefs.GetInt("Chance Value 4"));
         } else {
-            chanceDropdowns[3].value = 10; // 50%
+            SetChanceButtonValue(4, 10); // 50%
         }
-        if (PlayerPrefs.HasKey("Chance Dropdown 5")) {
-            SetChanceDropdownValue(5, PlayerPrefs.GetInt("Chance Dropdown 5"));
+        if (PlayerPrefs.HasKey("Chance Value 5")) {
+            SetChanceButtonValue(5, PlayerPrefs.GetInt("Chance Value 5"));
         } else {
-            chanceDropdowns[5].value = 15; // 75%
+            SetChanceButtonValue(5, 15); // 75%
         }
-        if (PlayerPrefs.HasKey("Chance Dropdown 6")) {
-            SetChanceDropdownValue(6, PlayerPrefs.GetInt("Chance Dropdown 6"));
+        if (PlayerPrefs.HasKey("Chance Value 6")) {
+            SetChanceButtonValue(6, PlayerPrefs.GetInt("Chance Value 6"));
         } else {
-            chanceDropdowns[6].value = 5; // 25%
+            SetChanceButtonValue(6, 5); // 25%
         }
 
         // Get objectButtons PlayerPrefs
@@ -104,10 +105,10 @@ public class AlgorithmMenu : MonoBehaviour {
         }
 
         // Add listener to dropdowns
-        for (int i = 0; i < chanceDropdowns.Count; i++) {
-            int copy = i;
-            chanceDropdowns[copy].onValueChanged.AddListener(delegate { SetChanceDropdownValue(copy, chanceDropdowns[copy].value); });
-        }
+        //for (int i = 0; i < chanceDropdowns.Count; i++) {
+        //    int copy = i;
+        //    chanceDropdowns[copy].onValueChanged.AddListener(delegate { SetChanceButtonValue(copy, chanceDropdowns[copy].value); });
+        //}
 
         // Add listeners to buttons
         for (int i = 0; i < objectButtons.Count; i++) {
@@ -128,38 +129,41 @@ public class AlgorithmMenu : MonoBehaviour {
         }
     }
 
-    void SetChanceDropdownValue(int ndx, int value) {
+    public void SetChanceButtonValue(int ndx, int value) {
         float valueAsFloat = value;
-        GameManager.S.spawner.chancesToSpawn[ndx] = valueAsFloat / 20;
-
-        chanceDropdowns[ndx].value = value;
+        GameManager.S.spawner.chancesToSpawn[ndx] = valueAsFloat / 20f;
 
         // If dropdown values total == 100%, reset colors
-        if (ndx == 0 || ndx == 1 || ndx == 4) {
-            List<TMPro.TMP_Dropdown> a = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[0], chanceDropdowns[1], chanceDropdowns[4] };
-            if (CheckDropdownForValidValues(a)) {
-                ResetDropdownColor(chanceDropdowns[0]);
-                ResetDropdownColor(chanceDropdowns[1]);
-                ResetDropdownColor(chanceDropdowns[4]);
+        if (ndx == 0 || ndx == 1 || ndx == 2) {
+            List<float> a = new List<float>() { GameManager.S.spawner.chancesToSpawn[0], GameManager.S.spawner.chancesToSpawn[1], GameManager.S.spawner.chancesToSpawn[2] };
+            if (CheckButtonForValidValues(a)) {
+                ResetButtonColor(chanceButtons[0]);
+                ResetButtonColor(chanceButtons[1]);
+                ResetButtonColor(chanceButtons[2]);
             }
-        } else if (ndx == 2 || ndx == 3) {
-            List<TMPro.TMP_Dropdown> b = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[2], chanceDropdowns[3] };
-            if (CheckDropdownForValidValues(b)) {
-                ResetDropdownColor(chanceDropdowns[2]);
-                ResetDropdownColor(chanceDropdowns[3]);
+        } else if (ndx == 3 || ndx == 4) {
+            List<float> b = new List<float>() { GameManager.S.spawner.chancesToSpawn[3], GameManager.S.spawner.chancesToSpawn[4] };
+            if (CheckButtonForValidValues(b)) {
+                ResetButtonColor(chanceButtons[3]);
+                ResetButtonColor(chanceButtons[4]);
             }
         } else if (ndx == 5 || ndx == 6) {
-            List<TMPro.TMP_Dropdown> c = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[5], chanceDropdowns[6] };
-            if (CheckDropdownForValidValues(c)) {
-                ResetDropdownColor(chanceDropdowns[5]);
-                ResetDropdownColor(chanceDropdowns[6]);
+            List<float> c = new List<float>() { GameManager.S.spawner.chancesToSpawn[5], GameManager.S.spawner.chancesToSpawn[6] };
+            if (CheckButtonForValidValues(c)) {
+                ResetButtonColor(chanceButtons[5]);
+                ResetButtonColor(chanceButtons[6]);
             }
         }
+
+        // Save
+        string tString = "Chance Value " + ndx.ToString();
+        float tFloat = GameManager.S.spawner.chancesToSpawn[ndx] * 20f;
+        PlayerPrefs.SetInt(tString, (int)tFloat);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //
     void OpenObjectSelectionSubMenu(int ndx) {
         // Cache button index
@@ -227,15 +231,23 @@ public class AlgorithmMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Set dropdowns to default values
-            SetChanceDropdownValue(0, 6); // 30%
-            SetChanceDropdownValue(1, 7); // 35%
-            SetChanceDropdownValue(4, 7); // 35%
+            SetChanceButtonValue(0, 6); // 30%
+            SetChanceButtonValue(1, 7); // 35%
+            SetChanceButtonValue(2, 7); // 35%
 
-            SetChanceDropdownValue(2, 10); // 50%
-            SetChanceDropdownValue(3, 10); // 50%
+            SetChanceButtonValue(3, 10); // 50%
+            SetChanceButtonValue(4, 10); // 50%
 
-            SetChanceDropdownValue(5, 15); // 75%
-            SetChanceDropdownValue(6, 5); // 25%
+            SetChanceButtonValue(5, 15); // 75%
+            SetChanceButtonValue(6, 5); // 25%
+
+            chanceButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "30%";
+            chanceButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
+            chanceButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
+            chanceButtons[3].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
+            chanceButtons[4].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
+            chanceButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = "75%";
+            chanceButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = "25%";
 
             SetObjectButtonValue(0, 3); // Horizontal block
             SetObjectButtonValue(1, 0); // Vertical low block
@@ -251,23 +263,26 @@ public class AlgorithmMenu : MonoBehaviour {
         }
     }
 
-    public bool CheckAllDropdownsForValidValues() {
+    public bool CheckAllButtonsForValidValues() {
         List<bool> isTrue = new List<bool>();
 
-        List<TMPro.TMP_Dropdown> a = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[0], chanceDropdowns[1], chanceDropdowns[4] };
-        if (!CheckDropdownForValidValues(a)) {
-            DropdownValuesInvalid(a, Color.red);
-            isTrue.Add(CheckDropdownForValidValues(a));
+        List<float> aFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[0], GameManager.S.spawner.chancesToSpawn[1], GameManager.S.spawner.chancesToSpawn[2] };
+        List<Button> aButtons = new List<Button>() { chanceButtons[0], chanceButtons[1], chanceButtons[2] };
+        if (!CheckButtonForValidValues(aFloats)) {
+            ButtonValuesInvalid(aButtons, Color.red);
+            isTrue.Add(CheckButtonForValidValues(aFloats));
         }
-        List<TMPro.TMP_Dropdown> b = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[2], chanceDropdowns[3] };
-        if (!CheckDropdownForValidValues(b)) {
-            DropdownValuesInvalid(b, new Color(1, 0.25f, 0, 1));
-            isTrue.Add(CheckDropdownForValidValues(b));
+        List<float> bFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[3], GameManager.S.spawner.chancesToSpawn[4] };
+        List<Button> bButtons = new List<Button>() { chanceButtons[3], chanceButtons[4] };
+        if (!CheckButtonForValidValues(bFloats)) {
+            ButtonValuesInvalid(bButtons, new Color(1, 0.25f, 0, 1));
+            isTrue.Add(CheckButtonForValidValues(bFloats));
         }
-        List<TMPro.TMP_Dropdown> c = new List<TMPro.TMP_Dropdown>() { chanceDropdowns[5], chanceDropdowns[6] };
-        if (!CheckDropdownForValidValues(c)) {
-            DropdownValuesInvalid(c, Color.yellow);
-            isTrue.Add(CheckDropdownForValidValues(c));
+        List<float> cFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[5], GameManager.S.spawner.chancesToSpawn[6] };
+        List<Button> cButtons = new List<Button>() { chanceButtons[5], chanceButtons[6] };
+        if (!CheckButtonForValidValues(cFloats)) {
+            ButtonValuesInvalid(cButtons, Color.yellow);
+            isTrue.Add(CheckButtonForValidValues(cFloats));
         }
 
         for (int i = 0; i < isTrue.Count; i++) {
@@ -279,62 +294,61 @@ public class AlgorithmMenu : MonoBehaviour {
             }
         }
 
-        //
-        SavePlayerPrefs();
-
         return true;
     }
 
-    void SavePlayerPrefs() {
-        // Chance dropdowns
-        for (int i = 0; i < chanceDropdowns.Count; i++) {
-            string tString = "Chance Dropdown " + i.ToString();
-            PlayerPrefs.SetInt(tString, chanceDropdowns[i].value);
+    public void SavePlayerPrefs() {
+        // Chance Values
+        for (int i = 0; i < chanceButtons.Count; i++) {
+            int copy = i;
+            string tString = "Chance Value " + copy.ToString();
+            float tFloat = GameManager.S.spawner.chancesToSpawn[copy] * 20f;
+            PlayerPrefs.SetInt(tString, (int)tFloat);
         }
     }
 
-    void DropdownValuesInvalid(List<TMPro.TMP_Dropdown> chanceDropdowns, Color color) {
+    void ButtonValuesInvalid(List<Button> chanceButtons, Color color) {
         // Display text
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted linked dropdowns is 100%.");
 
         // Highlight dropdowns
-        for (int i = 0; i < chanceDropdowns.Count; i++) {
+        for (int i = 0; i < chanceButtons.Count; i++) {
             // Set colors
-            ColorBlock cb = chanceDropdowns[i].colors;
+            ColorBlock cb = chanceButtons[i].colors;
             cb.normalColor = color;
             cb.highlightedColor = color;
             cb.selectedColor = color;
-            chanceDropdowns[i].colors = cb;
+            chanceButtons[i].colors = cb;
 
             // Shake animation clip
-            Animator anim = chanceDropdowns[i].GetComponent<Animator>();
+            Animator anim = chanceButtons[i].GetComponent<Animator>();
             if (anim) {
                 anim.CrossFade("Shake", 0);
             }
         }
     }
 
-    bool CheckDropdownForValidValues(List<TMPro.TMP_Dropdown> chanceDropdowns) {
-        // Add up chanceDropdown values
-        int total = 0;
-        for (int i = 0; i < chanceDropdowns.Count; i++) {
-            total += chanceDropdowns[i].value;
+    bool CheckButtonForValidValues(List<float> chanceValues) {
+        // Add up chance values
+        float total = 0;
+        for (int i = 0; i < chanceValues.Count; i++) {
+            total += chanceValues[i];
         }
 
         // Prompt user that combined dropdown values must equal 100%
-        if (total == 20) {
+        if (total == 1.0) {
             return true;
         }
 
         return false;
     }
 
-    void ResetDropdownColor(TMPro.TMP_Dropdown chanceDropdown) {
-        ColorBlock cb = chanceDropdown.colors;
+    void ResetButtonColor(Button chanceButton) {
+        ColorBlock cb = chanceButton.colors;
         cb.normalColor = Color.white;
         cb.highlightedColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 1);
         cb.selectedColor = new Color(0.9607843f, 0.9607843f, 0.9607843f, 1);
-        chanceDropdown.colors = cb;
+        chanceButton.colors = cb;
     }
 
     // Sets the DisplayText's message depending on which page of the menu is visible

@@ -46,7 +46,7 @@ public class MoreMenu : MonoBehaviour {
     //
     void ActivateMenuGO(int ndx) {
         //
-        if (GameManager.S.algorithmMenuCS.CheckAllDropdownsForValidValues()) {
+        if (GameManager.S.algorithmMenuCS.CheckAllButtonsForValidValues()) {
             // Deactivate all menus
             GameManager.utilities.SetActiveList(menuGOs, false);
 
@@ -84,7 +84,7 @@ public class MoreMenu : MonoBehaviour {
     //
     public void BackToMainMenuButton() {
         //
-        if (GameManager.S.algorithmMenuCS.CheckAllDropdownsForValidValues()) {
+        if (GameManager.S.algorithmMenuCS.CheckAllButtonsForValidValues()) {
             // Deactivate this menu
             gameObject.SetActive(false);
 
