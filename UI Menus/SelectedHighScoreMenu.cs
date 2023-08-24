@@ -38,16 +38,10 @@ public class SelectedHighScoreMenu : MonoBehaviour {
 
     private void Start() {
         // Add listeners to buttons
-        entryButtons[0].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(0); });
-        entryButtons[1].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(1); });
-        entryButtons[2].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(2); });
-        entryButtons[3].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(3); });
-        entryButtons[4].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(4); });
-        entryButtons[5].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(5); });
-        entryButtons[6].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(6); });
-        entryButtons[7].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(7); });
-        entryButtons[8].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(8); });
-        entryButtons[9].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(9); });
+        for (int i = 0; i < entryButtons.Count; i++) {
+            int copy = i;
+            entryButtons[copy].onClick.AddListener(delegate { DisplaySelectedHighScoreEntryData(copy); });
+        }
         backToScoreboardButton.onClick.AddListener(delegate { GoBackToScoreboard(); });
 
         selectedHighScoreMenuGO.SetActive(false);

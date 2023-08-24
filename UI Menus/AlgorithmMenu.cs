@@ -16,6 +16,9 @@ public class AlgorithmMenu : MonoBehaviour {
 
     public GameObject               objectSelectionSubMenu;
 
+    public Button                   loadButton;
+    public Button                   saveButton;
+    public Button                   deleteButton;
     public Button                   goBackButton;
 
     public Button                   defaultSettingsButton;
@@ -101,69 +104,28 @@ public class AlgorithmMenu : MonoBehaviour {
         }
 
         // Add listener to dropdowns
-        chanceDropdowns[0].onValueChanged.AddListener(delegate { SetChanceDropdownValue(0, chanceDropdowns[0].value); });
-        chanceDropdowns[1].onValueChanged.AddListener(delegate { SetChanceDropdownValue(1, chanceDropdowns[1].value); });
-        chanceDropdowns[2].onValueChanged.AddListener(delegate { SetChanceDropdownValue(2, chanceDropdowns[2].value); });
-        chanceDropdowns[3].onValueChanged.AddListener(delegate { SetChanceDropdownValue(3, chanceDropdowns[3].value); });
-        chanceDropdowns[4].onValueChanged.AddListener(delegate { SetChanceDropdownValue(4, chanceDropdowns[4].value); });
-        chanceDropdowns[5].onValueChanged.AddListener(delegate { SetChanceDropdownValue(5, chanceDropdowns[5].value); });
-        chanceDropdowns[6].onValueChanged.AddListener(delegate { SetChanceDropdownValue(6, chanceDropdowns[6].value); });
+        for (int i = 0; i < chanceDropdowns.Count; i++) {
+            int copy = i;
+            chanceDropdowns[copy].onValueChanged.AddListener(delegate { SetChanceDropdownValue(copy, chanceDropdowns[copy].value); });
+        }
 
         // Add listeners to buttons
-        objectButtons[0].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(0); });
-        objectButtons[1].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(1); });
-        objectButtons[2].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(2); });
-        objectButtons[3].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(3); });
-        objectButtons[4].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(4); });
+        for (int i = 0; i < objectButtons.Count; i++) {
+            int copy = i;
+            objectButtons[copy].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(copy); });
+        }
+
+        loadButton.onClick.AddListener(delegate { LoadCustomAlgorithmButton(); });
+        saveButton.onClick.AddListener(delegate { SaveCustomAlgorithmButton(); });
+        deleteButton.onClick.AddListener(delegate { DeleteCustomAlgorithmButton(); });
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
         goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
 
         // Add listeners to object selection sub menu buttons
-        objectSubMenuButtons[0].onClick.AddListener(delegate { SetObjectToSpawn(0); });
-        objectSubMenuButtons[1].onClick.AddListener(delegate { SetObjectToSpawn(1); });
-        objectSubMenuButtons[2].onClick.AddListener(delegate { SetObjectToSpawn(2); });
-        objectSubMenuButtons[3].onClick.AddListener(delegate { SetObjectToSpawn(3); });
-        objectSubMenuButtons[4].onClick.AddListener(delegate { SetObjectToSpawn(4); });
-        objectSubMenuButtons[5].onClick.AddListener(delegate { SetObjectToSpawn(5); });
-        objectSubMenuButtons[6].onClick.AddListener(delegate { SetObjectToSpawn(6); });
-        objectSubMenuButtons[7].onClick.AddListener(delegate { SetObjectToSpawn(7); });
-        objectSubMenuButtons[8].onClick.AddListener(delegate { SetObjectToSpawn(8); });
-        objectSubMenuButtons[9].onClick.AddListener(delegate { SetObjectToSpawn(9); });
-        objectSubMenuButtons[10].onClick.AddListener(delegate { SetObjectToSpawn(10); });
-        objectSubMenuButtons[11].onClick.AddListener(delegate { SetObjectToSpawn(11); });
-        objectSubMenuButtons[12].onClick.AddListener(delegate { SetObjectToSpawn(12); });
-        objectSubMenuButtons[13].onClick.AddListener(delegate { SetObjectToSpawn(13); });
-        objectSubMenuButtons[14].onClick.AddListener(delegate { SetObjectToSpawn(14); });
-        objectSubMenuButtons[15].onClick.AddListener(delegate { SetObjectToSpawn(15); });
-        objectSubMenuButtons[16].onClick.AddListener(delegate { SetObjectToSpawn(16); });
-        objectSubMenuButtons[17].onClick.AddListener(delegate { SetObjectToSpawn(17); });
-        objectSubMenuButtons[18].onClick.AddListener(delegate { SetObjectToSpawn(18); });
-        objectSubMenuButtons[19].onClick.AddListener(delegate { SetObjectToSpawn(19); });
-        objectSubMenuButtons[20].onClick.AddListener(delegate { SetObjectToSpawn(20); });
-        objectSubMenuButtons[21].onClick.AddListener(delegate { SetObjectToSpawn(21); });
-        objectSubMenuButtons[22].onClick.AddListener(delegate { SetObjectToSpawn(22); });
-        objectSubMenuButtons[23].onClick.AddListener(delegate { SetObjectToSpawn(23); });
-        objectSubMenuButtons[24].onClick.AddListener(delegate { SetObjectToSpawn(24); });
-        objectSubMenuButtons[25].onClick.AddListener(delegate { SetObjectToSpawn(25); });
-        objectSubMenuButtons[26].onClick.AddListener(delegate { SetObjectToSpawn(26); });
-        objectSubMenuButtons[27].onClick.AddListener(delegate { SetObjectToSpawn(27); });
-        objectSubMenuButtons[28].onClick.AddListener(delegate { SetObjectToSpawn(28); });
-        objectSubMenuButtons[29].onClick.AddListener(delegate { SetObjectToSpawn(29); });
-        objectSubMenuButtons[30].onClick.AddListener(delegate { SetObjectToSpawn(30); });
-        objectSubMenuButtons[31].onClick.AddListener(delegate { SetObjectToSpawn(31); });
-        objectSubMenuButtons[32].onClick.AddListener(delegate { SetObjectToSpawn(32); });
-        objectSubMenuButtons[33].onClick.AddListener(delegate { SetObjectToSpawn(33); });
-        objectSubMenuButtons[34].onClick.AddListener(delegate { SetObjectToSpawn(34); });
-        objectSubMenuButtons[35].onClick.AddListener(delegate { SetObjectToSpawn(35); });
-        objectSubMenuButtons[36].onClick.AddListener(delegate { SetObjectToSpawn(36); });
-        objectSubMenuButtons[37].onClick.AddListener(delegate { SetObjectToSpawn(37); });
-        objectSubMenuButtons[38].onClick.AddListener(delegate { SetObjectToSpawn(38); });
-        objectSubMenuButtons[39].onClick.AddListener(delegate { SetObjectToSpawn(39); });
-        objectSubMenuButtons[40].onClick.AddListener(delegate { SetObjectToSpawn(40); });
-        objectSubMenuButtons[41].onClick.AddListener(delegate { SetObjectToSpawn(41); });
-        objectSubMenuButtons[42].onClick.AddListener(delegate { SetObjectToSpawn(42); });
-        objectSubMenuButtons[43].onClick.AddListener(delegate { SetObjectToSpawn(43); });
-        objectSubMenuButtons[44].onClick.AddListener(delegate { SetObjectToSpawn(44); });
+        for (int i = 0; i < objectSubMenuButtons.Count; i++) {
+            int copy = i;
+            objectSubMenuButtons[copy].onClick.AddListener(delegate { SetObjectToSpawn(copy); });
+        }
     }
 
     void SetChanceDropdownValue(int ndx, int value) {
@@ -236,6 +198,18 @@ public class AlgorithmMenu : MonoBehaviour {
         // Set button sprite
         objectButtonSpriteNdx[buttonNdx] = objectNdx;
         objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
+    }
+
+    void LoadCustomAlgorithmButton() {
+        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
+    }
+
+    void SaveCustomAlgorithmButton() {
+        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
+    }
+
+    void DeleteCustomAlgorithmButton() {
+        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
