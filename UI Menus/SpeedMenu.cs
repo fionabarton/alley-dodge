@@ -55,27 +55,27 @@ public class SpeedMenu : MonoBehaviour {
     }
 
     //
-    void SetStartingObjectSpeedDropdownValue(int value) {
+    public void SetStartingObjectSpeedDropdownValue(int value) {
         GameManager.S.spawner.startingObjectSpeed = value + 1;
 
         speedDropdowns[0].value = value;
     }
 
-    void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
+    public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
         float valueAsFloat = value;
         GameManager.S.spawner.amountToIncreaseObjectSpeed = (valueAsFloat / 10);
 
         speedDropdowns[1].value = value;
     }
 
-    void SetStartingSpawnSpeedDropdownValue(int value) {
+    public void SetStartingSpawnSpeedDropdownValue(int value) {
         float valueAsFloat = value;
         GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 0.1f;
 
         speedDropdowns[2].value = value;
     }
 
-    void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
+    public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
         float valueAsFloat = value;
         GameManager.S.spawner.amountToDecreaseSpawnSpeed = (valueAsFloat / 10);
 

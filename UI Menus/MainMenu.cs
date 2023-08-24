@@ -85,8 +85,19 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.EnableClimbInteractors(true);
 
         // In case the level or alley dropdowns are set to something other than 1
-        SetLevel(false);
-        SetAlleyAmount(alleyAmountDropdown.value);
+        //SetLevel(false);
+        if (PlayerPrefs.HasKey("Level Select")) {
+            SetLevel(PlayerPrefs.GetInt("Level Select"), false);
+        } else {
+            SetLevel(1, false);
+        }
+
+        //SetAlleyAmount(alleyAmountDropdown.value);
+        if (PlayerPrefs.HasKey("Alley Amount")) {
+            SetAlleyAmount(PlayerPrefs.GetInt("Alley Amount"));
+        } else {
+            SetAlleyAmount(0);
+        }
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
@@ -199,6 +210,42 @@ public class MainMenu : MonoBehaviour {
         }        
     }
 
+    public void SetLevel(int level, bool displayText = true) {
+        // Save settings
+        PlayerPrefs.SetInt("Level Select", level);
+
+        // Set level to value of dropdown
+        GameManager.S.score.level = (level);
+        GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
+
+        // Set spawn and object speed
+        if (GameManager.S.score.level != 1) {
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed - ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToDecreaseSpawnSpeed);
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed + ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToIncreaseObjectSpeed);
+        } else {
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
+        }
+
+        // Set colorNdx
+        if (GameManager.S.score.level != 1) {
+            GameManager.color.colorNdx = GameManager.S.score.level - 2;
+            GameManager.color.GetNewColorPalette();
+        } else {
+            GameManager.color.ResetPalette();
+        }
+
+        // Set display text colors
+        GameManager.color.SetDisplayTextPalette();
+
+        if (displayText) {
+            if (gameObject.activeInHierarchy) {
+                // Delayed text display
+                delayedTextDisplay.DisplayText("Level selected!");
+            }
+        }
+    }
+
     // On value changed of alleyAmountDropdown, sets alley amount
     public void SetAlleyAmount(int amount, bool displayText = true) {
         // Save settings
@@ -231,7 +278,12 @@ public class MainMenu : MonoBehaviour {
     // On click of startGameButton, starts game
     void StartGame() {
         //
-        SetLevel();
+        //SetLevel();
+        if (PlayerPrefs.HasKey("Level Select")) {
+            SetLevel(PlayerPrefs.GetInt("Level Select"));
+        } else {
+            SetLevel(1);
+        }
 
         // Updates score and level GUI
         GameManager.S.score.UpdateGUI();
@@ -268,7 +320,12 @@ public class MainMenu : MonoBehaviour {
         // Activate exit run menu podium
         GameManager.S.podiums.ActivateMenus(true, false);
 
-        SetAlleyAmount(alleyAmountDropdown.value);
+        //SetAlleyAmount(alleyAmountDropdown.value);
+        if (PlayerPrefs.HasKey("Alley Amount")) {
+            SetAlleyAmount(PlayerPrefs.GetInt("Alley Amount"));
+        } else {
+            SetAlleyAmount(0);
+        }
     }
 
     //
