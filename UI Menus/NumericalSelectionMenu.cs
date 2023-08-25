@@ -285,19 +285,15 @@ public class NumericalSelectionMenu : MonoBehaviour {
     }
 }
 
-//To do:
-// - Add chance button functionality
-// - On reset to default settings, reset button text value
-
 //Main Menu
-//Level select (1-10) (1, 2, 3, etc.) (Count: 10)
-//Alley amount(3,5,7) (Count: 3)
+    //Level select (1-10) (1, 2, 3, etc.) (Count: 10)
+    //Alley amount(3,5,7) (Count: 3)
 
 //Algorithm Menu
-//Chance dropdowns (0%-100%) (0%, 5%, 10%, etc.) (Count: 21)
+    //Chance dropdowns (0%-100%) (0%, 5%, 10%, etc.) (Count: 21)
 
 //Speed Menu
-//Object speed (1-20) (1, 2, 3, etc.) (Count: 20)
-//Amount to increase (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)
-//Spawn speed(0.1-2.0) (0.1, 0.2, 0.3, etc.) (Count: 20)
-//Amount to decrease (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)
+    //Object speed (1-20) (1, 2, 3, etc.) (Count: 20)
+    //Amount to increase (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)
+    //Spawn speed(0.1-2.0) (0.1, 0.2, 0.3, etc.) (Count: 20)
+    //Amount to decrease (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)

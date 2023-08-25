@@ -6,8 +6,6 @@ using TMPro;
 
 public class AlgorithmMenu : MonoBehaviour {
     [Header("Set in Inspector")]
-    // Dropdowns, & buttons
-    public List<TMP_Dropdown>       chanceDropdowns;
     public List<Button>             chanceButtons;
 
     public List<Button>             objectButtons;
@@ -103,12 +101,6 @@ public class AlgorithmMenu : MonoBehaviour {
         } else {
             SetObjectButtonValue(4, 44); // Shield pickup
         }
-
-        // Add listener to dropdowns
-        //for (int i = 0; i < chanceDropdowns.Count; i++) {
-        //    int copy = i;
-        //    chanceDropdowns[copy].onValueChanged.AddListener(delegate { SetChanceButtonValue(copy, chanceDropdowns[copy].value); });
-        //}
 
         // Add listeners to buttons
         for (int i = 0; i < objectButtons.Count; i++) {

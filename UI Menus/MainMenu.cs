@@ -12,8 +12,8 @@ public class MainMenu : MonoBehaviour {
 
     // Slider, dropdowns, & buttons
     public Slider                   playerHeightSlider;
-    public TMPro.TMP_Dropdown       levelSelectDropdown;
-    public TMPro.TMP_Dropdown       alleyAmountDropdown;
+    public Button                   levelButton;
+    public Button                   alleyAmountButton;
     public Button                   startGameButton;
     public Button                   exitGameButton;
     public Button                   resetButton;
@@ -52,20 +52,18 @@ public class MainMenu : MonoBehaviour {
             playerHeightSlider.value = 168;
         }
         if (PlayerPrefs.HasKey("Level Select")) {
-            levelSelectDropdown.value = PlayerPrefs.GetInt("Level Select");
+            SetLevel(PlayerPrefs.GetInt("Level Select"));
         } else {
-            levelSelectDropdown.value = 0;
+            SetLevel(1);
         }
         if (PlayerPrefs.HasKey("Alley Amount")) {
-            alleyAmountDropdown.value = PlayerPrefs.GetInt("Alley Amount");
+            SetAlleyAmount(PlayerPrefs.GetInt("Alley Amount"));
         } else {
-            alleyAmountDropdown.value = 0;
+            SetAlleyAmount(0);
         }
 
-        // Add listener to slider and dropdowns
+        // Add listener to slider 
         playerHeightSlider.onValueChanged.AddListener(delegate { SetPlayerHeight(playerHeightSlider.value); });
-        levelSelectDropdown.onValueChanged.AddListener(delegate { SetLevel(); });
-        alleyAmountDropdown.onValueChanged.AddListener(delegate { SetAlleyAmount(alleyAmountDropdown.value); });
 
         // Add listeners to buttons
         startGameButton.onClick.AddListener(delegate { StartGame(); });
@@ -85,7 +83,6 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.EnableClimbInteractors(true);
 
         // In case the level or alley dropdowns are set to something other than 1
-        //SetLevel(false);
         if (PlayerPrefs.HasKey("Level Select")) {
             SetLevel(PlayerPrefs.GetInt("Level Select"), false);
         } else {
@@ -173,43 +170,6 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.EnableClimbInteractors(true);
     }
 
-    // On value changed of levelSelectDropdown, adjust level settings accordingly
-    void SetLevel(bool displayText = true) {
-        // Save settings
-        PlayerPrefs.SetInt("Level Select", levelSelectDropdown.value);
-
-        // Set level to value of dropdown
-        GameManager.S.score.level = (levelSelectDropdown.value + 1);
-        GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
-
-        // Set spawn and object speed
-        if(GameManager.S.score.level != 1) {
-            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed - ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToDecreaseSpawnSpeed);
-            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed + ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToIncreaseObjectSpeed);
-        } else {
-            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
-            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
-        }
-
-        // Set colorNdx
-        if (GameManager.S.score.level != 1) {
-            GameManager.color.colorNdx = GameManager.S.score.level - 2;
-            GameManager.color.GetNewColorPalette();
-        } else {
-            GameManager.color.ResetPalette();
-        }
-
-        // Set display text colors
-        GameManager.color.SetDisplayTextPalette();
-
-        if (displayText) {
-            if (gameObject.activeInHierarchy) {
-                // Delayed text display
-                delayedTextDisplay.DisplayText("Level selected!");
-            }
-        }        
-    }
-
     public void SetLevel(int level, bool displayText = true) {
         // Save settings
         PlayerPrefs.SetInt("Level Select", level);
@@ -278,7 +238,6 @@ public class MainMenu : MonoBehaviour {
     // On click of startGameButton, starts game
     void StartGame() {
         //
-        //SetLevel();
         if (PlayerPrefs.HasKey("Level Select")) {
             SetLevel(PlayerPrefs.GetInt("Level Select"));
         } else {
@@ -369,13 +328,14 @@ public class MainMenu : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
-            // Reset slider and dropdown values
+            // Reset player height, level, & alley amount
             playerHeightSlider.value = 168;
-            levelSelectDropdown.value = 0;
-            alleyAmountDropdown.value = 0;
-
-            // Reset alley amount
+            SetLevel(1, false);
             SetAlleyAmount(0);
+
+            // Reset button text
+            levelButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Level 1";
+            alleyAmountButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "3";
 
             // Reset spawn speed
             GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
