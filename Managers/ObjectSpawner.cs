@@ -84,9 +84,9 @@ public class ObjectSpawner : MonoBehaviour {
 		GameManager.S.spawner.objectsCanMove = true;
 	}
 
-	// Set the scale of all cube-shaped obstacles
+	// Set the scale of all cube-shaped obstacles, but NOT the items (yellow quid, blue shield)
 	public void SetObstacleScale(float xScale, float yScale) {
-		for(int i = 0; i < objects.Count; i++) {
+		for(int i = 0; i < objects.Count - 2; i++) {
 			if (xScale == -1) {
 				// Set xScale to its current value
 				xScale = objects[i].transform.localScale.x;
