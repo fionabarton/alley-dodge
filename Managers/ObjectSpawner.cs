@@ -127,10 +127,10 @@ public class ObjectSpawner : MonoBehaviour {
             randomVal = Random.value;
 
             // Instantiate vertical block
-            if (randomVal < chancesToSpawn[2]) { // 0.5f (50%)
+            if (randomVal > chancesToSpawn[2]) { // 0.5f (50%)
                 // Low block
                 InstantiateObject(objectsToSpawn[1]);
-            } else if (randomVal >= (1 - chancesToSpawn[3])) { // 0.5f (50%)
+            } else if (randomVal <= (1 - chancesToSpawn[3])) { // 0.5f (50%)
                 // High block
                 InstantiateObject(objectsToSpawn[2]);
             }
