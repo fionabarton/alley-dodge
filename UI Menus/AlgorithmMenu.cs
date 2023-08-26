@@ -77,29 +77,29 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Get objectButtons PlayerPrefs
         if (PlayerPrefs.HasKey("Object Button 0")) {
-            SetObjectButtonValue(0, PlayerPrefs.GetInt("Object Button 0"));
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 0"), 0);
         } else {
-            SetObjectButtonValue(0, 3); // Horizontal block
+            SetObjectToSpawn(3, 0); // Horizontal block
         }
         if (PlayerPrefs.HasKey("Object Button 1")) {
-            SetObjectButtonValue(1, PlayerPrefs.GetInt("Object Button 1"));
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 1"), 1);
         } else {
-            SetObjectButtonValue(1, 0); // Vertical low block
+            SetObjectToSpawn(0, 1); // Vertical low block
         }
         if (PlayerPrefs.HasKey("Object Button 2")) {
-            SetObjectButtonValue(2, PlayerPrefs.GetInt("Object Button 2"));
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 2"), 2);
         } else {
-            SetObjectButtonValue(2, 17); // Vertical high block
+            SetObjectToSpawn(17, 2); // Vertical high block
         }
         if (PlayerPrefs.HasKey("Object Button 3")) {
-            SetObjectButtonValue(3, PlayerPrefs.GetInt("Object Button 3"));
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 3"), 3);
         } else {
-            SetObjectButtonValue(3, 43); // Quid pickup
+            SetObjectToSpawn(43, 3); // Quid pickup
         }
         if (PlayerPrefs.HasKey("Object Button 4")) {
-            SetObjectButtonValue(4, PlayerPrefs.GetInt("Object Button 4"));
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 4"), 4);
         } else {
-            SetObjectButtonValue(4, 44); // Shield pickup
+            SetObjectToSpawn(44, 4); // Shield pickup
         }
 
         // Add listeners to buttons
@@ -166,34 +166,28 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     //
-    void SetObjectToSpawn(int value) {
-        // Set object to spawn
-        GameManager.S.spawner.objectsToSpawn[selectedObjectButtonNdx] = value;
-
-        // Set button image
-        objectButtonSpriteNdx[selectedObjectButtonNdx] = value;
-        objectButtons[selectedObjectButtonNdx].GetComponent<Image>().sprite = objectSprites[value];
-
-        // Save selected object button value
-        string tString = "Object Button " + selectedObjectButtonNdx.ToString();
-        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[selectedObjectButtonNdx]);
-
-        // Close object (obstacles & items) sub menu
-        CloseObjectSelectionSubMenu();
-    }
-
-    //
     void CloseObjectSelectionSubMenu() {
         objectSelectionSubMenu.SetActive(false);
     }
 
-    //
-    void SetObjectButtonValue(int buttonNdx, int objectNdx) {
+    void SetObjectToSpawn(int objectNdx, int buttonNdx = -1) {
+        if(buttonNdx == -1) {
+            buttonNdx = selectedObjectButtonNdx;
+        }
+
+        // Set object to spawn
         GameManager.S.spawner.objectsToSpawn[buttonNdx] = objectNdx;
 
-        // Set button sprite
+        // Set button image
         objectButtonSpriteNdx[buttonNdx] = objectNdx;
         objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
+
+        // Save selected object button value
+        string tString = "Object Button " + buttonNdx.ToString();
+        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
+
+        // Close object (obstacles & items) sub menu
+        CloseObjectSelectionSubMenu();
     }
 
     void LoadCustomAlgorithmButton() {
@@ -241,11 +235,11 @@ public class AlgorithmMenu : MonoBehaviour {
             chanceButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = "75%";
             chanceButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = "25%";
 
-            SetObjectButtonValue(0, 3); // Horizontal block
-            SetObjectButtonValue(1, 0); // Vertical low block
-            SetObjectButtonValue(2, 17); // Vertical high block
-            SetObjectButtonValue(3, 43); // Quid pickup
-            SetObjectButtonValue(4, 44); // Shield pickup
+            SetObjectToSpawn(3, 0); // Horizontal block
+            SetObjectToSpawn(0, 1); // Vertical low block
+            SetObjectToSpawn(17, 2); // Vertical high block
+            SetObjectToSpawn(43, 3); // Quid pickup
+            SetObjectToSpawn(44, 4); // Shield pickup
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
