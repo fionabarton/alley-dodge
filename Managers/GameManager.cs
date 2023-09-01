@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
     public SubMenu              subMenuCS;
     public ExitRunButton        exitRunButtonLeftCS;
     public ExitRunButton        exitRunButtonRightCS;
+    public CustomAlgorithmMenu  customAlgorithmMenuCS;
 
     // Audio
     public AudioSource          playerAudioSource;
@@ -108,7 +109,10 @@ public class GameManager : MonoBehaviour {
     //// For testing!
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.Space)) {
-
+    //        Test();
     //    }
+    //}
+    //void Test() {
+
     //}
 }
