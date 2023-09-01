@@ -17,7 +17,6 @@ public class AlgorithmMenu : MonoBehaviour {
 
     public Button                   loadButton;
     public Button                   saveButton;
-    public Button                   deleteButton;
     public Button                   goBackButton;
 
     public Button                   defaultSettingsButton;
@@ -108,9 +107,8 @@ public class AlgorithmMenu : MonoBehaviour {
             objectButtons[copy].onClick.AddListener(delegate { OpenObjectSelectionSubMenu(copy); });
         }
 
-        loadButton.onClick.AddListener(delegate { LoadCustomAlgorithmButton(); });
-        saveButton.onClick.AddListener(delegate { SaveCustomAlgorithmButton(); });
-        deleteButton.onClick.AddListener(delegate { DeleteCustomAlgorithmButton(); });
+        loadButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Load"); });
+        saveButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Save"); });
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
         goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
 
@@ -170,7 +168,7 @@ public class AlgorithmMenu : MonoBehaviour {
         objectSelectionSubMenu.SetActive(false);
     }
 
-    void SetObjectToSpawn(int objectNdx, int buttonNdx = -1) {
+    public void SetObjectToSpawn(int objectNdx, int buttonNdx = -1) {
         if(buttonNdx == -1) {
             buttonNdx = selectedObjectButtonNdx;
         }
@@ -188,18 +186,6 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Close object (obstacles & items) sub menu
         CloseObjectSelectionSubMenu();
-    }
-
-    void LoadCustomAlgorithmButton() {
-        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
-    }
-
-    void SaveCustomAlgorithmButton() {
-        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
-    }
-
-    void DeleteCustomAlgorithmButton() {
-        GameManager.S.customAlgorithmMenuCS.gameObject.SetActive(true);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
