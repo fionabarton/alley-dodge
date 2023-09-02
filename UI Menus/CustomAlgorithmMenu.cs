@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 // Allows the user to load and save customized game algorithms (speeds, chances to spawn, & objects to spawn)
 public class CustomAlgorithmMenu : MonoBehaviour {
@@ -19,10 +20,20 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public List<TextMeshProUGUI>    entryButtonDateTexts;
 
     public Button                   goBackButton;
+    public CryptographyManager      crypt;
 
     [Header("Set Dynamically")]
     public CustomAlgorithm[]        customAlgorithms;
     public CustomAlgorithmSaveData  data;
+    private string                  persistentPath = "";
+
+    private void Awake() {
+        // Create save data
+        data = new CustomAlgorithmSaveData();
+
+        // Set path
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "CustomAlgorithmSaveData.json";
+    }
 
     void Start() {
         // Add listeners
@@ -30,16 +41,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
 
         // Initialize array
         customAlgorithms = new CustomAlgorithm[8];
-        customAlgorithms[0] = new CustomAlgorithm("Preset 1", "99 September, 9999");
-        customAlgorithms[1] = new CustomAlgorithm("Preset 2");
-        customAlgorithms[2] = new CustomAlgorithm("Preset 3");
-        customAlgorithms[3] = new CustomAlgorithm("Preset 4");
-        customAlgorithms[4] = new CustomAlgorithm("Preset 5");
-        customAlgorithms[5] = new CustomAlgorithm("Preset 6");
-        customAlgorithms[6] = new CustomAlgorithm("Preset 7");
-        customAlgorithms[7] = new CustomAlgorithm("Preset 8");
-
-        UpdateGUI();
+        SetToDefaultSettings();
 
         gameObject.SetActive(false);
     }
@@ -61,7 +63,11 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         } else if (actionToBePerformed == "Save") {
             AddSaveAlgorithmListeners();
         }
-            
+
+        LoadAll();
+
+        UpdateGUI();
+
         gameObject.SetActive(true);
     }
 
@@ -139,13 +145,107 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         customAlgorithms[ndx].objectToSpawn3 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[3];
         customAlgorithms[ndx].objectToSpawn4 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4];
 
+        SaveAll();
+
         UpdateGUI();
 
         gameObject.SetActive(false);
     }
 
-    public void ResetToDefaultSettings() {
+    public void SaveAll() {
+        // Cache data displayed in game
+        for (int i = 0; i < customAlgorithms.Length; i++) {
+            data.names[i] = customAlgorithms[i].name;
+            data.dates[i] = customAlgorithms[i].date;
 
+            data.startingObjectSpeed[i] = customAlgorithms[i].startingObjectSpeed;
+            data.amountToIncreaseObjectSpeed[i] = customAlgorithms[i].amountToIncreaseObjectSpeed;
+            data.startingSpawnSpeed[i] = customAlgorithms[i].startingSpawnSpeed;
+            data.amountToDecreaseSpawnSpeed[i] = customAlgorithms[i].amountToDecreaseSpawnSpeed;
+
+            data.chanceToSpawn0[i] = customAlgorithms[i].chanceToSpawn0;
+            data.chanceToSpawn1[i] = customAlgorithms[i].chanceToSpawn1;
+            data.chanceToSpawn2[i] = customAlgorithms[i].chanceToSpawn2;
+            data.chanceToSpawn3[i] = customAlgorithms[i].chanceToSpawn3;
+            data.chanceToSpawn4[i] = customAlgorithms[i].chanceToSpawn4;
+            data.chanceToSpawn5[i] = customAlgorithms[i].chanceToSpawn5;
+            data.chanceToSpawn6[i] = customAlgorithms[i].chanceToSpawn6;
+
+            data.objectToSpawn0[i] = customAlgorithms[i].objectToSpawn0;
+            data.objectToSpawn1[i] = customAlgorithms[i].objectToSpawn1;
+            data.objectToSpawn2[i] = customAlgorithms[i].objectToSpawn2;
+            data.objectToSpawn3[i] = customAlgorithms[i].objectToSpawn3;
+            data.objectToSpawn4[i] = customAlgorithms[i].objectToSpawn4;
+        }
+
+        // Get file path
+        string savePath = persistentPath;
+
+        // Get data in JSON format
+        string json = JsonUtility.ToJson(data);
+
+        // Encrypt data
+        json = crypt.Encrypt(json);
+
+        // Write data to file
+        using StreamWriter writer = new StreamWriter(savePath);
+        writer.Write(json);
+        writer.Flush();
+        writer.Close();
+    }
+
+    public void LoadAll() {
+        // If save data file exists
+        if (File.Exists(persistentPath)) {
+            // Read data from file
+            using StreamReader reader = new StreamReader(persistentPath);
+            string json = reader.ReadToEnd();
+
+            // Decrypt data string
+            json = crypt.Decrypt(json);
+
+            // Create SaveData object from its JSON representation
+            CustomAlgorithmSaveData data = JsonUtility.FromJson<CustomAlgorithmSaveData>(json);
+
+            // Display custom algorithm data in game UI
+            for (int i = 0; i < customAlgorithms.Length; i++) {
+                customAlgorithms[i].name = data.names[i];
+                customAlgorithms[i].date = data.dates[i];
+
+                customAlgorithms[i].startingObjectSpeed = data.startingObjectSpeed[i];
+                customAlgorithms[i].amountToIncreaseObjectSpeed = data.amountToIncreaseObjectSpeed[i];
+                customAlgorithms[i].startingSpawnSpeed = data.startingSpawnSpeed[i];
+                customAlgorithms[i].amountToDecreaseSpawnSpeed = data.amountToDecreaseSpawnSpeed[i];
+
+                customAlgorithms[i].chanceToSpawn0 = data.chanceToSpawn0[i];
+                customAlgorithms[i].chanceToSpawn1 = data.chanceToSpawn1[i];
+                customAlgorithms[i].chanceToSpawn2 = data.chanceToSpawn2[i];
+                customAlgorithms[i].chanceToSpawn3 = data.chanceToSpawn3[i];
+                customAlgorithms[i].chanceToSpawn4 = data.chanceToSpawn4[i];
+                customAlgorithms[i].chanceToSpawn5 = data.chanceToSpawn5[i];
+                customAlgorithms[i].chanceToSpawn6 = data.chanceToSpawn6[i];
+
+                customAlgorithms[i].objectToSpawn0 = data.objectToSpawn0[i];
+                customAlgorithms[i].objectToSpawn1 = data.objectToSpawn1[i];
+                customAlgorithms[i].objectToSpawn2 = data.objectToSpawn2[i];
+                customAlgorithms[i].objectToSpawn3 = data.objectToSpawn3[i];
+                customAlgorithms[i].objectToSpawn4 = data.objectToSpawn4[i];
+            }
+        } else {
+            // Display default custom algorithm presets in game UI
+            SetToDefaultSettings();
+        }
+    }
+
+    public void SetToDefaultSettings() {
+        customAlgorithms[0] = new CustomAlgorithm("Preset 1", "99 September, 9999");
+        customAlgorithms[1] = new CustomAlgorithm("Preset 2");
+        customAlgorithms[2] = new CustomAlgorithm("Preset 3");
+        customAlgorithms[3] = new CustomAlgorithm("Preset 4");
+        customAlgorithms[4] = new CustomAlgorithm("Preset 5");
+        customAlgorithms[5] = new CustomAlgorithm("Preset 6");
+        customAlgorithms[6] = new CustomAlgorithm("Preset 7");
+        customAlgorithms[7] = new CustomAlgorithm("Preset 8");
     }
 }
 
