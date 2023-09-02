@@ -48,29 +48,52 @@ public class SpeedMenu : MonoBehaviour {
 
     //
     public void SetStartingObjectSpeedDropdownValue(int value) {
+        // Set value 
         GameManager.S.spawner.startingObjectSpeed = value + 1;
 
+        // Update button text
+        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 1).ToString();
+        
+        // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
     }
 
     public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
         float valueAsFloat = value;
+
+        // Set value
         GameManager.S.spawner.amountToIncreaseObjectSpeed = (valueAsFloat / 10);
 
+        // Update button text
+        amountToIncreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+
+        // Save value
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
     }
 
     public void SetStartingSpawnSpeedDropdownValue(int value) {
         float valueAsFloat = value;
+
+        // Set value
         GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 0.1f;
 
+        // Update button text
+        spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 0.1f).ToString();
+
+        // Save value
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
     }
 
     public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
         float valueAsFloat = value;
+
+        // Set value
         GameManager.S.spawner.amountToDecreaseSpawnSpeed = (valueAsFloat / 10);
 
+        // Update button text
+        amountToDecreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+
+        // Save value
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
     }
 
@@ -92,12 +115,6 @@ public class SpeedMenu : MonoBehaviour {
             SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
             SetStartingSpawnSpeedDropdownValue(19); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
-
-            // Set button text
-            objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "10";
-            amountToIncreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "0.2";
-            spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "2.0";
-            amountToDecreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "0.1";
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");

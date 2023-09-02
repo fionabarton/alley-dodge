@@ -145,6 +145,9 @@ public class AlgorithmMenu : MonoBehaviour {
             }
         }
 
+        // Set button text
+        chanceButtons[ndx].GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat * 5f).ToString() + "%";
+
         // Save
         string tString = "Chance Value " + ndx.ToString();
         float tFloat = GameManager.S.spawner.chancesToSpawn[ndx] * 20f;
@@ -212,14 +215,6 @@ public class AlgorithmMenu : MonoBehaviour {
 
             SetChanceButtonValue(5, 15); // 75%
             SetChanceButtonValue(6, 5); // 25%
-
-            chanceButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "30%";
-            chanceButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
-            chanceButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
-            chanceButtons[3].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
-            chanceButtons[4].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
-            chanceButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = "75%";
-            chanceButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = "25%";
 
             SetObjectToSpawn(3, 0); // Horizontal block
             SetObjectToSpawn(0, 1); // Vertical low block

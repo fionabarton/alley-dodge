@@ -24,12 +24,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
     // level, alleyAmount, moveSpeed, amountToIncrease, spawnSpeed, amountToDecrease, chance (0-6)
     public List<Button> propertyButtons;
 
-    //
-    //public List<Button> chanceButtons;
-
     void Start() {
         // Add listener
-        goBackButton.onClick.AddListener(delegate { GoBackButton(); });
+        goBackButton.onClick.AddListener(delegate { Deactivate(); });
 
         Invoke("OnStart", 0.1f);
     }
@@ -59,70 +56,10 @@ public class NumericalSelectionMenu : MonoBehaviour {
             propertyButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = "3";   
         }
 
-        if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
-            propertyButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Speed Dropdown 0") + 1f).ToString();
-        } else {
-            propertyButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = "10";
-        }
-        if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
-            propertyButtons[3].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Speed Dropdown 1") / 10f).ToString();
-        } else {
-            propertyButtons[3].GetComponentInChildren<TextMeshProUGUI>().text = "0.2";
-        }
-        if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
-            propertyButtons[4].GetComponentInChildren<TextMeshProUGUI>().text = ((PlayerPrefs.GetInt("Speed Dropdown 2") / 10f) + 0.1f).ToString();
-        } else {
-            propertyButtons[4].GetComponentInChildren<TextMeshProUGUI>().text = "2.0";
-        }
-        if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
-            propertyButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Speed Dropdown 3") / 10f).ToString();
-        } else {
-            propertyButtons[5].GetComponentInChildren<TextMeshProUGUI>().text = "0.1";
-        }
-
-        // Get top level chanceDropdowns PlayerPrefs
-        if (PlayerPrefs.HasKey("Chance Value 0")) {
-            propertyButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 0") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[6].GetComponentInChildren<TextMeshProUGUI>().text = "30%";
-        }
-        if (PlayerPrefs.HasKey("Chance Value 1")) {
-            propertyButtons[7].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 1") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[7].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
-        }
-        if (PlayerPrefs.HasKey("Chance Value 2")) {
-            propertyButtons[8].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 2") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[8].GetComponentInChildren<TextMeshProUGUI>().text = "35%";
-        }
-
-        // Get mid level chanceDropdowns PlayerPrefs
-        if (PlayerPrefs.HasKey("Chance Value 3")) {
-            propertyButtons[9].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 3") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[9].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
-        }
-        if (PlayerPrefs.HasKey("Chance Value 4")) {
-            propertyButtons[10].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 4") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[10].GetComponentInChildren<TextMeshProUGUI>().text = "50%";
-        }
-        if (PlayerPrefs.HasKey("Chance Value 5")) {
-            propertyButtons[11].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 5") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[11].GetComponentInChildren<TextMeshProUGUI>().text = "75%";
-        }
-        if (PlayerPrefs.HasKey("Chance Value 6")) {
-            propertyButtons[12].GetComponentInChildren<TextMeshProUGUI>().text = (PlayerPrefs.GetInt("Chance Value 6") * 5f).ToString() + "%";
-        } else {
-            propertyButtons[12].GetComponentInChildren<TextMeshProUGUI>().text = "25%";
-        }
-
         gameObject.SetActive(false);
     }
 
-    void GoBackButton() {
+    void Deactivate() {
         gameObject.SetActive(false);
     }
 
@@ -178,7 +115,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetStartingObjectSpeedDropdownValue(copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(2, objectSpeedValues[copy].ToString()); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 3:
@@ -188,7 +125,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(3, amountToIncreaseValues[copy].ToString()); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 4:
@@ -198,7 +135,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetStartingSpawnSpeedDropdownValue(copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(4, spawnSpeedValues[copy].ToString()); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 5:
@@ -208,7 +145,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(5, amountToDecreaseValues[copy].ToString()); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 6:
@@ -218,7 +155,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(0, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(6, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 7:
@@ -228,7 +165,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(1, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(7, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 8:
@@ -238,7 +175,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(2, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(8, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 9:
@@ -248,7 +185,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(3, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(9, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 10:
@@ -258,7 +195,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(4, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(10, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 11:
@@ -268,7 +205,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(5, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(11, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
             case 12:
@@ -278,7 +215,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     // Add listeners
                     int copy = i;
                     amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(6, copy); });
-                    amountButtons[copy].onClick.AddListener(delegate { SetButtonText(12, chanceValues[copy].ToString() + "%"); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
         }
