@@ -22,6 +22,11 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public Button                   goBackButton;
     public CryptographyManager      crypt;
 
+    // Preview the of selected custom algorithm
+    public List<TextMeshProUGUI>    chanceToSpawnTexts;
+    public List<Image>              objectsToSpawnImages;
+    public List<TextMeshProUGUI>    speedTexts;
+
     [Header("Set Dynamically")]
     public CustomAlgorithm[]        customAlgorithms;
     public CustomAlgorithmSaveData  data;
@@ -246,6 +251,29 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         customAlgorithms[5] = new CustomAlgorithm("Preset 6");
         customAlgorithms[6] = new CustomAlgorithm("Preset 7");
         customAlgorithms[7] = new CustomAlgorithm("Preset 8");
+    }
+
+    // Displays the properties and values of this entry's custom game algorithm
+    // Called on highlight in OnHighlightDisplayCustomAlgorithm.cs
+    public void DisplaySelectedCustomAlgorithm(int buttonNdx) {
+        chanceToSpawnTexts[0].text = (customAlgorithms[buttonNdx].chanceToSpawn0 * 5f).ToString() + "%";
+        chanceToSpawnTexts[1].text = (customAlgorithms[buttonNdx].chanceToSpawn1 * 5f).ToString() + "%";
+        chanceToSpawnTexts[2].text = (customAlgorithms[buttonNdx].chanceToSpawn2 * 5f).ToString() + "%";
+        chanceToSpawnTexts[3].text = (customAlgorithms[buttonNdx].chanceToSpawn3 * 5f).ToString() + "%";
+        chanceToSpawnTexts[4].text = (customAlgorithms[buttonNdx].chanceToSpawn4 * 5f).ToString() + "%";
+        chanceToSpawnTexts[5].text = (customAlgorithms[buttonNdx].chanceToSpawn5 * 5f).ToString() + "%";
+        chanceToSpawnTexts[6].text = (customAlgorithms[buttonNdx].chanceToSpawn6 * 5f).ToString() + "%";
+
+        objectsToSpawnImages[0].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn0];
+        objectsToSpawnImages[1].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn1];
+        objectsToSpawnImages[2].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn2];
+        objectsToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn3];
+        objectsToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn4];
+
+        speedTexts[0].text = "<color=red>Starting object speed:</color> " + (customAlgorithms[buttonNdx].startingObjectSpeed + 1).ToString();
+        speedTexts[1].text = "<color=#FFC800>Amount to increase per level:</color> " + (customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed / 10).ToString();
+        speedTexts[2].text = "<color=red>Starting spawn speed:</color> " + ((customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 0.1f).ToString();
+        speedTexts[3].text = "<color=#FFC800>Amount to decrease per level:</color> " + (customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed / 10).ToString();
     }
 }
 
