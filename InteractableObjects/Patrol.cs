@@ -12,7 +12,7 @@ public class Patrol : MonoBehaviour {
     public bool         isMovingToEndPoint;
 
     void FixedUpdate() {
-        var step = (GameManager.S.spawner.currentObjectSpeed * 0.5f) * Time.deltaTime; // calculate distance to move
+        var step = (GameManager.S.spawner.currentObjectSpeed * 0.25f) * Time.fixedDeltaTime; // calculate distance to move
 
         if (isMovingToEndPoint) {
             transform.position = Vector3.MoveTowards(transform.position, endPoint.position, step);
