@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
     public GameObject           mainMenuGO;
     public GameObject           moreMenuGO;
     public GameObject           subMenuGO;
+    public GameObject           scoreboardMenuGO;
+    public GameObject           selectedHighScoreMenuGO;
 
     // Menu scripts
     public KeyboardInputMenu    keyboardMenuCS;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour {
     public ExitRunButton        exitRunButtonLeftCS;
     public ExitRunButton        exitRunButtonRightCS;
     public CustomAlgorithmMenu  customAlgorithmMenuCS;
+    public SelectedHighScoreMenu selectedHighScoreMenuCS;
 
     // Audio
     public AudioSource          playerAudioSource;
