@@ -88,6 +88,7 @@ public class HighScoreManager : MonoBehaviour {
 
     // Deletes all saved high scores and resets them to default values 
     public void SetHighScoresToDefaultValues(bool saveData = false) {
+        // Populate elements 0 to 19
         highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
         highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
         highScores[2] = new HighScore("Chani", 42, 9, 0, "00:01:52.629");
@@ -109,6 +110,7 @@ public class HighScoreManager : MonoBehaviour {
         highScores[18] = new HighScore("Bb", 2, 1, 0, "00:00:00:000");
         highScores[19] = new HighScore("Aa", 1, 1, 0, "00:00:00:000");
 
+        // Populate elements 20 to 99
         for (int i = 20; i < highScores.Length; i++) {
             highScores[i] = new HighScore("Contestant " + (i + 1).ToString());
         }

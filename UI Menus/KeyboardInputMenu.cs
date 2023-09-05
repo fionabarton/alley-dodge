@@ -34,6 +34,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+    ////
     private void OnEnable() {
         // Display text
         messageDisplay.DisplayText("Congratulations!\nPlease enter your name!");
@@ -109,6 +110,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         }
     }
 
+    ////
     // Sets the displayed name to a predetermined default name
     public void DontCare() {
         // Get a default name
@@ -143,13 +145,12 @@ public class KeyboardInputMenu : MonoBehaviour {
 
         GameManager.S.subMenuCS.AddListeners(SetName, "Are you sure about this name?\nWell, are ya?");
     }
+
+    ////
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance
     void SetName(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
-
-
-        //chanceDropdowns[0].options[chanceDropdowns[0].value].text
 
         // 
         if (yesOrNo == 0) {

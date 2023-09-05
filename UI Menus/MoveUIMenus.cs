@@ -16,8 +16,9 @@ public class MoveUIMenus : MonoBehaviour {
     // Reset to default settings button
     public Button               resetButton;
 
-    // Delayed text display
-    //public DelayedTextDisplay   delayedTextDisplay;
+    // Move UI menus in/out event
+    public delegate void MoveMenusInOut();
+    public static event MoveMenusInOut onMoveMenusInOut;
 
     void Start() {
         Invoke("OnStart", 0.1f);
@@ -67,6 +68,9 @@ public class MoveUIMenus : MonoBehaviour {
 
         // Set UI menus position
         GameManager.utilities.SetPosition(UImenusParentGO, UImenusParentGO.transform.position.x, UImenusParentGO.transform.position.y, zPos);
+
+        // Invoke event
+        onMoveMenusInOut?.Invoke();
     }
 
     // On click, returns all menu settings to their default value
@@ -77,8 +81,5 @@ public class MoveUIMenus : MonoBehaviour {
 
         // Reset UI menus position
         GameManager.utilities.SetPosition(UImenusParentGO, 0, 0, 0);
- 
-        // Delayed text display
-        //delayedTextDisplay.DisplayText("Menu settings set to\ntheir default values!"); 
     }
 }
