@@ -48,7 +48,7 @@ public class OnHighlightPopUpUIElement : MonoBehaviour, IPointerEnterHandler, IP
     // Cache default and "pop up" z position and scale values
     void SetFields() {
         defaultZPos = rectTrans.position.z;
-        popUpZPos = defaultZPos - 0.15f;
+        popUpZPos = defaultZPos - 0.1f;
 
         defaultScale = rectTrans.localScale;
         popUpScale = defaultScale * 1.1f;
