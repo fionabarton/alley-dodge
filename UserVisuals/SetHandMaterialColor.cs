@@ -32,6 +32,9 @@ public class SetHandMaterialColor : MonoBehaviour {
 
         // Instantiate sparks
         Instantiate(sparkParticles, transform.position, transform.rotation);
+
+        // Audio: Damage
+        GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxGrab);
     }
 
     public void OnSelectExited() {
@@ -43,6 +46,9 @@ public class SetHandMaterialColor : MonoBehaviour {
         } else {
             GameManager.S.playerRightHandAnim.CrossFade("DefaultColor", 0);
         }
+
+        // Audio: Damage
+        //GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxGrab);
     }
 
     // Red w/ no opacity
