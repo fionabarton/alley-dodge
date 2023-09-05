@@ -32,6 +32,8 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public CustomAlgorithmSaveData  data;
     private string                  persistentPath = "";
 
+    private int                     selectedButtonNdx;
+
     private void Awake() {
         // Create save data
         data = new CustomAlgorithmSaveData();
@@ -81,7 +83,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
 
         for (int i = 0; i < customAlgorithms.Length; i++) {
             int copy = i;
-            entryButtons[copy].onClick.AddListener(delegate { LoadAlgorithm(copy); });
+            entryButtons[copy].onClick.AddListener(delegate { AddLoadAlgorithmConfirmationListener(copy); });
         }
     }
 
@@ -90,7 +92,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
 
         for (int i = 0; i < customAlgorithms.Length; i++) {
             int copy = i;
-            entryButtons[copy].onClick.AddListener(delegate { SaveAlgorithm(copy); });
+            entryButtons[copy].onClick.AddListener(delegate { AddSaveAlgorithmConfirmationListener(copy); });
         }
     }
 
@@ -102,59 +104,83 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         }
     }
 
-    public void LoadAlgorithm(int ndx) {
-        GameManager.S.speedMenuCS.SetStartingObjectSpeedDropdownValue(customAlgorithms[ndx].startingObjectSpeed);
-        GameManager.S.speedMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(customAlgorithms[ndx].amountToIncreaseObjectSpeed);
-        GameManager.S.speedMenuCS.SetStartingSpawnSpeedDropdownValue(customAlgorithms[ndx].startingSpawnSpeed);
-        GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(customAlgorithms[ndx].amountToDecreaseSpawnSpeed);
+    void AddLoadAlgorithmConfirmationListener(int ndx) {
+        selectedButtonNdx = ndx;
 
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(0, customAlgorithms[ndx].chanceToSpawn0);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(1, customAlgorithms[ndx].chanceToSpawn1);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(2, customAlgorithms[ndx].chanceToSpawn2);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(3, customAlgorithms[ndx].chanceToSpawn3);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(4, customAlgorithms[ndx].chanceToSpawn4);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(5, customAlgorithms[ndx].chanceToSpawn5);
-        GameManager.S.algorithmMenuCS.SetChanceButtonValue(6, customAlgorithms[ndx].chanceToSpawn6);
-
-        GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[ndx].objectToSpawn0, 0);
-        GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[ndx].objectToSpawn1, 1);
-        GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[ndx].objectToSpawn2, 2);
-        GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[ndx].objectToSpawn3, 3);
-        GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[ndx].objectToSpawn4, 4);
-
-        UpdateGUI();
-
-        gameObject.SetActive(false);
+        // Activate sub menu
+        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to load\nthis custom algorithm to this slot?");
     }
 
-    public void SaveAlgorithm(int ndx) {
-        customAlgorithms[ndx].name = "Preset" + ndx.ToString();
-        customAlgorithms[ndx].date = System.DateTime.UtcNow.ToString("dd MMMM, yyyy");
+    void AddSaveAlgorithmConfirmationListener(int ndx) {
+        selectedButtonNdx = ndx;
 
-        customAlgorithms[ndx].startingObjectSpeed = PlayerPrefs.GetInt("Speed Dropdown 0");
-        customAlgorithms[ndx].amountToIncreaseObjectSpeed = PlayerPrefs.GetInt("Speed Dropdown 1");
-        customAlgorithms[ndx].startingSpawnSpeed = PlayerPrefs.GetInt("Speed Dropdown 2");
-        customAlgorithms[ndx].amountToDecreaseSpawnSpeed = PlayerPrefs.GetInt("Speed Dropdown 3");
+        // Activate sub menu
+        GameManager.S.subMenuCS.AddListeners(SaveAlgorithm, "Are you sure that you would like to save\nthis custom algorithm to this slot?");
+    }
 
-        customAlgorithms[ndx].chanceToSpawn0 = PlayerPrefs.GetInt("Chance Value 0");
-        customAlgorithms[ndx].chanceToSpawn1 = PlayerPrefs.GetInt("Chance Value 1");
-        customAlgorithms[ndx].chanceToSpawn2 = PlayerPrefs.GetInt("Chance Value 2");
-        customAlgorithms[ndx].chanceToSpawn3 = PlayerPrefs.GetInt("Chance Value 3");
-        customAlgorithms[ndx].chanceToSpawn4 = PlayerPrefs.GetInt("Chance Value 4");
-        customAlgorithms[ndx].chanceToSpawn5 = PlayerPrefs.GetInt("Chance Value 5");
-        customAlgorithms[ndx].chanceToSpawn6 = PlayerPrefs.GetInt("Chance Value 6");
+    public void LoadAlgorithm(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
 
-        customAlgorithms[ndx].objectToSpawn0 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[0];
-        customAlgorithms[ndx].objectToSpawn1 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[1];
-        customAlgorithms[ndx].objectToSpawn2 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[2];
-        customAlgorithms[ndx].objectToSpawn3 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[3];
-        customAlgorithms[ndx].objectToSpawn4 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4];
+        if (yesOrNo == 0) {
+            GameManager.S.speedMenuCS.SetStartingObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingObjectSpeed);
+            GameManager.S.speedMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToIncreaseObjectSpeed);
+            GameManager.S.speedMenuCS.SetStartingSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingSpawnSpeed);
+            GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToDecreaseSpawnSpeed);
 
-        SaveAll();
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(0, customAlgorithms[selectedButtonNdx].chanceToSpawn0);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(1, customAlgorithms[selectedButtonNdx].chanceToSpawn1);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(2, customAlgorithms[selectedButtonNdx].chanceToSpawn2);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(3, customAlgorithms[selectedButtonNdx].chanceToSpawn3);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(4, customAlgorithms[selectedButtonNdx].chanceToSpawn4);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(5, customAlgorithms[selectedButtonNdx].chanceToSpawn5);
+            GameManager.S.algorithmMenuCS.SetChanceButtonValue(6, customAlgorithms[selectedButtonNdx].chanceToSpawn6);
 
-        UpdateGUI();
+            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn0, 0);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn1, 1);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn2, 2);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn3, 3);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn4, 4);
 
-        gameObject.SetActive(false);
+            UpdateGUI();
+
+            gameObject.SetActive(false);
+        } 
+    }
+
+    public void SaveAlgorithm(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        if (yesOrNo == 0) {
+            customAlgorithms[selectedButtonNdx].name = "Preset" + selectedButtonNdx.ToString();
+            customAlgorithms[selectedButtonNdx].date = System.DateTime.UtcNow.ToString("dd MMMM, yyyy");
+
+            customAlgorithms[selectedButtonNdx].startingObjectSpeed = PlayerPrefs.GetInt("Speed Dropdown 0");
+            customAlgorithms[selectedButtonNdx].amountToIncreaseObjectSpeed = PlayerPrefs.GetInt("Speed Dropdown 1");
+            customAlgorithms[selectedButtonNdx].startingSpawnSpeed = PlayerPrefs.GetInt("Speed Dropdown 2");
+            customAlgorithms[selectedButtonNdx].amountToDecreaseSpawnSpeed = PlayerPrefs.GetInt("Speed Dropdown 3");
+
+            customAlgorithms[selectedButtonNdx].chanceToSpawn0 = PlayerPrefs.GetInt("Chance Value 0");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn1 = PlayerPrefs.GetInt("Chance Value 1");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn2 = PlayerPrefs.GetInt("Chance Value 2");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn3 = PlayerPrefs.GetInt("Chance Value 3");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn4 = PlayerPrefs.GetInt("Chance Value 4");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn5 = PlayerPrefs.GetInt("Chance Value 5");
+            customAlgorithms[selectedButtonNdx].chanceToSpawn6 = PlayerPrefs.GetInt("Chance Value 6");
+
+            customAlgorithms[selectedButtonNdx].objectToSpawn0 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[0];
+            customAlgorithms[selectedButtonNdx].objectToSpawn1 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[1];
+            customAlgorithms[selectedButtonNdx].objectToSpawn2 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[2];
+            customAlgorithms[selectedButtonNdx].objectToSpawn3 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[3];
+            customAlgorithms[selectedButtonNdx].objectToSpawn4 = GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4];
+
+            SaveAll();
+
+            UpdateGUI();
+
+            gameObject.SetActive(false);
+        } 
     }
 
     public void SaveAll() {
