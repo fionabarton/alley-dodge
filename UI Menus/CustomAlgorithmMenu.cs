@@ -7,13 +7,6 @@ using System.IO;
 
 // Allows the user to load and save customized game algorithms (speeds, chances to spawn, & objects to spawn)
 public class CustomAlgorithmMenu : MonoBehaviour {
-    /*
-     * - Name algorithm to save
-     * - Confirmation sub-menu
-     * - Save data
-     * - On hover display algorithm preview
-    */
-
     [Header("Set in Inspector")]
     public List<Button>             entryButtons;
     public List<TextMeshProUGUI>    entryButtonNameTexts;
@@ -114,8 +107,8 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     void AddSaveAlgorithmConfirmationListener(int ndx) {
         selectedButtonNdx = ndx;
 
-        // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(SaveAlgorithm, "Are you sure that you would like to save\nthis custom algorithm to this slot?");
+        // Activate keyboard menu
+        GameManager.S.keyboardMenuCS.Activate("NameCustomAlgorithmEntry");
     }
 
     public void LoadAlgorithm(int yesOrNo = -1) {
@@ -152,8 +145,11 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
+        // Deactivate keyboard input menu
+        GameManager.S.keyboardMenuGO.SetActive(false);
+
         if (yesOrNo == 0) {
-            customAlgorithms[selectedButtonNdx].name = "Preset" + selectedButtonNdx.ToString();
+            customAlgorithms[selectedButtonNdx].name = GameManager.S.keyboardMenuCS.inputString;
             customAlgorithms[selectedButtonNdx].date = System.DateTime.UtcNow.ToString("dd MMMM, yyyy");
 
             customAlgorithms[selectedButtonNdx].startingObjectSpeed = PlayerPrefs.GetInt("Speed Dropdown 0");
@@ -180,7 +176,10 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             gameObject.SetActive(false);
-        } 
+        } else {
+            // Display text
+            GameManager.S.keyboardMenuCS.messageDisplay.DisplayText("Oh, okay. That's cool.\nSo what's the name?");
+        }
     }
 
     public void SaveAll() {

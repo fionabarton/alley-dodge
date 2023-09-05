@@ -14,6 +14,9 @@ public class KeyboardInputMenu : MonoBehaviour {
     // Used to set cursor position
     public GameObject           okButtonGO;
 
+    // Used to add either set high score entry name or custom algorithm name
+    public Button               okButtonCS;
+
     // Shake display text animator
     public Animator             messageDisplayAnim;
 
@@ -21,7 +24,7 @@ public class KeyboardInputMenu : MonoBehaviour {
     public DelayedTextDisplay   messageDisplay;
 
     [Header("Set Dynamically")]
-    private string              inputString = "";
+    public string               inputString = "";
 
     // Uppercase: 0-25, Lowercase: 26-51, Numbers: 52-61, Symbols: 62-65, 66-69, 70-89
     private string              characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789()[]!?.,~@#$%^&*+-=_\"'` :;/\\";
@@ -29,15 +32,42 @@ public class KeyboardInputMenu : MonoBehaviour {
     // Variables related to predetermined default names
     private int                 dontCareNdx;
     private List<string>        dontCareNames = new List<string>() { "Butthead", "Mildew", "Pee Wee", "Disappointment", "Moon Unit" };
-    
+
+    private bool                isSettingHighScoreEntryName;
+
     void Start() {
         gameObject.SetActive(false);
     }
 
-    ////
     private void OnEnable() {
         // Display text
         messageDisplay.DisplayText("Congratulations!\nPlease enter your name!");
+    }
+
+    public void Activate(string actionToBePerformed) {
+        // Remove listeners
+        okButtonCS.onClick.RemoveAllListeners();
+
+        //
+        if (actionToBePerformed == "NameHighScoreEntry") {
+            isSettingHighScoreEntryName = true;
+
+            // Add listener 
+            okButtonCS.onClick.AddListener(delegate { AddSetHighScoreEntryNameConfirmationListeners(); });
+
+            // Display saved name input string
+            GameManager.S.keyboardMenuCS.GetInputString("HighScoreInputString");
+        } else if (actionToBePerformed == "NameCustomAlgorithmEntry") {
+            isSettingHighScoreEntryName = false;
+
+            // Add listener
+            okButtonCS.onClick.AddListener(delegate { AddSetCustomAlgorithmEntryNameConfirmationListeners(); });
+
+            // Display saved name input string
+            GameManager.S.keyboardMenuCS.GetInputString("CustomAlgorithmInputString");
+        }
+
+        gameObject.SetActive(true);
     }
 
     // Add a char to the displayed name
@@ -50,7 +80,11 @@ public class KeyboardInputMenu : MonoBehaviour {
                     DisplayText(inputString + GetRemainingWhitespace());
 
                     // Save settings
-                    PlayerPrefs.SetString("Keyboard Input String", inputString);
+                    if (isSettingHighScoreEntryName) {
+                        PlayerPrefs.SetString("HighScoreInputString", inputString);
+                    } else {
+                        PlayerPrefs.SetString("CustomAlgorithmInputString", inputString);
+                    }
 
                     if (inputString.Length < 15) {
                         // Set active char cursor position
@@ -87,7 +121,11 @@ public class KeyboardInputMenu : MonoBehaviour {
             DisplayText(inputString + GetRemainingWhitespace());
 
             // Save settings
-            PlayerPrefs.SetString("Keyboard Input String", inputString);
+            if (isSettingHighScoreEntryName) {
+                PlayerPrefs.SetString("HighScoreInputString", inputString);
+            } else {
+                PlayerPrefs.SetString("CustomAlgorithmInputString", inputString);
+            }
 
             // Set active char cursor position
             cursorGO.SetActive(true);
@@ -110,7 +148,6 @@ public class KeyboardInputMenu : MonoBehaviour {
         }
     }
 
-    ////
     // Sets the displayed name to a predetermined default name
     public void DontCare() {
         // Get a default name
@@ -118,7 +155,11 @@ public class KeyboardInputMenu : MonoBehaviour {
         DisplayText(inputString + GetRemainingWhitespace());
 
         // Save settings
-        PlayerPrefs.SetString("Keyboard Input String", inputString);
+        if (isSettingHighScoreEntryName) {
+            PlayerPrefs.SetString("HighScoreInputString", inputString);
+        } else {
+            PlayerPrefs.SetString("CustomAlgorithmInputString", inputString);
+        }
 
         // Set active char cursor position
         cursorGO.SetActive(true);
@@ -139,16 +180,25 @@ public class KeyboardInputMenu : MonoBehaviour {
     }
 
     // On 'OK' button click, adds functions to the sub menu's yes/no buttons
-    public void AddSetNameConfirmationListeners() {
+    // - Sets high score entry name
+    public void AddSetHighScoreEntryNameConfirmationListeners() {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(SetName, "Are you sure about this name?\nWell, are ya?");
+        GameManager.S.subMenuCS.AddListeners(SetHighScoreEntryName, "Are you sure about this name?\nWell, are ya?");
     }
 
-    ////
+    // On 'OK' button click, adds functions to the sub menu's yes/no buttons
+    // - Sets custom algorithm entry name
+    public void AddSetCustomAlgorithmEntryNameConfirmationListeners() {
+        // Audio: Confirm
+        GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
+
+        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this slot?\nWell, are ya?");
+    }
+
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance
-    void SetName(int yesOrNo = -1) {
+    void SetHighScoreEntryName(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
@@ -185,7 +235,7 @@ public class KeyboardInputMenu : MonoBehaviour {
                 GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4]
                 );
 
-            // Activate high score menu
+            // Activate selected high score menu
             GameManager.S.highScoreMenuGO.SetActive(true);
 
             // Update high score display
@@ -227,10 +277,10 @@ public class KeyboardInputMenu : MonoBehaviour {
     }
 
     // Display saved name input string
-    public void GetInputString() {
+    public void GetInputString(string playerPrefsKeyName) {
         // GetPlayerPrefs
-        if (PlayerPrefs.HasKey("Keyboard Input String")) {
-            inputString = PlayerPrefs.GetString("Keyboard Input String");
+        if (PlayerPrefs.HasKey(playerPrefsKeyName)) {
+            inputString = PlayerPrefs.GetString(playerPrefsKeyName);
 
             if (inputString != "") {
                 DisplayText(inputString + GetRemainingWhitespace());
