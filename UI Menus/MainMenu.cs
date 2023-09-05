@@ -45,6 +45,13 @@ public class MainMenu : MonoBehaviour {
         GameManager.audioMan.PlayBGMClip(eBGM.bgmSoap);
     }
     void Start() {
+        Invoke("DelayedStart", 0.05f);
+
+        // Set objects' position and scale to their default values
+        Invoke("SetObjects", 0.1f);
+    }
+
+    void DelayedStart() {
         // GetPlayerPrefs
         if (PlayerPrefs.HasKey("Player Height")) {
             playerHeightSlider.value = PlayerPrefs.GetFloat("Player Height");
@@ -71,12 +78,9 @@ public class MainMenu : MonoBehaviour {
         resetButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
         optionsButton.onClick.AddListener(delegate { GoToOptionsMenuButton(); });
         highScoresButton.onClick.AddListener(delegate { GoToHighScoreMenuButton(); });
-        
-        // Set objects' position and scale to their default values
-        Invoke("SetObjects", 0.1f);
     }
 
-    void SetObjects() {
+    void SetObjects() { 
         SetPlayerHeight(playerHeightSlider.value);
 
         // Activate climbing interactors
