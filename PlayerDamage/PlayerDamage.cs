@@ -134,10 +134,11 @@ public class PlayerDamage : MonoBehaviour {
     //
     void ActivateKeyboardMenu() {
         // Activate keyboard input menu
-        GameManager.S.keyboardMenuGO.SetActive(true);
+        //GameManager.S.keyboardMenuGO.SetActive(true);
+        GameManager.S.keyboardMenuCS.Activate("NameHighScoreEntry");
 
-        // Display saved name input string
-        GameManager.S.keyboardMenuCS.GetInputString();
+        //// Display saved name input string
+        //GameManager.S.keyboardMenuCS.GetInputString();
 
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
