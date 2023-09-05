@@ -14,16 +14,18 @@ public class WordManager : MonoBehaviour {
 
     void Start() {
         exclamations = new List<string>() { "Awesome", "Booyah", "Cool", "Cool beans", "Cowabunga", "Dude", "Excellent",
-            "Fabulous", "Fantastic", "Far out", "Gee whiz", "Gnarly", "Great", "Groovy", "Heck yeah", "Hoorah", "Hooray",
+            "Fabulous", "Fantastic", "Far out", "Gee whiz", "Great", "Groovy", "Heck yeah", "Hoorah", "Hooray",
             "Hot diggity dog", "Huzzah", "Incredible", "Nice", "Oh yeah", "Right on", "Splendid", "Sweet", "Terrific",
-            "Tubular", "Unreal", "Wahoo", "Whoop dee doo", "Whoopee", "Wicked", "Woo hoo", "Wow", "Yahoo", "Yay", "Yippee" };
+            "Unreal", "Wahoo", "Whoop dee doo", "Whoopee", "Wicked", "Yahoo", "Yay", "Yippee" };
+        // "Gnarly", "Tubular", "Woo hoo", "Wow"
 
         interjections = new List<string>() { 
-            "Blast", "Blimey", "Blinking heck", "Bloody heck", "Blooming heck", "Confound it", "Cripes", "Dagnabbit", 
-            "Dang", "Dang it", "Darn", "Darn it", "Darnation", "Dash it", "Doggone it", "Flipping heck", 
-            "For crying out loud", "For Heaven's sake", "For Pete's sake", "Frick", "Good golly", "Good gosh", 
-            "Good gracious", "Goodness me", "Gosh darn it", "Gosh darn it to heck", "Great Scott", "My goodness", 
-            "Oh bother", "Oh fiddlesticks", "Oh poo", "Rats", "Shoot", "Shucks", "Strike me pink", "Yuck" };
+            "Blimey", "Blinking heck", "Bloody heck", "Blooming heck", "Dagnabbit", "Dang", "Dang it", "Darn",
+            "Darnation", "Dash it", "Doggone it", "Flipping heck", "For crying out loud", "For Heaven's sake",
+            "For Pete's sake", "Good gosh", "Goodness me", "Gosh darn it", "Gosh darn it to heck", "Great Scott",
+            "Oh fiddlesticks", "Rats", "Shoot" };
+        // "Blast", "Confound it", "Cripes", "Darn it", "Frick", "Good golly", "Good gracious", "My goodness",
+        // "Oh bother", "Oh poo", "Shucks", "Strike me pink", "Yuck"  
 
         // Populate lists of remaining indexes
         PopulateRemainingExclamationNdxs();

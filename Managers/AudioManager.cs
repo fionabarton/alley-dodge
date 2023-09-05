@@ -7,8 +7,9 @@ public enum eBGM {
 
 public enum eSFX {
     sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
-    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxRun, sfxSelection2, sfxSwell,
-    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream, sfxApplauseLoop
+    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxSelection, sfxSwell,
+    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream, sfxApplauseLoop,
+    sfxGrab
 };
 
 public enum eVOX {
@@ -59,9 +60,9 @@ public class AudioManager : MonoBehaviour {
         applauseSFXAudioSource.loop = doesLoop;
 
         if (doesLoop) {
-            applauseSFXAudioSource.clip = sfxClips[27];
+            applauseSFXAudioSource.clip = sfxClips[26];
         } else {
-            applauseSFXAudioSource.clip = sfxClips[25];
+            applauseSFXAudioSource.clip = sfxClips[24];
         }
 
         applauseSFXAudioSource.Play();

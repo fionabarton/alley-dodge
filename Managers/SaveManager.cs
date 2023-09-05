@@ -11,13 +11,13 @@ public class SaveManager : MonoBehaviour {
     [Header("Set Dynamically")]
     public CryptographyManager  crypt;
     
-    public SaveData             data;
+    public HighScoreSaveData    data;
 
     private string              persistentPath = "";
 
     private void Awake() {
         // Create save data
-        data = new SaveData();
+        data = new HighScoreSaveData();
 
         // Set path
         persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
@@ -88,7 +88,7 @@ public class SaveManager : MonoBehaviour {
             json = crypt.Decrypt(json);
 
             // Create SaveData object from its JSON representation
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            HighScoreSaveData data = JsonUtility.FromJson<HighScoreSaveData>(json);
 
             // Display high score data in game UI
             for (int i = 0; i < GameManager.S.highScore.highScores.Length; i++) {
@@ -133,7 +133,7 @@ public class SaveManager : MonoBehaviour {
 }
 
 //
-public class SaveData {
+public class HighScoreSaveData {
     public string[] names = new string[100];
     public int[] scores = new int[100];
     public int[] levels = new int[100];
