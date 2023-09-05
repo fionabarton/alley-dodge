@@ -183,6 +183,8 @@ public class HighScoreManager : MonoBehaviour {
         //
         UpdateHighScoreDisplay(currentPageNdx);
 
+        GameManager.S.selectedHighScoreMenuCS.DisplaySelectedHighScoreEntryData(newHighScoreNdx, true);
+
         // Reset score for next game
         GameManager.S.score.ResetScore();
     }

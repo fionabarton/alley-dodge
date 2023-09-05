@@ -6,9 +6,6 @@ using UnityEngine.UI;
 //
 public class SelectedHighScoreMenu : MonoBehaviour {
     [Header("Set in Inspector")]
-    public GameObject                   scoreboardMenuGO;
-    public GameObject                   selectedHighScoreMenuGO;
-
     // Buttons
     public List<Button>                 entryButtons;
     public Button                       backToScoreboardButton;
@@ -34,8 +31,6 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     public List<TMPro.TextMeshProUGUI>  chanceToSpawnValues;
     public List<Image>                  objectToSpawnImages;
 
-    //[Header("Set Dynamically")]
-
     private void Start() {
         // Add listeners to buttons
         for (int i = 0; i < entryButtons.Count; i++) {
@@ -44,18 +39,23 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         }
         backToScoreboardButton.onClick.AddListener(delegate { GoBackToScoreboard(); });
 
-        selectedHighScoreMenuGO.SetActive(false);
+        GameManager.S.selectedHighScoreMenuGO.SetActive(false);
     }
 
     //
-    void DisplaySelectedHighScoreEntryData(int buttonNdx) {
-        int ndx = buttonNdx + (GameManager.S.highScore.currentPageNdx * 10);
-
+    public void DisplaySelectedHighScoreEntryData(int buttonNdx, bool getByHighScoresNdx = false) {
+        int ndx = buttonNdx;
+        if (!getByHighScoresNdx) {
+            ndx += (GameManager.S.highScore.currentPageNdx * 10);
+        } else {
+            GameManager.S.highScore.currentPageNdx = buttonNdx / 10;
+        }
+        
         // Deactivate ScoreboardMenu gameObject
-        scoreboardMenuGO.SetActive(false);
+        GameManager.S.scoreboardMenuGO.SetActive(false);
 
         // Activate SelectedHighScoreMenu gameObject
-        selectedHighScoreMenuGO.SetActive(true);
+        GameManager.S.selectedHighScoreMenuGO.SetActive(true);
 
         // Copy data from HighScores to menu text
         rankValue.text = (ndx + 1).ToString();
@@ -92,10 +92,10 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     //
     void GoBackToScoreboard() {
         // Activate ScoreboardMenu gameObject
-        scoreboardMenuGO.SetActive(true);
+        GameManager.S.scoreboardMenuGO.SetActive(true);
 
         // Deactivate SelectedHighScoreMenu gameObject
-        selectedHighScoreMenuGO.SetActive(false);
+        GameManager.S.selectedHighScoreMenuGO.SetActive(false);
 
         // Update high score display
         GameManager.S.highScore.UpdateHighScoreDisplay(GameManager.S.highScore.currentPageNdx);
