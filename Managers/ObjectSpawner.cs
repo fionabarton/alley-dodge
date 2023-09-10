@@ -20,8 +20,8 @@ public class ObjectSpawner : MonoBehaviour {
 	public float			currentSpawnSpeed = 2.0f;
 
 	// Speed at which objects travel down the alley
-	public float			startingObjectSpeed = 5;
-	public float			currentObjectSpeed = 5;
+	public float			startingObjectSpeed = 10;
+	public float			currentObjectSpeed = 10;
 
 	// Amount to increase per level
 	public float			amountToDecreaseSpawnSpeed = 0.1f;
@@ -58,7 +58,7 @@ public class ObjectSpawner : MonoBehaviour {
     private void FixedUpdate() {
 		if (canSpawn) {
 			if (timeDone <= Time.time) {
-				InstantiateRandomObject();
+				InstantiateObject();
 				timeDone = currentSpawnSpeed + Time.time;
 			}
 		}
@@ -102,7 +102,7 @@ public class ObjectSpawner : MonoBehaviour {
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	// Instantiate a random hazard or pickup
-	void InstantiateRandomObject() {
+	void InstantiateObject() {
         // Add to object count
         GameManager.S.score.AddToObjectCount();
 
@@ -158,9 +158,18 @@ public class ObjectSpawner : MonoBehaviour {
 			InstantiateQuidPickup();
 		} else if (ndx == 44) {
 			InstantiateShieldPickup();
-        } else {
+		} else if (ndx == 45) {
+			InstantiateRandomObstacle();
+		} else {
 			Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 		}
+	}
+
+	void InstantiateRandomObstacle() {
+		// Get random index
+		int ndx = Random.Range(0, 43);
+
+		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 	}
 
 	void InstantiateHorizontalBlock() {
