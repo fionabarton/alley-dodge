@@ -13,6 +13,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public List<TextMeshProUGUI>    entryButtonDateTexts;
 
     public Button                   goBackButton;
+    public Button                   resetButton;
     public CryptographyManager      crypt;
 
     // Preview the of selected custom algorithm
@@ -38,6 +39,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     void Start() {
         // Add listeners
         goBackButton.onClick.AddListener(delegate { GoBackButton(); });
+        resetButton.onClick.AddListener(delegate { AddResetButtonConfirmationListener(); });
 
         // Initialize array
         customAlgorithms = new CustomAlgorithm[8];
@@ -97,20 +99,29 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         }
     }
 
+    void AddResetButtonConfirmationListener() {
+        // Activate sub menu
+        GameManager.S.subMenuCS.AddListeners(ResetButton, "Are you sure that you would like to\ndelete all saved custom algorithms?");
+    }
+    void ResetButton(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        if (yesOrNo == 0) {
+            SetToDefaultSettings();
+
+            SaveAll();
+
+            UpdateGUI();
+        }
+    }
+
     void AddLoadAlgorithmConfirmationListener(int ndx) {
         selectedButtonNdx = ndx;
 
         // Activate sub menu
         GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to load\nthis custom algorithm to this slot?");
     }
-
-    void AddSaveAlgorithmConfirmationListener(int ndx) {
-        selectedButtonNdx = ndx;
-
-        // Activate keyboard menu
-        GameManager.S.keyboardMenuCS.Activate("NameCustomAlgorithmEntry");
-    }
-
     public void LoadAlgorithm(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
@@ -141,6 +152,12 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         } 
     }
 
+    void AddSaveAlgorithmConfirmationListener(int ndx) {
+        selectedButtonNdx = ndx;
+
+        // Activate keyboard menu
+        GameManager.S.keyboardMenuCS.Activate("NameCustomAlgorithmEntry");
+    }
     public void SaveAlgorithm(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
