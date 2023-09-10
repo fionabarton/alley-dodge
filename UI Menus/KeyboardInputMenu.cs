@@ -17,6 +17,8 @@ public class KeyboardInputMenu : MonoBehaviour {
     // Used to add either set high score entry name or custom algorithm name
     public Button               okButtonCS;
 
+    public Button               goBackButton;
+
     // Shake display text animator
     public Animator             messageDisplayAnim;
 
@@ -57,6 +59,8 @@ public class KeyboardInputMenu : MonoBehaviour {
 
             // Display saved name input string
             GameManager.S.keyboardMenuCS.GetInputString("HighScoreInputString");
+
+            goBackButton.gameObject.SetActive(false);
         } else if (actionToBePerformed == "NameCustomAlgorithmEntry") {
             isSettingHighScoreEntryName = false;
 
@@ -65,6 +69,8 @@ public class KeyboardInputMenu : MonoBehaviour {
 
             // Display saved name input string
             GameManager.S.keyboardMenuCS.GetInputString("CustomAlgorithmInputString");
+
+            goBackButton.gameObject.SetActive(true);
         }
 
         gameObject.SetActive(true);
@@ -177,6 +183,10 @@ public class KeyboardInputMenu : MonoBehaviour {
 
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
+    }
+
+    public void GoBackButton() {
+        gameObject.SetActive(false);
     }
 
     // On 'OK' button click, adds functions to the sub menu's yes/no buttons
