@@ -53,35 +53,11 @@ public class HighScoreManager : MonoBehaviour {
         SetHighScoresToDefaultValues();
 
         gameObject.SetActive(false);
-
-        // Add listeners to reset button
-        resetButton.onClick.AddListener(delegate { AddResetHighScoresConfirmationListeners(); });
     }
 
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.");
-        }
-    }
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddResetHighScoresConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(ResetHighScores, "Are you sure that you would like to\ndelete all saved high scores?");
-    }
-    // On 'Yes' button click, deletes all saved high scores and resets them to default values
-    void ResetHighScores(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        // 
-        if (yesOrNo == 0) {
-            SetHighScoresToDefaultValues(true);
-
-            // Display text
-            delayedTextDisplay.DisplayText("All saved high scores deleted! ");
-        } else {
-            // Display text
             delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.");
         }
     }

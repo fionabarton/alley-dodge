@@ -39,7 +39,6 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     void Start() {
         // Add listeners
         goBackButton.onClick.AddListener(delegate { GoBackButton(); });
-        resetButton.onClick.AddListener(delegate { AddResetButtonConfirmationListener(); });
 
         // Initialize array
         customAlgorithms = new CustomAlgorithm[8];
@@ -48,7 +47,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    void UpdateGUI() {
+    public void UpdateGUI() {
         for(int i = 0; i < customAlgorithms.Length; i++) {
             entryButtonNameTexts[i].text = customAlgorithms[i].name;
             entryButtonDateTexts[i].text = customAlgorithms[i].date;
@@ -96,23 +95,6 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         for (int i = 0; i < entryButtons.Count; i++) {
             int copy = i;
             entryButtons[copy].onClick.RemoveAllListeners();
-        }
-    }
-
-    void AddResetButtonConfirmationListener() {
-        // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(ResetButton, "Are you sure that you would like to\ndelete all saved custom algorithms?");
-    }
-    void ResetButton(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        if (yesOrNo == 0) {
-            SetToDefaultSettings();
-
-            SaveAll();
-
-            UpdateGUI();
         }
     }
 

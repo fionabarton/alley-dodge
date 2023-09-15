@@ -7,11 +7,10 @@ using UnityEngine.UI;
 public class MoreMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     public Button           audioButton;
-    //public Button           speedButton;
     public Button           algorithmButton;
     public Button           instructionsButton;
     public Button           controlsButton;
-    //public Button           tutorialButton;
+    public Button           savedDataButton;
     public Button           mainMenuButton;
 
     // Audio, Programmer, Instructions, Controls, Tutorial, Help
@@ -27,11 +26,10 @@ public class MoreMenu : MonoBehaviour {
     void Start() {
         // Add listeners to buttons
         audioButton.onClick.AddListener(delegate { ActivateMenuGO(0); });
-        //speedButton.onClick.AddListener(delegate { ActivateMenuGO(1); });
         algorithmButton.onClick.AddListener(delegate { ActivateMenuGO(1); });
         instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
         controlsButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
-        //tutorialButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
+        savedDataButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
         Invoke("ActivateAlgorithmMenu", 0.1f);
