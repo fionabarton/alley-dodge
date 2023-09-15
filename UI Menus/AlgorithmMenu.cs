@@ -6,14 +6,22 @@ using TMPro;
 
 public class AlgorithmMenu : MonoBehaviour {
     [Header("Set in Inspector")]
+    // Chance selection
     public List<Button>             chanceButtons;
 
+    // Object selection
     public List<Button>             objectButtons;
     public List<Button>             objectSubMenuButtons;
     public List<Sprite>             objectSprites;
     public List<int>                objectButtonSpriteNdx;
 
     public GameObject               objectSelectionSubMenu;
+
+    // Speed selection
+    public Button                   objectSpeedButton;
+    public Button                   amountToIncreaseButton;
+    public Button                   spawnSpeedButton;
+    public Button                   amountToDecreaseButton;
 
     public Button                   loadButton;
     public Button                   saveButton;
@@ -99,6 +107,28 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 4"), 4);
         } else {
             SetObjectToSpawn(44, 4); // Shield pickup
+        }
+
+        // Get speedDropdowns PlayerPrefs
+        if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
+            SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
+        } else {
+            SetStartingObjectSpeedDropdownValue(9); // 10
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
+            SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
+        } else {
+            SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
+            SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
+        } else {
+            SetStartingSpawnSpeedDropdownValue(19); // 2.0f
+        }
+        if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
+            SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
+        } else {
+            SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
         }
 
         // Add listeners to buttons
@@ -194,6 +224,57 @@ public class AlgorithmMenu : MonoBehaviour {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //
+    public void SetStartingObjectSpeedDropdownValue(int value) {
+        // Set value 
+        GameManager.S.spawner.startingObjectSpeed = value + 1;
+
+        // Update button text
+        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 1).ToString();
+
+        // Save value
+        PlayerPrefs.SetInt("Speed Dropdown 0", value);
+    }
+
+    public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
+        float valueAsFloat = value;
+
+        // Set value
+        GameManager.S.spawner.amountToIncreaseObjectSpeed = (valueAsFloat / 10);
+
+        // Update button text
+        amountToIncreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+
+        // Save value
+        PlayerPrefs.SetInt("Speed Dropdown 1", value);
+    }
+
+    public void SetStartingSpawnSpeedDropdownValue(int value) {
+        float valueAsFloat = value;
+
+        // Set value
+        GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 0.1f;
+
+        // Update button text
+        spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 0.1f).ToString();
+
+        // Save value
+        PlayerPrefs.SetInt("Speed Dropdown 2", value);
+    }
+
+    public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
+        float valueAsFloat = value;
+
+        // Set value
+        GameManager.S.spawner.amountToDecreaseSpawnSpeed = (valueAsFloat / 10);
+
+        // Update button text
+        amountToDecreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+
+        // Save value
+        PlayerPrefs.SetInt("Speed Dropdown 3", value);
+    }
+
     // Adds functions to the sub menu's yes/no buttons
     void AddDefaultSettingsConfirmationListeners() {
         GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
@@ -221,6 +302,12 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(17, 2); // Vertical high block
             SetObjectToSpawn(43, 3); // Quid pickup
             SetObjectToSpawn(44, 4); // Shield pickup
+
+            // Set to default speed values
+            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
+            SetStartingSpawnSpeedDropdownValue(19); // 2.0f
+            SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");

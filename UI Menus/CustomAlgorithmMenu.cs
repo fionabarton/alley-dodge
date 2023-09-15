@@ -127,10 +127,10 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         GameManager.S.subMenuGO.SetActive(false);
 
         if (yesOrNo == 0) {
-            GameManager.S.speedMenuCS.SetStartingObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingObjectSpeed);
-            GameManager.S.speedMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToIncreaseObjectSpeed);
-            GameManager.S.speedMenuCS.SetStartingSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingSpawnSpeed);
-            GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToDecreaseSpawnSpeed);
+            GameManager.S.algorithmMenuCS.SetStartingObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingObjectSpeed);
+            GameManager.S.algorithmMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToIncreaseObjectSpeed);
+            GameManager.S.algorithmMenuCS.SetStartingSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingSpawnSpeed);
+            GameManager.S.algorithmMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToDecreaseSpawnSpeed);
 
             GameManager.S.algorithmMenuCS.SetChanceButtonValue(0, customAlgorithms[selectedButtonNdx].chanceToSpawn0);
             GameManager.S.algorithmMenuCS.SetChanceButtonValue(1, customAlgorithms[selectedButtonNdx].chanceToSpawn1);

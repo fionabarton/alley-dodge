@@ -114,7 +114,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
                     // Add listeners
                     int copy = i;
-                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetStartingObjectSpeedDropdownValue(copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetStartingObjectSpeedDropdownValue(copy); });
                     amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
@@ -124,7 +124,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
                     // Add listeners
                     int copy = i;
-                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(copy); });
                     amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
@@ -134,7 +134,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
                     // Add listeners
                     int copy = i;
-                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetStartingSpawnSpeedDropdownValue(copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetStartingSpawnSpeedDropdownValue(copy); });
                     amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
@@ -144,7 +144,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
                     // Add listeners
                     int copy = i;
-                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.speedMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetAmountToDecreaseSpawnSpeedDropdownValue(copy); });
                     amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
