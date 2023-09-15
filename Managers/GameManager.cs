@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour {
     public KeyboardInputMenu    keyboardMenuCS;
     public MainMenu             mainMenuCS;
     public MoreMenu             moreMenuCS;
-    public SpeedMenu            speedMenuCS;
     public AlgorithmMenu        algorithmMenuCS;
     public SubMenu              subMenuCS;
     public ExitRunButton        exitRunButtonLeftCS;
