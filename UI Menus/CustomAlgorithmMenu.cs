@@ -11,6 +11,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public List<Button>             entryButtons;
     public List<TextMeshProUGUI>    entryButtonNameTexts;
     public List<TextMeshProUGUI>    entryButtonDateTexts;
+    public Text                     selectAnAlgorithmText;
 
     public Button                   goBackButton;
     public Button                   resetButton;
@@ -61,8 +62,14 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public void ActivateMenu(string actionToBePerformed) {
         if (actionToBePerformed == "Load") {
             AddLoadAlgorithmListeners();
+
+            // Set title text
+            selectAnAlgorithmText.text = "Please select a custom algorithm to load!";
         } else if (actionToBePerformed == "Save") {
             AddSaveAlgorithmListeners();
+
+            // Set title text
+            selectAnAlgorithmText.text = "Please select a slot to save your custom algorithm!";
         }
 
         LoadAll();
