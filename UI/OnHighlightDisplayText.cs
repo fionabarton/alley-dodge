@@ -13,11 +13,11 @@ public class OnHighlightDisplayText : MonoBehaviour, IPointerEnterHandler {
     public string               messageToDisplay;
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (delayedTextDisplay.dialogueFinished) {
+        //if (delayedTextDisplay.dialogueFinished) {
             if (GameManager.S.previouslyHighlightedGO != gameObject) {
                 delayedTextDisplay.DisplayText(messageToDisplay);
                 GameManager.S.previouslyHighlightedGO = gameObject;
             }
-        }
+        //}
     }
 }
