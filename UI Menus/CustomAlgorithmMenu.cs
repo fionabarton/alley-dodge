@@ -109,7 +109,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         selectedButtonNdx = ndx;
 
         // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to load\nthis custom algorithm to this slot?");
+        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to\nload this custom algorithm?");
     }
     public void LoadAlgorithm(int yesOrNo = -1) {
         // Deactivate sub menu
@@ -274,7 +274,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     }
 
     public void SetToDefaultSettings() {
-        customAlgorithms[0] = new CustomAlgorithm("Preset 1", "99 September, 9999");
+        customAlgorithms[0] = new CustomAlgorithm("Preset 1");
         customAlgorithms[1] = new CustomAlgorithm("Preset 2");
         customAlgorithms[2] = new CustomAlgorithm("Preset 3");
         customAlgorithms[3] = new CustomAlgorithm("Preset 4");

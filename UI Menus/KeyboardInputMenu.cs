@@ -17,7 +17,7 @@ public class KeyboardInputMenu : MonoBehaviour {
     // Used to add either set high score entry name or custom algorithm name
     public Button               okButtonCS;
 
-    public Button               goBackButton;
+    public GameObject           goBackButtonGO;
 
     // Shake display text animator
     public Animator             messageDisplayAnim;
@@ -41,11 +41,6 @@ public class KeyboardInputMenu : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    private void OnEnable() {
-        // Display text
-        messageDisplay.DisplayText("Congratulations!\nPlease enter your name!");
-    }
-
     public void Activate(string actionToBePerformed) {
         // Remove listeners
         okButtonCS.onClick.RemoveAllListeners();
@@ -60,7 +55,10 @@ public class KeyboardInputMenu : MonoBehaviour {
             // Display saved name input string
             GameManager.S.keyboardMenuCS.GetInputString("HighScoreInputString");
 
-            goBackButton.gameObject.SetActive(false);
+            // Display text
+            messageDisplay.DisplayText("Congratulations!\nPlease enter your name!");
+
+            goBackButtonGO.SetActive(false);
         } else if (actionToBePerformed == "NameCustomAlgorithmEntry") {
             isSettingHighScoreEntryName = false;
 
@@ -70,7 +68,10 @@ public class KeyboardInputMenu : MonoBehaviour {
             // Display saved name input string
             GameManager.S.keyboardMenuCS.GetInputString("CustomAlgorithmInputString");
 
-            goBackButton.gameObject.SetActive(true);
+            // Display text
+            messageDisplay.DisplayText("Please name your custom algorithm to be saved!");
+
+            goBackButtonGO.SetActive(true);
         }
 
         gameObject.SetActive(true);
@@ -204,7 +205,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this slot?\nWell, are ya?");
+        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom algorithm slot?\nWell, are ya?");
     }
 
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance
