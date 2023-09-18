@@ -13,7 +13,11 @@ public class DelayedTextDisplay : MonoBehaviour {
 	[Header("Set Dynamically")]
 	public bool			dialogueFinished = true;
 
-	public void DisplayText(string text) {
+	public void DisplayText(string text, bool waitForTextToFinish = false) {
+        if (waitForTextToFinish) {
+			GameManager.S.waitForDialogueToFinish = waitForTextToFinish;
+		}
+
 		gameObject.SetActive(true);
 
 		StopAllCoroutines();
@@ -44,5 +48,7 @@ public class DelayedTextDisplay : MonoBehaviour {
 
 		// Dialogue Finished
 		dialogueFinished = true;
+
+		GameManager.S.waitForDialogueToFinish = false;
 	}
 }
