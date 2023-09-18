@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour {
     public int                  pauseCount;
 
     public bool                 playerIsInvincible;
+    public bool                 waitForDialogueToFinish;
 
     public static AlleyManager  alley;
     public static ColorManager  color;
