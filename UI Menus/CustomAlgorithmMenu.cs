@@ -137,6 +137,9 @@ public class CustomAlgorithmMenu : MonoBehaviour {
 
             UpdateGUI();
 
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom algorithm loaded!");
+
             gameObject.SetActive(false);
         } 
     }
@@ -180,6 +183,9 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             SaveAll();
 
             UpdateGUI();
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom algorithm, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx+1).ToString() + "!");
 
             gameObject.SetActive(false);
         } else {

@@ -35,7 +35,7 @@ public class SavedDataMenu : MonoBehaviour {
             GameManager.S.highScore.SetHighScoresToDefaultValues(true);
 
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved high scores deleted! ");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved high scores deleted!");
         } else {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.");

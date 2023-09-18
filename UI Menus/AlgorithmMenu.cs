@@ -178,6 +178,9 @@ public class AlgorithmMenu : MonoBehaviour {
         // Set button text
         chanceButtons[ndx].GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat * 5f).ToString() + "%";
 
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance of the flow chart\nfollowing this path selected!");
+
         // Save
         string tString = "Chance Value " + ndx.ToString();
         float tFloat = GameManager.S.spawner.chancesToSpawn[ndx] * 20f;
@@ -217,6 +220,9 @@ public class AlgorithmMenu : MonoBehaviour {
         string tString = "Object Button " + buttonNdx.ToString();
         PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
 
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!");
+
         // Close object (obstacles & items) sub menu
         CloseObjectSelectionSubMenu();
     }
@@ -234,6 +240,9 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting object speed selected!");
     }
 
     public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
@@ -247,6 +256,9 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase object speed\nper level selected!");
     }
 
     public void SetStartingSpawnSpeedDropdownValue(int value) {
@@ -260,6 +272,9 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting spawn speed selected!");
     }
 
     public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
@@ -273,6 +288,9 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to decrease spawn speed\nper level selected!");
     }
 
     // Adds functions to the sub menu's yes/no buttons
