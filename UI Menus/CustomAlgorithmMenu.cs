@@ -60,23 +60,28 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     }
 
     public void ActivateMenu(string actionToBePerformed) {
-        if (actionToBePerformed == "Load") {
-            AddLoadAlgorithmListeners();
+        if (GameManager.S.algorithmMenuCS.CheckAllButtonsForValidValues()) {
+            if (actionToBePerformed == "Load") {
+                AddLoadAlgorithmListeners();
 
-            // Set title text
-            selectAnAlgorithmText.text = "Please select a custom algorithm to load!";
-        } else if (actionToBePerformed == "Save") {
-            AddSaveAlgorithmListeners();
+                // Set title text
+                selectAnAlgorithmText.text = "Please select a custom algorithm to load!";
+            } else if (actionToBePerformed == "Save") {
+                AddSaveAlgorithmListeners();
 
-            // Set title text
-            selectAnAlgorithmText.text = "Please select a slot to save your custom algorithm!";
+                // Set title text
+                selectAnAlgorithmText.text = "Please select a slot to save your custom algorithm!";
+            }
+
+            LoadAll();
+
+            UpdateGUI();
+
+            gameObject.SetActive(true);
+        } else {
+            // Audio: Damage
+            GameManager.audioMan.PlayRandomDamageSFX();
         }
-
-        LoadAll();
-
-        UpdateGUI();
-
-        gameObject.SetActive(true);
     }
 
     public void AddLoadAlgorithmListeners() {
