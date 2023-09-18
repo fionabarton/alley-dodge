@@ -131,6 +131,12 @@ public class AlgorithmMenu : MonoBehaviour {
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
         }
 
+        // In case game was closed before ensuring connected chance values are valid (have a sum of exactly 100%),
+        // otherwise the menu will not open correctly
+        if (!GameManager.S.algorithmMenuCS.CheckAllButtonsForValidValues()) {
+            SetChanceValuesToDefaultSetting();
+        }
+
         // Add listeners to buttons
         for (int i = 0; i < objectButtons.Count; i++) {
             int copy = i;
@@ -305,15 +311,7 @@ public class AlgorithmMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Set dropdowns to default values
-            SetChanceButtonValue(0, 6); // 30%
-            SetChanceButtonValue(1, 7); // 35%
-            SetChanceButtonValue(2, 7); // 35%
-
-            SetChanceButtonValue(3, 10); // 50%
-            SetChanceButtonValue(4, 10); // 50%
-
-            SetChanceButtonValue(5, 15); // 75%
-            SetChanceButtonValue(6, 5); // 25%
+            SetChanceValuesToDefaultSetting();
 
             SetObjectToSpawn(3, 0); // Horizontal block
             SetObjectToSpawn(0, 1); // Vertical low block
@@ -333,6 +331,18 @@ public class AlgorithmMenu : MonoBehaviour {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu!");
         }
+    }
+
+    void SetChanceValuesToDefaultSetting() {
+        SetChanceButtonValue(0, 6); // 30%
+        SetChanceButtonValue(1, 7); // 35%
+        SetChanceButtonValue(2, 7); // 35%
+
+        SetChanceButtonValue(3, 10); // 50%
+        SetChanceButtonValue(4, 10); // 50%
+
+        SetChanceButtonValue(5, 15); // 75%
+        SetChanceButtonValue(6, 5); // 25%
     }
 
     public bool CheckAllButtonsForValidValues() {
@@ -381,7 +391,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
     void ButtonValuesInvalid(List<Button> chanceButtons, Color color) {
         // Display text
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted linked dropdowns is 100%.");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted connected buttons is 100%.");
 
         // Highlight dropdowns
         for (int i = 0; i < chanceButtons.Count; i++) {
