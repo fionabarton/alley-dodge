@@ -185,7 +185,7 @@ public class AlgorithmMenu : MonoBehaviour {
         chanceButtons[ndx].GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat * 5f).ToString() + "%";
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance of the flow chart\nfollowing this path selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance of the flow chart\nfollowing this path selected!", true);
 
         // Save
         string tString = "Chance Value " + ndx.ToString();
@@ -227,7 +227,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!", true);
 
         // Close object (obstacles & items) sub menu
         CloseObjectSelectionSubMenu();
@@ -248,7 +248,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting object speed selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting object speed selected!", true);
     }
 
     public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
@@ -264,7 +264,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase object speed\nper level selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase object speed\nper level selected!", true);
     }
 
     public void SetStartingSpawnSpeedDropdownValue(int value) {
@@ -280,7 +280,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting spawn speed selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Starting spawn speed selected!", true);
     }
 
     public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
@@ -296,7 +296,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to decrease spawn speed\nper level selected!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to decrease spawn speed\nper level selected!", true);
     }
 
     // Adds functions to the sub menu's yes/no buttons
@@ -326,10 +326,10 @@ public class AlgorithmMenu : MonoBehaviour {
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
         }
     }
 
@@ -391,7 +391,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
     void ButtonValuesInvalid(List<Button> chanceButtons, Color color) {
         // Display text
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted connected buttons is 100%.");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted connected buttons is 100%.", true);
 
         // Highlight dropdowns
         for (int i = 0; i < chanceButtons.Count; i++) {
@@ -435,6 +435,6 @@ public class AlgorithmMenu : MonoBehaviour {
 
     // Sets the DisplayText's message depending on which page of the menu is visible
     void SetGeneralDisplayTextMessage() {
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of of how likely\nand which objects will be randomly generated\nduring gameplay.");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
     }
 }
