@@ -28,6 +28,7 @@ public class AlgorithmMenu : MonoBehaviour {
     public Button                   goBackButton;
 
     public Button                   defaultSettingsButton;
+    public Button                   randomizeButton;
 
     // Shake display text animator
     public Animator                 messageDisplayAnim;
@@ -146,6 +147,7 @@ public class AlgorithmMenu : MonoBehaviour {
         loadButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Load"); });
         saveButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Save"); });
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
+        randomizeButton.onClick.AddListener(delegate { AddRandomizeSettingsConfirmationListeners(); });
         goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
 
         // Add listeners to object selection sub menu buttons
@@ -310,7 +312,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
-            // Set dropdowns to default values
+            // Set to default chance values
             SetChanceValuesToDefaultSetting();
 
             SetObjectToSpawn(3, 0); // Horizontal block
@@ -327,6 +329,58 @@ public class AlgorithmMenu : MonoBehaviour {
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddRandomizeSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nset this menu's options to totally random values?");
+    }
+    // On 'Yes' button click, sets all menu settings to random values
+    void RandomizeSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Chance values (set 1)
+            int randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(0, randomInt);
+            int difference = 20 - randomInt;
+            randomInt = Random.Range(0, difference);
+            SetChanceButtonValue(1, randomInt);
+            difference -= randomInt;
+            SetChanceButtonValue(2, difference);
+
+            // Chance values (set 2)
+            randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(3, randomInt);
+            difference = 20 - randomInt;
+            SetChanceButtonValue(4, difference);
+
+            // Chance values (set 3)
+            randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(5, randomInt);
+            difference = 20 - randomInt;
+            SetChanceButtonValue(6, difference); 
+
+            // Objects to spawn
+            for (int i = 0; i < 5; i++) {
+                randomInt = Random.Range(0, 44);
+                SetObjectToSpawn(randomInt, i);
+            }
+
+            // Speed values
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18)); 
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19)); 
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 18)); 
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 19)); 
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
         } else {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
@@ -351,19 +405,19 @@ public class AlgorithmMenu : MonoBehaviour {
         List<float> aFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[0], GameManager.S.spawner.chancesToSpawn[1], GameManager.S.spawner.chancesToSpawn[2] };
         List<Button> aButtons = new List<Button>() { chanceButtons[0], chanceButtons[1], chanceButtons[2] };
         if (!CheckButtonForValidValues(aFloats)) {
-            ButtonValuesInvalid(aButtons, Color.red);
+            ButtonValuesInvalid(aButtons, aFloats, Color.red, "red");
             isTrue.Add(CheckButtonForValidValues(aFloats));
         }
         List<float> bFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[3], GameManager.S.spawner.chancesToSpawn[4] };
         List<Button> bButtons = new List<Button>() { chanceButtons[3], chanceButtons[4] };
         if (!CheckButtonForValidValues(bFloats)) {
-            ButtonValuesInvalid(bButtons, new Color(1, 0.25f, 0, 1));
+            ButtonValuesInvalid(bButtons, bFloats, new Color(0.2f, 0.4f, 1.0f, 1), "blue");
             isTrue.Add(CheckButtonForValidValues(bFloats));
         }
         List<float> cFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[5], GameManager.S.spawner.chancesToSpawn[6] };
         List<Button> cButtons = new List<Button>() { chanceButtons[5], chanceButtons[6] };
         if (!CheckButtonForValidValues(cFloats)) {
-            ButtonValuesInvalid(cButtons, Color.yellow);
+            ButtonValuesInvalid(cButtons, cFloats, Color.yellow, "yellow");
             isTrue.Add(CheckButtonForValidValues(cFloats));
         }
 
@@ -389,9 +443,16 @@ public class AlgorithmMenu : MonoBehaviour {
         }
     }
 
-    void ButtonValuesInvalid(List<Button> chanceButtons, Color color) {
+    void ButtonValuesInvalid(List<Button> chanceButtons, List<float> chanceValues, Color color, string colorName) {
+        // Get sum of connected chance values as a string
+        float sumFloat = 0;
+        for(int i = 0; i< chanceValues.Count; i++) {
+            sumFloat += chanceValues[i];
+        }
+        string sumString = (sumFloat * 100).ToString() + "%";
+
         // Display text
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe highlighted connected buttons is 100%.", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe connected " + colorName + " buttons is 100%, not " + sumString + ".", true);
 
         // Highlight dropdowns
         for (int i = 0; i < chanceButtons.Count; i++) {
