@@ -160,6 +160,8 @@ public class ObjectSpawner : MonoBehaviour {
 			InstantiateShieldPickup();
 		} else if (ndx == 45) {
 			InstantiateRandomObstacle();
+		} else if (ndx == 46) {
+			InstantiateRandomItem();
 		} else {
 			Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 		}
@@ -170,6 +172,14 @@ public class ObjectSpawner : MonoBehaviour {
 		int ndx = Random.Range(0, 43);
 
 		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
+	}
+
+	void InstantiateRandomItem() {
+		if(Random.value > 0.5f) {
+			InstantiateQuidPickup();
+		} else {
+			InstantiateShieldPickup();
+		}
 	}
 
 	void InstantiateHorizontalBlock() {
