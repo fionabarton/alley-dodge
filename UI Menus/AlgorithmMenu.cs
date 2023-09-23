@@ -114,7 +114,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetStartingObjectSpeedDropdownValue(5); // 10
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
@@ -124,7 +124,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
         } else {
-            SetStartingSpawnSpeedDropdownValue(19); // 2.0f
+            SetStartingSpawnSpeedDropdownValue(10); // 2.0f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
             SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
@@ -244,7 +244,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.startingObjectSpeed = value + 1;
 
         // Update button text
-        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 1).ToString();
+        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 5).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
@@ -276,7 +276,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 0.1f;
 
         // Update button text
-        spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 0.1f).ToString();
+        spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 1.0f).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
@@ -322,9 +322,9 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(44, 4); // Shield pickup
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetStartingObjectSpeedDropdownValue(5); // 10
             SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
-            SetStartingSpawnSpeedDropdownValue(19); // 2.0f
+            SetStartingSpawnSpeedDropdownValue(10); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
 
             // Delayed text display
@@ -374,10 +374,10 @@ public class AlgorithmMenu : MonoBehaviour {
             }
 
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18)); 
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 14)); 
             SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19)); 
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 18)); 
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 19)); 
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 9)); 
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 9)); 
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
