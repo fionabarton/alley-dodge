@@ -28,7 +28,10 @@ public class AlgorithmMenu : MonoBehaviour {
     public Button                   goBackButton;
 
     public Button                   defaultSettingsButton;
-    public Button                   randomizeButton;
+    public Button                   randomizeAllButton;
+    public Button                   randomizeChancesButton;
+    public Button                   randomizeObjectsButton;
+    public Button                   randomizeSpeedsButton;
 
     // Shake display text animator
     public Animator                 messageDisplayAnim;
@@ -147,7 +150,10 @@ public class AlgorithmMenu : MonoBehaviour {
         loadButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Load"); });
         saveButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Save"); });
         defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
-        randomizeButton.onClick.AddListener(delegate { AddRandomizeSettingsConfirmationListeners(); });
+        randomizeAllButton.onClick.AddListener(delegate { AddRandomizeSettingsConfirmationListeners(); });
+        randomizeChancesButton.onClick.AddListener(delegate { AddRandomizeChancesSettingsConfirmationListeners(); });
+        randomizeObjectsButton.onClick.AddListener(delegate { AddRandomizeObjectsSettingsConfirmationListeners(); });
+        randomizeSpeedsButton.onClick.AddListener(delegate { AddRandomizeSpeedsSettingsConfirmationListeners(); });
         goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
 
         // Add listeners to object selection sub menu buttons
@@ -381,6 +387,101 @@ public class AlgorithmMenu : MonoBehaviour {
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddRandomizeAllSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nrandomize the all of the displayed algorithm's values?");
+    }
+
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddRandomizeChancesSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(RandomizeChancesSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's chance values?");
+    }
+    // On 'Yes' button click, sets chance settings to random values
+    void RandomizeChancesSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Chance values (set 1)
+            int randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(0, randomInt);
+            int difference = 20 - randomInt;
+            randomInt = Random.Range(0, difference);
+            SetChanceButtonValue(1, randomInt);
+            difference -= randomInt;
+            SetChanceButtonValue(2, difference);
+
+            // Chance values (set 2)
+            randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(3, randomInt);
+            difference = 20 - randomInt;
+            SetChanceButtonValue(4, difference);
+
+            // Chance values (set 3)
+            randomInt = Random.Range(0, 19);
+            SetChanceButtonValue(5, randomInt);
+            difference = 20 - randomInt;
+            SetChanceButtonValue(6, difference);
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance values set to totally random values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddRandomizeObjectsSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(RandomizeObjectsSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's object values?");
+    }
+    // On 'Yes' button click, sets object settings to random values
+    void RandomizeObjectsSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Objects to spawn
+            for (int i = 0; i < 5; i++) {
+                SetObjectToSpawn(Random.Range(0, 45), i);
+            }
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object values set to totally random values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddRandomizeSpeedsSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(RandomizeSpeedSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's speed values?");
+    }
+    // On 'Yes' button click, sets speed settings to random values
+    void RandomizeSpeedSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Speed values
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18));
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19));
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 9));
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 9));
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Speed values set to totally random values!", true);
         } else {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
