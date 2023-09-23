@@ -114,7 +114,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(5); // 10
+            SetStartingObjectSpeedDropdownValue(9); // 10
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
@@ -244,7 +244,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.startingObjectSpeed = value + 1;
 
         // Update button text
-        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 5).ToString();
+        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 1).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
@@ -273,7 +273,7 @@ public class AlgorithmMenu : MonoBehaviour {
         float valueAsFloat = value;
 
         // Set value
-        GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 0.1f;
+        GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 1.0f;
 
         // Update button text
         spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 1.0f).ToString();
@@ -322,7 +322,7 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(44, 4); // Shield pickup
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(5); // 10
+            SetStartingObjectSpeedDropdownValue(9); // 10
             SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
             SetStartingSpawnSpeedDropdownValue(10); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
@@ -369,12 +369,12 @@ public class AlgorithmMenu : MonoBehaviour {
 
             // Objects to spawn
             for (int i = 0; i < 5; i++) {
-                randomInt = Random.Range(0, 44);
+                randomInt = Random.Range(0, 45);
                 SetObjectToSpawn(randomInt, i);
             }
 
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 14)); 
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18)); 
             SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19)); 
             SetStartingSpawnSpeedDropdownValue(Random.Range(0, 9)); 
             SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 9)); 
