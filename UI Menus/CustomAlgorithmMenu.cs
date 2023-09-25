@@ -143,7 +143,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom algorithm loaded!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom algorithm loaded!", true);
 
             gameObject.SetActive(false);
         } 
@@ -190,7 +190,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom algorithm, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx+1).ToString() + "!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom algorithm, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx+1).ToString() + "!", true);
 
             gameObject.SetActive(false);
         } else {
@@ -285,9 +285,9 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     }
 
     public void SetToDefaultSettings() {
-        customAlgorithms[0] = new CustomAlgorithm("Preset 1");
-        customAlgorithms[1] = new CustomAlgorithm("Preset 2");
-        customAlgorithms[2] = new CustomAlgorithm("Preset 3");
+        customAlgorithms[0] = new CustomAlgorithm("Random");
+        customAlgorithms[1] = new CustomAlgorithm("Sideways");
+        customAlgorithms[2] = new CustomAlgorithm("Slow");
         customAlgorithms[3] = new CustomAlgorithm("Preset 4");
         customAlgorithms[4] = new CustomAlgorithm("Preset 5");
         customAlgorithms[5] = new CustomAlgorithm("Preset 6");
@@ -314,7 +314,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
 
         speedTexts[0].text = "<color=red>Starting object speed:</color> " + (customAlgorithms[buttonNdx].startingObjectSpeed + 1).ToString();
         speedTexts[1].text = "<color=#FFC800>Amount to increase per level:</color> " + ((float)customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed / 10).ToString();
-        speedTexts[2].text = "<color=red>Starting spawn speed:</color> " + (((float)customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 0.1f).ToString();
+        speedTexts[2].text = "<color=red>Starting spawn speed:</color> " + (((float)customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 1.0f).ToString();
         speedTexts[3].text = "<color=#FFC800>Amount to decrease per level:</color> " + ((float)customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed / 10).ToString();
     }
 }
