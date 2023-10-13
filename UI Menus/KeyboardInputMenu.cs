@@ -33,7 +33,7 @@ public class KeyboardInputMenu : MonoBehaviour {
 
     // Variables related to predetermined default names
     private int                 dontCareNdx;
-    private List<string>        dontCareNames = new List<string>() { "Butthead", "Mildew", "Pee Wee", "Disappointment", "Moon Unit" };
+    private List<string>        dontCareNames = new List<string>() { "Bud", "Champ", "Chief", "Cookie", "Cupcake", "Darling", "Deadbeat", "Dude", "Dumpling", "Dunce", "Giggles", "Goon", "Junior", "Kiddo", "Killer", "Lazy Bones", "Muscles", "Peanut", "Pumpkin", "Princess", "Slacker", "Slick", "Sport", "Stud", "Trouble" };
 
     private bool                isSettingHighScoreEntryName;
 
