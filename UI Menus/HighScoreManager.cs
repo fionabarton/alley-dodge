@@ -58,37 +58,38 @@ public class HighScoreManager : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.");
+            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the top 100 high score leaderboard and\ndetailed information for each entry.", true);
         }
     }
 
     // Deletes all saved high scores and resets them to default values 
     public void SetHighScoresToDefaultValues(bool saveData = false) {
         // Populate elements 0 to 19
-        highScores[0] = new HighScore("Fiona", 75, 16, 0, "00:01:52.629");
-        highScores[1] = new HighScore("Tom", 45, 10, 0, "00:03:18.875");
-        highScores[2] = new HighScore("Chani", 42, 9, 0, "00:01:52.629");
-        highScores[3] = new HighScore("Mill", 40, 9, 0, "00:01:52.629");
-        highScores[4] = new HighScore("Steve", 35, 8, 0, "00:03:18.875");
-        highScores[5] = new HighScore("Mr. Bagli", 34, 8, 0, "00:03:18.875");
-        highScores[6] = new HighScore("Popcorn", 33, 8, 0, "00:03:18.875");
-        highScores[7] = new HighScore("Little Max", 32, 8, 0, "00:03:18.875");
-        highScores[8] = new HighScore("Barley Corn", 31, 8, 0, "00:00:00:000");
-        highScores[9] = new HighScore("McGhee", 30, 7, 0, "00:00:00:000");
-        highScores[10] = new HighScore("Jj", 10, 3, 0, "00:00:00:000");
-        highScores[11] = new HighScore("Ii", 9, 2, 0, "00:00:00:000");
-        highScores[12] = new HighScore("Hh", 8, 2, 0, "00:00:00:000");
-        highScores[13] = new HighScore("Gg", 7, 2, 0, "00:00:00:000");
-        highScores[14] = new HighScore("Ff", 6, 2, 0, "00:00:00:000");
-        highScores[15] = new HighScore("Ee", 5, 2, 0, "00:00:00:000");
-        highScores[16] = new HighScore("Dd", 4, 1, 0, "00:00:00:000");
-        highScores[17] = new HighScore("Cc", 3, 1, 0, "00:00:00:000");
-        highScores[18] = new HighScore("Bb", 2, 1, 0, "00:00:00:000");
-        highScores[19] = new HighScore("Aa", 1, 1, 0, "00:00:00:000");
+        highScores[0] = new HighScore("Bernise", 63, 13, 300, "00:06:58.629");
+        highScores[1] = new HighScore("Mortimer", 57, 12, 192, "00:04:51.582");
+        highScores[2] = new HighScore("Ruth", 55, 12, 184, "00:04:38.194");
+        highScores[3] = new HighScore("Herbert", 53, 11, 188, "00:04:40.273");
+        highScores[4] = new HighScore("Ingrid", 47, 10, 184, "00:04:52.178");
+        highScores[5] = new HighScore("Murray", 45, 10, 175, "00:04:31.531");
+        highScores[6] = new HighScore("Thelma", 41, 9, 181, "00:05:03.040");
+        highScores[7] = new HighScore("Martha", 38, 8, 174, "00:04:52.516");
+        highScores[8] = new HighScore("Humphrey", 36, 8, 166, "00:04:39.254");
+        highScores[9] = new HighScore("Norman", 34, 7, 114, "00:03:10.624");
+        highScores[10] = new HighScore("Mavis", 31, 7, 143, "00:02:53.387");
+        highScores[11] = new HighScore("Wilbert", 29, 6, 166, "00:04:39.254");
+        highScores[12] = new HighScore("Doris", 24, 5, 152, "00:04:13.472");
+        highScores[13] = new HighScore("Orville", 21, 5, 137, "00:03:58.519");
+        highScores[14] = new HighScore("Maude", 15, 4, 54, "00:01:40.375");
+        highScores[15] = new HighScore("Harold", 14, 3, 41, "00:01:16.891");
+        highScores[16] = new HighScore("Melvin", 7, 2, 40, "00:01:18:163");
+        highScores[17] = new HighScore("Ethel", 6, 2, 34, "00:00:48:502");
+        highScores[18] = new HighScore("Dilmore", 4, 1, 21, "00:00:20:665");
+        highScores[19] = new HighScore("Gertrude", 2, 1, 26, "00:00:38:014");
+
 
         // Populate elements 20 to 99
         for (int i = 20; i < highScores.Length; i++) {
-            highScores[i] = new HighScore("Contestant " + (i + 1).ToString());
+            highScores[i] = new HighScore("Slot " + (i + 1).ToString() + ": EMPTY");
         }
 
         // Save data
