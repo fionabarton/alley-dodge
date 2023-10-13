@@ -285,14 +285,22 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     }
 
     public void SetToDefaultSettings() {
-        customAlgorithms[0] = new CustomAlgorithm("Random");
-        customAlgorithms[1] = new CustomAlgorithm("Sideways");
-        customAlgorithms[2] = new CustomAlgorithm("Slow");
-        customAlgorithms[3] = new CustomAlgorithm("Preset 4");
-        customAlgorithms[4] = new CustomAlgorithm("Preset 5");
-        customAlgorithms[5] = new CustomAlgorithm("Preset 6");
-        customAlgorithms[6] = new CustomAlgorithm("Preset 7");
-        customAlgorithms[7] = new CustomAlgorithm("Preset 8");
+        customAlgorithms[0] = new CustomAlgorithm("Random Objects", "26 February, 1984", 9, 2, 10, 1,
+        6, 7, 7, 10, 10, 15, 5,
+        45, 45, 45, 43, 44);
+        customAlgorithms[1] = new CustomAlgorithm("No Climbing", "29 November, 1986", 9, 1, 10, 2,
+        6, 7, 7, 10, 10, 15, 5,
+        3, 20, 21, 3, 22);
+        customAlgorithms[2] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 4, 2, 5, 1,
+        6, 7, 7, 10, 10, 15, 5,
+        14, 22, 5, 43, 44);
+        customAlgorithms[3] = new CustomAlgorithm("Up & Down", "5 April, 2063", 9, 2, 10, 1,
+        4, 8, 8, 10, 10, 10, 10,
+        17, 18, 34, 35, 46);
+        customAlgorithms[4] = new CustomAlgorithm("Slot 5: EMPTY");
+        customAlgorithms[5] = new CustomAlgorithm("Slot 6: EMPTY");
+        customAlgorithms[6] = new CustomAlgorithm("Slot 7: EMPTY");
+        customAlgorithms[7] = new CustomAlgorithm("Slot 8: EMPTY");
     }
 
     // Displays the properties and values of this entry's custom game algorithm
