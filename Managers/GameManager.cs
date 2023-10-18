@@ -43,8 +43,16 @@ public class GameManager : MonoBehaviour {
 
     // Animators
     public Animator             playerDamageColldierAnim;
-    public Animator             playerLeftHandAnim;
-    public Animator             playerRightHandAnim;
+    public Animator             playerLeftHandAnim1;
+    public Animator             playerLeftHandAnim2;
+    public Animator             playerRightHandAnim1;
+    public Animator             playerRightHandAnim2;
+
+    // Claws
+    public Transform            playerLeftHandTrans1;
+    public Transform            playerLeftHandTrans2;
+    public Transform            playerRightHandTrans1;
+    public Transform            playerRightHandTrans2;
 
     [Header("Set dynamically")]
     public GameObject           previouslyHighlightedGO;
