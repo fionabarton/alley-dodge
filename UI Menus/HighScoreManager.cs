@@ -247,10 +247,13 @@ public class HighScoreManager : MonoBehaviour {
         //
         GameManager.S.previouslyHighlightedGO = null;
 
-        // Reset player color
+        // Reset player hand color to default
         GameManager.S.playerDamageColldierAnim.CrossFade("DefaultColor", 0);
-        GameManager.S.playerLeftHandAnim.CrossFade("DefaultColor", 0);
-        GameManager.S.playerRightHandAnim.CrossFade("DefaultColor", 0);
+        GameManager.S.playerLeftHandAnim1.CrossFade("DefaultColor", 0);
+        GameManager.S.playerLeftHandAnim2.CrossFade("DefaultColor", 0);
+        GameManager.S.playerRightHandAnim1.CrossFade("DefaultColor", 0);
+        GameManager.S.playerRightHandAnim2.CrossFade("DefaultColor", 0);
+
     }
 
     // Displays either the previous or next 10 entries of high scores
