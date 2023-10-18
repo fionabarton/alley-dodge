@@ -122,10 +122,12 @@ public class PlayerDamage : MonoBehaviour {
         // Play BGM: Win
         GameManager.audioMan.PlayBGMClip(eBGM.bgmWin, false);
 
-        // Set player color to rainbow cycle
+        // Set player hand color to rainbow cycle
         GameManager.S.playerDamageColldierAnim.CrossFade("RainbowColor", 0);
-        GameManager.S.playerLeftHandAnim.CrossFade("RainbowColor", 0);
-        GameManager.S.playerRightHandAnim.CrossFade("RainbowColor", 0);
+        GameManager.S.playerLeftHandAnim1.CrossFade("RainbowColor", 0);
+        GameManager.S.playerLeftHandAnim2.CrossFade("RainbowColor", 0);
+        GameManager.S.playerRightHandAnim1.CrossFade("RainbowColor", 0);
+        GameManager.S.playerRightHandAnim2.CrossFade("RainbowColor", 0);
 
         //
         Invoke("ActivateKeyboardMenu", 2.5f);
