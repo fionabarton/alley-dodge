@@ -11,6 +11,7 @@ public class MoreMenu : MonoBehaviour {
     public Button           instructionsButton;
     public Button           controlsButton;
     public Button           savedDataButton;
+    public Button           creditsButton;
     public Button           mainMenuButton;
 
     // Audio, Programmer, Instructions, Controls, Tutorial, Help
@@ -30,6 +31,7 @@ public class MoreMenu : MonoBehaviour {
         instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
         controlsButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
         savedDataButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
+        creditsButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
         Invoke("ActivateAlgorithmMenu", 0.1f);
@@ -71,7 +73,7 @@ public class MoreMenu : MonoBehaviour {
 
             // Display text
             if (ndx == 3) {
-                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu:\nLearn what actions are performed by pressing\ncertain buttons/inputs on your hand controllers.");
+                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu:\nLearn what actions are performed by pressing\ncertain buttons/inputs on your hand controllers.", true);
             }
         } else {
             // Audio: Damage
