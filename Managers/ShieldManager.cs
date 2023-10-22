@@ -14,5 +14,13 @@ public class ShieldManager : MonoBehaviour {
         shieldIsActive = isActive;
         shieldPS.SetActive(isActive);
         shieldUI.SetActive(isActive);
+
+        if (isActive) {
+            // Set player body color to blue cycle
+            GameManager.S.playerDamageColldierAnim.CrossFade("PlayerDamageColliderBlue", 0);
+        } else {
+            // Reset player body color to default
+            GameManager.S.playerDamageColldierAnim.CrossFade("PlayerDamageColliderWhite", 0);
+        }
     }
 }
