@@ -93,6 +93,9 @@ public class ExitRunButton : MonoBehaviour {
 
             // Activate main menu
             GameManager.S.mainMenuGO.SetActive(true);
+
+            // Deactivate shield
+            GameManager.shield.SetActiveShield(false);
         } else {
             // Deactivate XR ray interactors
             GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, false);
