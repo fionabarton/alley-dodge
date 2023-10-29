@@ -287,16 +287,16 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public void SetToDefaultSettings() {
         customAlgorithms[0] = new CustomAlgorithm("Random Objects", "26 February, 1984", 9, 2, 10, 1,
         6, 7, 7, 10, 10, 15, 5,
-        45, 45, 45, 43, 44);
+        46, 46, 46, 47, 48);
         customAlgorithms[1] = new CustomAlgorithm("No Climbing", "29 November, 1986", 9, 1, 10, 2,
         6, 7, 7, 10, 10, 15, 5,
-        3, 20, 21, 3, 22);
+        7, 23, 24, 25, 49);
         customAlgorithms[2] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 4, 2, 5, 1,
         6, 7, 7, 10, 10, 15, 5,
-        14, 22, 5, 43, 44);
+        17, 25, 8, 47, 48);
         customAlgorithms[3] = new CustomAlgorithm("Up & Down", "5 April, 2063", 9, 2, 10, 1,
         4, 8, 8, 10, 10, 10, 10,
-        17, 18, 34, 35, 46);
+        20, 21, 37, 38, 49);
         customAlgorithms[4] = new CustomAlgorithm("Slot 5: EMPTY");
         customAlgorithms[5] = new CustomAlgorithm("Slot 6: EMPTY");
         customAlgorithms[6] = new CustomAlgorithm("Slot 7: EMPTY");
@@ -379,7 +379,7 @@ public class CustomAlgorithm {
     public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
         int _startingObjectSpeed = 9, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 19, int _amountToDecreaseSpawnSpeed = 1,
         int _chanceToSpawn0 = 6, int _chanceToSpawn1 = 7, int _chanceToSpawn2 = 7, int _chanceToSpawn3 = 10, int _chanceToSpawn4 = 10, int _chanceToSpawn5 = 15, int _chanceToSpawn6 = 5,
-        int _objectToSpawn0 = 3, int _objectToSpawn1 = 0, int _objectToSpawn2 = 17, int _objectToSpawn3 = 43, int _objectToSpawn4 = 44) {
+        int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48) {
         name = _name;
         date = _date;
 

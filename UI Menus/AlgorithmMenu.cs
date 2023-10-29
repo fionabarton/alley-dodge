@@ -250,7 +250,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.startingObjectSpeed = value + 1;
 
         // Update button text
-        objectSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (value + 1).ToString();
+        objectSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = (value + 1).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
@@ -266,7 +266,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.amountToIncreaseObjectSpeed = (valueAsFloat / 10);
 
         // Update button text
-        amountToIncreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+        amountToIncreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
@@ -282,7 +282,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 1.0f;
 
         // Update button text
-        spawnSpeedButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((valueAsFloat / 10) + 1.0f).ToString();
+        spawnSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = ((valueAsFloat / 10) + 1.0f).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
@@ -298,7 +298,7 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.spawner.amountToDecreaseSpawnSpeed = (valueAsFloat / 10);
 
         // Update button text
-        amountToDecreaseButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+        amountToDecreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
@@ -321,11 +321,17 @@ public class AlgorithmMenu : MonoBehaviour {
             // Set to default chance values
             SetChanceValuesToDefaultSetting();
 
-            SetObjectToSpawn(3, 0); // Horizontal block
+            //SetObjectToSpawn(3, 0); // Horizontal block
+            //SetObjectToSpawn(0, 1); // Vertical low block
+            //SetObjectToSpawn(17, 2); // Vertical high block
+            //SetObjectToSpawn(43, 3); // Quid pickup
+            //SetObjectToSpawn(44, 4); // Shield pickup
+
+            SetObjectToSpawn(7, 0); // Horizontal block
             SetObjectToSpawn(0, 1); // Vertical low block
-            SetObjectToSpawn(17, 2); // Vertical high block
-            SetObjectToSpawn(43, 3); // Quid pickup
-            SetObjectToSpawn(44, 4); // Shield pickup
+            SetObjectToSpawn(20, 2); // Vertical high block
+            SetObjectToSpawn(47, 3); // Quid pickup
+            SetObjectToSpawn(48, 4); // Shield pickup
 
             // Set to default speed values
             SetStartingObjectSpeedDropdownValue(9); // 10
@@ -375,7 +381,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
             // Objects to spawn
             for (int i = 0; i < 5; i++) {
-                randomInt = Random.Range(0, 45);
+                randomInt = Random.Range(0, 48);
                 SetObjectToSpawn(randomInt, i);
             }
 
@@ -452,7 +458,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (yesOrNo == 0) {
             // Objects to spawn
             for (int i = 0; i < 5; i++) {
-                SetObjectToSpawn(Random.Range(0, 45), i);
+                SetObjectToSpawn(Random.Range(0, 48), i);
             }
 
             // Delayed text display
