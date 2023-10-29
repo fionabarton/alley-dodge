@@ -147,20 +147,38 @@ public class ObjectSpawner : MonoBehaviour {
         }
     }
 
+	//void InstantiateObject(int ndx) {
+	//	if (ndx == 2) {
+	//		InstantiateRandomHorizontalBlock();
+	//	} else if (ndx == 3) {
+	//		InstantiateRandomHorizontalBlock();
+	//	} else if (ndx == 4) {
+	//		InstantiateRandomHorizontalBlock();
+	//	}else if (ndx == 43) {
+	//		InstantiateQuidPickup();
+	//	} else if (ndx == 44) {
+	//		InstantiateShieldPickup();
+	//	} else if (ndx == 45) {
+	//		InstantiateRandomObstacle();
+	//	} else if (ndx == 46) {
+	//		InstantiateRandomItem();
+	//	} else {
+	//		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
+	//	}
+	//}
+
 	void InstantiateObject(int ndx) {
-		if (ndx == 2) {
-			InstantiateHorizontalBlock();
-		} else if (ndx == 3) {
-			InstantiateHorizontalBlock();
-		} else if (ndx == 4) {
-			InstantiateHorizontalBlock();
-		}else if (ndx == 43) {
+		if (ndx == 3) {
+			InstantiateRandomHorizontalBlock();
+		} else if (ndx == 7) {
+			InstantiateRandomVerticalBlock();
+		} else if (ndx == 47) {
 			InstantiateQuidPickup();
-		} else if (ndx == 44) {
+		} else if (ndx == 48) {
 			InstantiateShieldPickup();
-		} else if (ndx == 45) {
-			InstantiateRandomObstacle();
 		} else if (ndx == 46) {
+			InstantiateRandomObstacle();
+		} else if (ndx == 49) {
 			InstantiateRandomItem();
 		} else {
 			Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
@@ -182,9 +200,16 @@ public class ObjectSpawner : MonoBehaviour {
 		}
 	}
 
-	void InstantiateHorizontalBlock() {
+	void InstantiateRandomHorizontalBlock() {
 		// Get random index
-		int ndx = Random.Range(2, 5);
+		int ndx = Random.Range(0, 3);
+
+		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
+	}
+
+	void InstantiateRandomVerticalBlock() {
+		// Get random index
+		int ndx = Random.Range(4, 7);
 
 		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
 	}
