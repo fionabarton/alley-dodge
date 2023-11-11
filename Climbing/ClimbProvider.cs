@@ -33,16 +33,19 @@ public class ClimbProvider : MonoBehaviour {
         if (_controllerName == "LeftHand Controller") {
             _leftActive = true;
             _rightActive = false;
+
+            GameManager.S.leftXR.SendHapticImpulse(0.5f, 0.15f);
         } else {
             _leftActive = false;
             _rightActive = true;
+
+            GameManager.S.rightXR.SendHapticImpulse(0.5f, 0.15f);
         }
 
         ClimbActive?.Invoke();
     }
 
     private void HandDeactivated(string _controllerName) {
-
         if (_rightActive && _controllerName == "RightHand Controller") {
             _rightActive = false;
             ClimbInActive?.Invoke();
