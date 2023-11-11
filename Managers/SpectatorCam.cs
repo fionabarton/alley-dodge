@@ -25,6 +25,8 @@ public class SpectatorCam : MonoBehaviour {
 
     public int                      currentDisplayNdx = 0;
 
+    public float autoCamStartingPosX = 0;
+
     private void Start() {
         cam = GetComponent<Camera>();
 
@@ -52,10 +54,12 @@ public class SpectatorCam : MonoBehaviour {
     void Update() {
         if (currentDisplayNdx != 2) {
             float x = Input.GetAxis("Horizontal");
+            //autoCamStartingPosX += Time.fixedDeltaTime;
             float y = Input.GetAxis("Vertical");
 
             // Move camera
             Vector3 movement = new Vector3(x, y, 0);
+            //Vector3 movement = new Vector3(autoCamStartingPosX, y, 0);
             movement = Vector3.ClampMagnitude(movement, 1);
             transform.Translate(movement * speed * Time.fixedDeltaTime);
         }
@@ -84,7 +88,9 @@ public class SpectatorCam : MonoBehaviour {
                 gameObject.transform.SetParent(null);
 
                 // Make objects visible to spectator cam
-                SetObjectsLayer("Invisible to HMD");
+                //SetObjectsLayer("Invisible to HMD");
+                // Activate objects invisible to HMD
+                GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, true);
 
                 // Set transform to look at
                 targetTrans = transforms[0];
@@ -100,7 +106,9 @@ public class SpectatorCam : MonoBehaviour {
                 targetTrans = transforms[1];
 
                 // Make objects visible to spectator cam
-                SetObjectsLayer("Invisible to HMD");
+                //SetObjectsLayer("Invisible to HMD");
+                // Activate objects invisible to HMD
+                GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, true);
 
                 // Set transform position & rotation to cached values
                 gameObject.transform.position = currentTransformPositions[1];
@@ -113,7 +121,10 @@ public class SpectatorCam : MonoBehaviour {
                 gameObject.transform.SetParent(Camera.main.transform);
 
                 // Make objects invisible to spectator cam
-                SetObjectsLayer("Invisible to Spectator Cam");
+                //SetObjectsLayer("Invisible to Spectator Cam");
+                //SetObjectsLayer("Invisible to HMD");
+                // Deactivate objects invisible to HMD
+                GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, false);
 
                 // Set position and rotation to 0
                 gameObject.transform.localPosition = Vector3.zero;
@@ -151,13 +162,13 @@ public class SpectatorCam : MonoBehaviour {
     }
 
     // Make objects (in)visible to spectator cam
-    void SetObjectsLayer(string layerName) {
-        int layerNdx = LayerMask.NameToLayer(layerName);
-        gameObject.layer = layerNdx;
-        for (int i = 0; i < gameObjectsInvisibleToHMD.Count; i++) {
-            gameObjectsInvisibleToHMD[i].layer = layerNdx;
-        }
-    }
+    //void SetObjectsLayer(string layerName) {
+    //    int layerNdx = LayerMask.NameToLayer(layerName);
+    //    gameObject.layer = layerNdx;
+    //    for (int i = 0; i < gameObjectsInvisibleToHMD.Count; i++) {
+    //        gameObjectsInvisibleToHMD[i].layer = layerNdx;
+    //    }
+    //}
 
     private void LateUpdate() {
         if (currentDisplayNdx != 2) {
