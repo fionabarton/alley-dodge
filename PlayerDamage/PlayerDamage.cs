@@ -7,9 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 // Handles what happens after the user collides with a hazardous object
 public class PlayerDamage : MonoBehaviour {
     [Header("Set in Inspector")]
-    public XRController leftXR;
-    public XRController rightXR;
-
     public GameObject   damageParticleSystemGO;
     public GameObject   deathParticleSystemGO;
 
@@ -28,8 +25,8 @@ public class PlayerDamage : MonoBehaviour {
                 Invoke("DeactivateInvicibility", 0.1f);
 
                 // Haptic feedback (amplitude, duration)
-                leftXR.SendHapticImpulse(0.25f, 0.5f);
-                rightXR.SendHapticImpulse(0.25f, 0.5f);
+                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.5f);
+                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.5f);
 
                 // Destroy hazard
                 Destroy(other.gameObject.transform.parent.gameObject);
