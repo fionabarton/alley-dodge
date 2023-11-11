@@ -117,7 +117,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetStartingObjectSpeedDropdownValue(4); // 5
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
@@ -334,7 +334,7 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(48, 4); // Shield pickup
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(9); // 10
+            SetStartingObjectSpeedDropdownValue(4); // 5
             SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
             SetStartingSpawnSpeedDropdownValue(10); // 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f

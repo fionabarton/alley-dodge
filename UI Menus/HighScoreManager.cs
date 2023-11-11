@@ -309,7 +309,7 @@ public class HighScore {
 
     public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects = 0, string _runTime = "00:00:00:000",
         string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, string _playerHeight = "1.68 m / 5 ft 6.14 in", int _fallBelowFloorCount = 0, int _damageCount = 0, int _pauseCount = 0,
-        string _startingObjectSpeed = "10", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1",
+        string _startingObjectSpeed = "5", string _amountToIncreaseObjectSpeed = "0.1", string _startingSpawnSpeed = "2", string _amountToDecreaseSpawnSpeed = "0.1",
         string _chanceToSpawn0 = "30%", string _chanceToSpawn1 = "35%", string _chanceToSpawn2 = "35%", string _chanceToSpawn3 = "50%", string _chanceToSpawn4 = "50%", string _chanceToSpawn5 = "75%", string _chanceToSpawn6 = "25%",
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48) {
         name = _name;

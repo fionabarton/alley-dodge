@@ -285,16 +285,16 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     }
 
     public void SetToDefaultSettings() {
-        customAlgorithms[0] = new CustomAlgorithm("Random Objects", "26 February, 1984", 9, 2, 10, 1,
+        customAlgorithms[0] = new CustomAlgorithm("Random Objects", "26 February, 1984", 4, 2, 10, 1,
         6, 7, 7, 10, 10, 15, 5,
         46, 46, 46, 47, 48);
-        customAlgorithms[1] = new CustomAlgorithm("No Climbing", "29 November, 1986", 9, 1, 10, 2,
+        customAlgorithms[1] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 10, 2,
         6, 7, 7, 10, 10, 15, 5,
         7, 23, 24, 25, 49);
-        customAlgorithms[2] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 4, 2, 5, 1,
+        customAlgorithms[2] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 2, 2, 5, 1,
         6, 7, 7, 10, 10, 15, 5,
         17, 25, 8, 47, 48);
-        customAlgorithms[3] = new CustomAlgorithm("Up & Down", "5 April, 2063", 9, 2, 10, 1,
+        customAlgorithms[3] = new CustomAlgorithm("Up & Down", "5 April, 2063", 4, 2, 10, 1,
         4, 8, 8, 10, 10, 10, 10,
         20, 21, 37, 38, 49);
         customAlgorithms[4] = new CustomAlgorithm("Slot 5: EMPTY");
@@ -377,7 +377,7 @@ public class CustomAlgorithm {
     public int objectToSpawn4;
 
     public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
-        int _startingObjectSpeed = 9, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 19, int _amountToDecreaseSpawnSpeed = 1,
+        int _startingObjectSpeed = 4, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 19, int _amountToDecreaseSpawnSpeed = 1,
         int _chanceToSpawn0 = 6, int _chanceToSpawn1 = 7, int _chanceToSpawn2 = 7, int _chanceToSpawn3 = 10, int _chanceToSpawn4 = 10, int _chanceToSpawn5 = 15, int _chanceToSpawn6 = 5,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48) {
         name = _name;
