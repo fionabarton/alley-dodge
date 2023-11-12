@@ -51,6 +51,9 @@ public class ObjectSpawner : MonoBehaviour {
 	// Stores amount of time game was paused, then adds it to timer when game is unpaused
 	private float			timePaused;
 
+	// On game start, ensure this is set to -1
+	public int				previousObjectNdx = -1;
+
 	private void Start() {
 		timeDone = currentSpawnSpeed + Time.time; 
 	}
@@ -103,19 +106,6 @@ public class ObjectSpawner : MonoBehaviour {
 	
 	// Instantiate a random hazard or pickup
 	void InstantiateObject() {
-        // Add to object count
-        GameManager.S.score.AddToObjectCount();
-
-        //if (Random.value <= 0.75f) {
-        //    Instantiate(testBlenderCube, new Vector3(0, 0, 40), transform.rotation);
-        //} else {
-        //    if (Random.value <= 0.75f) {
-        //        InstantiateQuidPickup();
-        //    } else {
-        //        InstantiateShieldPickup();
-        //    }
-        //}
-
         // Get random value
         float randomVal = Random.value;
 
@@ -127,10 +117,10 @@ public class ObjectSpawner : MonoBehaviour {
             randomVal = Random.value;
 
             // Instantiate vertical block
-            if (randomVal > chancesToSpawn[2]) { // 0.5f (50%)
+            if (randomVal <= (1 - chancesToSpawn[4])) { // 0.5f (50%)
                 // Low block
                 InstantiateObject(objectsToSpawn[1]);
-            } else if (randomVal <= (1 - chancesToSpawn[3])) { // 0.5f (50%)
+            } else if (randomVal > chancesToSpawn[3]) { // 0.5f (50%)
                 // High block
                 InstantiateObject(objectsToSpawn[2]);
             }
@@ -147,41 +137,78 @@ public class ObjectSpawner : MonoBehaviour {
         }
     }
 
-	//void InstantiateObject(int ndx) {
-	//	if (ndx == 2) {
-	//		InstantiateRandomHorizontalBlock();
-	//	} else if (ndx == 3) {
-	//		InstantiateRandomHorizontalBlock();
-	//	} else if (ndx == 4) {
-	//		InstantiateRandomHorizontalBlock();
-	//	}else if (ndx == 43) {
-	//		InstantiateQuidPickup();
-	//	} else if (ndx == 44) {
-	//		InstantiateShieldPickup();
-	//	} else if (ndx == 45) {
-	//		InstantiateRandomObstacle();
-	//	} else if (ndx == 46) {
-	//		InstantiateRandomItem();
-	//	} else {
-	//		Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
-	//	}
-	//}
+	// Returns true if more than one of the objectsToSpawn slots are
+	// accessible endpoints of the gameplay algorithm flow chart
+	bool checkIfMultipleObjectsCanBeSpawned() {
+		if(chancesToSpawn[0] >= 1.0f) {
+			return false;
+        } else if (chancesToSpawn[1] >= 1.0f) {
+			if(chancesToSpawn[3] >= 1.0f || chancesToSpawn[4] >= 1.0f) {
+				return false;
+			}
+		} else if (chancesToSpawn[2] >= 1.0f) {
+			if (chancesToSpawn[5] >= 1.0f || chancesToSpawn[6] >= 1.0f) {
+				return false;
+			}
+		}
+		return true;
+    }
 
-	void InstantiateObject(int ndx) {
-		if (ndx == 3) {
-			InstantiateRandomHorizontalBlock();
-		} else if (ndx == 7) {
-			InstantiateRandomVerticalBlock();
-		} else if (ndx == 47) {
-			InstantiateQuidPickup();
-		} else if (ndx == 48) {
-			InstantiateShieldPickup();
-		} else if (ndx == 46) {
-			InstantiateRandomObstacle();
-		} else if (ndx == 49) {
-			InstantiateRandomItem();
-		} else {
-			Instantiate(objects[ndx], new Vector3(0, 0, 40), transform.rotation);
+	void InstantiateObject(int objectNdx) {
+        // If more than one object can be spawned...
+        if (checkIfMultipleObjectsCanBeSpawned()) {
+			// ...and if the previously spawned object is not the same as the current one...
+			if(objectNdx != previousObjectNdx) {
+				// Instantiate object
+				if (objectNdx == 3) {
+					InstantiateRandomHorizontalBlock();
+				} else if (objectNdx == 7) {
+					InstantiateRandomVerticalBlock();
+				} else if (objectNdx == 47) {
+					InstantiateQuidPickup();
+				} else if (objectNdx == 48) {
+					InstantiateShieldPickup();
+				} else if (objectNdx == 46) {
+					InstantiateRandomObstacle();
+				} else if (objectNdx == 49) {
+					InstantiateRandomItem();
+				} else {
+					Instantiate(objects[objectNdx], new Vector3(0, 0, 40), transform.rotation);
+				}
+
+				// Cache previous object index
+				previousObjectNdx = objectNdx;
+
+				// Add to object count
+				GameManager.S.score.AddToObjectCount();
+			} else {
+				// If the previously spawned object is the same as the current one, try again
+				InstantiateObject();
+				Debug.Log("Reroll!");
+			}
+        } else {
+			// Instantiate object
+			if (objectNdx == 3) {
+				InstantiateRandomHorizontalBlock();
+			} else if (objectNdx == 7) {
+				InstantiateRandomVerticalBlock();
+			} else if (objectNdx == 47) {
+				InstantiateQuidPickup();
+			} else if (objectNdx == 48) {
+				InstantiateShieldPickup();
+			} else if (objectNdx == 46) {
+				InstantiateRandomObstacle();
+			} else if (objectNdx == 49) {
+				InstantiateRandomItem();
+			} else {
+				Instantiate(objects[objectNdx], new Vector3(0, 0, 40), transform.rotation);
+			}
+
+			// Cache previous object index
+			previousObjectNdx = objectNdx;
+
+			// Add to object count
+			GameManager.S.score.AddToObjectCount();
 		}
 	}
 
