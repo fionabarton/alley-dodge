@@ -279,6 +279,10 @@ public class MainMenu : MonoBehaviour {
         // Reset previous object index
         GameManager.S.spawner.previousObjectNdx = -1;
 
+        // Start smoke particle system and reset its starting size
+        GameManager.S.smokePSmain.startSize = GameManager.S.score.level;
+        GameManager.S.smokePS.Play();
+
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxLetsGo);
 
