@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 // Provides access to all components
 public class GameManager : MonoBehaviour {
@@ -54,6 +55,13 @@ public class GameManager : MonoBehaviour {
     public Transform            playerRightHandTrans1;
     public Transform            playerRightHandTrans2;
 
+    // Hand controllers for vibration
+    public XRController         leftXR;
+    public XRController         rightXR;
+
+    // Smoke particle system (on new level increases its starting size by 1)
+    public ParticleSystem       smokePS;
+
     [Header("Set dynamically")]
     public GameObject           previouslyHighlightedGO;
 
@@ -73,6 +81,8 @@ public class GameManager : MonoBehaviour {
     public static AudioManager  audioMan;
     public static SaveManager   save;
 
+    public ParticleSystem.MainModule smokePSmain;
+
     private static GameManager _S;
     public static GameManager S { get { return _S; } set { _S = value; } }
 
@@ -89,6 +99,7 @@ public class GameManager : MonoBehaviour {
         words = GetComponent<WordManager>();
         audioMan = GetComponent<AudioManager>();
         save = GetComponent<SaveManager>();
+        smokePSmain = smokePS.main;
     }
 
     public void EnableClimbInteractors(bool isActive){
