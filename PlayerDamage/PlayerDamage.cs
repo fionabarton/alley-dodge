@@ -77,6 +77,9 @@ public class PlayerDamage : MonoBehaviour {
                     // Play BGM: Lose
                     GameManager.audioMan.PlayBGMClip(eBGM.bgmLose, false);
 
+                    // Stop smoke particle system 
+                    GameManager.S.smokePS.Stop();
+
                     // Check for high score
                     if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
                         // 
