@@ -31,14 +31,14 @@ public class CreditsMenu : MonoBehaviour {
 
     // Displays either the previous or next page of instructions
     public void GoToPreviousOrNextPage(int amountToChange) {
-        //
+        // Adjust current page index
         currentPageNdx += amountToChange;
 
         // Reset
-        if (currentPageNdx > 4) {
+        if (currentPageNdx > textGO.Count - 1) {
             currentPageNdx = 0;
         } else if (currentPageNdx < 0) {
-            currentPageNdx = 4;
+            currentPageNdx = textGO.Count - 1;
         }
 
         // Deactivate all text pages
@@ -48,6 +48,6 @@ public class CreditsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/5" + "</color>";
+        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/6" + "</color>";
     }
 }
