@@ -6,10 +6,9 @@ public enum eBGM {
 };
 
 public enum eSFX {
-    sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeath, sfxDeny, sfxDialogue,
-    sfxFireball, sfxFireblast, sfxFlicker, sfxHighBeep1, sfxHighBeep2, sfxSelection, sfxSwell,
-    sfxQuid1, sfxQuid2, sfxQuid3, sfxQuid4, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, sfxApplause, sfxScream, sfxApplauseLoop,
-    sfxGrab
+    sfxBuff1, sfxBuff2, sfxConfirm, sfxDamage1, sfxDamage2, sfxDamage3, sfxDeny,
+    sfxFireball, sfxFireblast, sfxSelection, sfxQuid1, sfxQuid5, sfxWhooshHigh, sfxWhooshMed, sfxWhooshLow, 
+    sfxApplause, sfxScream, sfxApplauseLoop, sfxGrab, sfxHighBeep1, sfxHighBeep2,
 };
 
 public enum eVOX {
@@ -24,8 +23,10 @@ public class AudioManager : MonoBehaviour {
     public AudioSource      BGMAudioSource;
     public AudioSource      applauseSFXAudioSource;
     public AudioSource      VOXAudioSource;
+    public AudioSource      kangarooAudioSource;
 
     public List<AudioClip>  bgmClips = new List<AudioClip>();
+    public List<AudioClip>  soundtrackClips = new List<AudioClip>();
     public List<AudioClip>  sfxClips = new List<AudioClip>();
     public List<AudioClip>  voxClips = new List<AudioClip>();
     public List<AudioClip>  voxExclamationClips = new List<AudioClip>();
@@ -33,6 +34,11 @@ public class AudioManager : MonoBehaviour {
 
     [Header("Set Dynamically")]
     public float            previousVolumeLvl;
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    public int soundtrackNdx = 0;
+    public bool isLoopingGameSoundtrack = false;
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     private void Start() {
         // Set previous volume level
@@ -60,9 +66,9 @@ public class AudioManager : MonoBehaviour {
         applauseSFXAudioSource.loop = doesLoop;
 
         if (doesLoop) {
-            applauseSFXAudioSource.clip = sfxClips[26];
+            applauseSFXAudioSource.clip = sfxClips[17];
         } else {
-            applauseSFXAudioSource.clip = sfxClips[24];
+            applauseSFXAudioSource.clip = sfxClips[15];
         }
 
         applauseSFXAudioSource.Play();
@@ -76,6 +82,43 @@ public class AudioManager : MonoBehaviour {
         BGMAudioSource.clip = clip;
         BGMAudioSource.Play();
     }
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    private void FixedUpdate() {
+        // If the soundtrack is being looped
+        if (isLoopingGameSoundtrack) {
+            // If the audio source has STOPPED playing
+            if (!BGMAudioSource.isPlaying) {
+                // Increment index to next track
+                if (soundtrackNdx < soundtrackClips.Count) {
+                    soundtrackNdx += 1;
+                } else {
+                    soundtrackNdx = 0;
+                }
+
+                // Play next track of the soundtrack
+                AudioClip clip = soundtrackClips[soundtrackNdx];
+                BGMAudioSource.clip = clip;
+                BGMAudioSource.Play();
+            }
+        }
+    }
+
+    public void PlaySoundtrackClip(int ndx, bool doesLoop = true) {
+        BGMAudioSource.loop = doesLoop;
+
+        // Increment index to next track
+        if (soundtrackNdx < soundtrackClips.Count - 1) {
+            soundtrackNdx += 1;
+        } else {
+            soundtrackNdx = 0;
+        }
+
+        AudioClip clip = soundtrackClips[ndx];
+        BGMAudioSource.clip = clip;
+        BGMAudioSource.Play();
+    }
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     //
     public void PlayVOXClip(eVOX VOXName) {
