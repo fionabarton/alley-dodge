@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Acts as a menu to access ancillary features such as audio settings, instructions, controls, etc.
+// Acts as a menu to access ancillary features such as audio settings, resetting save data, altering the game algorithm etc.
 public class MoreMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     public Button           audioButton;
     public Button           algorithmButton;
     public Button           instructionsButton;
-    public Button           controlsButton;
     public Button           savedDataButton;
     public Button           creditsButton;
     public Button           mainMenuButton;
 
-    // Audio, Programmer, Instructions, Controls, Tutorial, Help
+    // Audio, Programmer, Instructions, Saved Data, Credits
     public List<GameObject> menuGOs;
     public List<Button>     menuButtons;
 
@@ -29,9 +28,8 @@ public class MoreMenu : MonoBehaviour {
         audioButton.onClick.AddListener(delegate { ActivateMenuGO(0); });
         algorithmButton.onClick.AddListener(delegate { ActivateMenuGO(1); });
         instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
-        controlsButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
-        savedDataButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
-        creditsButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
+        savedDataButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
+        creditsButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
         Invoke("ActivateAlgorithmMenu", 0.1f);
@@ -45,7 +43,7 @@ public class MoreMenu : MonoBehaviour {
 
     //
     void ActivateMenuGO(int ndx) {
-        //
+        // Ensure gameplay algorithm is set to valid values
         if (GameManager.S.algorithmMenuCS.CheckAllButtonsForValidValues()) {
             // Deactivate all menus
             GameManager.utilities.SetActiveList(menuGOs, false);
@@ -70,11 +68,6 @@ public class MoreMenu : MonoBehaviour {
             // Set cursor positions
             GameManager.utilities.PositionCursor(cursorGO[0], menuButtons[ndx].gameObject, -125f, 0, 0);
             GameManager.utilities.PositionCursor(cursorGO[1], menuButtons[ndx].gameObject, 125f, 0, 2);
-
-            // Display text
-            if (ndx == 3) {
-                GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the controls menu:\nLearn what actions are performed by pressing\ncertain buttons/inputs on your hand controllers.", true);
-            }
         } else {
             // Audio: Damage
             GameManager.audioMan.PlayRandomDamageSFX();
