@@ -172,7 +172,7 @@ public class HighScoreManager : MonoBehaviour {
         int startingNdx = pageNdx * 10;
 
         // Set title text
-        titleText.text = "Top 100 High Scores " + "(" + (startingNdx + 1).ToString() + "-" + (startingNdx + 10).ToString() + ")";
+        //titleText.text = "Top 100 High Scores " + "(" + (startingNdx + 1).ToString() + "-" + (startingNdx + 10).ToString() + ")";
 
         // Loop over the 10 UI text objects
         for (int i = 0; i < 10; i++) {
