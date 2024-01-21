@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour {
 	private void FixedUpdate() {
 		// Display time
         if (timerIsOn) {
-			timeText.text = "Time:\n<color=white>" + GetTime(Time.time);
+			timeText.text = GetTime(Time.time);
 		}
     }
 
