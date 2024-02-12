@@ -48,6 +48,6 @@ public class CreditsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/6" + "</color>";
+        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/8" + "</color>";
     }
 }
