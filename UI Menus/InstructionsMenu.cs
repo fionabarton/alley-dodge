@@ -15,7 +15,6 @@ public class InstructionsMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI    pageText;
 
     [Header("Set dynamically")]
-    //
     public int                      currentPageNdx = 0;
 
     private void OnEnable() {
@@ -50,10 +49,10 @@ public class InstructionsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/6" + "</color>";
+        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/7" + "</color>";
 
         // Set menu header text
-        if (currentPageNdx != 5) {
+        if (currentPageNdx != 5 && currentPageNdx != 6) {
             menuHeaderText.text = "Instructions:";
         } else {
             menuHeaderText.text = "Controls:";
