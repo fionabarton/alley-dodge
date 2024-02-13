@@ -116,11 +116,11 @@ public class ScoreManager : MonoBehaviour {
 		level += 1;
 		levelText.text = "Level: <color=white>" + level;
 
-		// Increase smoke particle system starting size
-		GameManager.S.smokePSmain.startSize = GameManager.S.score.level;
+        // Set smoke particle system starting size based on the number of the level currently being played
+        GameManager.S.PlaySmokeParticelSystemAndSetSize();
 
-		// Reset amountToNextLevel 
-		amountToNextLevel = 5;
+        // Reset amountToNextLevel 
+        amountToNextLevel = 5;
 
 		// Display text
 		SetDisplayText("NEXT LEVEL!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxNextLevel);

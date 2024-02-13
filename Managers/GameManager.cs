@@ -128,6 +128,20 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    // Play smoke particle system and set its size based on the number of the level currently being played
+    public void PlaySmokeParticelSystemAndSetSize() {
+        // For levels 5 and higher...
+        if (score.level >= 5) {
+            // Set size based on level number
+            smokePSmain.startSize = score.level * 0.3f;
+
+            // If not playing, start playing
+            if (!smokePS.isPlaying) {
+                smokePS.Play();
+            }
+        }
+    }
+
     //// For testing!
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.Space)) {
