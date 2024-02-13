@@ -280,14 +280,20 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.spawner.previousObjectNdx = -1;
 
         // Start smoke particle system and reset its starting size
-        GameManager.S.smokePSmain.startSize = GameManager.S.score.level;
-        GameManager.S.smokePS.Play();
+        GameManager.S.PlaySmokeParticelSystemAndSetSize();
 
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxLetsGo);
 
         // Play BGM: Ninja
-        GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
+        //GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        // Enable looping over background music soundtrack
+        GameManager.audioMan.isLoopingGameSoundtrack = true;
+
+        // Start playing BGM
+        GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.soundtrackNdx, false);
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         // Activate exit run menu podium
         GameManager.S.podiums.ActivateMenus(true, false);
