@@ -45,6 +45,9 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Remove listeners
         okButtonCS.onClick.RemoveAllListeners();
 
+        // Activated here in order to ensure that following display text code below gets a chance to run
+        gameObject.SetActive(true);
+
         //
         if (actionToBePerformed == "NameHighScoreEntry") {
             isSettingHighScoreEntryName = true;
@@ -73,8 +76,6 @@ public class KeyboardInputMenu : MonoBehaviour {
 
             goBackButtonGO.SetActive(true);
         }
-
-        gameObject.SetActive(true);
     }
 
     // Add a char to the displayed name
