@@ -6,6 +6,7 @@ using UnityEngine;
 public class OnEnterVibrateHandController : MonoBehaviour {
     [Header("Set in Inspector")]
     public bool isLeftHandController;
+    public GameObject sparkParticles;
 
     [Header("Set dynamically")]
     float       amplitude = 0;
@@ -33,5 +34,8 @@ public class OnEnterVibrateHandController : MonoBehaviour {
         } else {
             GameManager.S.rightXR.SendHapticImpulse(amplitude, duration);
         }
+
+        // Instantiate sparks
+        Instantiate(sparkParticles, transform.position, transform.rotation);
     }
 }
