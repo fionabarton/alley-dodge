@@ -4,6 +4,8 @@ using UnityEngine;
 
 // Sets the user's left & right hand's material's colors depending on their current interaction (hover, hold, release)
 // with a climbable XRGrabInteractable object.
+
+// Is set on XRDirectClimbInteractor's "Interactor Events" (in Inspector) attached to both hand controller game objects 
 public class SetHandMaterialColor : MonoBehaviour {
     [Header("Set in Inspector")]
     public Material         handMaterial;
@@ -28,34 +30,10 @@ public class SetHandMaterialColor : MonoBehaviour {
             // Set hand material color
             GameManager.S.playerLeftHandAnim1.CrossFade("RainbowColor", 0);
             GameManager.S.playerLeftHandAnim2.CrossFade("RainbowColor", 0);
-
-            // Rotate hands closed
-            GameManager.S.playerLeftHandTrans1.localEulerAngles = new Vector3(
-                -89,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerLeftHandTrans2.localEulerAngles = new Vector3(
-                -89,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.z
-            );
         } else {
             // Set hand material color
             GameManager.S.playerRightHandAnim1.CrossFade("RainbowColor", 0);
             GameManager.S.playerRightHandAnim2.CrossFade("RainbowColor", 0);
-
-            // Rotate hands closed
-            GameManager.S.playerRightHandTrans1.localEulerAngles = new Vector3(
-                -89,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerRightHandTrans2.localEulerAngles = new Vector3(
-                -89,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.z
-            );
         }
 
         // Instantiate sparks
@@ -73,34 +51,10 @@ public class SetHandMaterialColor : MonoBehaviour {
             // Set hand material color
             GameManager.S.playerLeftHandAnim1.CrossFade("DefaultColor", 0);
             GameManager.S.playerLeftHandAnim2.CrossFade("DefaultColor", 0);
-
-            // Rotate hands open
-            GameManager.S.playerLeftHandTrans1.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerLeftHandTrans2.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.z
-            );
         } else {
             // Set hand material color
             GameManager.S.playerRightHandAnim1.CrossFade("DefaultColor", 0);
             GameManager.S.playerRightHandAnim2.CrossFade("DefaultColor", 0);
-
-            // Rotate hands open
-            GameManager.S.playerRightHandTrans1.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerRightHandTrans2.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.z
-            );
         }
 
         // Audio: Damage
@@ -118,34 +72,10 @@ public class SetHandMaterialColor : MonoBehaviour {
             // Set hand material color
             GameManager.S.playerLeftHandAnim1.CrossFade("DefaultColor", 0);
             GameManager.S.playerLeftHandAnim2.CrossFade("DefaultColor", 0);
-
-            // Rotate hands open
-            GameManager.S.playerLeftHandTrans1.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerLeftHandTrans2.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.y,
-                GameManager.S.playerLeftHandTrans2.localEulerAngles.z
-            );
         } else {
             // Set hand material color
             GameManager.S.playerRightHandAnim1.CrossFade("DefaultColor", 0);
             GameManager.S.playerRightHandAnim2.CrossFade("DefaultColor", 0);
-
-            // Rotate hands open
-            GameManager.S.playerRightHandTrans1.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans1.localEulerAngles.z
-            );
-            GameManager.S.playerRightHandTrans2.localEulerAngles = new Vector3(
-                -60,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.y,
-                GameManager.S.playerRightHandTrans2.localEulerAngles.z
-            );
         }
     }
 }
