@@ -320,10 +320,10 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         objectsToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn3];
         objectsToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn4];
 
-        speedTexts[0].text = "<color=red>Starting object speed:</color> " + (customAlgorithms[buttonNdx].startingObjectSpeed + 1).ToString();
-        speedTexts[1].text = "<color=#FFC800>Amount to increase per level:</color> " + ((float)customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed / 10).ToString();
-        speedTexts[2].text = "<color=red>Starting spawn speed:</color> " + (((float)customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 1.0f).ToString();
-        speedTexts[3].text = "<color=#FFC800>Amount to decrease per level:</color> " + ((float)customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed / 10).ToString();
+        speedTexts[0].text = "Starting object speed:<color=#D9D9D9> " + (customAlgorithms[buttonNdx].startingObjectSpeed + 1).ToString();
+        speedTexts[1].text = "Amount to increase per level:<color=#D9D9D9> " + ((float)customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed / 10).ToString();
+        speedTexts[2].text = "Starting spawn speed:<color=#D9D9D9> " + (((float)customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 1.0f).ToString();
+        speedTexts[3].text = "Amount to decrease per level:<color=#D9D9D9> " + ((float)customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed / 10).ToString();
     }
 }
 

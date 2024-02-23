@@ -49,7 +49,7 @@ public class InstructionsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=white>" + (currentPageNdx + 1).ToString() + "/7" + "</color>";
+        pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/7" + "</color>";
 
         // Set menu header text
         if (currentPageNdx != 5 && currentPageNdx != 6) {

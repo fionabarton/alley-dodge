@@ -220,7 +220,7 @@ public class HighScoreManager : MonoBehaviour {
         }
 
         // Set page text
-        pageText.text = "Page: " + "<color=white>" + (pageNdx + 1).ToString() + "/10" + "</color>";
+        pageText.text = "Page: " + "<color=#D9D9D9>" + (pageNdx + 1).ToString() + "/10" + "</color>";
     }
 
     // Sets the colors of a single HighScore entry's text
