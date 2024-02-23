@@ -45,7 +45,7 @@ public class SpectatorCam : MonoBehaviour {
         cam.targetDisplay = 0;
 
         // Display text
-        displayText.text = "Display: <color=white>Look at Spawner</color>";
+        displayText.text = "Display: <color=#D9D9D9>Look at Spawner</color>";
 
         // Set transform to look at
         targetTrans = transforms[0];
@@ -100,7 +100,7 @@ public class SpectatorCam : MonoBehaviour {
                 gameObject.transform.rotation = currentTransformRotations[0];
 
                 // Display text
-                displayText.text = "Display: <color=white>Look at Spawner</color>";
+                displayText.text = "Display: <color=#D9D9D9>Look at Spawner</color>";
             } else if (currentDisplayNdx == 1) {
                 // Set transform to look at
                 targetTrans = transforms[1];
@@ -115,7 +115,7 @@ public class SpectatorCam : MonoBehaviour {
                 gameObject.transform.rotation = currentTransformRotations[1];
 
                 // Display text
-                displayText.text = "Display: <color=white>Look at Player</color>";
+                displayText.text = "Display: <color=#D9D9D9>Look at Player</color>";
             } else {
                 // Set parent transform
                 gameObject.transform.SetParent(Camera.main.transform);
@@ -131,7 +131,7 @@ public class SpectatorCam : MonoBehaviour {
                 gameObject.transform.localRotation = Quaternion.identity;
 
                 // Display text
-                displayText.text = "Display: <color=white>Player HMD</color>";
+                displayText.text = "Display: <color=#D9D9D9>Player HMD</color>";
             }
         }
 
