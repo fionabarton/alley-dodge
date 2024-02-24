@@ -24,9 +24,9 @@ public class PlayerDamage : MonoBehaviour {
                 GameManager.S.playerIsInvincible = true;
                 Invoke("DeactivateInvicibility", 0.1f);
 
-                // Haptic feedback (amplitude, duration)
-                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.5f);
-                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.5f);
+                // Send haptic feedback (amplitude, duration) to both controllers
+                GameManager.S.leftXR.SendHapticImpulse(0.75f, 0.5f);
+                GameManager.S.rightXR.SendHapticImpulse(0.75f, 0.5f);
 
                 // Destroy hazard
                 Destroy(other.gameObject.transform.parent.gameObject);
@@ -45,6 +45,11 @@ public class PlayerDamage : MonoBehaviour {
 
                 // If shield isn't active...
                 if (!GameManager.shield.shieldIsActive) {
+                    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    // Stop looping over background music soundtrack
+                    GameManager.audioMan.isLoopingGameSoundtrack = false;
+                    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
                     // Cache ending time
                     GameManager.S.score.endingTime = Time.time;
 
@@ -101,6 +106,10 @@ public class PlayerDamage : MonoBehaviour {
                     // Display text
                     GameManager.S.score.SetDisplayText(GameManager.words.GetRandomInterjection(true) + "!", Color.red, Color.red);
                 }
+            } else if (other.gameObject.tag == "Pickup") {
+                // Send haptic feedback (amplitude, duration) to both controllers
+                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.25f);
+                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.25f);
             }
         }
     }
@@ -136,11 +145,7 @@ public class PlayerDamage : MonoBehaviour {
     //
     void ActivateKeyboardMenu() {
         // Activate keyboard input menu
-        //GameManager.S.keyboardMenuGO.SetActive(true);
         GameManager.S.keyboardMenuCS.Activate("NameHighScoreEntry");
-
-        //// Display saved name input string
-        //GameManager.S.keyboardMenuCS.GetInputString();
 
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
