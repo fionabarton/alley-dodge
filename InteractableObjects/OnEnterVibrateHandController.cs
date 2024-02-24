@@ -5,34 +5,25 @@ using UnityEngine;
 // On trigger enter, if tag is "Climbable" or "Pickup" vibrate hand controller
 public class OnEnterVibrateHandController : MonoBehaviour {
     [Header("Set in Inspector")]
-    public bool isLeftHandController;
-    public GameObject sparkParticles;
-
-    [Header("Set dynamically")]
-    float       amplitude = 0;
-    float       duration = 0;
+    public bool         isLeftHandController;
+    public GameObject   sparkParticles;
 
     private void OnTriggerEnter(Collider other) {
         // If tag is "Climbable" or "Pickup" vibrate hand controller
         if (other.gameObject.tag == "Climbable") {
-            amplitude = 0.15f;
-            duration = 0.15f;
-
-            VibrateController();
+            // Vibrate left or right hand controller (amplitude, duration)
+            if (isLeftHandController) {
+                GameManager.S.leftXR.SendHapticImpulse(0.2f, 0.1f);
+            } else {
+                GameManager.S.rightXR.SendHapticImpulse(0.2f, 0.1f);
+            }
         } else if (other.gameObject.tag == "Pickup") {
-            amplitude = 0.25f;
-            duration = 0.25f;
-
-            VibrateController();
-        }
-    }
-
-    // Vibrate left or right hand controller (amplitude, duration)
-    void VibrateController() {
-        if (isLeftHandController) {
-            GameManager.S.leftXR.SendHapticImpulse(amplitude, duration);
-        } else {
-            GameManager.S.rightXR.SendHapticImpulse(amplitude, duration);
+            // Vibrate left or right hand controller (amplitude, duration)
+            if (isLeftHandController) {
+                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.25f);
+            } else {
+                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.25f);
+            }
         }
 
         // Instantiate sparks
