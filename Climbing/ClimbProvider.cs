@@ -34,12 +34,12 @@ public class ClimbProvider : MonoBehaviour {
             _leftActive = true;
             _rightActive = false;
 
-            GameManager.S.leftXR.SendHapticImpulse(0.5f, 0.15f);
+            GameManager.S.leftXR.SendHapticImpulse(0.75f, 0.1f);
         } else {
             _leftActive = false;
             _rightActive = true;
 
-            GameManager.S.rightXR.SendHapticImpulse(0.5f, 0.15f);
+            GameManager.S.rightXR.SendHapticImpulse(0.75f, 0.1f);
         }
 
         ClimbActive?.Invoke();
