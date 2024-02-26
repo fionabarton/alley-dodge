@@ -14,17 +14,21 @@ public class DelayedTextDisplay : MonoBehaviour {
 	public bool			dialogueFinished = true;
 
 	public void DisplayText(string text, bool waitForTextToFinish = false) {
-        if (waitForTextToFinish) {
-			GameManager.S.waitForDialogueToFinish = waitForTextToFinish;
-		}
+		//      if (waitForTextToFinish) {
+		//	GameManager.S.waitForDialogueToFinish = waitForTextToFinish;
+		//}
 
 		gameObject.SetActive(true);
 
-		StopAllCoroutines();
+		//StopAllCoroutines();
 
-		StopCoroutine("DisplayTextCo");
-		StartCoroutine(DisplayTextCo(text));
-	}
+		//StopCoroutine("DisplayTextCo");
+		//StartCoroutine(DisplayTextCo(text));
+
+		// Display message to user WITHOUT any delay
+		// (Yes, thanks to this design choice, the contents of this script have become mostly useless!)
+		message.text = text;
+    }
 	IEnumerator DisplayTextCo(string text) {
 		// Deactivate Cursor
 		cursorGO.SetActive(false);
