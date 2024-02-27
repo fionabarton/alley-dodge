@@ -51,18 +51,18 @@ public class MoreMenu : MonoBehaviour {
             // Activate selected menu
             menuGOs[ndx].SetActive(true);
 
-            // Reset all menu buttons' colorss
+            // Reset all menu buttons' colors
             for (int i = 0; i < menuButtons.Count; i++) {
                 ColorBlock colors = menuButtons[i].colors;
                 colors.normalColor = Color.white;
-                colors.highlightedColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 1);
+                colors.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
                 menuButtons[i].colors = colors;
             }
 
             // Set selected menu button's colors
             ColorBlock c = menuButtons[ndx].colors;
             c.normalColor = new Color(1, 0.7843137f, 0, 1);
-            c.highlightedColor = new Color(0.7264151f, 0.5697374f, 0, 1);
+            c.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
             menuButtons[ndx].colors = c;
 
             // Set cursor positions

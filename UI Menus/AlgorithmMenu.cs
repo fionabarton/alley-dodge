@@ -596,8 +596,8 @@ public class AlgorithmMenu : MonoBehaviour {
     void ResetButtonColor(Button chanceButton) {
         ColorBlock cb = chanceButton.colors;
         cb.normalColor = Color.white;
-        cb.highlightedColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 1);
-        cb.selectedColor = new Color(0.9607843f, 0.9607843f, 0.9607843f, 1);
+        cb.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
+        cb.selectedColor = new Color(0.45f, 0.85f, 0.3f, 1);
         chanceButton.colors = cb;
     }
 
