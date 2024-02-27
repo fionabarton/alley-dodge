@@ -23,8 +23,7 @@ public class OnHighlightChangeButtonColor : MonoBehaviour, IPointerEnterHandler,
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        //Color newColor = new Color(1.0f, 0.65f, 0f, 1);
-        Color newColor = Color.green;
+        Color newColor = new Color(1, 0.7f, 0.1f, 1);
 
         // Highlight buttons w/ new color
         for (int i = 0; i < buttons.Count; i++) {
