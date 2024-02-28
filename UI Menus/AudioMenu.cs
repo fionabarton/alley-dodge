@@ -18,7 +18,7 @@ public class AudioMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
         }
 
         // Set selected game object to null
@@ -46,28 +46,28 @@ public class AudioMenu : MonoBehaviour {
             masterVolSlider.value = PlayerPrefs.GetFloat("Master Volume");
             GameManager.audioMan.SetMasterVolume(masterVolSlider.value);
         } else {
-            GameManager.audioMan.SetMasterVolume(0.5f);
+            GameManager.audioMan.SetMasterVolume(0.25f);
         }
 
         if (PlayerPrefs.HasKey("BGM Volume")) {
             BGMVolSlider.value = PlayerPrefs.GetFloat("BGM Volume");
             GameManager.audioMan.SetBGMVolume(BGMVolSlider.value);
         } else {
-            GameManager.audioMan.SetBGMVolume(0.5f);
+            GameManager.audioMan.SetBGMVolume(0.45f);
         }
 
         if (PlayerPrefs.HasKey("SFX Volume")) {
             SFXVolSlider.value = PlayerPrefs.GetFloat("SFX Volume");
             GameManager.audioMan.SetSFXVolume(SFXVolSlider.value);
         } else {
-            GameManager.audioMan.SetSFXVolume(0.5f);
+            GameManager.audioMan.SetSFXVolume(0.65f);
         }
 
         if (PlayerPrefs.HasKey("VOX Volume")) {
             VOXVolSlider.value = PlayerPrefs.GetFloat("VOX Volume");
             GameManager.audioMan.SetVOXVolume(VOXVolSlider.value);
         } else {
-            GameManager.audioMan.SetVOXVolume(0.5f);
+            GameManager.audioMan.SetVOXVolume(0.45f);
         }
 
         if (PlayerPrefs.HasKey("Mute Audio")) {
@@ -81,20 +81,20 @@ public class AudioMenu : MonoBehaviour {
     // Called OnPointerUp() by the EventTrigger attached to each slider in the Inspector
     public void OnSliderButtonReleased(string name) {
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!");
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!", true);
     }
 
     // On click (un)mutes all audio
     public void MuteAudioButton() {
         // Delayed text display
-        if (!AudioListener.pause) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been muted!");
+        if (!GameManager.audioMan.isMuted) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been muted!", true);
             muteAudioButtonText.text = "Unmute Audio";
 
             // Save settings
             PlayerPrefs.SetInt("Mute Audio", 0);
         } else {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been unmuted!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Audio has been unmuted!", true);
             muteAudioButtonText.text = "Mute Audio";
 
             // Save settings
@@ -115,10 +115,10 @@ public class AudioMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Reset slider values
-            masterVolSlider.value = 0.5f;
-            BGMVolSlider.value = 0.5f;
-            SFXVolSlider.value = 0.5f;
-            VOXVolSlider.value = 0.5f;
+            masterVolSlider.value = 0.25f;
+            BGMVolSlider.value = 0.45f;
+            SFXVolSlider.value = 0.65f;
+            VOXVolSlider.value = 0.45f;
 
             // Reset mute
             AudioListener.pause = true;
@@ -126,10 +126,10 @@ public class AudioMenu : MonoBehaviour {
             muteAudioButtonText.text = "Mute Audio";
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
         }
     }
 }
