@@ -121,8 +121,9 @@ public class AudioMenu : MonoBehaviour {
             VOXVolSlider.value = 0.45f;
 
             // Reset mute
-            AudioListener.pause = true;
-            GameManager.audioMan.PauseAndMuteAudio();
+            if (GameManager.audioMan.isMuted) {
+                GameManager.audioMan.PauseAndMuteAudio();
+            }
             muteAudioButtonText.text = "Mute Audio";
 
             // Delayed text display
