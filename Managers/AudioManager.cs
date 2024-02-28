@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour {
 
     [Header("Set Dynamically")]
     public float            previousVolumeLvl;
+    public bool             isMuted;
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     public int soundtrackNdx = 0;
@@ -159,16 +160,17 @@ public class AudioManager : MonoBehaviour {
 
     public void PauseAndMuteAudio() {
         // Pause and mute
-        if (!AudioListener.pause) {
+        if (!isMuted) {
             previousVolumeLvl = AudioListener.volume;
-            AudioListener.pause = true;
+            AudioListener.volume = 0;
+            isMuted = true;
 
             // Save settings
             PlayerPrefs.SetInt("Mute Audio", 0);
         // Unpause and unmute
         } else {
             AudioListener.volume = previousVolumeLvl;
-            AudioListener.pause = false;
+            isMuted = false;
 
             // Save settings
             PlayerPrefs.SetInt("Mute Audio", 1);
