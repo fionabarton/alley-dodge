@@ -14,6 +14,8 @@ public class SpectatorCam : MonoBehaviour {
 
     public List<GameObject>         gameObjectsInvisibleToHMD;
 
+    public List<GameObject>         textObjectsToDeactivateOnHMD;
+
     [Header("Set Dynamically")]
     private Camera                  cam;
 
@@ -65,7 +67,7 @@ public class SpectatorCam : MonoBehaviour {
         }
 
         // Switch monitor's target display
-        if (Input.GetKeyDown(KeyCode.V)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             // Cache transform position & rotation
             if (currentDisplayNdx == 0) {
                 currentTransformPositions[0] = gameObject.transform.position;
@@ -87,10 +89,11 @@ public class SpectatorCam : MonoBehaviour {
                 // Set parent transform
                 gameObject.transform.SetParent(null);
 
-                // Make objects visible to spectator cam
-                //SetObjectsLayer("Invisible to HMD");
                 // Activate objects invisible to HMD
                 GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, true);
+
+                // Activate text control bindings (all except 'Switch Display')
+                GameManager.utilities.SetActiveList(textObjectsToDeactivateOnHMD, true);
 
                 // Set transform to look at
                 targetTrans = transforms[0];
@@ -105,10 +108,11 @@ public class SpectatorCam : MonoBehaviour {
                 // Set transform to look at
                 targetTrans = transforms[1];
 
-                // Make objects visible to spectator cam
-                //SetObjectsLayer("Invisible to HMD");
                 // Activate objects invisible to HMD
                 GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, true);
+
+                // Activate text control bindings (all except 'Switch Display')
+                GameManager.utilities.SetActiveList(textObjectsToDeactivateOnHMD, true);
 
                 // Set transform position & rotation to cached values
                 gameObject.transform.position = currentTransformPositions[1];
@@ -120,11 +124,11 @@ public class SpectatorCam : MonoBehaviour {
                 // Set parent transform
                 gameObject.transform.SetParent(Camera.main.transform);
 
-                // Make objects invisible to spectator cam
-                //SetObjectsLayer("Invisible to Spectator Cam");
-                //SetObjectsLayer("Invisible to HMD");
                 // Deactivate objects invisible to HMD
                 GameManager.utilities.SetActiveList(gameObjectsInvisibleToHMD, false);
+
+                // Deactivate text control bindings (all except 'Switch Display')
+                GameManager.utilities.SetActiveList(textObjectsToDeactivateOnHMD, false);
 
                 // Set position and rotation to 0
                 gameObject.transform.localPosition = Vector3.zero;
@@ -160,15 +164,6 @@ public class SpectatorCam : MonoBehaviour {
             }
         } 
     }
-
-    // Make objects (in)visible to spectator cam
-    //void SetObjectsLayer(string layerName) {
-    //    int layerNdx = LayerMask.NameToLayer(layerName);
-    //    gameObject.layer = layerNdx;
-    //    for (int i = 0; i < gameObjectsInvisibleToHMD.Count; i++) {
-    //        gameObjectsInvisibleToHMD[i].layer = layerNdx;
-    //    }
-    //}
 
     private void LateUpdate() {
         if (currentDisplayNdx != 2) {
