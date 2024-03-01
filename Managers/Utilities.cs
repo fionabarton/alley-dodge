@@ -18,11 +18,19 @@ public class Utilities : MonoBehaviour {
         tPos.z = z;
         tGO.transform.position = tPos;
     }
-    public void SetLocalPosition(GameObject tGO, float x, float y) {
+    public void SetLocalPosition(GameObject tGO, float x, float y, float z = 0) {
         Vector3 tPos = tGO.transform.localPosition;
         tPos.x = x;
         tPos.y = y;
+        tPos.z = z;
         tGO.transform.localPosition = tPos;
+    }
+    public void SetRectPosition(GameObject tGO, float x, float y) {
+        RectTransform rect = tGO.GetComponent<RectTransform>();
+
+        if (rect != null) {
+            rect.anchoredPosition = new Vector2(x, y);
+        }
     }
 
     // Set GameObject Scale
