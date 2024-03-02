@@ -284,6 +284,16 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         }
     }
 
+    // Fun fictional historical dates
+    // 2/26/1984: Venom Snake awakens from 9 year coma
+    // 11/26/1985: Marty McFly accidentally travels back to 1955
+    // 11/29/86: Lan Di murders Iwao Hazuki
+    // 1/12/1992: HAL 9000 becomes operational
+    // 8/29/1997: Judgement Day: Skynet becomes self-aware and launches nuclear missiles at Russia
+    // 12/31/1999: Philip J.Fry accidentally cryogenically freezes himself
+    // 1/8/2016: Birth of Roy Batty
+    // 7/13/2035: Birth of Jean-Luc Picard
+    // 4/5/2063: Zefram Cochrane makes first human warp flight
     public void SetToDefaultSettings() {
         customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
         customAlgorithms[1] = new CustomAlgorithm("Random Objects", "26 February, 1984", 4, 2, 10, 1,
@@ -295,10 +305,12 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 2, 2, 5, 1,
         6, 7, 7, 10, 10, 15, 5,
         17, 25, 8, 47, 48);
-        customAlgorithms[4] = new CustomAlgorithm("Up & Down", "5 April, 2063", 4, 2, 10, 1,
+        customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 4, 2, 10, 1,
         4, 8, 8, 10, 10, 10, 10,
-        20, 21, 37, 38, 49);
-        customAlgorithms[5] = new CustomAlgorithm("Slot 6: EMPTY");
+        20, 21, 41, 42, 49);
+        customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 2, 10, 1,
+        4, 8, 8, 10, 10, 10, 10,
+        36, 39, 44, 45, 49); 
         customAlgorithms[6] = new CustomAlgorithm("Slot 7: EMPTY");
         customAlgorithms[7] = new CustomAlgorithm("Slot 8: EMPTY");
     }
@@ -377,7 +389,7 @@ public class CustomAlgorithm {
     public int objectToSpawn4;
 
     public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
-        int _startingObjectSpeed = 4, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 19, int _amountToDecreaseSpawnSpeed = 1,
+        int _startingObjectSpeed = 4, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 10, int _amountToDecreaseSpawnSpeed = 1,
         int _chanceToSpawn0 = 6, int _chanceToSpawn1 = 7, int _chanceToSpawn2 = 7, int _chanceToSpawn3 = 10, int _chanceToSpawn4 = 10, int _chanceToSpawn5 = 15, int _chanceToSpawn6 = 5,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48) {
         name = _name;
