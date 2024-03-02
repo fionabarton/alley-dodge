@@ -109,6 +109,11 @@ public class ScoreManager : MonoBehaviour {
 		// Decrease spawn speed (starts at 2.0f)
 		GameManager.S.spawner.currentSpawnSpeed -= GameManager.S.spawner.amountToDecreaseSpawnSpeed;
 
+		// Prevent decreasing spawn speed below 0
+		if(GameManager.S.spawner.currentSpawnSpeed <= 0.1f) {
+			GameManager.S.spawner.currentSpawnSpeed = 0.1f;
+        }
+
 		// Increase object speed (starts at 0)
 		GameManager.S.spawner.currentObjectSpeed += GameManager.S.spawner.amountToIncreaseObjectSpeed;
 
