@@ -321,12 +321,6 @@ public class AlgorithmMenu : MonoBehaviour {
             // Set to default chance values
             SetChanceValuesToDefaultSetting();
 
-            //SetObjectToSpawn(3, 0); // Horizontal block
-            //SetObjectToSpawn(0, 1); // Vertical low block
-            //SetObjectToSpawn(17, 2); // Vertical high block
-            //SetObjectToSpawn(43, 3); // Quid pickup
-            //SetObjectToSpawn(44, 4); // Shield pickup
-
             SetObjectToSpawn(7, 0); // Horizontal block
             SetObjectToSpawn(0, 1); // Vertical low block
             SetObjectToSpawn(20, 2); // Vertical high block
@@ -386,10 +380,10 @@ public class AlgorithmMenu : MonoBehaviour {
             }
 
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18)); 
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19)); 
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 9)); 
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 9)); 
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 19)); 
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20)); 
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20)); 
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20)); 
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
@@ -481,10 +475,10 @@ public class AlgorithmMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 18));
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 19));
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 9));
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 9));
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 19));
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20));
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20));
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20));
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Speed values set to totally random values!", true);
