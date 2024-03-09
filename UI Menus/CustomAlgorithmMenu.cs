@@ -302,7 +302,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 10, 2,
         6, 7, 7, 10, 10, 15, 5,
         7, 23, 24, 25, 49);
-        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 2, 2, 5, 1,
+        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 10, 1,
         6, 7, 7, 10, 10, 15, 5,
         17, 25, 8, 47, 48);
         customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 4, 2, 10, 1,
