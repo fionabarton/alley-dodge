@@ -117,22 +117,22 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(4); // 5
+            SetStartingObjectSpeedDropdownValue(1); // 10 MPH / 4.469444f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
         } else {
-            SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
+            SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f            
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
         } else {
-            SetStartingSpawnSpeedDropdownValue(10); // 2.0f
+            SetStartingSpawnSpeedDropdownValue(5); // 30 OPM / 2.0f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
             SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
         } else {
-            SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
+            SetAmountToDecreaseSpawnSpeedDropdownValue(2); // 2 OPM
         }
 
         // In case game was closed before ensuring connected chance values are valid (have a sum of exactly 100%),
@@ -247,10 +247,10 @@ public class AlgorithmMenu : MonoBehaviour {
     //
     public void SetStartingObjectSpeedDropdownValue(int value) {
         // Set value 
-        GameManager.S.spawner.startingObjectSpeed = value + 1;
+        GameManager.S.spawner.startingObjectSpeed = GameManager.S.objectSpeedValues[value];
 
         // Update button text
-        objectSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = (value + 1).ToString();
+        objectSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.objectSpeedDisplayedValues[value].ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 0", value);
@@ -260,13 +260,11 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     public void SetAmountToIncreaseObjectSpeedDropdownValue(int value) {
-        float valueAsFloat = value;
-
         // Set value
-        GameManager.S.spawner.amountToIncreaseObjectSpeed = (valueAsFloat / 10);
+        GameManager.S.spawner.amountToIncreaseObjectSpeed = GameManager.S.amountToIncreaseValues[value];
 
         // Update button text
-        amountToIncreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+        amountToIncreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToIncreaseDisplayedValues[value].ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
@@ -276,13 +274,11 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     public void SetStartingSpawnSpeedDropdownValue(int value) {
-        float valueAsFloat = value;
-
         // Set value
-        GameManager.S.spawner.startingSpawnSpeed = (valueAsFloat / 10) + 1.0f;
+        GameManager.S.spawner.startingSpawnSpeed = GameManager.S.spawnSpeedValues[value];
 
         // Update button text
-        spawnSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = ((valueAsFloat / 10) + 1.0f).ToString();
+        spawnSpeedButton.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.spawnSpeedDisplayedValues[value].ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 2", value);
@@ -292,13 +288,11 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     public void SetAmountToDecreaseSpawnSpeedDropdownValue(int value) {
-        float valueAsFloat = value;
-
         // Set value
-        GameManager.S.spawner.amountToDecreaseSpawnSpeed = (valueAsFloat / 10);
+        GameManager.S.spawner.amountToDecreaseSpawnSpeed = GameManager.S.amountToDecreaseValues[value];
 
         // Update button text
-        amountToDecreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat / 10).ToString();
+        amountToDecreaseButton.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToDecreaseDisplayedValues[value].ToString();
 
         // Save value
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
@@ -328,10 +322,10 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(48, 4); // Shield pickup
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(4); // 5
-            SetAmountToIncreaseObjectSpeedDropdownValue(2); // 0.2f
-            SetStartingSpawnSpeedDropdownValue(10); // 2.0f
-            SetAmountToDecreaseSpawnSpeedDropdownValue(1); // 0.1f
+            SetStartingObjectSpeedDropdownValue(1);         // 10 MPH / 4.469444f
+            SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
+            SetStartingSpawnSpeedDropdownValue(5);          // 30 OPM / 2.0f
+            SetAmountToDecreaseSpawnSpeedDropdownValue(2);  // 2 OPM
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
@@ -382,7 +376,7 @@ public class AlgorithmMenu : MonoBehaviour {
             // Speed values
             SetStartingObjectSpeedDropdownValue(Random.Range(0, 19)); 
             SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20)); 
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20)); 
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 19)); 
             SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20)); 
 
             // Delayed text display
@@ -477,7 +471,7 @@ public class AlgorithmMenu : MonoBehaviour {
             // Speed values
             SetStartingObjectSpeedDropdownValue(Random.Range(0, 19));
             SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20));
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20));
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 19));
             SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20));
 
             // Delayed text display

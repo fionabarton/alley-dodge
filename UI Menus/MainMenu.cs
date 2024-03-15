@@ -184,13 +184,21 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.score.level = (level);
         GameManager.S.score.levelText.text = "Level:  <color=white>" + GameManager.S.score.level;
 
-        // Set spawn and object speed
+        // Set current object and spawn speed
         if (GameManager.S.score.level != 1) {
-            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed - ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToDecreaseSpawnSpeed);
-            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed + ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToIncreaseObjectSpeed);
-        } else {
+            // Set object speed
+            GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed + ((float)(GameManager.S.score.level - 1) * GameManager.S.spawner.amountToIncreaseObjectSpeed);      
+
+            // Initialize spawn spawn speed
             GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed;
+
+            // Increment spawn speed for each level
+            for(int i = 0; i < GameManager.S.score.level - 1; i++) {
+                GameManager.S.spawner.currentSpawnSpeed = GameManager.S.GetIncreasedSpawnSpeedLevel();
+            }
+        } else {
             GameManager.S.spawner.currentObjectSpeed = GameManager.S.spawner.startingObjectSpeed;
+            GameManager.S.spawner.currentSpawnSpeed = GameManager.S.spawner.startingSpawnSpeed; 
         }
 
         // Set colorNdx

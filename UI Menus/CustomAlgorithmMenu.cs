@@ -296,19 +296,19 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     // 4/5/2063: Zefram Cochrane makes first human warp flight
     public void SetToDefaultSettings() {
         customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
-        customAlgorithms[1] = new CustomAlgorithm("Random Objects", "26 February, 1984", 4, 2, 10, 1,
+        customAlgorithms[1] = new CustomAlgorithm("Random Objects", "26 February, 1984", 1, 1, 5, 2,
         6, 7, 7, 10, 10, 15, 5,
         46, 46, 46, 47, 48);
-        customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 10, 2,
+        customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 1, 1, 5, 2,
         6, 7, 7, 10, 10, 15, 5,
         7, 23, 24, 25, 49);
-        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 10, 1,
+        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 5, 2,
         6, 7, 7, 10, 10, 15, 5,
         17, 25, 8, 47, 48);
-        customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 4, 2, 10, 1,
+        customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 1, 1, 5, 2,
         4, 8, 8, 10, 10, 10, 10,
         20, 21, 41, 42, 49);
-        customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 2, 10, 1,
+        customAlgorithms[5] = new("In The Middle", "5 April, 2063", 1, 1, 5, 2,
         4, 8, 8, 10, 10, 10, 10,
         36, 39, 44, 45, 49); 
         customAlgorithms[6] = new CustomAlgorithm("Slot 7: EMPTY");
@@ -332,10 +332,10 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         objectsToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn3];
         objectsToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn4];
 
-        speedTexts[0].text = "Starting object speed:<color=#D9D9D9> " + (customAlgorithms[buttonNdx].startingObjectSpeed + 1).ToString();
-        speedTexts[1].text = "Amount to increase per level:<color=#D9D9D9> " + ((float)customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed / 10).ToString();
-        speedTexts[2].text = "Starting spawn speed:<color=#D9D9D9> " + (((float)customAlgorithms[buttonNdx].startingSpawnSpeed / 10) + 1.0f).ToString();
-        speedTexts[3].text = "Amount to decrease per level:<color=#D9D9D9> " + ((float)customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed / 10).ToString();
+        speedTexts[0].text = "Starting object speed (MPH):<color=#D9D9D9> " + GameManager.S.objectSpeedDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 0")].ToString();
+        speedTexts[1].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToIncreaseDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 1")].ToString();
+        speedTexts[2].text = "Starting spawn speed (OPM):<color=#D9D9D9> " + GameManager.S.spawnSpeedDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 2")].ToString();
+        speedTexts[3].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToDecreaseDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 3")].ToString();
     }
 }
 
@@ -389,7 +389,7 @@ public class CustomAlgorithm {
     public int objectToSpawn4;
 
     public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
-        int _startingObjectSpeed = 4, int _amountToIncreaseObjectSpeed = 2, int _startingSpawnSpeed = 10, int _amountToDecreaseSpawnSpeed = 1,
+        int _startingObjectSpeed = 1, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 5, int _amountToDecreaseSpawnSpeed = 2,
         int _chanceToSpawn0 = 6, int _chanceToSpawn1 = 7, int _chanceToSpawn2 = 7, int _chanceToSpawn3 = 10, int _chanceToSpawn4 = 10, int _chanceToSpawn5 = 15, int _chanceToSpawn6 = 5,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48) {
         name = _name;

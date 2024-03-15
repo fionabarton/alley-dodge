@@ -15,10 +15,7 @@ public class NumericalSelectionMenu : MonoBehaviour {
 
     public List<int>    levelValues;
     public List<int>    alleyAmountValues;
-    public List<int>    objectSpeedValues;
-    public List<float>  amountToIncreaseValues;
-    public List<float>  spawnSpeedValues;
-    public List<float>  amountToDecreaseValues;
+
     public List<int>    chanceValues;
 
     // level, alleyAmount, moveSpeed, amountToIncrease, spawnSpeed, amountToDecrease, chance (0-6)
@@ -109,8 +106,8 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 2:
-                for (int i = 0; i < objectSpeedValues.Count; i++) {
-                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = objectSpeedValues[i].ToString();
+                for (int i = 0; i < GameManager.S.objectSpeedValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.objectSpeedDisplayedValues[i].ToString();
 
                     // Add listeners
                     int copy = i;
@@ -119,8 +116,8 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 3:
-                for (int i = 0; i < amountToIncreaseValues.Count; i++) {
-                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = amountToIncreaseValues[i].ToString();
+                for (int i = 0; i < GameManager.S.amountToIncreaseValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToIncreaseDisplayedValues[i].ToString();
 
                     // Add listeners
                     int copy = i;
@@ -129,8 +126,8 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 4:
-                for (int i = 0; i < spawnSpeedValues.Count; i++) {
-                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = spawnSpeedValues[i].ToString();
+                for (int i = 0; i < GameManager.S.spawnSpeedValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.spawnSpeedDisplayedValues[i].ToString();
 
                     // Add listeners
                     int copy = i;
@@ -139,8 +136,8 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 5:
-                for (int i = 0; i < amountToDecreaseValues.Count; i++) {
-                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = amountToDecreaseValues[i].ToString();
+                for (int i = 0; i < GameManager.S.amountToDecreaseValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToDecreaseDisplayedValues[i].ToString();
 
                     // Add listeners
                     int copy = i;
@@ -221,16 +218,3 @@ public class NumericalSelectionMenu : MonoBehaviour {
         }
     }
 }
-
-//Main Menu
-    //Level select (1-10) (1, 2, 3, etc.) (Count: 10)
-    //Alley amount(3,5,7) (Count: 3)
-
-//Algorithm Menu
-    //Chance dropdowns (0%-100%) (0%, 5%, 10%, etc.) (Count: 21)
-
-//Speed Menu
-    //Object speed (1-20) (1, 2, 3, etc.) (Count: 20)
-    //Amount to increase (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)
-    //Spawn speed(0.1-2.0) (0.1, 0.2, 0.3, etc.) (Count: 20)
-    //Amount to decrease (0-2.0) (0, 0.1, 0.2, etc.) (Count: 21)
