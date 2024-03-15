@@ -107,10 +107,10 @@ public class ScoreManager : MonoBehaviour {
 		GameManager.S.confetti.DropConfetti();
 
 		// Decrease spawn speed (starts at 2.0f)
-		GameManager.S.spawner.currentSpawnSpeed -= GameManager.S.spawner.amountToDecreaseSpawnSpeed;
+		GameManager.S.spawner.currentSpawnSpeed = GameManager.S.GetIncreasedSpawnSpeedLevel();
 
-		// Prevent decreasing spawn speed below 0
-		if(GameManager.S.spawner.currentSpawnSpeed <= 0.1f) {
+        // Prevent decreasing spawn speed below 0
+        if (GameManager.S.spawner.currentSpawnSpeed <= 0.1f) {
 			GameManager.S.spawner.currentSpawnSpeed = 0.1f;
         }
 
@@ -163,7 +163,6 @@ public class ScoreManager : MonoBehaviour {
 	// Resets script properties to their default values
 	public void ResetScore() {
 		score = 0;
-		//level = GameManager.S.me
 		objectCount = 0;
 		startingTime = 0f;
 		endingTime = 0f;

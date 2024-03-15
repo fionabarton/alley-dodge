@@ -62,6 +62,18 @@ public class GameManager : MonoBehaviour {
     // Smoke particle system (on new level increases its starting size by 1)
     public ParticleSystem       smokePS;
 
+    // Actual "under-the-hood" speed values 
+    public List<float>          objectSpeedValues;
+    public List<float>          amountToIncreaseValues;
+    public List<float>          spawnSpeedValues;
+    public List<float>          amountToDecreaseValues;
+
+    // Displayed "digestable-to-a-layperson" speed values
+    public List<float>          objectSpeedDisplayedValues;
+    public List<float>          amountToIncreaseDisplayedValues;
+    public List<float>          spawnSpeedDisplayedValues;
+    public List<float>          amountToDecreaseDisplayedValues;
+
     [Header("Set dynamically")]
     public GameObject           previouslyHighlightedGO;
 
@@ -140,6 +152,21 @@ public class GameManager : MonoBehaviour {
                 smokePS.Play();
             }
         }
+    }
+
+    public float GetIncreasedSpawnSpeedLevel() {
+        // Convert both ‘current spawn speed’ AND ‘amount to increase’ from seconds to OPM
+        float currentSpawnSpeedOPM = 60 / spawner.currentSpawnSpeed;
+        float amountToIncreaseOPM = spawner.amountToDecreaseSpawnSpeed;
+
+        // Add them together
+        float sum = currentSpawnSpeedOPM + amountToIncreaseOPM;
+
+        // Convert the resulting sum from OPM to seconds
+        sum = 60 / sum;
+
+        // Return sum
+        return sum;
     }
 
     //// For testing!

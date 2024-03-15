@@ -20,12 +20,12 @@ public class ObjectSpawner : MonoBehaviour {
 	public float			currentSpawnSpeed = 2.0f;
 
 	// Speed at which objects travel down the alley
-	public float			startingObjectSpeed = 10;
-	public float			currentObjectSpeed = 10;
+	public float			startingObjectSpeed = 5;
+	public float			currentObjectSpeed = 5;
 
 	// Amount to increase per level
 	public float			amountToDecreaseSpawnSpeed = 0.1f;
-	public float			amountToIncreaseObjectSpeed = 0;
+	public float			amountToIncreaseObjectSpeed = 0.2f;
 
 	// Controls whether ALL objects (hazards, pickups, etc.) can move
 	public bool				objectsCanMove = true;
@@ -184,7 +184,7 @@ public class ObjectSpawner : MonoBehaviour {
 			} else {
 				// If the previously spawned object is the same as the current one, try again
 				InstantiateObject();
-				Debug.Log("Reroll!");
+				//Debug.Log("Reroll!");
 			}
         } else {
 			// Instantiate object
