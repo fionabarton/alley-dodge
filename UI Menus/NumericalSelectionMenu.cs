@@ -21,6 +21,8 @@ public class NumericalSelectionMenu : MonoBehaviour {
     // level, alleyAmount, moveSpeed, amountToIncrease, spawnSpeed, amountToDecrease, chance (0-6)
     public List<Button> propertyButtons;
 
+    public Text         headerText;
+
     void Start() {
         // Add listener
         goBackButton.onClick.AddListener(delegate { Deactivate(); });
@@ -86,6 +88,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
         // Set button texts
         switch (ndx) {
             case 0:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < levelValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = levelValues[i].ToString();
 
@@ -96,6 +101,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 1:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < alleyAmountValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = alleyAmountValues[i].ToString();
 
@@ -106,6 +114,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 2:
+                // Set header text
+                headerText.text = "Please select an amount!\n<color=#CC991A>(Measured in miles per hour)</color>";
+
                 for (int i = 0; i < GameManager.S.objectSpeedValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.objectSpeedDisplayedValues[i].ToString();
 
@@ -116,6 +127,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 3:
+                // Set header text
+                headerText.text = "Please select an amount!\n<color=#CC991A>(Measured in miles per hour)</color>";
+
                 for (int i = 0; i < GameManager.S.amountToIncreaseValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToIncreaseDisplayedValues[i].ToString();
 
@@ -126,6 +140,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 4:
+                // Set header text
+                headerText.text = "Please select an amount!\n<color=#CC991A>(Measured in objects generated per minute)</color>";
+
                 for (int i = 0; i < GameManager.S.spawnSpeedValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.spawnSpeedDisplayedValues[i].ToString();
 
@@ -136,6 +153,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 5:
+                // Set header text
+                headerText.text = "Please select an amount!\n<color=#CC991A>(Measured in objects generated per minute)</color>";
+
                 for (int i = 0; i < GameManager.S.amountToDecreaseValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.S.amountToDecreaseDisplayedValues[i].ToString();
 
@@ -146,6 +166,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 6:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -156,6 +179,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 7:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -166,6 +192,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 8:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -176,6 +205,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 9:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -186,6 +218,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 10:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -196,6 +231,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 11:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
@@ -206,6 +244,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
                 }
                 break;
             case 12:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
                 for (int i = 0; i < chanceValues.Count; i++) {
                     amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
 
