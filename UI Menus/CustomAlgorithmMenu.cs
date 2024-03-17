@@ -302,7 +302,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 1, 1, 5, 2,
         6, 7, 7, 10, 10, 15, 5,
         7, 23, 24, 25, 49);
-        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 5, 2,
+        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 0, 1, 5, 5,
         6, 7, 7, 10, 10, 15, 5,
         17, 25, 8, 47, 48);
         customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 1, 1, 5, 2,
@@ -332,10 +332,10 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         objectsToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn3];
         objectsToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[customAlgorithms[buttonNdx].objectToSpawn4];
 
-        speedTexts[0].text = "Starting object speed (MPH):<color=#D9D9D9> " + GameManager.S.objectSpeedDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 0")].ToString();
-        speedTexts[1].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToIncreaseDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 1")].ToString();
-        speedTexts[2].text = "Starting spawn speed (OPM):<color=#D9D9D9> " + GameManager.S.spawnSpeedDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 2")].ToString();
-        speedTexts[3].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToDecreaseDisplayedValues[PlayerPrefs.GetInt("Speed Dropdown 3")].ToString();
+        speedTexts[0].text = "Starting object speed (MPH):<color=#D9D9D9> " + GameManager.S.objectSpeedDisplayedValues[customAlgorithms[buttonNdx].startingObjectSpeed].ToString();
+        speedTexts[1].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToIncreaseDisplayedValues[customAlgorithms[buttonNdx].amountToIncreaseObjectSpeed].ToString();
+        speedTexts[2].text = "Starting spawn speed (OPM):<color=#D9D9D9> " + GameManager.S.spawnSpeedDisplayedValues[customAlgorithms[buttonNdx].startingSpawnSpeed].ToString();
+        speedTexts[3].text = "Amount to increase per level:<color=#D9D9D9> " + GameManager.S.amountToDecreaseDisplayedValues[customAlgorithms[buttonNdx].amountToDecreaseSpawnSpeed].ToString();
     }
 }
 
