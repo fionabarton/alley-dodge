@@ -117,7 +117,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(1); // 10 MPH / 4.469444f
+            SetStartingObjectSpeedDropdownValue(4); // 10 MPH / 4.469444f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
@@ -127,7 +127,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
         } else {
-            SetStartingSpawnSpeedDropdownValue(5); // 30 OPM / 2.0f
+            SetStartingSpawnSpeedDropdownValue(14); // 30 OPM / 2.0f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
             SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
@@ -322,9 +322,9 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(48, 4); // Shield pickup
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(1);         // 10 MPH / 4.469444f
+            SetStartingObjectSpeedDropdownValue(4);         // 10 MPH / 4.469444f
             SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
-            SetStartingSpawnSpeedDropdownValue(5);          // 30 OPM / 2.0f
+            SetStartingSpawnSpeedDropdownValue(14);          // 30 OPM / 2.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(2);  // 2 OPM
 
             // Delayed text display
