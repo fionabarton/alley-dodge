@@ -7,9 +7,9 @@ public class ObjectSpawner : MonoBehaviour {
 	[Header("Set in Inspector")]
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
+	public GameObject		nothingObstacle;
 
 	public List<GameObject> objects;
-	public GameObject		testBlenderCube;
 
 	public GameObject		horizontalDestruction;
 	public GameObject		verticalHighDestruction;
@@ -109,48 +109,48 @@ public class ObjectSpawner : MonoBehaviour {
         // Get random value
         float randomVal = Random.value;
 
-        if (randomVal <= chancesToSpawn[0]) { // 0.3f (30%)
-            // Instantiate horizontal block
-            InstantiateObject(objectsToSpawn[0]);
-        } else if (randomVal <= (chancesToSpawn[0] + chancesToSpawn[1])) { // 0.65f (65%)
-            // Get random value
-            randomVal = Random.value;
+        // Convert 'chancesToSpawn' list to work for this implementation
+        List<float> chanceValues = new List<float> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		float total = 0;
+		for(int i = 0; i < chancesToSpawn.Count; i++) {
+			// Increment total amount
+			total += chancesToSpawn[i];
 
-            // Instantiate vertical block
-            if (randomVal <= (1 - chancesToSpawn[4])) { // 0.5f (50%)
-                // Low block
-                InstantiateObject(objectsToSpawn[1]);
-            } else if (randomVal > chancesToSpawn[3]) { // 0.5f (50%)
-                // High block
-                InstantiateObject(objectsToSpawn[2]);
-            }
-        } else {
-            // Get random value
-            randomVal = Random.value;
-
-            // Spawn pickups
-            if (randomVal < chancesToSpawn[5]) { // 0.75f (75%)
-                InstantiateObject(objectsToSpawn[3]);
-            } else if (randomVal >= (1 - chancesToSpawn[6])) { // 0.25f (25%)
-                InstantiateObject(objectsToSpawn[4]);
-            }
+			// Assign total amount to this element
+			chanceValues[i] = total;
         }
-    }
 
-	// Returns true if more than one of the objectsToSpawn slots are
-	// accessible endpoints of the gameplay algorithm flow chart
-	bool checkIfMultipleObjectsCanBeSpawned() {
-		if(chancesToSpawn[0] >= 1.0f) {
-			return false;
-        } else if (chancesToSpawn[1] >= 1.0f) {
-			if(chancesToSpawn[3] >= 1.0f || chancesToSpawn[4] >= 1.0f) {
-				return false;
-			}
-		} else if (chancesToSpawn[2] >= 1.0f) {
-			if (chancesToSpawn[5] >= 1.0f || chancesToSpawn[6] >= 1.0f) {
-				return false;
-			}
+		// Randomly instantiate 1 of the 10 possible objects to spawn
+		if (randomVal >= 0 && randomVal <= chanceValues[0]) {
+			InstantiateObject(objectsToSpawn[0]);
+		} else if (randomVal > chanceValues[0] && randomVal <= chanceValues[1]) {
+			InstantiateObject(objectsToSpawn[1]);
+		} else if (randomVal > chanceValues[1] && randomVal <= chanceValues[2]) {
+			InstantiateObject(objectsToSpawn[2]);
+		} else if (randomVal > chanceValues[2] && randomVal <= chanceValues[3]) {
+			InstantiateObject(objectsToSpawn[3]);
+		} else if (randomVal > chanceValues[3] && randomVal <= chanceValues[4]) {
+			InstantiateObject(objectsToSpawn[4]);
+		} else if (randomVal > chanceValues[4] && randomVal <= chanceValues[5]) {
+			InstantiateObject(objectsToSpawn[5]);
+		} else if (randomVal > chanceValues[5] && randomVal <= chanceValues[6]) {
+			InstantiateObject(objectsToSpawn[6]);
+		} else if (randomVal > chanceValues[6] && randomVal <= chanceValues[7]) {
+			InstantiateObject(objectsToSpawn[7]);
+		} else if (randomVal > chanceValues[7] && randomVal <= chanceValues[8]) {
+			InstantiateObject(objectsToSpawn[8]);
+		} else if (randomVal > chanceValues[8] && randomVal <= chanceValues[9]) {
+			InstantiateObject(objectsToSpawn[9]);
 		}
+	}
+
+	// Returns true if any of the objectsToSpawn slots are set to 100%
+	bool checkIfMultipleObjectsCanBeSpawned() {
+		for(int i = 0; i < chancesToSpawn.Count; i++) {
+			if(chancesToSpawn[i] >= 1.0f) {
+				return false;
+			}
+        }
 		return true;
     }
 
@@ -172,7 +172,9 @@ public class ObjectSpawner : MonoBehaviour {
 					InstantiateRandomObstacle();
 				} else if (objectNdx == 49) {
 					InstantiateRandomItem();
-				} else {
+				} else if (objectNdx == 50) {
+					// Nothing!
+                } else {
 					Instantiate(objects[objectNdx], new Vector3(0, 0, 40), transform.rotation);
 				}
 
@@ -184,7 +186,6 @@ public class ObjectSpawner : MonoBehaviour {
 			} else {
 				// If the previously spawned object is the same as the current one, try again
 				InstantiateObject();
-				//Debug.Log("Reroll!");
 			}
         } else {
 			// Instantiate object
@@ -200,7 +201,9 @@ public class ObjectSpawner : MonoBehaviour {
 				InstantiateRandomObstacle();
 			} else if (objectNdx == 49) {
 				InstantiateRandomItem();
-			} else {
+			} else if (objectNdx == 50) {
+                // Nothing!
+            } else {
 				Instantiate(objects[objectNdx], new Vector3(0, 0, 40), transform.rotation);
 			}
 
