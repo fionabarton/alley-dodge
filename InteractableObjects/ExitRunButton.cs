@@ -59,6 +59,9 @@ public class ExitRunButton : MonoBehaviour {
         // Pause ScoreManager timer
         GameManager.S.score.PauseTimer();
 
+        // Stop all coroutines on ScoreManager ('fall through floor'/'pause game' 3, 2, 1 countdown)
+        GameManager.S.score.StopAllCoroutines();
+
         // Increment exit run count
         GameManager.S.pauseCount += 1;
 
@@ -78,6 +81,11 @@ public class ExitRunButton : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
+            // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            // Stop looping over background music soundtrack
+            GameManager.audioMan.isLoopingGameSoundtrack = false;
+            // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
             // Reset exit run button positions and allow them to be pressed again
             GameManager.S.exitRunButtonLeftCS.ResetButton();
             GameManager.S.exitRunButtonRightCS.ResetButton();
