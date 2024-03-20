@@ -47,43 +47,56 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     void Start() {
-        // Get top level chanceDropdowns PlayerPrefs
+        // Get chanceDropdowns PlayerPrefs
         if (PlayerPrefs.HasKey("Chance Value 0")) {
             SetChanceButtonValue(0, PlayerPrefs.GetInt("Chance Value 0"));
         } else {
-            SetChanceButtonValue(0, 6); // 30%
+            SetChanceButtonValue(0, 5); // 25%
         }
         if (PlayerPrefs.HasKey("Chance Value 1")) {
             SetChanceButtonValue(1, PlayerPrefs.GetInt("Chance Value 1"));
         } else {
-            SetChanceButtonValue(1, 7); // 35%
+            SetChanceButtonValue(1, 5); // 25%
         }
         if (PlayerPrefs.HasKey("Chance Value 2")) {
             SetChanceButtonValue(2, PlayerPrefs.GetInt("Chance Value 2"));
         } else {
-            SetChanceButtonValue(2, 7); // 35%
+            SetChanceButtonValue(2, 5); // 25%
         }
-
-        // Get mid level chanceDropdowns PlayerPrefs
         if (PlayerPrefs.HasKey("Chance Value 3")) {
             SetChanceButtonValue(3, PlayerPrefs.GetInt("Chance Value 3"));
         } else {
-            SetChanceButtonValue(3, 10); // 50%
+            SetChanceButtonValue(3, 4); // 20%
         }
         if (PlayerPrefs.HasKey("Chance Value 4")) {
             SetChanceButtonValue(4, PlayerPrefs.GetInt("Chance Value 4"));
         } else {
-            SetChanceButtonValue(4, 10); // 50%
+            SetChanceButtonValue(4, 1); // 5%
         }
         if (PlayerPrefs.HasKey("Chance Value 5")) {
             SetChanceButtonValue(5, PlayerPrefs.GetInt("Chance Value 5"));
         } else {
-            SetChanceButtonValue(5, 15); // 75%
+            SetChanceButtonValue(5, 0); // 0%
         }
         if (PlayerPrefs.HasKey("Chance Value 6")) {
             SetChanceButtonValue(6, PlayerPrefs.GetInt("Chance Value 6"));
         } else {
-            SetChanceButtonValue(6, 5); // 25%
+            SetChanceButtonValue(6, 0); // 0%
+        }
+        if (PlayerPrefs.HasKey("Chance Value 7")) {
+            SetChanceButtonValue(7, PlayerPrefs.GetInt("Chance Value 7"));
+        } else {
+            SetChanceButtonValue(7, 0); // 0%
+        }
+        if (PlayerPrefs.HasKey("Chance Value 8")) {
+            SetChanceButtonValue(8, PlayerPrefs.GetInt("Chance Value 8"));
+        } else {
+            SetChanceButtonValue(8, 0); // 0%
+        }
+        if (PlayerPrefs.HasKey("Chance Value 9")) {
+            SetChanceButtonValue(9, PlayerPrefs.GetInt("Chance Value 9"));
+        } else {
+            SetChanceButtonValue(9, 0); // 0%
         }
 
         // Get objectButtons PlayerPrefs
@@ -111,6 +124,31 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 4"), 4);
         } else {
             SetObjectToSpawn(44, 4); // Shield pickup
+        }
+        if (PlayerPrefs.HasKey("Object Button 5")) {
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 5"), 5);
+        } else {
+            SetObjectToSpawn(50, 5); // Nothing
+        }
+        if (PlayerPrefs.HasKey("Object Button 6")) {
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 6"), 6);
+        } else {
+            SetObjectToSpawn(50, 6); // Nothing
+        }
+        if (PlayerPrefs.HasKey("Object Button 7")) {
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 7"), 7);
+        } else {
+            SetObjectToSpawn(50, 7); // Nothing
+        }
+        if (PlayerPrefs.HasKey("Object Button 8")) {
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 8"), 8);
+        } else {
+            SetObjectToSpawn(50, 8); // Nothing
+        }
+        if (PlayerPrefs.HasKey("Object Button 9")) {
+            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 9"), 9);
+        } else {
+            SetObjectToSpawn(50, 9); // Nothing
         }
 
         // Get speedDropdowns PlayerPrefs
@@ -167,25 +205,10 @@ public class AlgorithmMenu : MonoBehaviour {
         float valueAsFloat = value;
         GameManager.S.spawner.chancesToSpawn[ndx] = valueAsFloat / 20f;
 
-        // If dropdown values total == 100%, reset colors
-        if (ndx == 0 || ndx == 1 || ndx == 2) {
-            List<float> a = new List<float>() { GameManager.S.spawner.chancesToSpawn[0], GameManager.S.spawner.chancesToSpawn[1], GameManager.S.spawner.chancesToSpawn[2] };
-            if (CheckButtonForValidValues(a)) {
-                ResetButtonColor(chanceButtons[0]);
-                ResetButtonColor(chanceButtons[1]);
-                ResetButtonColor(chanceButtons[2]);
-            }
-        } else if (ndx == 3 || ndx == 4) {
-            List<float> b = new List<float>() { GameManager.S.spawner.chancesToSpawn[3], GameManager.S.spawner.chancesToSpawn[4] };
-            if (CheckButtonForValidValues(b)) {
-                ResetButtonColor(chanceButtons[3]);
-                ResetButtonColor(chanceButtons[4]);
-            }
-        } else if (ndx == 5 || ndx == 6) {
-            List<float> c = new List<float>() { GameManager.S.spawner.chancesToSpawn[5], GameManager.S.spawner.chancesToSpawn[6] };
-            if (CheckButtonForValidValues(c)) {
-                ResetButtonColor(chanceButtons[5]);
-                ResetButtonColor(chanceButtons[6]);
+        // If button values total == 100%, reset colors
+        if (CheckButtonForValidValues(GameManager.S.spawner.chancesToSpawn)) {
+            for(int i = 0; i < chanceButtons.Count; i++) {
+                ResetButtonColor(chanceButtons[i]);
             }
         }
 
@@ -320,6 +343,11 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(20, 2); // Vertical high block
             SetObjectToSpawn(47, 3); // Quid pickup
             SetObjectToSpawn(48, 4); // Shield pickup
+            SetObjectToSpawn(50, 5); // Nothing
+            SetObjectToSpawn(50, 6); // Nothing
+            SetObjectToSpawn(50, 7); // Nothing
+            SetObjectToSpawn(50, 8); // Nothing
+            SetObjectToSpawn(50, 9); // Nothing
 
             // Set to default speed values
             SetStartingObjectSpeedDropdownValue(4);         // 10 MPH / 4.469444f
@@ -346,38 +374,39 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
-            // Chance values (set 1)
-            int randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(0, randomInt);
+            // Create a list of indexes from 0 to 9
+            List<int> chanceButtonNdx = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            // Shuffle list
+            chanceButtonNdx = GameManager.utilities.ShuffleIntList(chanceButtonNdx);
+
+            // Set chance button 1
+            int randomInt = Random.Range(0, 20);
+            SetChanceButtonValue(chanceButtonNdx[0], randomInt);
+
+            // Set chance button 2
             int difference = 20 - randomInt;
-            randomInt = Random.Range(0, difference);
-            SetChanceButtonValue(1, randomInt);
-            difference -= randomInt;
-            SetChanceButtonValue(2, difference);
+            randomInt = Random.Range(0, difference + 1);
+            SetChanceButtonValue(chanceButtonNdx[1], randomInt);
 
-            // Chance values (set 2)
-            randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(3, randomInt);
-            difference = 20 - randomInt;
-            SetChanceButtonValue(4, difference);
-
-            // Chance values (set 3)
-            randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(5, randomInt);
-            difference = 20 - randomInt;
-            SetChanceButtonValue(6, difference); 
+            // Set chance buttons 3 to 10
+            for (int i = 2; i < chanceButtonNdx.Count; i++) {
+                difference -= randomInt;
+                randomInt = Random.Range(0, difference + 1);
+                SetChanceButtonValue(chanceButtonNdx[i], randomInt);
+            }
 
             // Objects to spawn
-            for (int i = 0; i < 5; i++) {
-                randomInt = Random.Range(0, 48);
+            for (int i = 0; i < 10; i++) {
+                randomInt = Random.Range(0, 51);
                 SetObjectToSpawn(randomInt, i);
             }
 
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 19)); 
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20)); 
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 19)); 
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20)); 
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 20)); 
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 21)); 
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20)); 
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 21)); 
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
@@ -404,26 +433,27 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // 
         if (yesOrNo == 0) {
-            // Chance values (set 1)
-            int randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(0, randomInt);
+            // Create a list of indexes from 0 to 9
+            List<int> chanceButtonNdx = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            
+            // Shuffle list
+            chanceButtonNdx = GameManager.utilities.ShuffleIntList(chanceButtonNdx);
+
+            // Set chance button 1
+            int randomInt = Random.Range(0, 20);
+            SetChanceButtonValue(chanceButtonNdx[0], randomInt);
+
+            // Set chance button 2
             int difference = 20 - randomInt;
-            randomInt = Random.Range(0, difference);
-            SetChanceButtonValue(1, randomInt);
-            difference -= randomInt;
-            SetChanceButtonValue(2, difference);
+            randomInt = Random.Range(0, difference+1);
+            SetChanceButtonValue(chanceButtonNdx[1], randomInt);
 
-            // Chance values (set 2)
-            randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(3, randomInt);
-            difference = 20 - randomInt;
-            SetChanceButtonValue(4, difference);
-
-            // Chance values (set 3)
-            randomInt = Random.Range(0, 19);
-            SetChanceButtonValue(5, randomInt);
-            difference = 20 - randomInt;
-            SetChanceButtonValue(6, difference);
+            // Set chance buttons 3 to 10
+            for (int i = 2; i < chanceButtonNdx.Count; i++) {
+                difference -= randomInt;
+                randomInt = Random.Range(0, difference + 1);
+                SetChanceButtonValue(chanceButtonNdx[i], randomInt);
+            }         
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance values set to totally random values!", true);
@@ -445,8 +475,8 @@ public class AlgorithmMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Objects to spawn
-            for (int i = 0; i < 5; i++) {
-                SetObjectToSpawn(Random.Range(0, 48), i);
+            for (int i = 0; i < 10; i++) {
+                SetObjectToSpawn(Random.Range(0, 51), i);
             }
 
             // Delayed text display
@@ -469,10 +499,10 @@ public class AlgorithmMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 19));
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 20));
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 19));
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 20));
+            SetStartingObjectSpeedDropdownValue(Random.Range(0, 20));
+            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 21));
+            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20));
+            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 21));
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Speed values set to totally random values!", true);
@@ -483,48 +513,31 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     void SetChanceValuesToDefaultSetting() {
-        SetChanceButtonValue(0, 6); // 30%
-        SetChanceButtonValue(1, 7); // 35%
-        SetChanceButtonValue(2, 7); // 35%
+        SetChanceButtonValue(0, 5); // 25%
+        SetChanceButtonValue(1, 5); // 25%
+        SetChanceButtonValue(2, 5); // 25%
 
-        SetChanceButtonValue(3, 10); // 50%
-        SetChanceButtonValue(4, 10); // 50%
+        SetChanceButtonValue(3, 4); // 20%
+        SetChanceButtonValue(4, 1); // 5%
 
-        SetChanceButtonValue(5, 15); // 75%
-        SetChanceButtonValue(6, 5); // 25%
+        SetChanceButtonValue(5, 0); // 0%
+        SetChanceButtonValue(6, 0); // 0%
+        SetChanceButtonValue(7, 0); // 0%
+        SetChanceButtonValue(8, 0); // 0%
+        SetChanceButtonValue(9, 0); // 0%
     }
 
     public bool CheckAllButtonsForValidValues() {
-        List<bool> isTrue = new List<bool>();
-
-        List<float> aFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[0], GameManager.S.spawner.chancesToSpawn[1], GameManager.S.spawner.chancesToSpawn[2] };
-        List<Button> aButtons = new List<Button>() { chanceButtons[0], chanceButtons[1], chanceButtons[2] };
-        if (!CheckButtonForValidValues(aFloats)) {
-            ButtonValuesInvalid(aButtons, aFloats, Color.red, "red");
-            isTrue.Add(CheckButtonForValidValues(aFloats));
-        }
-        List<float> bFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[3], GameManager.S.spawner.chancesToSpawn[4] };
-        List<Button> bButtons = new List<Button>() { chanceButtons[3], chanceButtons[4] };
-        if (!CheckButtonForValidValues(bFloats)) {
-            ButtonValuesInvalid(bButtons, bFloats, new Color(0.2f, 0.4f, 1.0f, 1), "blue");
-            isTrue.Add(CheckButtonForValidValues(bFloats));
-        }
-        List<float> cFloats = new List<float>() { GameManager.S.spawner.chancesToSpawn[5], GameManager.S.spawner.chancesToSpawn[6] };
-        List<Button> cButtons = new List<Button>() { chanceButtons[5], chanceButtons[6] };
-        if (!CheckButtonForValidValues(cFloats)) {
-            ButtonValuesInvalid(cButtons, cFloats, Color.yellow, "yellow");
-            isTrue.Add(CheckButtonForValidValues(cFloats));
-        }
-
-        for (int i = 0; i < isTrue.Count; i++) {
-            if (!isTrue[i]) {
+        if (!CheckButtonForValidValues(GameManager.S.spawner.chancesToSpawn)) {
+            ButtonValuesInvalid(chanceButtons, GameManager.S.spawner.chancesToSpawn, Color.red, "red");
+            //isTrue.Add(CheckButtonForValidValues(GameManager.S.spawner.chancesToSpawn));
+            if (!CheckButtonForValidValues(GameManager.S.spawner.chancesToSpawn)) {
                 // Input box shake animation
                 messageDisplayAnim.CrossFade("DisplayTextShake", 0);
 
                 return false;
             }
         }
-
         return true;
     }
 
@@ -541,7 +554,7 @@ public class AlgorithmMenu : MonoBehaviour {
     void ButtonValuesInvalid(List<Button> chanceButtons, List<float> chanceValues, Color color, string colorName) {
         // Get sum of connected chance values as a string
         float sumFloat = 0;
-        for(int i = 0; i< chanceValues.Count; i++) {
+        for (int i = 0; i < chanceValues.Count; i++) {
             sumFloat += chanceValues[i];
         }
         string sumString = (sumFloat * 100).ToString() + "%";

@@ -256,6 +256,45 @@ public class NumericalSelectionMenu : MonoBehaviour {
                     amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
                 }
                 break;
+            case 13:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(7, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
+                }
+                break;
+            case 14:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(8, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
+                }
+                break;
+            case 15:
+                // Set header text
+                headerText.text = "Please select an amount!";
+
+                for (int i = 0; i < chanceValues.Count; i++) {
+                    amountButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = chanceValues[i].ToString() + "%";
+
+                    // Add listeners
+                    int copy = i;
+                    amountButtons[copy].onClick.AddListener(delegate { GameManager.S.algorithmMenuCS.SetChanceButtonValue(9, copy); });
+                    amountButtons[copy].onClick.AddListener(delegate { Deactivate(); });
+                }
+                break;
         }
     }
 }

@@ -240,11 +240,19 @@ public class KeyboardInputMenu : MonoBehaviour {
                 (GameManager.S.spawner.chancesToSpawn[4] * 100).ToString() + "%",
                 (GameManager.S.spawner.chancesToSpawn[5] * 100).ToString() + "%",
                 (GameManager.S.spawner.chancesToSpawn[6] * 100).ToString() + "%",
+                (GameManager.S.spawner.chancesToSpawn[7] * 100).ToString() + "%",
+                (GameManager.S.spawner.chancesToSpawn[8] * 100).ToString() + "%",
+                (GameManager.S.spawner.chancesToSpawn[9] * 100).ToString() + "%",
                 GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[0],
                 GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[1],
                 GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[2],
                 GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[3],
-                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4]
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[4],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[5],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[6],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[7],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[8],
+                GameManager.S.algorithmMenuCS.objectButtonSpriteNdx[9]
                 );
 
             // Activate selected high score menu
