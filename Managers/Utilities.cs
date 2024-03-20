@@ -84,4 +84,15 @@ public class Utilities : MonoBehaviour {
 
         return (NewValue);
     }
+
+    // Returns a shuffled list of integers (Fisher-Yates algorithm)
+    public List<int> ShuffleIntList(List<int> listToBeShuffled) {
+        for (int i = listToBeShuffled.Count - 1; i > 0; i--) {
+            int j = Random.Range(0, i + 1);
+            int temp = listToBeShuffled[i];
+            listToBeShuffled[i] = listToBeShuffled[j];
+            listToBeShuffled[j] = temp;
+        }
+        return listToBeShuffled;
+    }
 }
