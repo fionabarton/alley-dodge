@@ -13,7 +13,12 @@ public class DelayedTextDisplay : MonoBehaviour {
 	[Header("Set Dynamically")]
 	public bool			dialogueFinished = true;
 
-	public void DisplayText(string text, bool waitForTextToFinish = false) {
+    public Animator		anim;
+
+    void Start() {
+        anim = GetComponent<Animator>();
+    }
+    public void DisplayText(string text, bool waitForTextToFinish = false) {
 		//      if (waitForTextToFinish) {
 		//	GameManager.S.waitForDialogueToFinish = waitForTextToFinish;
 		//}
@@ -28,6 +33,9 @@ public class DelayedTextDisplay : MonoBehaviour {
 		// Display message to user WITHOUT any delay
 		// (Yes, thanks to this design choice, the contents of this script have become mostly useless!)
 		message.text = text;
+
+		// Play animation clip: shake text box
+        //anim.CrossFade("ShakeOnTextChange", 0);
     }
 	IEnumerator DisplayTextCo(string text) {
 		// Deactivate Cursor
