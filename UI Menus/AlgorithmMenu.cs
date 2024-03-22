@@ -557,7 +557,7 @@ public class AlgorithmMenu : MonoBehaviour {
         for (int i = 0; i < chanceValues.Count; i++) {
             sumFloat += chanceValues[i];
         }
-        string sumString = (sumFloat * 100).ToString() + "%";
+        string sumString = ((int)(sumFloat * 100)).ToString() + "%";
 
         // Display text
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Please ensure the total value of\nthe connected " + colorName + " buttons is 100%, not " + sumString + ".", true);
