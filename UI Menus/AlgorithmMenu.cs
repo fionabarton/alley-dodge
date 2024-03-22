@@ -587,7 +587,7 @@ public class AlgorithmMenu : MonoBehaviour {
         }
 
         // Prompt user that combined dropdown values must equal 100%
-        if (total == 1.0) {
+        if (total >= 0.975f && total < 1.025f) {
             return true;
         }
 
