@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Sets the user's left & right hand's material's colors depending on their current interaction (hover, hold, release)
+// Sets the user's left & right hand's material's colors depending on their current interaction (hold, release)
 // with a climbable XRGrabInteractable object.
 
 // Is set on XRDirectClimbInteractor's "Interactor Events" (in Inspector) attached to both hand controller game objects 
