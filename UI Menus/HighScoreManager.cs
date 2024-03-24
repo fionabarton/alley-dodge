@@ -45,7 +45,21 @@ public class HighScoreManager : MonoBehaviour {
     //
     public int                          currentPageNdx = 0;
 
+    public List<string>                 names = new List<string>();
     void Start() {
+        // Populate list of names for high score entries
+        names = new List<string>() { "Bernise", "Mortimer", "Ruth", "Herbert", "Ingrid", "Murray", "Thelma", "Martha", "Humphrey", "Norman",
+            "Mavis", "Wilbert", "Doris", "Orville", "Maude", "Harold", "Melvin", "Ethel", "Dilmore", "Gertrude",
+            "Harriet", "Otis", "Trudy", "Alfred", "Hilda", "Rutherford", "Gladys", "Sherman", "Mabel", "Deforest",
+            "Opal", "Edmund", "Bernadette", "Peyton", "Etta", "Silas", "Louise", "Felix", "Ophelia", "Horace",
+            "Marjorie", "Reginald", "Helga", "Mortimer", "Ursula", "Cassius", "Millie", "Homer", "Calliope", "Milo",
+            "Caldonia", "Edgar", "Blanche", "Rufus", "Betty", "Llewellyn", "Ramona", "Langston", "Henrietta", "Gilbert",
+            "Bertie", "Holden", "Maude", "Ignatius", "Drusilla", "Thaddeus", "Wilma", "Percy", "Fanny", "Atlas",
+            "Shirley", "Neville", "Liza", "Brooks", "Posey", "Hugo", "Sibyl", "Archibald", "Glenda", "Stanley",
+            "Elaine", "Atticus", "Daphne", "Francis", "Susannah", "Rawlins", "Claribel", "Omar", "Astrid", "Waldo",
+            "Lucille", "Cornelius", "Darcy", "Gil", "Sandra", "Quincy", "Lucretia", "Chester", "Margaret", "Ansel",
+            "Agatha", "Jasper", "Hester", "Amos", "Hazel", "Rollo", "Agnes", "Demetrius", "Pollyanna", "Tobias" };
+
         // Initialize array of high scores
         highScores = new HighScore[100];
 
@@ -64,32 +78,27 @@ public class HighScoreManager : MonoBehaviour {
 
     // Deletes all saved high scores and resets them to default values 
     public void SetHighScoresToDefaultValues(bool saveData = false) {
-        // Populate elements 0 to 19
-        highScores[0] = new HighScore("Bernise", 63, 13, 300, "00:06:58.629");
-        highScores[1] = new HighScore("Mortimer", 57, 12, 192, "00:04:51.582");
-        highScores[2] = new HighScore("Ruth", 55, 12, 184, "00:04:38.194");
-        highScores[3] = new HighScore("Herbert", 53, 11, 188, "00:04:40.273");
-        highScores[4] = new HighScore("Ingrid", 47, 10, 184, "00:04:52.178");
-        highScores[5] = new HighScore("Murray", 45, 10, 175, "00:04:31.531");
-        highScores[6] = new HighScore("Thelma", 41, 9, 181, "00:05:03.040");
-        highScores[7] = new HighScore("Martha", 38, 8, 174, "00:04:52.516");
-        highScores[8] = new HighScore("Humphrey", 36, 8, 166, "00:04:39.254");
-        highScores[9] = new HighScore("Norman", 34, 7, 114, "00:03:10.624");
-        highScores[10] = new HighScore("Mavis", 31, 7, 143, "00:02:53.387");
-        highScores[11] = new HighScore("Wilbert", 29, 6, 166, "00:04:39.254");
-        highScores[12] = new HighScore("Doris", 24, 5, 152, "00:04:13.472");
-        highScores[13] = new HighScore("Orville", 21, 5, 137, "00:03:58.519");
-        highScores[14] = new HighScore("Maude", 15, 4, 54, "00:01:40.375");
-        highScores[15] = new HighScore("Harold", 14, 3, 41, "00:01:16.891");
-        highScores[16] = new HighScore("Melvin", 7, 2, 40, "00:01:18:163");
-        highScores[17] = new HighScore("Ethel", 6, 2, 34, "00:00:48:502");
-        highScores[18] = new HighScore("Dilmore", 4, 1, 21, "00:00:20:665");
-        highScores[19] = new HighScore("Gertrude", 2, 1, 26, "00:00:38:014");
+        // Populate list of high score entries
+        int highestScore = 100;
+        int highestObjects = 200;
+        int highestTime = 360;
+        for (int i = 0; i < highScores.Length; i++) {
+            highScores[i] = new HighScore(names[i], highestScore, (int)((highestScore * 0.2f) + 1) , highestObjects, GameManager.S.score.GetTime(highestTime));
 
+            // Decrement topScore
+            if(highestScore > 0) {
+                highestScore -= 1;
+            }
 
-        // Populate elements 20 to 99
-        for (int i = 20; i < highScores.Length; i++) {
-            highScores[i] = new HighScore("Slot " + (i + 1).ToString() + ": EMPTY");
+            // Decrement topObjects
+            if (highestObjects > 0) {
+                highestObjects -= 2;
+            }
+
+            // Decrement topTime
+            if (highestTime > 0) {
+                highestTime -= 3;
+            }
         }
 
         // Save data
