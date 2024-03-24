@@ -329,8 +329,8 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     public void SetToDefaultSettings() {
         customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
         customAlgorithms[1] = new CustomAlgorithm("Random Objects", "26 February, 1984", 4, 1, 14, 2,
-        5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
-        46, 46, 46, 47, 48, 50, 50, 50, 50, 50);
+        15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
+        46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
         customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 14, 2,
         5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
         7, 23, 24, 25, 49, 50, 50, 50, 50, 50);
