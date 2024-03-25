@@ -9,6 +9,7 @@ public class InstructionsMenu : MonoBehaviour {
     public Button                   previousPageButton;
     public Button                   nextPageButton;
 
+    // Each is a "page" of instructions
     public List<GameObject>         textGO;
 
     public TMPro.TextMeshProUGUI    menuHeaderText;
@@ -32,10 +33,10 @@ public class InstructionsMenu : MonoBehaviour {
 
     // Displays either the previous or next page of instructions
     public void GoToPreviousOrNextPage(int amountToChange) {
-        //
+        // Increment pageNdx
         currentPageNdx += amountToChange;
 
-        // Reset
+        // Ensure pageNdx stays within valid range
         if (currentPageNdx > textGO.Count - 1) {
             currentPageNdx = 0;
         } else if (currentPageNdx < 0) {
