@@ -82,11 +82,19 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         chanceToSpawnValues[4].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn4;
         chanceToSpawnValues[5].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn5;
         chanceToSpawnValues[6].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn6;
+        chanceToSpawnValues[7].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn7;
+        chanceToSpawnValues[8].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn8;
+        chanceToSpawnValues[9].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn9;
         objectToSpawnImages[0].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn0];
         objectToSpawnImages[1].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn1];
         objectToSpawnImages[2].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn2];
         objectToSpawnImages[3].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn3];
         objectToSpawnImages[4].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn4];
+        objectToSpawnImages[5].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn5];
+        objectToSpawnImages[6].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn6];
+        objectToSpawnImages[7].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn7];
+        objectToSpawnImages[8].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn8];
+        objectToSpawnImages[9].sprite = GameManager.S.algorithmMenuCS.objectSprites[GameManager.S.highScore.highScores[ndx].objectToSpawn9];
     }
 
     //
