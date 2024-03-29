@@ -23,7 +23,7 @@ public class AlleyManager : MonoBehaviour {
         playerFloor.transform.localScale = new Vector3(alleyCount, 1, 2.5f);
 
         // Set transparent alley length
-        transparentAlley.transform.localScale = new Vector3(alleyCount, 0.05f, 36f);
+        transparentAlley.transform.localScale = new Vector3(alleyCount, 0.025f, 36f);
 
         // Set base handle length  3-1, 5-2, 7-3
         baseHandle.transform.localScale = new Vector3(0.2f, ((alleyCount/2)), 0.2f);
