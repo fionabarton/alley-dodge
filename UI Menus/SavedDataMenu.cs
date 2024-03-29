@@ -12,7 +12,7 @@ public class SavedDataMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
         }
     }
 
@@ -31,14 +31,15 @@ public class SavedDataMenu : MonoBehaviour {
         GameManager.S.subMenuGO.SetActive(false);
 
         //
-        if (yesOrNo == 0) {
+        if (yesOrNo == 0) {  
             GameManager.S.highScore.SetHighScoresToDefaultValues(true);
+            GameManager.S.highScore.ResetNewHighScoreNdx();
 
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved high scores deleted!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved high scores deleted!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
         }
     }
 
@@ -60,10 +61,10 @@ public class SavedDataMenu : MonoBehaviour {
             GameManager.S.customAlgorithmMenuCS.UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved custom algorithms deleted!");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved custom algorithms deleted!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.");
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
         }
     }
 }
