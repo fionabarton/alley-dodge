@@ -79,14 +79,14 @@ public class HighScoreManager : MonoBehaviour {
     // Deletes all saved high scores and resets them to default values 
     public void SetHighScoresToDefaultValues(bool saveData = false) {
         // Populate list of high score entries
-        int highestScore = 100;
+        int highestScore = 75;
         int highestObjects = 200;
         int highestTime = 360;
         for (int i = 0; i < highScores.Length; i++) {
             highScores[i] = new HighScore(names[i], highestScore, (int)((highestScore * 0.2f) + 1) , highestObjects, GameManager.S.score.GetTime(highestTime));
 
             // Decrement topScore
-            if(highestScore > 0) {
+            if(highestScore > 1) {
                 highestScore -= 1;
             }
 
@@ -107,6 +107,21 @@ public class HighScoreManager : MonoBehaviour {
 
             UpdateHighScoreDisplay(currentPageNdx);
         }
+    }
+
+    public void ResetNewHighScoreNdx() {
+        // Reset new high score text color
+        for (int i = 0; i < 10; i++) {
+            SetHighScoreColors(i, "RainbowTextWhite");
+        }
+
+        // Deactivate new high score cursors 
+        GameManager.utilities.SetActiveList(cursorGO, false);
+
+        // Reset new high score index to default value
+        newHighScoreNdx = -1;
+        newHighScoreListNdx = -1;
+        newHighScorePageNdx = -1;
     }
 
     // Checks if the score is a new high score,
