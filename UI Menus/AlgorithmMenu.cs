@@ -604,6 +604,6 @@ public class AlgorithmMenu : MonoBehaviour {
 
     // Sets the DisplayText's message depending on which page of the menu is visible
     void SetGeneralDisplayTextMessage() {
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
     }
 }
