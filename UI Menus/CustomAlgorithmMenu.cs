@@ -445,7 +445,7 @@ public class CustomAlgorithm {
     public int objectToSpawn9;
 
     public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
-        int _startingObjectSpeed = 4, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 14, int _amountToDecreaseSpawnSpeed = 2,
+        int _startingObjectSpeed = 2, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 9, int _amountToDecreaseSpawnSpeed = 2,
         int _chanceToSpawn0 = 5, int _chanceToSpawn1 = 5, int _chanceToSpawn2 = 5, int _chanceToSpawn3 = 4, int _chanceToSpawn4 = 1, int _chanceToSpawn5 = 0, int _chanceToSpawn6 = 0, int _chanceToSpawn7 = 0, int _chanceToSpawn8 = 0, int _chanceToSpawn9 = 0,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48, int _objectToSpawn5 = 50, int _objectToSpawn6 = 50, int _objectToSpawn7 = 50, int _objectToSpawn8 = 50, int _objectToSpawn9 = 50) {
         name = _name;

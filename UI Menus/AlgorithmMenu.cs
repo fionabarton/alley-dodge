@@ -155,7 +155,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 0")) {
             SetStartingObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 0"));
         } else {
-            SetStartingObjectSpeedDropdownValue(4); // 10 MPH / 4.469444f
+            SetStartingObjectSpeedDropdownValue(2); // 6 MPH 
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 1")) {
             SetAmountToIncreaseObjectSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 1"));
@@ -165,7 +165,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 2")) {
             SetStartingSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 2"));
         } else {
-            SetStartingSpawnSpeedDropdownValue(14); // 30 OPM / 2.0f
+            SetStartingSpawnSpeedDropdownValue(9); // 20 OPM / 3.0f
         }
         if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
             SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
@@ -350,9 +350,9 @@ public class AlgorithmMenu : MonoBehaviour {
             SetObjectToSpawn(50, 9); // Nothing
 
             // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(4);         // 10 MPH / 4.469444f
+            SetStartingObjectSpeedDropdownValue(2);         // 6 MPH 
             SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
-            SetStartingSpawnSpeedDropdownValue(14);          // 30 OPM / 2.0f
+            SetStartingSpawnSpeedDropdownValue(9);          // 20 OPM / 3.0f
             SetAmountToDecreaseSpawnSpeedDropdownValue(2);  // 2 OPM
 
             // Delayed text display
