@@ -52,9 +52,9 @@ public class CreditsMenu : MonoBehaviour {
         pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/11" + "</color>";
 
         // Set menu header text
-        if (currentPageNdx == 7 || currentPageNdx == 8) {
+        if (currentPageNdx == 0 || currentPageNdx == 1) {
             menuHeaderText.text = "Credits: <color=#D9D9D9>1st Party Developers";
-        } else if (currentPageNdx == 9 || currentPageNdx == 10) {
+        } else if (currentPageNdx == 2 || currentPageNdx == 3) {
             menuHeaderText.text = "Credits: <color=#D9D9D9>Tools";
         } else {
             menuHeaderText.text = "Credits: <color=#D9D9D9>3rd Party Assets";
