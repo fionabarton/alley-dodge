@@ -51,27 +51,27 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Chance Value 0")) {
             SetChanceButtonValue(0, PlayerPrefs.GetInt("Chance Value 0"));
         } else {
-            SetChanceButtonValue(0, 5); // 25%
+            SetChanceButtonValue(0, 4); // 20%
         }
         if (PlayerPrefs.HasKey("Chance Value 1")) {
             SetChanceButtonValue(1, PlayerPrefs.GetInt("Chance Value 1"));
         } else {
-            SetChanceButtonValue(1, 5); // 25%
+            SetChanceButtonValue(1, 4); // 20%
         }
         if (PlayerPrefs.HasKey("Chance Value 2")) {
             SetChanceButtonValue(2, PlayerPrefs.GetInt("Chance Value 2"));
         } else {
-            SetChanceButtonValue(2, 5); // 25%
+            SetChanceButtonValue(2, 4); // 20%
         }
         if (PlayerPrefs.HasKey("Chance Value 3")) {
             SetChanceButtonValue(3, PlayerPrefs.GetInt("Chance Value 3"));
         } else {
-            SetChanceButtonValue(3, 4); // 20%
+            SetChanceButtonValue(3, 6); // 30%
         }
         if (PlayerPrefs.HasKey("Chance Value 4")) {
             SetChanceButtonValue(4, PlayerPrefs.GetInt("Chance Value 4"));
         } else {
-            SetChanceButtonValue(4, 1); // 5%
+            SetChanceButtonValue(4, 2); // 10%
         }
         if (PlayerPrefs.HasKey("Chance Value 5")) {
             SetChanceButtonValue(5, PlayerPrefs.GetInt("Chance Value 5"));
@@ -170,7 +170,7 @@ public class AlgorithmMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("Speed Dropdown 3")) {
             SetAmountToDecreaseSpawnSpeedDropdownValue(PlayerPrefs.GetInt("Speed Dropdown 3"));
         } else {
-            SetAmountToDecreaseSpawnSpeedDropdownValue(2); // 2 OPM
+            SetAmountToDecreaseSpawnSpeedDropdownValue(3); // 3 OPM
         }
 
         // In case game was closed before ensuring connected chance values are valid (have a sum of exactly 100%),
@@ -353,7 +353,7 @@ public class AlgorithmMenu : MonoBehaviour {
             SetStartingObjectSpeedDropdownValue(2);         // 6 MPH 
             SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
             SetStartingSpawnSpeedDropdownValue(9);          // 20 OPM / 3.0f
-            SetAmountToDecreaseSpawnSpeedDropdownValue(2);  // 2 OPM
+            SetAmountToDecreaseSpawnSpeedDropdownValue(3);  // 3 OPM
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
@@ -513,12 +513,12 @@ public class AlgorithmMenu : MonoBehaviour {
     }
 
     void SetChanceValuesToDefaultSetting() {
-        SetChanceButtonValue(0, 5); // 25%
-        SetChanceButtonValue(1, 5); // 25%
-        SetChanceButtonValue(2, 5); // 25%
+        SetChanceButtonValue(0, 4); // 20%
+        SetChanceButtonValue(1, 4); // 20%
+        SetChanceButtonValue(2, 4); // 20%
 
-        SetChanceButtonValue(3, 4); // 20%
-        SetChanceButtonValue(4, 1); // 5%
+        SetChanceButtonValue(3, 6); // 30%
+        SetChanceButtonValue(4, 2); // 10%
 
         SetChanceButtonValue(5, 0); // 0%
         SetChanceButtonValue(6, 0); // 0%
