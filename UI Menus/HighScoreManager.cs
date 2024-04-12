@@ -341,8 +341,8 @@ public class HighScore {
 
     public HighScore(string _name = "", int _score = 0, int _level = 1, int _objects = 0, string _runTime = "00:00:00:000",
         string _date = "29 August, 1997", string _time = "12:00", int _alleyCount = 3, string _playerHeight = "1.68 m / 5 ft 6.14 in", int _fallBelowFloorCount = 0, int _damageCount = 0, int _pauseCount = 0,
-        string _startingObjectSpeed = "10", string _amountToIncreaseObjectSpeed = "1", string _startingSpawnSpeed = "30", string _amountToDecreaseSpawnSpeed = "2",
-        string _chanceToSpawn0 = "25%", string _chanceToSpawn1 = "25%", string _chanceToSpawn2 = "25%", string _chanceToSpawn3 = "20%", string _chanceToSpawn4 = "5%", string _chanceToSpawn5 = "0%", string _chanceToSpawn6 = "0%", string _chanceToSpawn7 = "0%", string _chanceToSpawn8 = "0%", string _chanceToSpawn9 = "0%",
+        string _startingObjectSpeed = "6", string _amountToIncreaseObjectSpeed = "1", string _startingSpawnSpeed = "20", string _amountToDecreaseSpawnSpeed = "3",
+        string _chanceToSpawn0 = "20%", string _chanceToSpawn1 = "20%", string _chanceToSpawn2 = "20%", string _chanceToSpawn3 = "30%", string _chanceToSpawn4 = "10%", string _chanceToSpawn5 = "0%", string _chanceToSpawn6 = "0%", string _chanceToSpawn7 = "0%", string _chanceToSpawn8 = "0%", string _chanceToSpawn9 = "0%",
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48, int _objectToSpawn5 = 50, int _objectToSpawn6 = 50, int _objectToSpawn7 = 50, int _objectToSpawn8 = 50, int _objectToSpawn9 = 50) {
         name = _name;
         score = _score;
