@@ -13,8 +13,8 @@ public class VibrationMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI    muteVibrationButtonText;
 
     [Header("Set Dynamically")]
-    public float                    vibrationMultiplier = 1.0f;
-    public float                    cachedVibrationMultiplier = 1.0f;
+    public float                    vibrationMultiplier = 0.75f;
+    public float                    cachedVibrationMultiplier = 0.75f;
 
     private void OnEnable() {
         // Display text
@@ -44,7 +44,7 @@ public class VibrationMenu : MonoBehaviour {
             vibrationSlider.value = PlayerPrefs.GetFloat("Vibration Volume");
             vibrationMultiplier = vibrationSlider.value;
         } else {
-            vibrationMultiplier = 1.0f;
+            vibrationMultiplier = 0.75f;
         }
 
         if (PlayerPrefs.HasKey("Mute Vibration")) {
@@ -58,9 +58,14 @@ public class VibrationMenu : MonoBehaviour {
     public void OnSliderButtonReleased(string name) {
         // Delayed text display
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!", true);
+
+        // Vibrate controllers
+        GameManager.S.LeftXRSendHapticImpuse(1.0f, 0.5f);
+        GameManager.S.RightXRSendHapticImpuse(1.0f, 0.5f);
     }
 
     public void SetVibrationVolume(float volume) {
+        // Set vibration volume
         vibrationSlider.value = volume;
         vibrationMultiplier = vibrationSlider.value;
 
@@ -97,6 +102,10 @@ public class VibrationMenu : MonoBehaviour {
         // Set vibration to cached value
         vibrationMultiplier = cachedVibrationMultiplier;
 
+        // Vibrate controllers
+        GameManager.S.LeftXRSendHapticImpuse(1.0f, 0.5f);
+        GameManager.S.RightXRSendHapticImpuse(1.0f, 0.5f);
+
         // Delayed text display
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Vibration has been unmuted!", true);
         muteVibrationButtonText.text = "Mute Vibration";
@@ -117,8 +126,8 @@ public class VibrationMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Reset values
-            vibrationSlider.value = 1.0f;
-            vibrationMultiplier = 1.0f;
+            vibrationSlider.value = 0.75f;
+            vibrationMultiplier = 0.75f;
 
             // Reset mute
             UnmuteVibration();
