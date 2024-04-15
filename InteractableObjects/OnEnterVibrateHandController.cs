@@ -13,16 +13,16 @@ public class OnEnterVibrateHandController : MonoBehaviour {
         if (other.gameObject.tag == "Climbable") {
             // Vibrate left or right hand controller (amplitude, duration)
             if (isLeftHandController) {
-                GameManager.S.leftXR.SendHapticImpulse(0.2f, 0.1f);
+                GameManager.S.LeftXRSendHapticImpuse(0.25f, 0.1f);
             } else {
-                GameManager.S.rightXR.SendHapticImpulse(0.2f, 0.1f);
+                GameManager.S.RightXRSendHapticImpuse(0.25f, 0.1f);
             }
         } else if (other.gameObject.tag == "Pickup") {
             // Vibrate left or right hand controller (amplitude, duration)
             if (isLeftHandController) {
-                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.25f);
+                GameManager.S.LeftXRSendHapticImpuse(0.3333f, 0.25f);
             } else {
-                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.25f);
+                GameManager.S.RightXRSendHapticImpuse(0.3333f, 0.25f);
             }
         }
 
