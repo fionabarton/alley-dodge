@@ -25,8 +25,8 @@ public class PlayerDamage : MonoBehaviour {
                 Invoke("DeactivateInvicibility", 0.1f);
 
                 // Send haptic feedback (amplitude, duration) to both controllers
-                GameManager.S.leftXR.SendHapticImpulse(0.75f, 0.5f);
-                GameManager.S.rightXR.SendHapticImpulse(0.75f, 0.5f);
+                GameManager.S.LeftXRSendHapticImpuse(1.0f, 0.5f);
+                GameManager.S.RightXRSendHapticImpuse(1.0f, 0.5f);
 
                 // Destroy hazard
                 Destroy(other.gameObject.transform.parent.gameObject);
@@ -108,8 +108,8 @@ public class PlayerDamage : MonoBehaviour {
                 }
             } else if (other.gameObject.tag == "Pickup") {
                 // Send haptic feedback (amplitude, duration) to both controllers
-                GameManager.S.leftXR.SendHapticImpulse(0.25f, 0.25f);
-                GameManager.S.rightXR.SendHapticImpulse(0.25f, 0.25f);
+                GameManager.S.LeftXRSendHapticImpuse(0.3333f, 0.25f);
+                GameManager.S.RightXRSendHapticImpuse(0.3333f, 0.25f);
             }
         }
     }
