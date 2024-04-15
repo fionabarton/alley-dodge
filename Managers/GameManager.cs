@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
     public ExitRunButton        exitRunButtonRightCS;
     public CustomAlgorithmMenu  customAlgorithmMenuCS;
     public SelectedHighScoreMenu selectedHighScoreMenuCS;
+    public VibrationMenu        vibrationMenuCS;
 
     // Audio
     public AudioSource          playerAudioSource;
@@ -167,6 +168,14 @@ public class GameManager : MonoBehaviour {
 
         // Return sum
         return sum;
+    }
+
+    public void LeftXRSendHapticImpuse(float amplitude, float duration) {
+        leftXR.SendHapticImpulse((amplitude * vibrationMenuCS.vibrationMultiplier), duration);
+    }
+
+    public void RightXRSendHapticImpuse(float amplitude, float duration) {
+        rightXR.SendHapticImpulse((amplitude * vibrationMenuCS.vibrationMultiplier), duration);
     }
 
     //// For testing!
