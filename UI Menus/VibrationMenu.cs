@@ -1,0 +1,133 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+// Allows users to adjust the level of hand controller vibration 
+public class VibrationMenu : MonoBehaviour {
+    [Header("Set in Inspector")]
+    public Slider                   vibrationSlider;
+    public Button                   defaultSettingsButton;
+    public Button                   muteVibrationButton;
+    public TMPro.TextMeshProUGUI    muteVibrationButtonText;
+
+    [Header("Set Dynamically")]
+    public float                    vibrationMultiplier = 1.0f;
+    public float                    cachedVibrationMultiplier = 1.0f;
+
+    private void OnEnable() {
+        // Display text
+        if (Time.time > 0.01f) {
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the level of vibration to your hand controllers.", true);
+        }
+
+        // Set selected game object to null
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    void Start() {
+        // Add listeners to slider
+        vibrationSlider.onValueChanged.AddListener(delegate { SetVibrationVolume(vibrationSlider.value); });
+
+        // Add listeners to buttons
+        defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
+        muteVibrationButton.onClick.AddListener(delegate { MuteVibrationButton(); });
+
+        Invoke("GetPlayerPrefs", 0.1f);
+
+        gameObject.SetActive(false);
+    }
+
+    void GetPlayerPrefs() {
+        if (PlayerPrefs.HasKey("Vibration Volume")) {
+            vibrationSlider.value = PlayerPrefs.GetFloat("Vibration Volume");
+            vibrationMultiplier = vibrationSlider.value;
+        } else {
+            vibrationMultiplier = 1.0f;
+        }
+
+        if (PlayerPrefs.HasKey("Mute Vibration")) {
+            if (PlayerPrefs.GetInt("Mute Vibration") == 0) {
+                MuteVibration();
+            }
+        }
+    }
+
+    // Called OnPointerUp() by the EventTrigger attached to each slider in the Inspector
+    public void OnSliderButtonReleased(string name) {
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!", true);
+    }
+
+    public void SetVibrationVolume(float volume) {
+        vibrationSlider.value = volume;
+        vibrationMultiplier = vibrationSlider.value;
+
+        // Save settings
+        PlayerPrefs.SetFloat("Vibration Volume", volume);
+    }
+
+    public void MuteVibrationButton() {
+        if (PlayerPrefs.HasKey("Mute Vibration")) {
+            if (PlayerPrefs.GetInt("Mute Vibration") == 0) {
+                UnmuteVibration();
+            } else {
+                MuteVibration();
+            }
+        }
+    }
+
+    // On click mutes all vibration
+    public void MuteVibration() {
+        // Cache vibration value and mute volume
+        cachedVibrationMultiplier = vibrationMultiplier;
+        vibrationMultiplier = 0;
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Vibration has been muted!", true);
+        muteVibrationButtonText.text = "Unmute Vibration";
+
+        // Save settings
+        PlayerPrefs.SetInt("Mute Vibration", 0);
+    }
+
+    // On click unmutes all vibration
+    public void UnmuteVibration() {
+        // Set vibration to cached value
+        vibrationMultiplier = cachedVibrationMultiplier;
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Vibration has been unmuted!", true);
+        muteVibrationButtonText.text = "Mute Vibration";
+
+        // Save settings
+        PlayerPrefs.SetInt("Mute Vibration", 1);
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddDefaultSettingsConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    }
+    // On 'Yes' button click, returns all menu settings to their default value
+    public void DefaultSettings(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Reset values
+            vibrationSlider.value = 1.0f;
+            vibrationMultiplier = 1.0f;
+
+            // Reset mute
+            UnmuteVibration();
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the level of vibration to your hand controllers.", true);
+        }
+    }
+}

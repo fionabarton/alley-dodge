@@ -11,6 +11,7 @@ public class MoreMenu : MonoBehaviour {
     public Button           instructionsButton;
     public Button           savedDataButton;
     public Button           creditsButton;
+    public Button           vibrationButton;
     public Button           mainMenuButton;
 
     // Audio, Programmer, Instructions, Saved Data, Credits
@@ -30,6 +31,8 @@ public class MoreMenu : MonoBehaviour {
         instructionsButton.onClick.AddListener(delegate { ActivateMenuGO(2); });
         savedDataButton.onClick.AddListener(delegate { ActivateMenuGO(3); });
         creditsButton.onClick.AddListener(delegate { ActivateMenuGO(4); });
+        vibrationButton.onClick.AddListener(delegate { ActivateMenuGO(5); });
+
         mainMenuButton.onClick.AddListener(delegate { BackToMainMenuButton(); });
 
         Invoke("ActivateAlgorithmMenu", 0.1f);
@@ -61,7 +64,7 @@ public class MoreMenu : MonoBehaviour {
 
             // Set selected menu button's colors
             ColorBlock c = menuButtons[ndx].colors;
-            c.normalColor = new Color(1, 0.7843137f, 0, 1);
+            c.normalColor = new Color(0.805353f, 0.9333333f, 0.372549f, 1);
             c.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
             menuButtons[ndx].colors = c;
 
