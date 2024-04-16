@@ -62,12 +62,28 @@ public class VibrationMenu : MonoBehaviour {
         // Vibrate controllers
         GameManager.S.LeftXRSendHapticImpuse(1.0f, 0.5f);
         GameManager.S.RightXRSendHapticImpuse(1.0f, 0.5f);
+
+        // If volume is set to a value above zero, unmute
+        if (vibrationSlider.value > 0) {
+            muteVibrationButtonText.text = "Mute Vibration";
+
+            // Save settings
+            PlayerPrefs.SetInt("Mute Vibration", 1);
+        } else {
+            muteVibrationButtonText.text = "Unmute Vibration";
+
+            // Save settings
+            PlayerPrefs.SetInt("Mute Vibration", 0);
+        }
     }
 
     public void SetVibrationVolume(float volume) {
         // Set vibration volume
         vibrationSlider.value = volume;
         vibrationMultiplier = vibrationSlider.value;
+
+        // Cache vibration value
+        cachedVibrationMultiplier = vibrationSlider.value;
 
         // Save settings
         PlayerPrefs.SetFloat("Vibration Volume", volume);

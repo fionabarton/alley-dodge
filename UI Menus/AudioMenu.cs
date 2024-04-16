@@ -82,6 +82,25 @@ public class AudioMenu : MonoBehaviour {
     public void OnSliderButtonReleased(string name) {
         // Delayed text display
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText(name + " volume set!", true);
+
+        // For master volume, if volume is set to a value above zero, unmute
+        if (name == "Master") {
+            if (masterVolSlider.value > 0) {
+                GameManager.audioMan.isMuted = false;
+
+                muteAudioButtonText.text = "Mute Audio";
+
+                // Save settings
+                PlayerPrefs.SetInt("Mute Audio", 1);
+            } else {
+                GameManager.audioMan.isMuted = true;
+
+                muteAudioButtonText.text = "Unmute Audio";
+
+                // Save settings
+                PlayerPrefs.SetInt("Mute Audio", 0);
+            }
+        }
     }
 
     // On click (un)mutes all audio
