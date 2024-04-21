@@ -83,7 +83,7 @@ public class ExitRunButton : MonoBehaviour {
         if (yesOrNo == 0) {
             // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             // Stop looping over background music soundtrack
-            GameManager.audioMan.isLoopingGameSoundtrack = false;
+            GameManager.audioMan.checkForBGMListenerNotPlaying = false;
             // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
             // Reset exit run button positions and allow them to be pressed again
