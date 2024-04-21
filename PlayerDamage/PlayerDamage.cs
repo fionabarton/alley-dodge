@@ -47,7 +47,7 @@ public class PlayerDamage : MonoBehaviour {
                 if (!GameManager.shield.shieldIsActive) {
                     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     // Stop looping over background music soundtrack
-                    GameManager.audioMan.isLoopingGameSoundtrack = false;
+                    GameManager.audioMan.checkForBGMListenerNotPlaying = false;
                     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
                     // Cache ending time
