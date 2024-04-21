@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum eBGM {
-    bgm1940, bgmLose, bgmNever, bgmNinja, bgmSoap, bgmStart_Battle, bgmThings, bgmWin
+    bgm1940, bgmLose, bgmNever, bgmSoap, bgmWin
 };
 
 public enum eSFX {
@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour {
     public AudioSource      BGMAudioSource;
     public AudioSource      applauseSFXAudioSource;
     public AudioSource      VOXAudioSource;
-    public AudioSource      kangarooAudioSource;
 
     public List<AudioClip>  bgmClips = new List<AudioClip>();
     public List<AudioClip>  soundtrackClips = new List<AudioClip>();
@@ -37,9 +36,13 @@ public class AudioManager : MonoBehaviour {
     public bool             isMuted;
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    public int soundtrackNdx = 0;
-    public bool isLoopingGameSoundtrack = false;
+
+    public int              startingSoundtrackNdx = 0;
+    public int              currentSoundtrackNdx = 0;
+    public bool             checkForBGMListenerNotPlaying = false;
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public bool             loopSoundtrackToggleIsOn = false;
 
     private void Start() {
         // Set previous volume level
@@ -86,19 +89,19 @@ public class AudioManager : MonoBehaviour {
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     private void FixedUpdate() {
-        // If the soundtrack is being looped
-        if (isLoopingGameSoundtrack) {
+        // If the soundtrack is playing one track after another
+        if (checkForBGMListenerNotPlaying) {
             // If the audio source has STOPPED playing
             if (!BGMAudioSource.isPlaying) {
-                // Increment index to next track
-                if (soundtrackNdx < soundtrackClips.Count) {
-                    soundtrackNdx += 1;
+                // Increment soundtrack index to next track
+                if (currentSoundtrackNdx < soundtrackClips.Count - 1) {
+                    currentSoundtrackNdx += 1;
                 } else {
-                    soundtrackNdx = 0;
+                    currentSoundtrackNdx = 0;
                 }
 
                 // Play next track of the soundtrack
-                AudioClip clip = soundtrackClips[soundtrackNdx];
+                AudioClip clip = soundtrackClips[currentSoundtrackNdx];
                 BGMAudioSource.clip = clip;
                 BGMAudioSource.Play();
             }
@@ -108,17 +111,30 @@ public class AudioManager : MonoBehaviour {
     public void PlaySoundtrackClip(int ndx, bool doesLoop = true) {
         BGMAudioSource.loop = doesLoop;
 
-        // Increment index to next track
-        if (soundtrackNdx < soundtrackClips.Count - 1) {
-            soundtrackNdx += 1;
-        } else {
-            soundtrackNdx = 0;
-        }
-
+        // Play track 
         AudioClip clip = soundtrackClips[ndx];
         BGMAudioSource.clip = clip;
         BGMAudioSource.Play();
     }
+
+    // Increment soundtrack index to next track
+    public void IncrementStartingSoundtrackNdx() {
+        if (startingSoundtrackNdx < soundtrackClips.Count - 1) {
+            startingSoundtrackNdx += 1;
+        } else {
+            startingSoundtrackNdx = 0;
+        }
+    }
+
+    // Decrement soundtrack index to previous track
+    public void DecrementStartingSoundtrackNdx() {
+        if (startingSoundtrackNdx > 0) {
+            startingSoundtrackNdx -= 1;
+        } else {
+            startingSoundtrackNdx = soundtrackClips.Count - 1;
+        }
+    }
+
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     //
@@ -180,11 +196,11 @@ public class AudioManager : MonoBehaviour {
     public void SetMasterVolume(float volume) {
         AudioListener.volume = volume;
 
-        // Save settings
-        PlayerPrefs.SetFloat("Master Volume", volume);
-
         // Set previous volume level
         previousVolumeLvl = volume;
+
+        // Save settings
+        PlayerPrefs.SetFloat("Master Volume", volume);
     }
 
     public void SetBGMVolume(float volume) {
