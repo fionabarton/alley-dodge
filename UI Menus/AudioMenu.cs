@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static System.Net.Mime.MediaTypeNames;
 
 //
 public class AudioMenu : MonoBehaviour {
@@ -11,9 +12,23 @@ public class AudioMenu : MonoBehaviour {
     public Slider                   BGMVolSlider;
     public Slider                   SFXVolSlider;
     public Slider                   VOXVolSlider;
+    public Button                   soundtrackMenuButton;
     public Button                   defaultSettingsButton;
     public Button                   muteAudioButton;
     public TMPro.TextMeshProUGUI    muteAudioButtonText;
+
+    public TMPro.TextMeshProUGUI    startingMusicTrackText;
+    public Button                   previousTrackButton;
+    public Button                   nextTrackButton;
+    public Button                   playButton;
+    public TMPro.TextMeshProUGUI    playButtonText;
+    public Toggle                   loopTrackToggle;
+    public Button                   resetSoundtrackButton;
+    public Button                   volumeMenuButton;
+
+    public TMPro.TextMeshProUGUI    menuHeaderText;
+    public GameObject               volumeMenu;
+    public GameObject               soundtrackMenu;
 
     private void OnEnable() {
         // Display text
@@ -33,8 +48,19 @@ public class AudioMenu : MonoBehaviour {
         VOXVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetVOXVolume((VOXVolSlider.value)); });
 
         // Add listeners to buttons
-        defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
+        defaultSettingsButton.onClick.AddListener(delegate { AddResetVolumeConfirmationListeners(); });
         muteAudioButton.onClick.AddListener(delegate { MuteAudioButton(); });
+        
+        previousTrackButton.onClick.AddListener(delegate { GoToPreviousOrNextTrack(-1); });
+        nextTrackButton.onClick.AddListener(delegate { GoToPreviousOrNextTrack(1); });
+        playButton.onClick.AddListener(delegate { PlayOrStopTrack(); });
+        resetSoundtrackButton.onClick.AddListener(delegate { AddResetSoundtrackConfirmationListeners(); });
+
+        // Add listeners to toggle
+        loopTrackToggle.onValueChanged.AddListener(delegate { LoopSoundtrack(); });
+
+        volumeMenuButton.onClick.AddListener(delegate { SwapBetweenVolumeAndSoundtrackMenus(); });
+        soundtrackMenuButton.onClick.AddListener(delegate { SwapBetweenVolumeAndSoundtrackMenus(); });
 
         Invoke("GetPlayerPrefs", 0.1f);
 
@@ -123,11 +149,11 @@ public class AudioMenu : MonoBehaviour {
     }
 
     // Adds functions to the sub menu's yes/no buttons
-    void AddDefaultSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    void AddResetVolumeConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(ResetVolume, "Are you sure that you would like to\nreset this menu's options to their default values?");
     }
     // On 'Yes' button click, returns all menu settings to their default value
-    public void DefaultSettings(int yesOrNo = -1) {
+    public void ResetVolume(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
@@ -144,6 +170,139 @@ public class AudioMenu : MonoBehaviour {
                 GameManager.audioMan.PauseAndMuteAudio();
             }
             muteAudioButtonText.text = "Mute Audio";
+
+            // Delayed text display
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+        } else {
+            // Display text
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Swaps which of the 2 halves of the audio menu is active
+    public void SwapBetweenVolumeAndSoundtrackMenus() {
+        if (volumeMenu.activeInHierarchy) {
+            // Activate menu
+            volumeMenu.SetActive(false);
+            soundtrackMenu.SetActive(true);
+
+            // Set header text
+            menuHeaderText.text = "Audio: <color=#D9D9D9>Soundtrack";
+        } else {
+            // Activate menu
+            soundtrackMenu.SetActive(false);
+            volumeMenu.SetActive(true);
+
+            // Set header text
+            menuHeaderText.text = "Audio: <color=#D9D9D9>Volume";
+
+            // If not already playing 8-bit BGM: Never, then play it
+            if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
+                GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
+            }
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Selects either the previous or next track as 'Starting Music Track'
+    public void GoToPreviousOrNextTrack(int amountToChange) {
+        // Change soundtrack index
+        if(amountToChange == -1) {
+            GameManager.audioMan.DecrementStartingSoundtrackNdx();
+        } else {
+            GameManager.audioMan.IncrementStartingSoundtrackNdx();
+        }
+
+        // Set track name text
+        switch (GameManager.audioMan.startingSoundtrackNdx) {
+            case 0:
+                startingMusicTrackText.text = "1) Track Name";
+                break;
+            case 1:
+                startingMusicTrackText.text = "2) Track Name";
+                break;
+            case 2:
+                startingMusicTrackText.text = "3) Track Name";
+                break;
+            case 3:
+                startingMusicTrackText.text = "4) Track Name";
+                break;
+            case 4:
+                startingMusicTrackText.text = "5) Track Name";
+                break;
+            case 5:
+                startingMusicTrackText.text = "6) Track Name";
+                break;
+            case 6:
+                startingMusicTrackText.text = "7) Track Name";
+                break;
+            case 7:
+                startingMusicTrackText.text = "8) Track Name";
+                break;
+            case 8:
+                startingMusicTrackText.text = "9) Track Name";
+                break;
+            case 9:
+                startingMusicTrackText.text = "10) Track Name";
+                break;
+        }
+
+        // Play soundtrack sample
+        if (playButtonText.text == "Stop") {
+            GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
+        }
+    }
+
+    void PlayOrStopTrack() {
+        if(playButtonText.text == "Stop") {
+            // Stop track
+            GameManager.audioMan.BGMAudioSource.Stop();
+
+            // Set button text
+            playButtonText.text = "Play";
+        } else {
+            // Play track
+            GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
+
+            // Set button text
+            playButtonText.text = "Stop";
+        }
+    }
+
+    //
+    void LoopSoundtrack() {
+        if (loopTrackToggle.isOn) {
+            // Enable loop background music soundtrack
+            GameManager.audioMan.loopSoundtrackToggleIsOn = true;
+            GameManager.audioMan.BGMAudioSource.loop = true;
+        } else {
+            // Disable loop background music soundtrack
+            GameManager.audioMan.loopSoundtrackToggleIsOn = false;
+            GameManager.audioMan.BGMAudioSource.loop = false;
+        }
+    }
+
+    // Adds functions to the sub menu's yes/no buttons
+    void AddResetSoundtrackConfirmationListeners() {
+        GameManager.S.subMenuCS.AddListeners(ResetSoundtrack, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    }
+    // On 'Yes' button click, returns all menu settings to their default value
+    public void ResetSoundtrack(int yesOrNo = -1) {
+        // Deactivate sub menu
+        GameManager.S.subMenuGO.SetActive(false);
+
+        // 
+        if (yesOrNo == 0) {
+            // Reset starting music track
+            GameManager.audioMan.startingSoundtrackNdx = 0;
+            startingMusicTrackText.text = "1) Track Name";
+
+            // Disable loop toggle
+            loopTrackToggle.isOn = false;
+
+            // Disable loop background music soundtrack
+            GameManager.audioMan.loopSoundtrackToggleIsOn = false;
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);

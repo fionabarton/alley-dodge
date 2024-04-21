@@ -100,7 +100,7 @@ public class MainMenu : MonoBehaviour {
         }
 
         // On start, display text
-        delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
+        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
@@ -297,10 +297,11 @@ public class MainMenu : MonoBehaviour {
         //GameManager.audioMan.PlayBGMClip(eBGM.bgmNinja);
         // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Enable looping over background music soundtrack
-        GameManager.audioMan.isLoopingGameSoundtrack = true;
+        GameManager.audioMan.checkForBGMListenerNotPlaying = true;
 
         // Start playing BGM
-        GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.soundtrackNdx, false);
+        GameManager.audioMan.currentSoundtrackNdx = GameManager.audioMan.startingSoundtrackNdx;
+        GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
         // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         // Activate exit run menu podium
