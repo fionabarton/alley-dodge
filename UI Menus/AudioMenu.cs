@@ -40,6 +40,16 @@ public class AudioMenu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    private void OnDisable() {
+        // If not already playing 8-bit BGM: "Never", then play it
+        if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
+            GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
+        }
+
+        // Reset play/stop soundtrack sample button text
+        playButtonText.text = "Play";
+    }
+
     void Start() {
         // Add listeners to sliders
         masterVolSlider.onValueChanged.AddListener(delegate { GameManager.audioMan.SetMasterVolume((masterVolSlider.value)); });
@@ -100,6 +110,23 @@ public class AudioMenu : MonoBehaviour {
             if (PlayerPrefs.GetInt("Mute Audio") == 0) {
                 GameManager.audioMan.PauseAndMuteAudio();
                 muteAudioButtonText.text = "Unmute Audio";
+            }
+        }
+
+        // Set starting soundtrack index & name
+        if (PlayerPrefs.HasKey("Starting Soundtrack Index")) {
+            // Set track index
+            GameManager.audioMan.startingSoundtrackNdx = PlayerPrefs.GetInt("Starting Soundtrack Index");
+
+            // Set track name text
+            SetStartingTrackName();
+        }
+
+        // Set loop and loop toggle
+        if (PlayerPrefs.HasKey("Soundtrack Is Looping")) {
+            if (PlayerPrefs.GetInt("Soundtrack Is Looping") == 1) {
+                // Enable loop toggle, which by changing its value calls LoopSoundtrack()   
+                loopTrackToggle.isOn = true;
             }
         }
     }
@@ -197,7 +224,7 @@ public class AudioMenu : MonoBehaviour {
             // Set header text
             menuHeaderText.text = "Audio: <color=#D9D9D9>Volume";
 
-            // If not already playing 8-bit BGM: Never, then play it
+            // If not already playing 8-bit BGM: "Never", then play it
             if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
                 GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
             }
@@ -215,6 +242,18 @@ public class AudioMenu : MonoBehaviour {
         }
 
         // Set track name text
+        SetStartingTrackName();
+
+        // Play soundtrack sample
+        if (playButtonText.text == "Stop") {
+            GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
+        }
+
+        // Save settings
+        PlayerPrefs.SetInt("Starting Soundtrack Index", GameManager.audioMan.startingSoundtrackNdx);
+    }
+
+    void SetStartingTrackName() {
         switch (GameManager.audioMan.startingSoundtrackNdx) {
             case 0:
                 startingMusicTrackText.text = "1) Track Name";
@@ -246,11 +285,9 @@ public class AudioMenu : MonoBehaviour {
             case 9:
                 startingMusicTrackText.text = "10) Track Name";
                 break;
-        }
-
-        // Play soundtrack sample
-        if (playButtonText.text == "Stop") {
-            GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
+            case 10:
+                startingMusicTrackText.text = "11) Track Name";
+                break;
         }
     }
 
@@ -276,10 +313,16 @@ public class AudioMenu : MonoBehaviour {
             // Enable loop background music soundtrack
             GameManager.audioMan.loopSoundtrackToggleIsOn = true;
             GameManager.audioMan.BGMAudioSource.loop = true;
+
+            // Save settings
+            PlayerPrefs.SetInt("Soundtrack Is Looping", 1);
         } else {
             // Disable loop background music soundtrack
             GameManager.audioMan.loopSoundtrackToggleIsOn = false;
             GameManager.audioMan.BGMAudioSource.loop = false;
+
+            // Save settings
+            PlayerPrefs.SetInt("Soundtrack Is Looping", 0);
         }
     }
 
@@ -303,6 +346,10 @@ public class AudioMenu : MonoBehaviour {
 
             // Disable loop background music soundtrack
             GameManager.audioMan.loopSoundtrackToggleIsOn = false;
+
+            // Save settings
+            PlayerPrefs.SetInt("Starting Soundtrack Index", 0);
+            PlayerPrefs.SetInt("Soundtrack Is Looping", 0);
 
             // Delayed text display
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
