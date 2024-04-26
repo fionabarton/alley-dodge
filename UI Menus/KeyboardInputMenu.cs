@@ -72,7 +72,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.keyboardMenuCS.GetInputString("CustomAlgorithmInputString");
 
             // Display text
-            messageDisplay.DisplayText("Please name your custom algorithm to be saved!");
+            messageDisplay.DisplayText("Please name your custom game mode to be saved!");
 
             goBackButtonGO.SetActive(true);
         }
@@ -206,7 +206,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom algorithm slot?\nWell, are ya?");
+        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom game mode slot?\nWell, are ya?");
     }
 
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance
@@ -219,7 +219,8 @@ public class KeyboardInputMenu : MonoBehaviour {
             // Create new HighScore
             HighScore newHighScore = new HighScore(
                 inputString,
-                GameManager.S.score.score, GameManager.S.score.level,
+                GameManager.S.score.score, 
+                GameManager.S.score.level,
                 GameManager.S.score.objectCount,
                 GameManager.S.score.GetTime(GameManager.S.score.endingTime),
                 System.DateTime.UtcNow.ToString("dd MMMM, yyyy"),

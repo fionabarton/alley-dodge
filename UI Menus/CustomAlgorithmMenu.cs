@@ -65,12 +65,12 @@ public class CustomAlgorithmMenu : MonoBehaviour {
                 AddLoadAlgorithmListeners();
 
                 // Set title text
-                selectAnAlgorithmText.text = "Please select a custom algorithm to load!";
+                selectAnAlgorithmText.text = "Please select a custom game mode to load!";
             } else if (actionToBePerformed == "Save") {
                 AddSaveAlgorithmListeners();
 
                 // Set title text
-                selectAnAlgorithmText.text = "Please select a slot to save your custom algorithm!";
+                selectAnAlgorithmText.text = "Please select a slot to save your custom game mode!";
             }
 
             LoadAll();
@@ -114,7 +114,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         selectedButtonNdx = ndx;
 
         // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to\nload this custom algorithm?");
+        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to\nload this custom game mode?");
     }
     public void LoadAlgorithm(int yesOrNo = -1) {
         // Deactivate sub menu
@@ -151,7 +151,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom algorithm loaded!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom game mode loaded!", true);
 
             gameObject.SetActive(false);
         } 
@@ -206,7 +206,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom algorithm, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx+1).ToString() + "!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom game mode, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx+1).ToString() + "!", true);
 
             gameObject.SetActive(false);
         } else {

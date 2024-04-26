@@ -216,7 +216,7 @@ public class AlgorithmMenu : MonoBehaviour {
         chanceButtons[ndx].GetComponentInChildren<TextMeshProUGUI>().text = (valueAsFloat * 5f).ToString() + "%";
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance of the flow chart\nfollowing this path selected!", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance of this objects being spawned selected!", true);
 
         // Save
         string tString = "Chance Value " + ndx.ToString();
@@ -293,7 +293,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 1", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase object speed\nper level selected!", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase object speed per level selected!", true);
     }
 
     public void SetStartingSpawnSpeedDropdownValue(int value) {
@@ -321,7 +321,7 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Speed Dropdown 3", value);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to decrease spawn speed\nper level selected!", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase spawn speed per level selected!", true);
     }
 
     // Adds functions to the sub menu's yes/no buttons
@@ -359,7 +359,7 @@ public class AlgorithmMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
         }
     }
 
@@ -412,19 +412,19 @@ public class AlgorithmMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to totally random values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
         }
     }
 
     // Adds functions to the sub menu's yes/no buttons
     void AddRandomizeAllSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nrandomize the all of the displayed algorithm's values?");
+        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nrandomize the all of the displayed game mode's values?");
     }
 
 
     // Adds functions to the sub menu's yes/no buttons
     void AddRandomizeChancesSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeChancesSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's chance values?");
+        GameManager.S.subMenuCS.AddListeners(RandomizeChancesSettings, "Are you sure that you would like to\nrandomize the displayed game mode's chance values?");
     }
     // On 'Yes' button click, sets chance settings to random values
     void RandomizeChancesSettings(int yesOrNo = -1) {
@@ -459,13 +459,13 @@ public class AlgorithmMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance values set to totally random values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
         }
     }
 
     // Adds functions to the sub menu's yes/no buttons
     void AddRandomizeObjectsSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeObjectsSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's object values?");
+        GameManager.S.subMenuCS.AddListeners(RandomizeObjectsSettings, "Are you sure that you would like to\nrandomize the displayed game mode's object values?");
     }
     // On 'Yes' button click, sets object settings to random values
     void RandomizeObjectsSettings(int yesOrNo = -1) {
@@ -483,13 +483,13 @@ public class AlgorithmMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object values set to totally random values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
         }
     }
 
     // Adds functions to the sub menu's yes/no buttons
     void AddRandomizeSpeedsSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeSpeedSettings, "Are you sure that you would like to\nrandomize the displayed algorithm's speed values?");
+        GameManager.S.subMenuCS.AddListeners(RandomizeSpeedSettings, "Are you sure that you would like to\nrandomize the displayed game mode's speed values?");
     }
     // On 'Yes' button click, sets speed settings to random values
     void RandomizeSpeedSettings(int yesOrNo = -1) {
@@ -508,7 +508,7 @@ public class AlgorithmMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Speed values set to totally random values!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the algorithm menu:\nView and adjust the flow chart of how likely\nand which objects will be randomly generated\nduring gameplay.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nView and adjust how likely and which objects will be\nrandomly generated during gameplay along with other fun settings.", true);
         }
     }
 

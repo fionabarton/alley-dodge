@@ -12,7 +12,7 @@ public class SavedDataMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nReset saved high scores or custom game modes to their default values.", true);
         }
     }
 
@@ -39,13 +39,13 @@ public class SavedDataMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved high scores deleted!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nReset saved high scores or custom game modes to their default values.", true);
         }
     }
 
     // Adds functions to the sub menu's yes/no buttons
     void AddResetCustomAlgorithmsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(ResetCustomAlgorithms, "Are you sure that you would like to\ndelete all saved custom algorithms?");
+        GameManager.S.subMenuCS.AddListeners(ResetCustomAlgorithms, "Are you sure that you would like to\ndelete all saved custom game modes?");
     }
     // On 'Yes' button click, deletes all saved custom algorithms and resets them to default values
     public void ResetCustomAlgorithms(int yesOrNo = -1) {
@@ -61,10 +61,10 @@ public class SavedDataMenu : MonoBehaviour {
             GameManager.S.customAlgorithmMenuCS.UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved custom algorithms deleted!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All saved custom game modes deleted!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nDelete all saved high scores or custom algorithms,\nthen reset said data to their default values.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the saved data menu:\nReset saved high scores or custom game modes to their default values.", true);
         }
     }
 }
