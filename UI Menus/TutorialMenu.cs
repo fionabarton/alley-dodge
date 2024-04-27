@@ -52,7 +52,7 @@ public class TutorialMenu : MonoBehaviour {
 
     // Adds functions to the sub menu's yes/no buttons
     void AddExitTutorialConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(ExitTutorial, "Are you sure that you would like to\nexit this tutorial and figure out the game for yourself?");
+        GameManager.S.subMenuCS.AddListeners(ExitTutorial, "Are you sure that you would like to\nexit this tutorial and figure out how to play the game for yourself?");
     }
     // On 'Yes' button click, exits the tutorial and starts the app as it normally would
     public void ExitTutorial(int yesOrNo = -1) {

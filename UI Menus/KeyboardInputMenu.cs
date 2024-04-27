@@ -117,7 +117,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.audioMan.PlayRandomDamageSFX();
 
             // Display text
-            messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't add anymore characters;\nthere's no more room!");
+            messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYou can't add anymore characters;\nthere's no more room left!");
         }
     }
 
@@ -152,7 +152,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.audioMan.PlayRandomDamageSFX();
 
             // Display text
-            messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYa can't delete anymore characters;\nthere's nothing left to delete!");
+            messageDisplay.DisplayText(GameManager.words.GetRandomInterjection() + "!\nYou can't delete anymore characters;\nthere's nothing left to delete!");
         }
     }
 
@@ -181,7 +181,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         }
 
         // Display text
-        messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nNice choice, lazy bones!");
+        messageDisplay.DisplayText(GameManager.words.GetRandomExclamation() + "!\nNice choice!");
 
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
@@ -197,7 +197,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(SetHighScoreEntryName, "Are you sure about this name?\nWell, are ya?");
+        GameManager.S.subMenuCS.AddListeners(SetHighScoreEntryName, "Are you sure about this name?\nWell, are you?");
     }
 
     // On 'OK' button click, adds functions to the sub menu's yes/no buttons
@@ -206,7 +206,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom game mode slot?\nWell, are ya?");
+        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom game mode slot?\nWell, are you?");
     }
 
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance

@@ -19,7 +19,7 @@ public class VibrationMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the level of vibration to your hand controllers.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the amount of vibration to your hand controllers.", true);
         }
 
         // Set selected game object to null
@@ -149,10 +149,10 @@ public class VibrationMenu : MonoBehaviour {
             UnmuteVibration();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the level of vibration to your hand controllers.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the amount of vibration to your hand controllers.", true);
         }
     }
 }

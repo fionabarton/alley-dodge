@@ -33,7 +33,7 @@ public class AudioMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, & select in-game music.", true);
         }
 
         // Set selected game object to null
@@ -199,7 +199,7 @@ public class AudioMenu : MonoBehaviour {
             muteAudioButtonText.text = "Mute Audio";
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
@@ -352,7 +352,7 @@ public class AudioMenu : MonoBehaviour {
             PlayerPrefs.SetInt("Soundtrack Is Looping", 0);
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Options set to their default values!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);

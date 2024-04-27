@@ -151,7 +151,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected custom game mode loaded!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected game mode loaded!", true);
 
             gameObject.SetActive(false);
         } 

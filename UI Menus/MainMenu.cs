@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour {
 
     void DelayedOnEnable() {
         // Display text
-        delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
+        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
 
         // Set selected game object to null
         EventSystem.current.SetSelectedGameObject(null);
@@ -100,7 +100,7 @@ public class MainMenu : MonoBehaviour {
         }
 
         // On start, display text
-        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
+        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
@@ -378,10 +378,10 @@ public class MainMenu : MonoBehaviour {
             GameManager.color.SetDisplayTextPalette();
 
             // Delayed text display
-            delayedTextDisplay.DisplayText("Menu settings set to their default values!", true);
+            delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Reset display text
-            delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
+            delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
         }
 
         // Activate climbing interactors
@@ -400,13 +400,13 @@ public class MainMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Delayed text display
-            delayedTextDisplay.DisplayText("Thanks for playing, pal!", true);
+            delayedTextDisplay.DisplayText("Thanks for playing!", true);
 
             // Quit application in 2 seconds
             Invoke("DelayedExitApp", 2f);
         } else {
             // Reset display text
-            delayedTextDisplay.DisplayText("To get started quickly,\nplease set the 'Player Height' slider to your height,\nand then press the 'Start Game' button!", true);
+            delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
         }
     }
     void DelayedExitApp() {
