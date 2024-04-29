@@ -20,7 +20,7 @@ public class CreditsMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the credits menu:\nRead along and learn who is responsible for each part of the game.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the credits menu:\nRead along and learn who created what for the game.", true);
         }
     }
 
@@ -49,13 +49,15 @@ public class CreditsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/11" + "</color>";
+        pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/12" + "</color>";
 
         // Set menu header text
         if (currentPageNdx == 0 || currentPageNdx == 1) {
             menuHeaderText.text = "Credits: <color=#D9D9D9>1st Party Developers";
         } else if (currentPageNdx == 2 || currentPageNdx == 3) {
             menuHeaderText.text = "Credits: <color=#D9D9D9>Tools";
+        } else if (currentPageNdx == 11) {
+            menuHeaderText.text = "Credits: <color=#D9D9D9>Thanks";
         } else {
             menuHeaderText.text = "Credits: <color=#D9D9D9>3rd Party Assets";
         }
