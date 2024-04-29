@@ -202,7 +202,7 @@ public class AudioMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, & select in-game music.", true);
         }
     }
 
@@ -355,7 +355,7 @@ public class AudioMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, etc.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the audio menu:\nAdjust volume levels, mute audio, & select in-game music.", true);
         }
     }
 }
