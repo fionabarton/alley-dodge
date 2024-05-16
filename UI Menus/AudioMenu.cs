@@ -226,6 +226,9 @@ public class AudioMenu : MonoBehaviour {
             // Set header text
             menuHeaderText.text = "Audio: <color=#D9D9D9>Volume";
 
+            // Reset play/stop soundtrack sample button text
+            playButtonText.text = "Play";
+
             // If not already playing 8-bit BGM: "Never", then play it
             if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
                 GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
