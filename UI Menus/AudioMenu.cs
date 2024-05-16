@@ -41,13 +41,15 @@ public class AudioMenu : MonoBehaviour {
     }
 
     private void OnDisable() {
-        // If not already playing 8-bit BGM: "Never", then play it
-        if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
-            GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
-        }
+        if (Time.time > 0.01f) {
+            // If not already playing 8-bit BGM: "Never", then play it
+            if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
+                GameManager.audioMan.PlayBGMClip(eBGM.bgmNever);
+            }
 
-        // Reset play/stop soundtrack sample button text
-        playButtonText.text = "Play";
+            // Reset play/stop soundtrack sample button text
+            playButtonText.text = "Play";
+        }
     }
 
     void Start() {
@@ -256,37 +258,37 @@ public class AudioMenu : MonoBehaviour {
     void SetStartingTrackName() {
         switch (GameManager.audioMan.startingSoundtrackNdx) {
             case 0:
-                startingMusicTrackText.text = "1) Track Name";
+                startingMusicTrackText.text = "Track 1";
                 break;
             case 1:
-                startingMusicTrackText.text = "2) Track Name";
+                startingMusicTrackText.text = "Track 2";
                 break;
             case 2:
-                startingMusicTrackText.text = "3) Track Name";
+                startingMusicTrackText.text = "Track 3";
                 break;
             case 3:
-                startingMusicTrackText.text = "4) Track Name";
+                startingMusicTrackText.text = "Track 4";
                 break;
             case 4:
-                startingMusicTrackText.text = "5) Track Name";
+                startingMusicTrackText.text = "Track 5";
                 break;
             case 5:
-                startingMusicTrackText.text = "6) Track Name";
+                startingMusicTrackText.text = "Track 6";
                 break;
             case 6:
-                startingMusicTrackText.text = "7) Track Name";
+                startingMusicTrackText.text = "Track 7";
                 break;
             case 7:
-                startingMusicTrackText.text = "8) Track Name";
+                startingMusicTrackText.text = "Track 8";
                 break;
             case 8:
-                startingMusicTrackText.text = "9) Track Name";
+                startingMusicTrackText.text = "Track 9";
                 break;
             case 9:
-                startingMusicTrackText.text = "10) Track Name";
+                startingMusicTrackText.text = "Track 10";
                 break;
             case 10:
-                startingMusicTrackText.text = "11) Track Name";
+                startingMusicTrackText.text = "Track 11";
                 break;
         }
     }
@@ -312,17 +314,21 @@ public class AudioMenu : MonoBehaviour {
         if (loopTrackToggle.isOn) {
             // Enable loop background music soundtrack
             GameManager.audioMan.loopSoundtrackToggleIsOn = true;
-            GameManager.audioMan.BGMAudioSource.loop = true;
 
             // Save settings
             PlayerPrefs.SetInt("Soundtrack Is Looping", 1);
+
+            // Audio: Damage
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxConfirm);
         } else {
             // Disable loop background music soundtrack
             GameManager.audioMan.loopSoundtrackToggleIsOn = false;
-            GameManager.audioMan.BGMAudioSource.loop = false;
 
             // Save settings
             PlayerPrefs.SetInt("Soundtrack Is Looping", 0);
+
+            // Audio: Damage
+            GameManager.audioMan.PlayPlayerSFXClip(eSFX.sfxDeny);
         }
     }
 
