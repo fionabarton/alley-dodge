@@ -53,10 +53,12 @@ public class InstructionsMenu : MonoBehaviour {
         pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/7" + "</color>";
 
         // Set menu header text
-        if (currentPageNdx != 5 && currentPageNdx != 6) {
-            menuHeaderText.text = "Instructions:";
-        } else {
+        if (currentPageNdx == 4 || currentPageNdx == 5) {
             menuHeaderText.text = "Controls:";
+        } else if (currentPageNdx == 6) {
+            menuHeaderText.text = "Settings:";
+        } else {
+            menuHeaderText.text = "Instructions:";
         }
     }
 }
