@@ -328,21 +328,25 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     // 4/5/2063: Zefram Cochrane makes first human warp flight
     public void SetToDefaultSettings() {
         customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
-        customAlgorithms[1] = new CustomAlgorithm("Random Objects", "26 February, 1984", 4, 1, 14, 2,
+        customAlgorithms[1] = new CustomAlgorithm("Random Objects", "1 January, 2025", 4, 1, 14, 2,
         15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
         46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
-        customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 14, 2,
-        4, 1, 1, 2, 2, 2, 1, 1, 2, 4,
-        7, 23, 24, 25, 30, 31, 42, 43, 45, 49);
-        customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 14, 5,
-        5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
-        17, 25, 8, 47, 48, 50, 50, 50, 50, 50);
-        customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 2, 1, 6, 2,
-        7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
-        20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
-        customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 1, 14, 2,
-        4, 4, 4, 4, 4, 0, 0, 0, 0, 0,
-        36, 39, 44, 45, 49, 50, 50, 50, 50, 50); 
+        //customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 14, 2,
+        //4, 1, 1, 2, 2, 2, 1, 1, 2, 4,
+        //7, 23, 24, 25, 30, 31, 42, 43, 45, 49);
+        //customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 14, 5,
+        //5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
+        //17, 25, 8, 47, 48, 50, 50, 50, 50, 50);
+        //customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 2, 1, 6, 2,
+        //7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
+        //20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
+        //customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 1, 14, 2,
+        //4, 4, 4, 4, 4, 0, 0, 0, 0, 0,
+        //36, 39, 44, 45, 49, 50, 50, 50, 50, 50); 
+        customAlgorithms[2] = new CustomAlgorithm("Slot 3: EMPTY");
+        customAlgorithms[3] = new CustomAlgorithm("Slot 4: EMPTY");
+        customAlgorithms[4] = new CustomAlgorithm("Slot 5: EMPTY");
+        customAlgorithms[5] = new CustomAlgorithm("Slot 6: EMPTY");
         customAlgorithms[6] = new CustomAlgorithm("Slot 7: EMPTY");
         customAlgorithms[7] = new CustomAlgorithm("Slot 8: EMPTY");
     }
@@ -444,7 +448,7 @@ public class CustomAlgorithm {
     public int objectToSpawn8;
     public int objectToSpawn9;
 
-    public CustomAlgorithm(string _name = "", string _date = "29 August, 1997",
+    public CustomAlgorithm(string _name = "", string _date = "1 January, 2025",
         int _startingObjectSpeed = 2, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 9, int _amountToDecreaseSpawnSpeed = 3,
         int _chanceToSpawn0 = 4, int _chanceToSpawn1 = 4, int _chanceToSpawn2 = 4, int _chanceToSpawn3 = 6, int _chanceToSpawn4 = 2, int _chanceToSpawn5 = 0, int _chanceToSpawn6 = 0, int _chanceToSpawn7 = 0, int _chanceToSpawn8 = 0, int _chanceToSpawn9 = 0,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48, int _objectToSpawn5 = 50, int _objectToSpawn6 = 50, int _objectToSpawn7 = 50, int _objectToSpawn8 = 50, int _objectToSpawn9 = 50) {
