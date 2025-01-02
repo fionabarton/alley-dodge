@@ -53,6 +53,10 @@ public class PlayerDamage : MonoBehaviour {
                     // Cache ending time
                     GameManager.S.score.endingTime = Time.time;
 
+                    // Cache ending move and spawn speeds
+                    GameManager.S.spawner.SetEndingMoveSpeedForHighScoreEntry();
+                    GameManager.S.spawner.SetEndingSpawnSpeedForHighScoreEntry();
+
                     // Freeze all objects
                     GameManager.S.spawner.objectsCanMove = false;
                     GameManager.S.spawner.canSpawn = false;
