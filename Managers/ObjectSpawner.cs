@@ -7,7 +7,6 @@ public class ObjectSpawner : MonoBehaviour {
 	[Header("Set in Inspector")]
 	public GameObject		shieldPickup;
 	public GameObject		quidPickup;
-	public GameObject		nothingObstacle;
 
 	public List<GameObject> objects;
 
@@ -22,6 +21,9 @@ public class ObjectSpawner : MonoBehaviour {
 	// Speed at which objects travel down the alley
 	public float			startingObjectSpeed = 5;
 	public float			currentObjectSpeed = 5;
+
+	public float			cachedObjectSpeed = 5;
+	public float			cachedSpawnSpeed = 2.0f;
 
 	// Amount to increase per level
 	public float			amountToDecreaseSpawnSpeed = 0.1f;
@@ -258,5 +260,14 @@ public class ObjectSpawner : MonoBehaviour {
 		float yPos = Random.Range(0.5f, pickupMaxYPos);
 
 		Instantiate(shieldPickup, new Vector3(xPos, yPos, 40), transform.rotation);
+	}
+
+	public void SetEndingMoveSpeedForHighScoreEntry() {
+		float endingMoveSpeedKPH = currentObjectSpeed * 3.6f;
+		cachedObjectSpeed = endingMoveSpeedKPH / 1.609f;
+	}
+
+	public void SetEndingSpawnSpeedForHighScoreEntry() {
+		cachedSpawnSpeed = 60 / currentSpawnSpeed;
 	}
 }

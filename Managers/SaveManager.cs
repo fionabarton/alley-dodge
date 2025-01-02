@@ -46,6 +46,9 @@ public class SaveManager : MonoBehaviour {
             data.startingSpawnSpeed[i] = GameManager.S.highScore.highScores[i].startingSpawnSpeed;
             data.amountToDecreaseSpawnSpeed[i] = GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed;
 
+            data.endingObjectSpeed[i] = GameManager.S.highScore.highScores[i].endingObjectSpeed;
+            data.endingSpawnSpeed[i] = GameManager.S.highScore.highScores[i].endingSpawnSpeed;
+
             data.chanceToSpawn0[i] = GameManager.S.highScore.highScores[i].chanceToSpawn0;
             data.chanceToSpawn1[i] = GameManager.S.highScore.highScores[i].chanceToSpawn1;
             data.chanceToSpawn2[i] = GameManager.S.highScore.highScores[i].chanceToSpawn2;
@@ -111,6 +114,9 @@ public class SaveManager : MonoBehaviour {
                 GameManager.S.highScore.highScores[i].startingSpawnSpeed = data.startingSpawnSpeed[i];
                 GameManager.S.highScore.highScores[i].amountToDecreaseSpawnSpeed = data.amountToDecreaseSpawnSpeed[i];
 
+                GameManager.S.highScore.highScores[i].endingObjectSpeed = data.endingObjectSpeed[i];
+                GameManager.S.highScore.highScores[i].endingSpawnSpeed = data.endingSpawnSpeed[i];
+
                 GameManager.S.highScore.highScores[i].chanceToSpawn0 = data.chanceToSpawn0[i];
                 GameManager.S.highScore.highScores[i].chanceToSpawn1 = data.chanceToSpawn1[i];
                 GameManager.S.highScore.highScores[i].chanceToSpawn2 = data.chanceToSpawn2[i];
@@ -152,6 +158,9 @@ public class HighScoreSaveData {
     public string[] amountToIncreaseObjectSpeed = new string[100];
     public string[] startingSpawnSpeed = new string[100];
     public string[] amountToDecreaseSpawnSpeed = new string[100];
+
+    public string[] endingObjectSpeed = new string[100];
+    public string[] endingSpawnSpeed = new string[100];
 
     public string[] chanceToSpawn0 = new string[100];
     public string[] chanceToSpawn1 = new string[100];
