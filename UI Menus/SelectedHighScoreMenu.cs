@@ -28,6 +28,8 @@ public class SelectedHighScoreMenu : MonoBehaviour {
     public TMPro.TextMeshProUGUI        amountToIncreaseObjectSpeedValue;
     public TMPro.TextMeshProUGUI        startingSpawnSpeedValue;
     public TMPro.TextMeshProUGUI        amountToDecreaseSpawnSpeedValue;
+    public TMPro.TextMeshProUGUI        endingObjectSpeedValue;
+    public TMPro.TextMeshProUGUI        endingSpawnSpeedValue;
     public List<TMPro.TextMeshProUGUI>  chanceToSpawnValues;
     public List<Image>                  objectToSpawnImages;
 
@@ -75,6 +77,8 @@ public class SelectedHighScoreMenu : MonoBehaviour {
         amountToIncreaseObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].amountToIncreaseObjectSpeed;
         startingSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].startingSpawnSpeed;
         amountToDecreaseSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].amountToDecreaseSpawnSpeed;
+        endingObjectSpeedValue.text = GameManager.S.highScore.highScores[ndx].endingObjectSpeed;
+        endingSpawnSpeedValue.text = GameManager.S.highScore.highScores[ndx].endingSpawnSpeed;
         chanceToSpawnValues[0].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn0;
         chanceToSpawnValues[1].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn1;
         chanceToSpawnValues[2].text = GameManager.S.highScore.highScores[ndx].chanceToSpawn2;
