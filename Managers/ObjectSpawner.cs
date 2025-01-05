@@ -264,7 +264,8 @@ public class ObjectSpawner : MonoBehaviour {
 
 	public void SetEndingMoveSpeedForHighScoreEntry() {
 		float endingMoveSpeedKPH = currentObjectSpeed * 3.6f;
-		cachedObjectSpeed = (int)endingMoveSpeedKPH / 1.609f;
+		cachedObjectSpeed = endingMoveSpeedKPH / 1.609f;
+		cachedObjectSpeed = (int)cachedObjectSpeed;
 	}
 
 	public void SetEndingSpawnSpeedForHighScoreEntry() {
