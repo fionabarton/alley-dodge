@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum eBGM {
-    bgm1940, bgmLose, bgmNever, bgmSoap, bgmWin
+    bgm1940, bgmLose, bgmNever, bgmSoap, bgmWin, bgmNinja, bgmThings
 };
 
 public enum eSFX {
