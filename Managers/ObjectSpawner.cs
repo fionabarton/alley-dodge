@@ -265,7 +265,9 @@ public class ObjectSpawner : MonoBehaviour {
 	public void SetEndingMoveSpeedForHighScoreEntry() {
 		float endingMoveSpeedKPH = currentObjectSpeed * 3.6f;
 		cachedObjectSpeed = endingMoveSpeedKPH / 1.609f;
-		cachedObjectSpeed = (int)cachedObjectSpeed;
+
+		// Round up to nearest int
+		cachedObjectSpeed = (int)System.Math.Round(cachedObjectSpeed, 0); 
 	}
 
 	public void SetEndingSpawnSpeedForHighScoreEntry() {
