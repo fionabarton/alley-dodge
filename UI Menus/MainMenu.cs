@@ -40,8 +40,13 @@ public class MainMenu : MonoBehaviour {
         // Set selected game object to null
         EventSystem.current.SetSelectedGameObject(null);
 
-        // Play BGM: Soap
-        GameManager.audioMan.PlayBGMClip(eBGM.bgmSoap);
+        // Get saved current main menu BGM index
+        if (PlayerPrefs.HasKey("Current Main Menu Audio Track Index")) {
+            MainMenuBGMSelector.S.currentTrackNdx = PlayerPrefs.GetInt("Current Main Menu Audio Track Index");
+        }
+
+        // Play BGM
+        MainMenuBGMSelector.S.PlayCurrentTrack(); 
     }
     void Start() {
         Invoke("DelayedStart", 0.05f);
@@ -362,7 +367,7 @@ public class MainMenu : MonoBehaviour {
             SetAlleyAmount(0);
 
             // Reset button text
-            levelButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Level 1";
+            levelButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "1";
             alleyAmountButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "3";
 
             // Reset spawn speed
