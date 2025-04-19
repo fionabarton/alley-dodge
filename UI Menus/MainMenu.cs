@@ -42,11 +42,11 @@ public class MainMenu : MonoBehaviour {
 
         // Get saved current main menu BGM index
         if (PlayerPrefs.HasKey("Current Main Menu Audio Track Index")) {
-            MainMenuBGMSelector.S.currentTrackNdx = PlayerPrefs.GetInt("Current Main Menu Audio Track Index");
+            MainMenuFun.S.currentTrackNdx = PlayerPrefs.GetInt("Current Main Menu Audio Track Index");
         }
 
         // Play BGM
-        MainMenuBGMSelector.S.PlayCurrentTrack(); 
+        MainMenuFun.S.PlayCurrentTrack(); 
     }
     void Start() {
         Invoke("DelayedStart", 0.05f);
@@ -294,6 +294,9 @@ public class MainMenu : MonoBehaviour {
 
         // Start smoke particle system and reset its starting size
         GameManager.S.PlaySmokeParticelSystemAndSetSize();
+
+        // Deactivate confetti, fireworks, & applause
+        MainMenuFun.S.SetAllToFalse();
 
         // Display text
         GameManager.S.score.SetDisplayText("LET'S GO!", GameManager.color.alleyMaterial1.color, GameManager.color.alleyMaterial2.color, eVOX.voxLetsGo);

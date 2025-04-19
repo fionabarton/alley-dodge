@@ -27,11 +27,35 @@ public class AlgorithmMenu : MonoBehaviour {
     public Button                   saveButton;
     public Button                   goBackButton;
 
-    public Button                   defaultSettingsButton;
-    public Button                   randomizeAllButton;
-    public Button                   randomizeChancesButton;
-    public Button                   randomizeObjectsButton;
-    public Button                   randomizeSpeedsButton;
+    //public Button                   defaultSettingsButton;
+    //public Button                   randomizeAllButton;
+    //public Button                   randomizeChancesButton;
+    //public Button                   randomizeObjectsButton;
+    //public Button                   randomizeSpeedsButton;
+
+    /// Basic Options //////////////////////////////////////////////
+    public Button                   normalModeButton;
+    public Button                   randomModeButton;
+    public Button                   advancedOptionsMenuButton;
+    public TextMeshProUGUI          menuHeaderText;
+
+    public GameObject               basicOptionsMenu;
+    public GameObject               advancedOptionsMenu;
+
+    public GameObject               cursorGO;
+    public List<Button>             gameModeButtons;
+
+    public TextMeshProUGUI          gameModeTypeText;
+    public TextMeshProUGUI          modeDescriptionText;
+    ////////////////////////////////////////////////////////////////
+
+    public GameObject               normalModeImage;
+    public GameObject               randomModeImage;
+    public GameObject               customModeImage;
+
+    /// Advanced Options ///////////////////////////////////////////
+    public Button                   goBackToBasicOptionsButton;
+    ////////////////////////////////////////////////////////////////
 
     // Shake display text animator
     public Animator                 messageDisplayAnim;
@@ -187,19 +211,158 @@ public class AlgorithmMenu : MonoBehaviour {
 
         loadButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Load"); });
         saveButton.onClick.AddListener(delegate { GameManager.S.customAlgorithmMenuCS.ActivateMenu("Save"); });
-        defaultSettingsButton.onClick.AddListener(delegate { AddDefaultSettingsConfirmationListeners(); });
-        randomizeAllButton.onClick.AddListener(delegate { AddRandomizeSettingsConfirmationListeners(); });
-        randomizeChancesButton.onClick.AddListener(delegate { AddRandomizeChancesSettingsConfirmationListeners(); });
-        randomizeObjectsButton.onClick.AddListener(delegate { AddRandomizeObjectsSettingsConfirmationListeners(); });
-        randomizeSpeedsButton.onClick.AddListener(delegate { AddRandomizeSpeedsSettingsConfirmationListeners(); });
         goBackButton.onClick.AddListener(delegate { CloseObjectSelectionSubMenu(); });
+
+        /// Basic Options //////////////////////////////////////////////
+        normalModeButton.onClick.AddListener(delegate { SetGameToNormalMode(); });
+        randomModeButton.onClick.AddListener(delegate { SetGameToRandomMode(); });
+        
+        advancedOptionsMenuButton.onClick.AddListener(delegate { SwapBetweenBasicAndAdvancedMenus(); });
+        goBackToBasicOptionsButton.onClick.AddListener(delegate { SwapBetweenBasicAndAdvancedMenus(); });
+        ////////////////////////////////////////////////////////////////
 
         // Add listeners to object selection sub menu buttons
         for (int i = 0; i < objectSubMenuButtons.Count; i++) {
             int copy = i;
             objectSubMenuButtons[copy].onClick.AddListener(delegate { SetObjectToSpawn(copy); });
         }
+
+        if (PlayerPrefs.HasKey("Game Mode")) {
+            switch (PlayerPrefs.GetInt("Game Mode")) {
+                case 0:
+                    SetUIToNormalMode();
+                    break;
+                case 1:
+                    SetUIToRandomMode();
+                    break;
+                case 2:
+                    SetUIToCustomMode();
+                    break;
+            }
+        } else {
+            SetUIToNormalMode();
+        }
     }
+
+    //
+    void HighlightSelectedButton(int ndx) {
+        // Reset all menu buttons' colors
+        for (int i = 0; i < gameModeButtons.Count; i++) {
+            ColorBlock colors = gameModeButtons[i].colors;
+            colors.normalColor = Color.white;
+            colors.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
+            gameModeButtons[i].colors = colors;
+        }
+
+        // Set selected menu button's colors
+        ColorBlock c = gameModeButtons[ndx].colors;
+        c.normalColor = new Color(0.805353f, 0.9333333f, 0.372549f, 1);
+        c.highlightedColor = new Color(0.45f, 0.85f, 0.3f, 1);
+        gameModeButtons[ndx].colors = c;
+
+        // Set cursor position
+        GameManager.utilities.PositionCursor(cursorGO, gameModeButtons[ndx].gameObject, 0, 60f, 3);
+    }
+
+    /// Basic Options //////////////////////////////////////////////
+    public void SetGameToNormalMode() {
+        // Set game options
+        NormalModeSettings();
+
+        // Save current mode
+        PlayerPrefs.SetInt("Game Mode", 0);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game set to normal mode!", true);
+
+        SetUIToNormalMode();
+
+        Debug.Log("Normal called");
+    }
+    void SetUIToNormalMode() {
+        // Set button color
+        HighlightSelectedButton(0);
+
+        // Set text
+        gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Normal</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>3 different obstacle shapes.\nSidestep, duck, or climb!</color>";
+
+        // Activate algorithm image
+        normalModeImage.SetActive(true);
+        randomModeImage.SetActive(false);
+        customModeImage.SetActive(false);
+    }
+
+    public void SetGameToRandomMode() {
+        // Set game options
+        RandomModeSettings();
+
+        // Save current mode
+        PlayerPrefs.SetInt("Game Mode", 1);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game set to hard mode!", true);
+
+        SetUIToRandomMode();
+
+        Debug.Log("Random called");
+    }
+    void SetUIToRandomMode() {
+        // Set button color
+        HighlightSelectedButton(1);
+
+        // Set text
+        gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Hard</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>All 46 different obstacle shapes.\nSqueeze your body all over the game.</color>";
+
+        // Activate algorithm image
+        normalModeImage.SetActive(false);
+        randomModeImage.SetActive(true);
+        customModeImage.SetActive(false);
+    }
+    ////////////////////////////////////////////////////////////////
+
+    /// Advanced Options ///////////////////////////////////////////
+    // Swaps which of the 2 halves of the algorithm menu is active
+    public void SwapBetweenBasicAndAdvancedMenus() {
+        if (basicOptionsMenu.activeInHierarchy) {
+            // Save current mode
+            PlayerPrefs.SetInt("Game Mode", 2);
+
+            Debug.Log("Custom called");
+
+            // Activate menu
+            basicOptionsMenu.SetActive(false);
+            advancedOptionsMenu.SetActive(true);
+
+            // Set header text
+            menuHeaderText.text = "Game Options: <color=#D9D9D9>Advanced";
+
+            SetUIToCustomMode();
+        } else {
+            // Activate menu
+            advancedOptionsMenu.SetActive(false);
+            basicOptionsMenu.SetActive(true);
+
+            // Set header text
+            menuHeaderText.text = "Game Options: <color=#D9D9D9>Basic";
+        }
+    }
+    void SetUIToCustomMode() {
+        // Set button color
+        HighlightSelectedButton(2);
+
+        // Set text
+        gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Custom</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Customized set of game options.\nAdjust everything from game speed to objects to spawn. </color>";
+
+        // Activate algorithm image
+        normalModeImage.SetActive(false);
+        randomModeImage.SetActive(false);
+        customModeImage.SetActive(true);
+    }
+
+    ////////////////////////////////////////////////////////////////
 
     public void SetChanceButtonValue(int ndx, int value) {
         float valueAsFloat = value;
@@ -324,193 +487,58 @@ public class AlgorithmMenu : MonoBehaviour {
         GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Amount to increase spawn speed per level selected!", true);
     }
 
-    // Adds functions to the sub menu's yes/no buttons
-    void AddDefaultSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+    public void NormalModeSettings() {
+        // Set to default chance values
+        SetChanceValuesToDefaultSetting();
+
+        SetObjectToSpawn(7, 0); // Horizontal block
+        SetObjectToSpawn(0, 1); // Vertical low block
+        SetObjectToSpawn(20, 2); // Vertical high block
+        SetObjectToSpawn(47, 3); // Quid pickup
+        SetObjectToSpawn(48, 4); // Shield pickup
+        SetObjectToSpawn(50, 5); // Nothing
+        SetObjectToSpawn(50, 6); // Nothing
+        SetObjectToSpawn(50, 7); // Nothing
+        SetObjectToSpawn(50, 8); // Nothing
+        SetObjectToSpawn(50, 9); // Nothing
+
+        // Set to default speed values
+        SetStartingObjectSpeedDropdownValue(2);         // 6 MPH 
+        SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
+        SetStartingSpawnSpeedDropdownValue(9);          // 20 OPM / 3.0f
+        SetAmountToDecreaseSpawnSpeedDropdownValue(3);  // 3 OPM
     }
-    // On 'Yes' button click, returns all menu settings to their default value
-    public void DefaultSettings(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
+    public void RandomModeSettings() {
+        // Set chance values
+        SetChanceButtonValue(0, 15); // 75%
+        SetChanceButtonValue(1, 4);  // 20%
+        SetChanceButtonValue(2, 1);  // 5%
 
-        // 
-        if (yesOrNo == 0) {
-            // Set to default chance values
-            SetChanceValuesToDefaultSetting();
+        SetChanceButtonValue(3, 0); // 0%
+        SetChanceButtonValue(4, 0); // 0%
+        SetChanceButtonValue(5, 0); // 0%
+        SetChanceButtonValue(6, 0); // 0%
+        SetChanceButtonValue(7, 0); // 0%
+        SetChanceButtonValue(8, 0); // 0%
+        SetChanceButtonValue(9, 0); // 0%
 
-            SetObjectToSpawn(7, 0); // Horizontal block
-            SetObjectToSpawn(0, 1); // Vertical low block
-            SetObjectToSpawn(20, 2); // Vertical high block
-            SetObjectToSpawn(47, 3); // Quid pickup
-            SetObjectToSpawn(48, 4); // Shield pickup
-            SetObjectToSpawn(50, 5); // Nothing
-            SetObjectToSpawn(50, 6); // Nothing
-            SetObjectToSpawn(50, 7); // Nothing
-            SetObjectToSpawn(50, 8); // Nothing
-            SetObjectToSpawn(50, 9); // Nothing
+        // Set object to spawn values
+        SetObjectToSpawn(46, 0); // Random block
+        SetObjectToSpawn(47, 1); // Yellow coin
+        SetObjectToSpawn(48, 2); // Blue shield
+        SetObjectToSpawn(50, 3); // Nothing
+        SetObjectToSpawn(50, 4); // Nothing
+        SetObjectToSpawn(50, 5); // Nothing
+        SetObjectToSpawn(50, 6); // Nothing
+        SetObjectToSpawn(50, 7); // Nothing
+        SetObjectToSpawn(50, 8); // Nothing
+        SetObjectToSpawn(50, 9); // Nothing
 
-            // Set to default speed values
-            SetStartingObjectSpeedDropdownValue(2);         // 6 MPH 
-            SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
-            SetStartingSpawnSpeedDropdownValue(9);          // 20 OPM / 3.0f
-            SetAmountToDecreaseSpawnSpeedDropdownValue(3);  // 3 OPM
-
-            // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
-        } else {
-            // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
-        }
-    }
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddRandomizeSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nrandomize all of the displayed game mode's options?");
-    }
-    // On 'Yes' button click, sets all menu settings to random values
-    void RandomizeSettings(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        // 
-        if (yesOrNo == 0) {
-            // Create a list of indexes from 0 to 9
-            List<int> chanceButtonNdx = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-            // Shuffle list
-            chanceButtonNdx = GameManager.utilities.ShuffleIntList(chanceButtonNdx);
-
-            // Set chance button 1
-            int randomInt = Random.Range(0, 20);
-            SetChanceButtonValue(chanceButtonNdx[0], randomInt);
-
-            // Set chance button 2
-            int difference = 20 - randomInt;
-            randomInt = Random.Range(0, difference + 1);
-            SetChanceButtonValue(chanceButtonNdx[1], randomInt);
-
-            // Set chance buttons 3 to 10
-            for (int i = 2; i < chanceButtonNdx.Count; i++) {
-                difference -= randomInt;
-                randomInt = Random.Range(0, difference + 1);
-                SetChanceButtonValue(chanceButtonNdx[i], randomInt);
-            }
-
-            // Objects to spawn
-            for (int i = 0; i < 10; i++) {
-                randomInt = Random.Range(0, 51);
-                SetObjectToSpawn(randomInt, i);
-            }
-
-            // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 20)); 
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 21)); 
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20)); 
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 21)); 
-
-            // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("All menu settings have been randomized!", true);
-        } else {
-            // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
-        }
-    }
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddRandomizeAllSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeSettings, "Are you sure that you would like to\nrandomize the value of all of the displayed game mode's options?");
-    }
-
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddRandomizeChancesSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeChancesSettings, "Are you sure that you would like to\nrandomize the value of all of the displayed game mode's chance buttons?");
-
-    }
-    // On 'Yes' button click, sets chance settings to random values
-    void RandomizeChancesSettings(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        // 
-        if (yesOrNo == 0) {
-            // Create a list of indexes from 0 to 9
-            List<int> chanceButtonNdx = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            
-            // Shuffle list
-            chanceButtonNdx = GameManager.utilities.ShuffleIntList(chanceButtonNdx);
-
-            // Set chance button 1
-            int randomInt = Random.Range(0, 20);
-            SetChanceButtonValue(chanceButtonNdx[0], randomInt);
-
-            // Set chance button 2
-            int difference = 20 - randomInt;
-            randomInt = Random.Range(0, difference+1);
-            SetChanceButtonValue(chanceButtonNdx[1], randomInt);
-
-            // Set chance buttons 3 to 10
-            for (int i = 2; i < chanceButtonNdx.Count; i++) {
-                difference -= randomInt;
-                randomInt = Random.Range(0, difference + 1);
-                SetChanceButtonValue(chanceButtonNdx[i], randomInt);
-            }         
-
-            // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Chance values have been randomized!", true);
-        } else {
-            // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
-        }
-    }
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddRandomizeObjectsSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeObjectsSettings, "Are you sure that you would like to\nrandomize the value of all of the displayed game mode's object buttons?");
-    }
-    // On 'Yes' button click, sets object settings to random values
-    void RandomizeObjectsSettings(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        // 
-        if (yesOrNo == 0) {
-            // Objects to spawn
-            for (int i = 0; i < 10; i++) {
-                SetObjectToSpawn(Random.Range(0, 51), i);
-            }
-
-            // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object values have been randomized!", true);
-        } else {
-            // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
-        }
-    }
-
-    // Adds functions to the sub menu's yes/no buttons
-    void AddRandomizeSpeedsSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(RandomizeSpeedSettings, "Are you sure that you would like to\nrandomize the value of all of the displayed game mode's speed buttons?");
-    }
-    // On 'Yes' button click, sets speed settings to random values
-    void RandomizeSpeedSettings(int yesOrNo = -1) {
-        // Deactivate sub menu
-        GameManager.S.subMenuGO.SetActive(false);
-
-        // 
-        if (yesOrNo == 0) {
-            // Speed values
-            SetStartingObjectSpeedDropdownValue(Random.Range(0, 20));
-            SetAmountToIncreaseObjectSpeedDropdownValue(Random.Range(0, 21));
-            SetStartingSpawnSpeedDropdownValue(Random.Range(0, 20));
-            SetAmountToDecreaseSpawnSpeedDropdownValue(Random.Range(0, 21));
-
-            // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Speed values have been randomized!", true);
-        } else {
-            // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
-        }
+        // Set speed values
+        SetStartingObjectSpeedDropdownValue(2);         // 6 MPH 
+        SetAmountToIncreaseObjectSpeedDropdownValue(1); // 1 MPH / 0.4469444444f
+        SetStartingSpawnSpeedDropdownValue(9);          // 20 OPM / 3.0f
+        SetAmountToDecreaseSpawnSpeedDropdownValue(3);  // 3 OPM
     }
 
     void SetChanceValuesToDefaultSetting() {

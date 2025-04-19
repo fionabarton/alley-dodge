@@ -48,7 +48,7 @@ public class AudioMenu : MonoBehaviour {
             }
 
             // Reset play/stop soundtrack sample button text
-            playButtonText.text = "Play";
+            playButtonText.text = "Play Sample";
         }
     }
 
@@ -91,14 +91,14 @@ public class AudioMenu : MonoBehaviour {
             BGMVolSlider.value = PlayerPrefs.GetFloat("BGM Volume");
             GameManager.audioMan.SetBGMVolume(BGMVolSlider.value);
         } else {
-            GameManager.audioMan.SetBGMVolume(0.45f);
+            GameManager.audioMan.SetBGMVolume(0.3f);
         }
 
         if (PlayerPrefs.HasKey("SFX Volume")) {
             SFXVolSlider.value = PlayerPrefs.GetFloat("SFX Volume");
             GameManager.audioMan.SetSFXVolume(SFXVolSlider.value);
         } else {
-            GameManager.audioMan.SetSFXVolume(0.65f);
+            GameManager.audioMan.SetSFXVolume(0.2f);
         }
 
         if (PlayerPrefs.HasKey("VOX Volume")) {
@@ -190,8 +190,8 @@ public class AudioMenu : MonoBehaviour {
         if (yesOrNo == 0) {
             // Reset slider values
             masterVolSlider.value = 0.25f;
-            BGMVolSlider.value = 0.45f;
-            SFXVolSlider.value = 0.65f;
+            BGMVolSlider.value = 0.3f;
+            SFXVolSlider.value = 0.2f;
             VOXVolSlider.value = 0.45f;
 
             // Reset mute
@@ -227,7 +227,7 @@ public class AudioMenu : MonoBehaviour {
             menuHeaderText.text = "Audio: <color=#D9D9D9>Volume";
 
             // Reset play/stop soundtrack sample button text
-            playButtonText.text = "Play";
+            playButtonText.text = "Play Sample";
 
             // If not already playing 8-bit BGM: "Never", then play it
             if (GameManager.audioMan.BGMAudioSource.clip != GameManager.audioMan.bgmClips[2]) {
@@ -250,7 +250,7 @@ public class AudioMenu : MonoBehaviour {
         SetStartingTrackName();
 
         // Play soundtrack sample
-        if (playButtonText.text == "Stop") {
+        if (playButtonText.text == "Stop Sample") {
             GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
         }
 
@@ -261,54 +261,54 @@ public class AudioMenu : MonoBehaviour {
     void SetStartingTrackName() {
         switch (GameManager.audioMan.startingSoundtrackNdx) {
             case 0:
-                startingMusicTrackText.text = "Track 1";
+                startingMusicTrackText.text = "Type A";
                 break;
             case 1:
-                startingMusicTrackText.text = "Track 2";
+                startingMusicTrackText.text = "Type B";
                 break;
             case 2:
-                startingMusicTrackText.text = "Track 3";
+                startingMusicTrackText.text = "Type C";
                 break;
             case 3:
-                startingMusicTrackText.text = "Track 4";
+                startingMusicTrackText.text = "Type D";
                 break;
             case 4:
-                startingMusicTrackText.text = "Track 5";
+                startingMusicTrackText.text = "Type E";
                 break;
             case 5:
-                startingMusicTrackText.text = "Track 6";
+                startingMusicTrackText.text = "Type F";
                 break;
             case 6:
-                startingMusicTrackText.text = "Track 7";
+                startingMusicTrackText.text = "Type G";
                 break;
             case 7:
-                startingMusicTrackText.text = "Track 8";
+                startingMusicTrackText.text = "Type H";
                 break;
             case 8:
-                startingMusicTrackText.text = "Track 9";
+                startingMusicTrackText.text = "Type I";
                 break;
             case 9:
-                startingMusicTrackText.text = "Track 10";
+                startingMusicTrackText.text = "Type J";
                 break;
             case 10:
-                startingMusicTrackText.text = "Track 11";
+                startingMusicTrackText.text = "Type K";
                 break;
         }
     }
 
     void PlayOrStopTrack() {
-        if(playButtonText.text == "Stop") {
+        if(playButtonText.text == "Stop Sample") {
             // Stop track
             GameManager.audioMan.BGMAudioSource.Stop();
 
             // Set button text
-            playButtonText.text = "Play";
+            playButtonText.text = "Play Sample";
         } else {
             // Play track
             GameManager.audioMan.PlaySoundtrackClip(GameManager.audioMan.startingSoundtrackNdx, GameManager.audioMan.loopSoundtrackToggleIsOn);
 
             // Set button text
-            playButtonText.text = "Stop";
+            playButtonText.text = "Stop Sample";
         }
     }
 
@@ -348,7 +348,7 @@ public class AudioMenu : MonoBehaviour {
         if (yesOrNo == 0) {
             // Reset starting music track
             GameManager.audioMan.startingSoundtrackNdx = 0;
-            startingMusicTrackText.text = "1) Track Name";
+            startingMusicTrackText.text = "Type A";
 
             // Disable loop toggle
             loopTrackToggle.isOn = false;

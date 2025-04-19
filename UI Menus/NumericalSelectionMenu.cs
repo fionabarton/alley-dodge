@@ -33,9 +33,9 @@ public class NumericalSelectionMenu : MonoBehaviour {
     void OnStart() {
         // Set property button text
         if (PlayerPrefs.HasKey("Level Select")) {
-            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Level "+ PlayerPrefs.GetInt("Level Select").ToString();
+            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = PlayerPrefs.GetInt("Level Select").ToString();
         } else {
-            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Level 1";
+            propertyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = "1";
         }
 
         if (PlayerPrefs.HasKey("Alley Amount")) {

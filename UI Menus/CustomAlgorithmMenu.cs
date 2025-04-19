@@ -448,6 +448,13 @@ public class CustomAlgorithm {
     public int objectToSpawn8;
     public int objectToSpawn9;
 
+    //customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
+    //customAlgorithms[1] = new CustomAlgorithm(
+    //"Random Objects", "1 January, 2025",
+    //2, 1, 9, 3,
+    //15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
+    //46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
+
     public CustomAlgorithm(string _name = "", string _date = "1 January, 2025",
         int _startingObjectSpeed = 2, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 9, int _amountToDecreaseSpawnSpeed = 3,
         int _chanceToSpawn0 = 4, int _chanceToSpawn1 = 4, int _chanceToSpawn2 = 4, int _chanceToSpawn3 = 6, int _chanceToSpawn4 = 2, int _chanceToSpawn5 = 0, int _chanceToSpawn6 = 0, int _chanceToSpawn7 = 0, int _chanceToSpawn8 = 0, int _chanceToSpawn9 = 0,
