@@ -1,4 +1,4 @@
-// Please note that I, Fiona Barton, did not write this code.
+// Please note that I, Fiona Barton, did not write all of this code.
 // It was sourced from:
 // https://github.com/Fist-Full-of-Shrimp/Unity-VR-Basics-2022/tree/main/Assets/Scripts/14%20Climbing
 
