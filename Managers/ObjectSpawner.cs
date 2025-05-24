@@ -156,9 +156,38 @@ public class ObjectSpawner : MonoBehaviour {
 		return true;
     }
 
+	//
+	bool checkIfSingleObjectToSpawn() {
+		int previousNdx = -1;
+		
+		for (int i = 0; i < objectsToSpawn.Count; i++) {
+			if (objectsToSpawn[i] != previousNdx) {
+				//
+				previousNdx = objectsToSpawn[i];
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public bool checkIfObjectToSpawnHasDuplicates(int ndx, int buttonNdx) {
+		bool tBool = false;
+		
+		for (int i = 0; i < objectsToSpawn.Count; i++) {
+			// Skip over selected object to spawn slot
+			if (i != buttonNdx) {
+				if (objectsToSpawn[i] == ndx) {
+					tBool = true;
+				}
+			}
+		}
+
+		return tBool;
+	}
+
 	void InstantiateObject(int objectNdx) {
         // If more than one object can be spawned...
-        if (checkIfMultipleObjectsCanBeSpawned()) {
+        if (checkIfMultipleObjectsCanBeSpawned() && checkIfSingleObjectToSpawn()) {
 			// ...and if the previously spawned object is not the same as the current one...
 			if(objectNdx != previousObjectNdx) {
 				// Instantiate object
