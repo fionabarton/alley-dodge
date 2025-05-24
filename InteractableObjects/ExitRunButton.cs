@@ -69,7 +69,7 @@ public class ExitRunButton : MonoBehaviour {
         GameManager.S.podiums.ActivateMenus(true, true);
 
         // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(ExitRun, "Are you sure that you would like to\nend this run and return to the main menu?");
+        GameManager.S.subMenuCS.AddListeners(ExitRun, "Would you like to end the game\nand return to the main menu?");
     }
     // On 'Yes' button click, quits run and returns to main menu
     void ExitRun(int yesOrNo = -1) {
