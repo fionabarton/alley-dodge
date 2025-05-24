@@ -70,7 +70,7 @@ public class HighScoreManager : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            delayedTextDisplay.DisplayText("Welcome to the high score menu:\nView the high score leaderboard\nand detailed information for each entry.", true);
+            delayedTextDisplay.DisplayText("Welcome to the high score menu.", true);
         }
     }
 

@@ -7,25 +7,25 @@ using TMPro;
 public class AlgorithmMenu : MonoBehaviour {
     [Header("Set in Inspector")]
     // Chance selection
-    public List<Button>             chanceButtons;
+    public List<Button> chanceButtons;
 
     // Object selection
-    public List<Button>             objectButtons;
-    public List<Button>             objectSubMenuButtons;
-    public List<Sprite>             objectSprites;
-    public List<int>                objectButtonSpriteNdx;
+    public List<Button> objectButtons;
+    public List<Button> objectSubMenuButtons;
+    public List<Sprite> objectSprites;
+    public List<int> objectButtonSpriteNdx;
 
-    public GameObject               objectSelectionSubMenu;
+    public GameObject objectSelectionSubMenu;
 
     // Speed selection
-    public Button                   objectSpeedButton;
-    public Button                   amountToIncreaseButton;
-    public Button                   spawnSpeedButton;
-    public Button                   amountToDecreaseButton;
+    public Button objectSpeedButton;
+    public Button amountToIncreaseButton;
+    public Button spawnSpeedButton;
+    public Button amountToDecreaseButton;
 
-    public Button                   loadButton;
-    public Button                   saveButton;
-    public Button                   goBackButton;
+    public Button loadButton;
+    public Button saveButton;
+    public Button goBackButton;
 
     //public Button                   defaultSettingsButton;
     //public Button                   randomizeAllButton;
@@ -34,34 +34,36 @@ public class AlgorithmMenu : MonoBehaviour {
     //public Button                   randomizeSpeedsButton;
 
     /// Basic Options //////////////////////////////////////////////
-    public Button                   normalModeButton;
-    public Button                   randomModeButton;
-    public Button                   advancedOptionsMenuButton;
-    public TextMeshProUGUI          menuHeaderText;
+    public Button normalModeButton;
+    public Button randomModeButton;
+    public Button advancedOptionsMenuButton;
+    public TextMeshProUGUI menuHeaderText;
 
-    public GameObject               basicOptionsMenu;
-    public GameObject               advancedOptionsMenu;
+    public GameObject basicOptionsMenu;
+    public GameObject advancedOptionsMenu;
 
-    public GameObject               cursorGO;
-    public List<Button>             gameModeButtons;
+    public GameObject cursorGO;
+    public List<Button> gameModeButtons;
 
-    public TextMeshProUGUI          gameModeTypeText;
-    public TextMeshProUGUI          modeDescriptionText;
+    public TextMeshProUGUI gameModeTypeText;
+    public TextMeshProUGUI modeDescriptionText;
     ////////////////////////////////////////////////////////////////
 
-    public GameObject               normalModeImage;
-    public GameObject               randomModeImage;
-    public GameObject               customModeImage;
+    public GameObject normalModeImage;
+    public GameObject randomModeImage;
+    public GameObject customModeImage;
 
     /// Advanced Options ///////////////////////////////////////////
-    public Button                   goBackToBasicOptionsButton;
+    public Button goBackToBasicOptionsButton;
     ////////////////////////////////////////////////////////////////
 
+    public List<GameObject> objectShadowImages;
+
     // Shake display text animator
-    public Animator                 messageDisplayAnim;
+    public Animator messageDisplayAnim;
 
     [Header("Set Dynamically")]
-    public int                      selectedObjectButtonNdx = 0;
+    public int selectedObjectButtonNdx = 0;
 
     private void OnEnable() {
         // Display text
@@ -69,7 +71,7 @@ public class AlgorithmMenu : MonoBehaviour {
             SetGeneralDisplayTextMessage();
         }
     }
-
+    
     void Start() {
         // Get chanceDropdowns PlayerPrefs
         if (PlayerPrefs.HasKey("Chance Value 0")) {
@@ -125,54 +127,61 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Get objectButtons PlayerPrefs
         if (PlayerPrefs.HasKey("Object Button 0")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 0"), 0);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 0"), 0);
+
         } else {
-            SetObjectToSpawn(3, 0); // Horizontal block
+            //SetObjectToSpawn(3, 0); // Horizontal block
+            SetObjectToSpawnLOADCUSTOM(7, 0); // Horizontal block  
         }
         if (PlayerPrefs.HasKey("Object Button 1")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 1"), 1);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 1"), 1);
         } else {
-            SetObjectToSpawn(0, 1); // Vertical low block
+            //SetObjectToSpawn(0, 1); // Vertical low block
+            SetObjectToSpawnLOADCUSTOM(0, 1); // Vertical low block
+
         }
         if (PlayerPrefs.HasKey("Object Button 2")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 2"), 2);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 2"), 2);
         } else {
-            SetObjectToSpawn(17, 2); // Vertical high block
+            //SetObjectToSpawn(17, 2); // Vertical high block
+            SetObjectToSpawnLOADCUSTOM(20, 2); // Vertical high block
         }
         if (PlayerPrefs.HasKey("Object Button 3")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 3"), 3);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 3"), 3);
         } else {
-            SetObjectToSpawn(43, 3); // Quid pickup
+            //SetObjectToSpawn(43, 3); // Quid pickup
+            SetObjectToSpawnLOADCUSTOM(47, 3); // Quid pickup
         }
         if (PlayerPrefs.HasKey("Object Button 4")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 4"), 4);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 4"), 4);
         } else {
-            SetObjectToSpawn(44, 4); // Shield pickup
+            //SetObjectToSpawn(44, 4); // Shield pickup
+            SetObjectToSpawnLOADCUSTOM(48, 4); // Shield pickup
         }
         if (PlayerPrefs.HasKey("Object Button 5")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 5"), 5);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 5"), 5);
         } else {
-            SetObjectToSpawn(50, 5); // Nothing
+            SetObjectToSpawnLOADCUSTOM(50, 5); // Nothing
         }
         if (PlayerPrefs.HasKey("Object Button 6")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 6"), 6);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 6"), 6);
         } else {
-            SetObjectToSpawn(50, 6); // Nothing
+            SetObjectToSpawnLOADCUSTOM(50, 6); // Nothing
         }
         if (PlayerPrefs.HasKey("Object Button 7")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 7"), 7);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 7"), 7);
         } else {
-            SetObjectToSpawn(50, 7); // Nothing
+            SetObjectToSpawnLOADCUSTOM(50, 7); // Nothing
         }
         if (PlayerPrefs.HasKey("Object Button 8")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 8"), 8);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 8"), 8);
         } else {
-            SetObjectToSpawn(50, 8); // Nothing
+            SetObjectToSpawnLOADCUSTOM(50, 8); // Nothing
         }
         if (PlayerPrefs.HasKey("Object Button 9")) {
-            SetObjectToSpawn(PlayerPrefs.GetInt("Object Button 9"), 9);
+            SetObjectToSpawnLOADCUSTOM(PlayerPrefs.GetInt("Object Button 9"), 9);
         } else {
-            SetObjectToSpawn(50, 9); // Nothing
+            SetObjectToSpawnLOADCUSTOM(50, 9); // Nothing
         }
 
         // Get speedDropdowns PlayerPrefs
@@ -216,7 +225,7 @@ public class AlgorithmMenu : MonoBehaviour {
         /// Basic Options //////////////////////////////////////////////
         normalModeButton.onClick.AddListener(delegate { SetGameToNormalMode(); });
         randomModeButton.onClick.AddListener(delegate { SetGameToRandomMode(); });
-        
+
         advancedOptionsMenuButton.onClick.AddListener(delegate { SwapBetweenBasicAndAdvancedMenus(); });
         goBackToBasicOptionsButton.onClick.AddListener(delegate { SwapBetweenBasicAndAdvancedMenus(); });
         ////////////////////////////////////////////////////////////////
@@ -224,9 +233,20 @@ public class AlgorithmMenu : MonoBehaviour {
         // Add listeners to object selection sub menu buttons
         for (int i = 0; i < objectSubMenuButtons.Count; i++) {
             int copy = i;
-            objectSubMenuButtons[copy].onClick.AddListener(delegate { SetObjectToSpawn(copy); });
+            objectSubMenuButtons[copy].onClick.AddListener(delegate { SetObjectToSpawnCLICKBUTTON(copy, -1); });
         }
 
+        //
+        Invoke("DelayedStart", 0.05f);
+    }
+
+    void DelayedStart() {
+        // GetPlayerPrefs
+        //if (PlayerPrefs.HasKey("Player Height")) {
+        //    playerHeightSlider.value = PlayerPrefs.GetFloat("Player Height");
+        //} else {
+        //    playerHeightSlider.value = 168;
+        //}
         if (PlayerPrefs.HasKey("Game Mode")) {
             switch (PlayerPrefs.GetInt("Game Mode")) {
                 case 0:
@@ -273,11 +293,9 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Game Mode", 0);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game set to normal mode!", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game options set to normal mode!", true);
 
         SetUIToNormalMode();
-
-        Debug.Log("Normal called");
     }
     void SetUIToNormalMode() {
         // Set button color
@@ -285,12 +303,12 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Set text
         gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Normal</color>";
-        modeDescriptionText.text = "Description:\n<color=#D9D9D9>3 different obstacle shapes.\nSidestep, duck, or climb!</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid 3 differently shaped red obstacles.\nSidestep, duck, or climb.</color>";
 
         // Activate algorithm image
-        normalModeImage.SetActive(true);
-        randomModeImage.SetActive(false);
-        customModeImage.SetActive(false);
+        //normalModeImage.SetActive(true);
+        //randomModeImage.SetActive(false);
+        //customModeImage.SetActive(false);
     }
 
     public void SetGameToRandomMode() {
@@ -301,11 +319,9 @@ public class AlgorithmMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Game Mode", 1);
 
         // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game set to hard mode!", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Game options set to hard mode!", true);
 
         SetUIToRandomMode();
-
-        Debug.Log("Random called");
     }
     void SetUIToRandomMode() {
         // Set button color
@@ -313,12 +329,12 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Set text
         gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Hard</color>";
-        modeDescriptionText.text = "Description:\n<color=#D9D9D9>All 46 different obstacle shapes.\nSqueeze your body all over the game.</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid over 40 differently shaped red obstacles.\nSqueeze your body all over the game.</color>";
 
         // Activate algorithm image
-        normalModeImage.SetActive(false);
-        randomModeImage.SetActive(true);
-        customModeImage.SetActive(false);
+        //normalModeImage.SetActive(false);
+        //randomModeImage.SetActive(true);
+        //customModeImage.SetActive(false);
     }
     ////////////////////////////////////////////////////////////////
 
@@ -328,8 +344,6 @@ public class AlgorithmMenu : MonoBehaviour {
         if (basicOptionsMenu.activeInHierarchy) {
             // Save current mode
             PlayerPrefs.SetInt("Game Mode", 2);
-
-            Debug.Log("Custom called");
 
             // Activate menu
             basicOptionsMenu.SetActive(false);
@@ -354,12 +368,12 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Set text
         gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Custom</color>";
-        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Customized set of game options.\nAdjust everything from game speed to objects to spawn. </color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Customize how likely and what obstacles or items\nthe game will generate, game speed, and more.</color>";
 
         // Activate algorithm image
-        normalModeImage.SetActive(false);
-        randomModeImage.SetActive(false);
-        customModeImage.SetActive(true);
+        //normalModeImage.SetActive(false);
+        //randomModeImage.SetActive(false);
+        //customModeImage.SetActive(true);
     }
 
     ////////////////////////////////////////////////////////////////
@@ -370,7 +384,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // If button values total == 100%, reset colors
         if (CheckButtonForValidValues(GameManager.S.spawner.chancesToSpawn)) {
-            for(int i = 0; i < chanceButtons.Count; i++) {
+            for (int i = 0; i < chanceButtons.Count; i++) {
                 ResetButtonColor(chanceButtons[i]);
             }
         }
@@ -404,27 +418,8 @@ public class AlgorithmMenu : MonoBehaviour {
         objectSelectionSubMenu.SetActive(false);
     }
 
-    public void SetObjectToSpawn(int objectNdx, int buttonNdx = -1) {
-        if(buttonNdx == -1) {
-            buttonNdx = selectedObjectButtonNdx;
-        }
-
-        // Set object to spawn
-        GameManager.S.spawner.objectsToSpawn[buttonNdx] = objectNdx;
-
-        // Set button image
-        objectButtonSpriteNdx[buttonNdx] = objectNdx;
-        objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
-
-        // Save selected object button value
-        string tString = "Object Button " + buttonNdx.ToString();
-        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
-
-        // Delayed text display
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!", true);
-
-        // Close object (obstacles & items) sub menu
-        CloseObjectSelectionSubMenu();
+    public void ActivateAllObjectShadowImages() {
+        GameManager.utilities.SetActiveList(objectShadowImages, true);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -491,6 +486,9 @@ public class AlgorithmMenu : MonoBehaviour {
         // Set to default chance values
         SetChanceValuesToDefaultSetting();
 
+        // Reset all object shadow images
+        ActivateAllObjectShadowImages();
+
         SetObjectToSpawn(7, 0); // Horizontal block
         SetObjectToSpawn(0, 1); // Vertical low block
         SetObjectToSpawn(20, 2); // Vertical high block
@@ -521,6 +519,9 @@ public class AlgorithmMenu : MonoBehaviour {
         SetChanceButtonValue(7, 0); // 0%
         SetChanceButtonValue(8, 0); // 0%
         SetChanceButtonValue(9, 0); // 0%
+
+        // Reset all object shadow images
+        ActivateAllObjectShadowImages();
 
         // Set object to spawn values
         SetObjectToSpawn(46, 0); // Random block
@@ -633,6 +634,160 @@ public class AlgorithmMenu : MonoBehaviour {
 
     // Sets the DisplayText's message depending on which page of the menu is visible
     void SetGeneralDisplayTextMessage() {
-        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game mode menu:\nSet how likely and which objects are randomly generated by the game,\nalong with how quickly they move and are spawned.", true);
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the game options menu.", true);
     }
+
+    /// //////////////////////////////////////////////////////////////////////////
+    /// //////////////////////////////////////////////////////////////////////////
+    /// //////////////////////////////////////////////////////////////////////////
+    public void SetObjectToSpawn(int objectNdx, int buttonNdx = -1) {
+        if (buttonNdx == -1) {
+            buttonNdx = selectedObjectButtonNdx;
+        }
+
+        // Set object to spawn
+        GameManager.S.spawner.objectsToSpawn[buttonNdx] = objectNdx;
+
+        // Set button image
+        objectButtonSpriteNdx[buttonNdx] = objectNdx;
+        objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
+
+        // HIGHLIGHT SELECTED 
+        // DEactivate newly selected "object to spawn" shadow
+        switch (objectNdx) {
+            case 49:
+                objectShadowImages[50].SetActive(false);
+                break;
+            case 50:
+                objectShadowImages[49].SetActive(false);
+                break;
+            default:
+                objectShadowImages[objectNdx].SetActive(false);
+                break;
+        }
+        
+        // Save selected object button value
+        string tString = "Object Button " + buttonNdx.ToString();
+        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!", true);
+
+        // Close object (obstacles & items) sub menu
+        CloseObjectSelectionSubMenu();
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    public void SetObjectToSpawnCLICKBUTTON(int objectNdx, int buttonNdx = -1) {
+        if (buttonNdx == -1) {
+            buttonNdx = selectedObjectButtonNdx;
+        }
+
+        // Loop through all 10 objects to spawn
+        // Check if GameManager.S.spawner.objectsToSpawn[buttonNdx] matches any other element in its list
+        if (!GameManager.S.spawner.checkIfObjectToSpawnHasDuplicates(GameManager.S.spawner.objectsToSpawn[buttonNdx], buttonNdx)) {
+        // OBSCURE PREVIOUSLY SELECTED 
+        // Activate previously selected "object to spawn" shadow
+            switch (GameManager.S.spawner.objectsToSpawn[buttonNdx]) {
+                case 47:
+                    objectShadowImages[48].SetActive(true);
+                    break;
+                case 48:
+                    objectShadowImages[49].SetActive(true);
+                    break;
+                case 49:
+                    objectShadowImages[50].SetActive(true);
+                    break;
+                case 50:
+                    objectShadowImages[47].SetActive(true);
+                    break;
+                default:
+                    objectShadowImages[GameManager.S.spawner.objectsToSpawn[buttonNdx]].SetActive(true);
+                    break;
+            }
+        }
+
+        // Set object to spawn
+        GameManager.S.spawner.objectsToSpawn[buttonNdx] = objectNdx;
+
+        // Set button image
+        objectButtonSpriteNdx[buttonNdx] = objectNdx;
+        objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
+
+        // HIGHLIGHT SELECTED 
+        // DEactivate newly selected "object to spawn" shadow
+        switch (objectNdx) {
+            case 47:
+                objectShadowImages[48].SetActive(false);
+                break;
+            case 48:
+                objectShadowImages[49].SetActive(false);
+                break;
+            case 49:
+                objectShadowImages[50].SetActive(false);
+                break;
+            case 50:
+                objectShadowImages[47].SetActive(false);
+                break;
+            default:
+                objectShadowImages[objectNdx].SetActive(false);
+                break;
+        }
+
+        // Save selected object button value
+        string tString = "Object Button " + buttonNdx.ToString();
+        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!", true);
+
+        // Close object (obstacles & items) sub menu
+        CloseObjectSelectionSubMenu();
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    public void SetObjectToSpawnLOADCUSTOM(int objectNdx, int buttonNdx = -1) {
+        if (buttonNdx == -1) {
+            buttonNdx = selectedObjectButtonNdx;
+        }
+
+        // Set object to spawn
+        GameManager.S.spawner.objectsToSpawn[buttonNdx] = objectNdx;
+
+        // Set button image
+        objectButtonSpriteNdx[buttonNdx] = objectNdx;
+        objectButtons[buttonNdx].GetComponent<Image>().sprite = objectSprites[objectNdx];
+
+        // HIGHLIGHT SELECTED 
+        // DEactivate newly selected "object to spawn" shadow
+        switch (objectNdx) {
+            case 47:
+                objectShadowImages[48].SetActive(false);
+                break;
+            case 48:
+                objectShadowImages[49].SetActive(false);
+                break;
+            case 49:
+                objectShadowImages[50].SetActive(false);
+                break;
+            case 50:
+                objectShadowImages[47].SetActive(false);
+                break;
+            default:
+                objectShadowImages[objectNdx].SetActive(false);
+                break;
+        }
+
+        // Save selected object button value
+        string tString = "Object Button " + buttonNdx.ToString();
+        PlayerPrefs.SetInt(tString, GameManager.S.spawner.objectsToSpawn[buttonNdx]);
+
+        // Delayed text display
+        GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Object to spawn selected!", true);
+
+        // Close object (obstacles & items) sub menu
+        CloseObjectSelectionSubMenu();
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 }

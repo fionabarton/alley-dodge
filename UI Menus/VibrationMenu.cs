@@ -19,7 +19,7 @@ public class VibrationMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the amount of vibration to your hand controllers.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu.", true);
         }
 
         // Set selected game object to null
@@ -132,7 +132,7 @@ public class VibrationMenu : MonoBehaviour {
 
     // Adds functions to the sub menu's yes/no buttons
     void AddDefaultSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Would you like to\nreset this menu to its default settings?");
     }
     // On 'Yes' button click, returns all menu settings to their default value
     public void DefaultSettings(int yesOrNo = -1) {
@@ -152,7 +152,7 @@ public class VibrationMenu : MonoBehaviour {
             GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Display text
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu:\nAdjust the amount of vibration to your hand controllers.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the vibration menu.", true);
         }
     }
 }

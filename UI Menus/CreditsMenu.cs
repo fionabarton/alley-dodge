@@ -20,7 +20,7 @@ public class CreditsMenu : MonoBehaviour {
     private void OnEnable() {
         // Display text
         if (Time.time > 0.01f) {
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the credits menu:\nRead along and learn who created what for the game.", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Welcome to the credits menu.", true);
         }
     }
 

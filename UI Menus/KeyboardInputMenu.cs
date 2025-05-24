@@ -59,7 +59,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.keyboardMenuCS.GetInputString("HighScoreInputString");
 
             // Display text
-            messageDisplay.DisplayText("Congratulations!\nPlease enter your name!");
+            messageDisplay.DisplayText("Congratulations!\nYou have achieved a high score.\nPlease enter your name!");
 
             goBackButtonGO.SetActive(false);
         } else if (actionToBePerformed == "NameCustomAlgorithmEntry") {
@@ -72,7 +72,7 @@ public class KeyboardInputMenu : MonoBehaviour {
             GameManager.S.keyboardMenuCS.GetInputString("CustomAlgorithmInputString");
 
             // Display text
-            messageDisplay.DisplayText("Please name your custom game mode to be saved!");
+            messageDisplay.DisplayText("Please enter a name for the custom game options you would like to save!");
 
             goBackButtonGO.SetActive(true);
         }
@@ -206,7 +206,7 @@ public class KeyboardInputMenu : MonoBehaviour {
         // Audio: Confirm
         GameManager.audioMan.PlayUISFXClip(eSFX.sfxConfirm);
 
-        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting this custom game mode slot?\nWell, are you?");
+        GameManager.S.subMenuCS.AddListeners(GameManager.S.customAlgorithmMenuCS.SaveAlgorithm, "Are you sure about this name?\nAND overwriting the custom game options saved to this slot with the game's current settings?\nWell, are you?");
     }
 
     // On 'Yes' button click, creates and stores a new HighScore based on the user's performance

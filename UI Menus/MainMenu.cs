@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour {
 
     void DelayedOnEnable() {
         // Display text
-        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
+        delayedTextDisplay.DisplayText("Welcome to the main menu.", true);
 
         // Set selected game object to null
         EventSystem.current.SetSelectedGameObject(null);
@@ -105,7 +105,7 @@ public class MainMenu : MonoBehaviour {
         }
 
         // On start, display text
-        delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
+        delayedTextDisplay.DisplayText("Welcome to the main menu.", true);
     }
 
     // On value changed of playerHeightSlider, display the user's selected height in both meters and feet
@@ -162,7 +162,7 @@ public class MainMenu : MonoBehaviour {
         GameManager.S.EnableClimbInteractors(true);
 
         // Delayed text display
-        delayedTextDisplay.DisplayText("Player height selected!", true);
+        delayedTextDisplay.DisplayText("Player height set!", true);
     }
 
     // Set player height based on camera's y-position
@@ -355,7 +355,7 @@ public class MainMenu : MonoBehaviour {
 
     // Adds functions to the sub menu's yes/no buttons
     void AddDefaultSettingsConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Are you sure that you would like to\nreset this menu's options to their default values?");
+        GameManager.S.subMenuCS.AddListeners(DefaultSettings, "Would you like to\nreset this menu to its default settings?");
     }
     // On 'Yes' button click, returns all menu settings to their default value
     public void DefaultSettings(int yesOrNo = -1) {
@@ -389,7 +389,7 @@ public class MainMenu : MonoBehaviour {
             delayedTextDisplay.DisplayText("Menu settings reset!", true);
         } else {
             // Reset display text
-            delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
+            delayedTextDisplay.DisplayText("Welcome to the main menu.", true);
         }
 
         // Activate climbing interactors
@@ -398,7 +398,7 @@ public class MainMenu : MonoBehaviour {
 
     // Adds functions to the sub menu's yes/no buttons
     void AddExitAppConfirmationListeners() {
-        GameManager.S.subMenuCS.AddListeners(ExitApp, "Are you sure that you would\nlike to close this application?");
+        GameManager.S.subMenuCS.AddListeners(ExitApp, "Would you like to\nclose this application?");
     }
     // On 'Yes' button click, quits application after a short delay
     void ExitApp(int yesOrNo = -1) {
@@ -408,13 +408,13 @@ public class MainMenu : MonoBehaviour {
         // 
         if (yesOrNo == 0) {
             // Delayed text display
-            delayedTextDisplay.DisplayText("Thanks for playing!", true);
+            delayedTextDisplay.DisplayText("Thank you for playing!", true);
 
             // Quit application in 2 seconds
             Invoke("DelayedExitApp", 2f);
         } else {
             // Reset display text
-            delayedTextDisplay.DisplayText("Please set the 'Player Height' slider to your standing or sitting height,\nthen press the 'Start Game' button to play!", true);
+            delayedTextDisplay.DisplayText("Welcome to the main menu.", true);
         }
     }
     void DelayedExitApp() {

@@ -65,12 +65,12 @@ public class CustomAlgorithmMenu : MonoBehaviour {
                 AddLoadAlgorithmListeners();
 
                 // Set title text
-                selectAnAlgorithmText.text = "Please select a custom game mode to load!";
+                selectAnAlgorithmText.text = "Please select a slot of custom game options to load!";
             } else if (actionToBePerformed == "Save") {
                 AddSaveAlgorithmListeners();
 
                 // Set title text
-                selectAnAlgorithmText.text = "Please select a slot to save your custom game mode!";
+                selectAnAlgorithmText.text = "Please select a slot to save your custom game options!";
             }
 
             LoadAll();
@@ -114,13 +114,16 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         selectedButtonNdx = ndx;
 
         // Activate sub menu
-        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Are you sure that you would like to\nload this custom game mode?");
+        GameManager.S.subMenuCS.AddListeners(LoadAlgorithm, "Would you like to\nload these custom game options?");
     }
     public void LoadAlgorithm(int yesOrNo = -1) {
         // Deactivate sub menu
         GameManager.S.subMenuGO.SetActive(false);
 
         if (yesOrNo == 0) {
+            // Reset all object shadow images
+            GameManager.S.algorithmMenuCS.ActivateAllObjectShadowImages();
+
             GameManager.S.algorithmMenuCS.SetStartingObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingObjectSpeed);
             GameManager.S.algorithmMenuCS.SetAmountToIncreaseObjectSpeedDropdownValue(customAlgorithms[selectedButtonNdx].amountToIncreaseObjectSpeed);
             GameManager.S.algorithmMenuCS.SetStartingSpawnSpeedDropdownValue(customAlgorithms[selectedButtonNdx].startingSpawnSpeed);
@@ -137,21 +140,21 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             GameManager.S.algorithmMenuCS.SetChanceButtonValue(8, customAlgorithms[selectedButtonNdx].chanceToSpawn8);
             GameManager.S.algorithmMenuCS.SetChanceButtonValue(9, customAlgorithms[selectedButtonNdx].chanceToSpawn9);
 
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn0, 0);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn1, 1);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn2, 2);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn3, 3);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn4, 4);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn5, 5);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn6, 6);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn7, 7);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn8, 8);
-            GameManager.S.algorithmMenuCS.SetObjectToSpawn(customAlgorithms[selectedButtonNdx].objectToSpawn9, 9);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn0, 0);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn1, 1);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn2, 2);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn3, 3);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn4, 4);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn5, 5);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn6, 6);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn7, 7);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn8, 8);
+            GameManager.S.algorithmMenuCS.SetObjectToSpawnLOADCUSTOM(customAlgorithms[selectedButtonNdx].objectToSpawn9, 9);
 
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected game mode loaded!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Selected game options loaded!", true);
 
             gameObject.SetActive(false);
         }
@@ -206,7 +209,7 @@ public class CustomAlgorithmMenu : MonoBehaviour {
             UpdateGUI();
 
             // Delayed text display
-            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom game mode, " + customAlgorithms[selectedButtonNdx].name + ",\n saved to slot " + (selectedButtonNdx + 1).ToString() + "!", true);
+            GameManager.S.moreMenuCS.delayedTextDisplay.DisplayText("Your custom game options, " + customAlgorithms[selectedButtonNdx].name + ",\n have been saved to slot " + (selectedButtonNdx + 1).ToString() + "!", true);
 
             gameObject.SetActive(false);
         } else {
@@ -327,23 +330,23 @@ public class CustomAlgorithmMenu : MonoBehaviour {
     // 7/13/2035: Birth of Jean-Luc Picard
     // 4/5/2063: Zefram Cochrane makes first human warp flight
     public void SetToDefaultSettings() {
-        customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
-        customAlgorithms[1] = new CustomAlgorithm("Random Objects", "1 January, 2025", 2, 1, 9, 3,
-        15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
-        46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
-        //customAlgorithms[2] = new CustomAlgorithm("No Climbing", "29 November, 1986", 4, 1, 14, 2,
-        //4, 1, 1, 2, 2, 2, 1, 1, 2, 4,
-        //7, 23, 24, 25, 30, 31, 42, 43, 45, 49);
-        //customAlgorithms[3] = new CustomAlgorithm("Slow Burn", "31 December, 1999", 1, 1, 14, 5,
-        //5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
-        //17, 25, 8, 47, 48, 50, 50, 50, 50, 50);
-        //customAlgorithms[4] = new CustomAlgorithm("Up & Down", "8 January, 2016", 2, 1, 6, 2,
-        //7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
-        //20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
+        //customAlgorithms[0] = new CustomAlgorithm("Normal Game Mode");
+        //customAlgorithms[1] = new CustomAlgorithm("Random Objects", "1 January, 2025", 2, 1, 9, 3,
+        //15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
+        //46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
+        customAlgorithms[0] = new CustomAlgorithm("Crouch & Climb", "29 August, 1997", 2, 1, 6, 2,
+        7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
+        20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
+        customAlgorithms[1] = new CustomAlgorithm("Slow Heist", "31 December, 1999", 1, 1, 14, 5,
+        5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
+        17, 25, 8, 47, 48, 50, 50, 50, 50, 50);
+        customAlgorithms[2] = new CustomAlgorithm("Mostly Grounded", "5 April, 2063", 4, 1, 14, 2,
+        4, 1, 1, 2, 2, 2, 1, 1, 2, 4,
+        7, 23, 24, 25, 30, 31, 42, 43, 45, 49);
         //customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 1, 14, 2,
         //4, 4, 4, 4, 4, 0, 0, 0, 0, 0,
         //36, 39, 44, 45, 49, 50, 50, 50, 50, 50); 
-        customAlgorithms[2] = new CustomAlgorithm("Slot 3: EMPTY");
+
         customAlgorithms[3] = new CustomAlgorithm("Slot 4: EMPTY");
         customAlgorithms[4] = new CustomAlgorithm("Slot 5: EMPTY");
         customAlgorithms[5] = new CustomAlgorithm("Slot 6: EMPTY");
@@ -455,7 +458,7 @@ public class CustomAlgorithm {
     //15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
     //46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
 
-    public CustomAlgorithm(string _name = "", string _date = "1 January, 2025",
+    public CustomAlgorithm(string _name = "", string _date = "",
         int _startingObjectSpeed = 2, int _amountToIncreaseObjectSpeed = 1, int _startingSpawnSpeed = 9, int _amountToDecreaseSpawnSpeed = 3,
         int _chanceToSpawn0 = 4, int _chanceToSpawn1 = 4, int _chanceToSpawn2 = 4, int _chanceToSpawn3 = 6, int _chanceToSpawn4 = 2, int _chanceToSpawn5 = 0, int _chanceToSpawn6 = 0, int _chanceToSpawn7 = 0, int _chanceToSpawn8 = 0, int _chanceToSpawn9 = 0,
         int _objectToSpawn0 = 7, int _objectToSpawn1 = 0, int _objectToSpawn2 = 20, int _objectToSpawn3 = 47, int _objectToSpawn4 = 48, int _objectToSpawn5 = 50, int _objectToSpawn6 = 50, int _objectToSpawn7 = 50, int _objectToSpawn8 = 50, int _objectToSpawn9 = 50) {
