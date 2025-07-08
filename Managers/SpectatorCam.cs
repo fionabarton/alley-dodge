@@ -5,7 +5,8 @@ using UnityEngine;
 // Handles adjusting monitor camera properties (position, rotation, & target display) via keyboard input
 public class SpectatorCam : MonoBehaviour {
     [Header("Set in Inspector")]
-    public float                    speed = 10;
+    //public float                    speed = 10;
+    public float                    speed = 4;
 
     public TMPro.TextMeshProUGUI    displayText;
 
@@ -152,7 +153,7 @@ public class SpectatorCam : MonoBehaviour {
             }
 
             // Zoom in
-            if (Vector3.Distance(targetTrans.position, transform.position) >= 7.5f) {
+            if (Vector3.Distance(targetTrans.position, transform.position) >= 1f) {
                 if (Input.GetButton("CamForward")) {
                     transform.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
                 }

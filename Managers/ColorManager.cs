@@ -31,27 +31,27 @@ public class ColorManager : MonoBehaviour {
         new Color(1.0f, 0, 0.5f, 1.0f) // rose
     };
 
-    List<Color> playerColors = new List<Color>() {
-        new Color(0.9f, 0, 0.05f, 0.5f), // red
-        new Color(1.0f, 0.35f, 0, 0.5f), // orange
-        new Color(1.0f, 0.8f, 0, 0.5f), // yellow
-        new Color(0.5f, 1.0f, 0, 0.5f), // chartreuse green
-        new Color(0, 0.85f, 0, 0.5f), // green
-        new Color(0, 0.85f, 0.45f, 0.5f), // spring green
-        new Color(0, 1, 1, 0.5f), // cyan 
-        new Color(0, 0.5f, 1.0f, 0.5f), // azure
-        new Color(0, 0, 1, 0.5f), // blue 
-        new Color(0.5f, 0, 1.0f, 0.5f), // violet
-        new Color(1, 0, 1, 0.5f), // magenta 
-        new Color(1.0f, 0, 0.5f, 0.5f) // rose
-    };
+    //List<Color> playerColors = new List<Color>() {
+    //    new Color(0.9f, 0, 0.05f, 0.5f), // red
+    //    new Color(1.0f, 0.35f, 0, 0.5f), // orange
+    //    new Color(1.0f, 0.8f, 0, 0.5f), // yellow
+    //    new Color(0.5f, 1.0f, 0, 0.5f), // chartreuse green
+    //    new Color(0, 0.85f, 0, 0.5f), // green
+    //    new Color(0, 0.85f, 0.45f, 0.5f), // spring green
+    //    new Color(0, 1, 1, 0.5f), // cyan 
+    //    new Color(0, 0.5f, 1.0f, 0.5f), // azure
+    //    new Color(0, 0, 1, 0.5f), // blue 
+    //    new Color(0.5f, 0, 1.0f, 0.5f), // violet
+    //    new Color(1, 0, 1, 0.5f), // magenta 
+    //    new Color(1.0f, 0, 0.5f, 0.5f) // rose
+    //};
 
     public void Start() {
         alleyMaterial1.color = alleyColors[0];
         alleyMaterial2.color = alleyColors[6];
 
-        playerMaterial1.color = playerColors[0];
-        playerMaterial2.color = playerColors[6];
+        playerMaterial1.color = alleyColors[0];
+        playerMaterial2.color = alleyColors[6];
     }
 
     // Resets script properties to their default values
@@ -60,8 +60,8 @@ public class ColorManager : MonoBehaviour {
         alleyMaterial1.color = alleyColors[0];
         alleyMaterial2.color = alleyColors[6];
 
-        playerMaterial1.color = playerColors[0];
-        playerMaterial2.color = playerColors[6];
+        playerMaterial1.color = alleyColors[0];
+        playerMaterial2.color = alleyColors[6];
     }
 
     // Sets UI display text colors to alley colors
@@ -85,15 +85,15 @@ public class ColorManager : MonoBehaviour {
 
         // Set material 1 color
         alleyMaterial1.color = alleyColors[colorNdx];
-        playerMaterial1.color = playerColors[colorNdx];
+        playerMaterial1.color = alleyColors[colorNdx];
 
         // Set material 2 color
         if (colorNdx < 6) {
             alleyMaterial2.color = alleyColors[colorNdx + 6];
-            playerMaterial2.color = playerColors[colorNdx + 6];
+            playerMaterial2.color = alleyColors[colorNdx + 6];
         } else {
             alleyMaterial2.color = alleyColors[colorNdx - 6];
-            playerMaterial2.color = playerColors[colorNdx - 6];
+            playerMaterial2.color = alleyColors[colorNdx - 6];
         }
     }
 }
