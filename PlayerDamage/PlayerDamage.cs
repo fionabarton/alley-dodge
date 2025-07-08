@@ -89,6 +89,9 @@ public class PlayerDamage : MonoBehaviour {
                     // Stop smoke particle system 
                     GameManager.S.smokePS.Stop();
 
+                    // Activate move UI menu podium
+                    GameManager.S.podiums.ActivateMenus(false, true);
+
                     // Check for high score
                     if (GameManager.S.highScore.CheckForNewHighScore(GameManager.S.score.score)) {
                         // 
@@ -154,8 +157,8 @@ public class PlayerDamage : MonoBehaviour {
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
 
-        // Activate move UI menu podium
-        GameManager.S.podiums.ActivateMenus(false, true);
+        //// Activate move UI menu podium
+        //GameManager.S.podiums.ActivateMenus(false, true);
 
         // Play BGM: 1940
         GameManager.audioMan.PlayBGMClip(eBGM.bgm1940);
@@ -169,8 +172,8 @@ public class PlayerDamage : MonoBehaviour {
         // Activate XR ray interactors
         GameManager.utilities.SetActiveList(GameManager.S.xrRayInteractorsGO, true);
 
-        // Activate move UI menu podium
-        GameManager.S.podiums.ActivateMenus(false, true);
+        //// Activate move UI menu podium
+        //GameManager.S.podiums.ActivateMenus(false, true);
 
         // Activate main menu
         GameManager.S.mainMenuGO.SetActive(true);
