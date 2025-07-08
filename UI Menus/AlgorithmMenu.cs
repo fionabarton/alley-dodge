@@ -281,7 +281,7 @@ public class AlgorithmMenu : MonoBehaviour {
         gameModeButtons[ndx].colors = c;
 
         // Set cursor position
-        GameManager.utilities.PositionCursor(cursorGO, gameModeButtons[ndx].gameObject, 0, 60f, 3);
+        GameManager.utilities.PositionCursor(cursorGO, gameModeButtons[ndx].gameObject, 0, 50f, 3);
     }
 
     /// Basic Options //////////////////////////////////////////////
@@ -303,7 +303,7 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Set text
         gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Normal</color>";
-        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid 3 differently shaped red obstacles.\nSidestep, duck, or climb.</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid 3 differently shaped red obstacles.\nConsciously curated to make you sidestep, duck, and climb.</color>";
 
         // Activate algorithm image
         //normalModeImage.SetActive(true);
@@ -329,7 +329,10 @@ public class AlgorithmMenu : MonoBehaviour {
 
         // Set text
         gameModeTypeText.text = "Game Mode: <color=#D9D9D9>Hard</color>";
-        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid over 40 differently shaped red obstacles.\nSqueeze your body all over the game.</color>";
+        modeDescriptionText.text = "Description:\n<color=#D9D9D9>Avoid over 40 differently shaped red obstacles.\nWith such a wide variety of obstacle shapes to anticipate, this mode will force you to squeeze your body all over the game.</color>";
+
+        // Deactivate all object shadow images
+        ActivateAllObjectShadowImages(false);
 
         // Activate algorithm image
         //normalModeImage.SetActive(false);
@@ -418,8 +421,8 @@ public class AlgorithmMenu : MonoBehaviour {
         objectSelectionSubMenu.SetActive(false);
     }
 
-    public void ActivateAllObjectShadowImages() {
-        GameManager.utilities.SetActiveList(objectShadowImages, true);
+    public void ActivateAllObjectShadowImages(bool setToActive = true) {
+        GameManager.utilities.SetActiveList(objectShadowImages, setToActive);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -519,9 +522,6 @@ public class AlgorithmMenu : MonoBehaviour {
         SetChanceButtonValue(7, 0); // 0%
         SetChanceButtonValue(8, 0); // 0%
         SetChanceButtonValue(9, 0); // 0%
-
-        // Reset all object shadow images
-        ActivateAllObjectShadowImages();
 
         // Set object to spawn values
         SetObjectToSpawn(46, 0); // Random block

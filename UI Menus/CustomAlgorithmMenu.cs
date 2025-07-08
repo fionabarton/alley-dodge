@@ -334,15 +334,15 @@ public class CustomAlgorithmMenu : MonoBehaviour {
         //customAlgorithms[1] = new CustomAlgorithm("Random Objects", "1 January, 2025", 2, 1, 9, 3,
         //15, 4, 1, 0, 0, 0, 0, 0, 0, 0,
         //46, 47, 48, 50, 50, 50, 50, 50, 50, 50);
-        customAlgorithms[0] = new CustomAlgorithm("Crouch & Climb", "29 August, 1997", 2, 1, 6, 2,
-        7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
-        20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
-        customAlgorithms[1] = new CustomAlgorithm("Slow Heist", "31 December, 1999", 1, 1, 14, 5,
+        customAlgorithms[0] = new CustomAlgorithm("Zigzag", "29 August, 1997", 4, 1, 14, 2,
+        4, 4, 4, 2, 4, 2, 0, 0, 0, 0,
+        7, 23, 24, 25, 47, 48, 50, 50, 50, 50);
+        customAlgorithms[1] = new CustomAlgorithm("Intersecting Lines", "31 December, 1999", 1, 1, 14, 5,
         5, 5, 5, 4, 1, 0, 0, 0, 0, 0,
         17, 25, 8, 47, 48, 50, 50, 50, 50, 50);
-        customAlgorithms[2] = new CustomAlgorithm("Mostly Grounded", "5 April, 2063", 4, 1, 14, 2,
-        4, 1, 1, 2, 2, 2, 1, 1, 2, 4,
-        7, 23, 24, 25, 30, 31, 42, 43, 45, 49);
+        customAlgorithms[2] = new CustomAlgorithm("Climb & Crouch", "5 April, 2063", 2, 1, 6, 2,
+        7, 7, 4, 2, 0, 0, 0, 0, 0, 0,
+        20, 21, 47, 48, 50, 50, 50, 50, 50, 50);
         //customAlgorithms[5] = new("In The Middle", "5 April, 2063", 4, 1, 14, 2,
         //4, 4, 4, 4, 4, 0, 0, 0, 0, 0,
         //36, 39, 44, 45, 49, 50, 50, 50, 50, 50); 

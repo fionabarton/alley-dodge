@@ -50,15 +50,15 @@ public class InstructionsMenu : MonoBehaviour {
         textGO[currentPageNdx].SetActive(true);
 
         // Set page text
-        pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/7" + "</color>";
+        pageText.text = "Page: " + "<color=#D9D9D9>" + (currentPageNdx + 1).ToString() + "/8" + "</color>";
 
         // Set menu header text
-        if (currentPageNdx == 4 || currentPageNdx == 5) {
-            menuHeaderText.text = "Controls:";
-        } else if (currentPageNdx == 6) {
-            menuHeaderText.text = "Settings:";
-        } else {
-            menuHeaderText.text = "Instructions:";
-        }
+        //if (currentPageNdx == 4 || currentPageNdx == 5) {
+        //    menuHeaderText.text = "Controls:";
+        //} else if (currentPageNdx == 6) {
+        //    menuHeaderText.text = "Settings:";
+        //} else {
+        //    menuHeaderText.text = "Instructions:";
+        //}
     }
 }
